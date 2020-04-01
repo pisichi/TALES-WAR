@@ -61,7 +61,7 @@ namespace Final_Assignment
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             
-            spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 800, 800));
+            spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 700));
 
 
         }
