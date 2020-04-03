@@ -15,6 +15,7 @@ namespace Final_Assignment
 
 
         Texture2D _bg;
+        SpriteFont _font;
 
         public IntroScreen(IGameScreenManager screenManager)
         {
@@ -24,7 +25,9 @@ namespace Final_Assignment
 
         public void Init(ContentManager content)
         {
-            _bg = content.Load<Texture2D>("bg");
+            _bg = content.Load<Texture2D>("sprites/bg");
+            _font = content.Load<SpriteFont>("font/File");
+
         }
 
         public void Pause()
@@ -61,8 +64,8 @@ namespace Final_Assignment
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             
-            spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 700));
-
+            spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800));
+            spriteBatch.DrawString(_font, "press ESC to exit", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("press ESC to exit") / 2, Color.White);
 
         }
 

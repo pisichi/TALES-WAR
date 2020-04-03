@@ -1,2 +1,3 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/bliss-windowxp-1024x823.jpg","C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/bin/Windows/Content/bg.xnb","TextureProcessor","Texture2DContent",539067,12000085,1.230072
+"C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/font/File.spritefont","C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/bin/Windows/Content/font/File.xnb","FontDescriptionProcessor","SpriteFontContent",2008,37905,0.3011952
+"C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bg.png","C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/bin/Windows/Content/sprites/bg.xnb","TextureProcessor","Texture2DContent",440121,9600085,0.4673402

@@ -12,13 +12,19 @@ namespace Final_Assignment
 
         private IGameScreenManager m_screenManager;
 
+        SpriteFont _font;
+
+
         public Main()
         {
             graphics = new GraphicsDeviceManager(this)
             {
-                PreferredBackBufferWidth = 800,
-                PreferredBackBufferHeight = 700
+                PreferredBackBufferWidth = Singleton.SCREENWIDTH,
+                PreferredBackBufferHeight = Singleton.SCREENHEIGHT
             };
+
+            IsMouseVisible = true;
+            
 
             graphics.ApplyChanges();
 
@@ -28,6 +34,7 @@ namespace Final_Assignment
 
         protected override void LoadContent()
         {
+            _font = Content.Load<SpriteFont>("font/File");
 
             m_spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -35,7 +42,7 @@ namespace Final_Assignment
 
             m_screenManager.OnGameExit += Exit;
 
-            m_screenManager.ChangeScreen(new IntroScreen(m_screenManager));
+            
         }
 
 
@@ -53,6 +60,11 @@ namespace Final_Assignment
         protected override void Update(GameTime gameTime)
         {
 
+            //testing
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                m_screenManager.ChangeScreen(new IntroScreen(m_screenManager));
+            }
 
             m_screenManager.ChangeBetweenScreen();
 
@@ -66,7 +78,13 @@ namespace Final_Assignment
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
+
+           
             m_spriteBatch.Begin();
+
+            //testing
+            m_spriteBatch.DrawString(_font, "press space to continue", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("press space to continue") / 2, Color.White);
+
             m_screenManager.Draw(gameTime);
             base.Draw(gameTime);
             m_spriteBatch.End();

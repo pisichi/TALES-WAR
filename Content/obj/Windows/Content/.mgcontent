@@ -4,9 +4,11 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/bliss-windowxp-1024x823.jpg</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/font/File.spritefont</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bg.png</File>
   </SourceFiles>
   <DestFiles>
-    <File>bg.jpg</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>

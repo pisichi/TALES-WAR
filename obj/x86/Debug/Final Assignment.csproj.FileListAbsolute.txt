@@ -21,4 +21,5 @@ C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86\Debug\Final Assignment.csproj.CopyComplete
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86\Debug\Final Assignment.exe
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86\Debug\Final Assignment.pdb
-C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\bg.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\bg.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\font\File.xnb
