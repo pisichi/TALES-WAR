@@ -40,9 +40,14 @@ namespace Final_Assignment
 
             m_screenManager = new GameScreenManager(m_spriteBatch, Content);
 
+            Singleton.Instance.CurrentGameState = Singleton.GameState.GameIntro;
+
+
             m_screenManager.OnGameExit += Exit;
 
             
+
+
         }
 
 
@@ -60,11 +65,21 @@ namespace Final_Assignment
         protected override void Update(GameTime gameTime)
         {
 
-            //testing
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Space))
+            switch (Singleton.Instance.CurrentGameState)
             {
-                m_screenManager.ChangeScreen(new IntroScreen(m_screenManager));
+                case Singleton.GameState.GameIntro:
+                    m_screenManager.ChangeScreen(new IntroScreen(m_screenManager));
+                    break;
+                case Singleton.GameState.GameMenu:
+                    m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
+                    break;
+                case Singleton.GameState.GamePlaying:
+                    m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
+                    break;
+
             }
+            
+
 
             m_screenManager.ChangeBetweenScreen();
 
@@ -82,8 +97,7 @@ namespace Final_Assignment
            
             m_spriteBatch.Begin();
 
-            //testing
-            m_spriteBatch.DrawString(_font, "press space to continue", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("press space to continue") / 2, Color.White);
+           
 
             m_screenManager.Draw(gameTime);
             base.Draw(gameTime);

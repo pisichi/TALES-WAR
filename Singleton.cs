@@ -17,6 +17,7 @@ namespace Final_Assignment
 
         public enum GameState
         {
+            GameIntro,
             GameMenu,
             GamePlaying,
             GamePaused,
