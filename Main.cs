@@ -100,9 +100,11 @@ namespace Final_Assignment
            
 
             m_screenManager.Draw(gameTime);
-            base.Draw(gameTime);
+            
             m_spriteBatch.End();
             graphics.BeginDraw();
+
+            base.Draw(gameTime);
         }
     }
 }
