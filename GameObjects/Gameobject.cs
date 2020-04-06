@@ -102,5 +102,47 @@ namespace Final_Assignment
             return this.MemberwiseClone();
         }
 
+        #region Collision
+        public bool IsTouching(GameObject g)
+        {
+            return IsTouchingLeft(g) ||
+                IsTouchingTop(g) ||
+                IsTouchingRight(g) ||
+                IsTouchingBottom(g);
+        }
+
+        public bool IsTouchingLeft(GameObject g)
+        {
+            return this.Rectangle.Right > g.Rectangle.Left &&
+                    this.Rectangle.Left < g.Rectangle.Left &&
+                    this.Rectangle.Bottom > g.Rectangle.Top &&
+                    this.Rectangle.Top < g.Rectangle.Bottom;
+        }
+
+        public bool IsTouchingRight(GameObject g)
+        {
+            return this.Rectangle.Right > g.Rectangle.Right &&
+                    this.Rectangle.Left < g.Rectangle.Right &&
+                    this.Rectangle.Bottom > g.Rectangle.Top &&
+                    this.Rectangle.Top < g.Rectangle.Bottom;
+        }
+
+        public bool IsTouchingTop(GameObject g)
+        {
+            return this.Rectangle.Right > g.Rectangle.Left &&
+                    this.Rectangle.Left < g.Rectangle.Right &&
+                    this.Rectangle.Bottom > g.Rectangle.Top &&
+                    this.Rectangle.Top < g.Rectangle.Top;
+        }
+
+        public bool IsTouchingBottom(GameObject g)
+        {
+            return this.Rectangle.Right > g.Rectangle.Left &&
+                    this.Rectangle.Left < g.Rectangle.Right &&
+                    this.Rectangle.Bottom > g.Rectangle.Bottom &&
+                    this.Rectangle.Top < g.Rectangle.Bottom;
+        }
+        #endregion
+
     }
 }

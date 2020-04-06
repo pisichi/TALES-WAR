@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace Final_Assignment
 {
@@ -13,6 +14,7 @@ namespace Final_Assignment
 
         public bool IsPaused { get; private set; }
 
+        List<GameObject> _gameObjects;
 
         Texture2D _bg;
         SpriteFont _font;
@@ -27,6 +29,7 @@ namespace Final_Assignment
         {
             _bg = content.Load<Texture2D>("sprites/bg");
             _font = content.Load<SpriteFont>("font/File");
+            _gameObjects = new List<GameObject>();
 
         }
 
@@ -42,7 +45,10 @@ namespace Final_Assignment
 
         public void Update(GameTime gameTime)
         {
+            foreach (GameObject s in _gameObjects)
+            {
 
+            }
         }
 
         public void HandleInput(GameTime gameTime)
@@ -57,6 +63,11 @@ namespace Final_Assignment
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+
+            for (int i = 0; i < _gameObjects.Count; i++)
+            {
+                _gameObjects[i].Draw(spriteBatch);
+            }
 
             spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800));
             spriteBatch.DrawString(_font, "Playing", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("Playing") / 2, Color.White);
