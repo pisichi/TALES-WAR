@@ -41,6 +41,12 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AnimationManagers\AnimationManager.cs" />
+    <Compile Include="GameObjects\Bullet.cs" />
+    <Compile Include="GameObjects\Floor.cs" />
+    <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="Model\Animation.cs" />
     <Compile Include="Screen\GameScreenManager.cs" />
     <Compile Include="Screen\Interfaces.cs" />
     <Compile Include="Screen\IntroScreen.cs" />
@@ -57,6 +63,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
+    <Reference Include="VelcroPhysics.MonoGame">
+      <HintPath>C:\Users\patta\Desktop\VelcroPhysics-master\VelcroPhysics\bin\Debug\net45\VelcroPhysics.MonoGame.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
@@ -66,7 +75,6 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="GameObjects\" />
     <Folder Include="Utility\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

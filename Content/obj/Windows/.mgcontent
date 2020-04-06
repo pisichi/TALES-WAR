@@ -4,10 +4,12 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/font/File.spritefont</File>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bg.png</File>
+    <File>D:/Game Programming/Final project copy/Monogame_shooting/Content/Asteroid_Spritesheet.png</File>
+    <File>D:/Game Programming/Final project copy/Monogame_shooting/Content/font/File.spritefont</File>
+    <File>D:/Game Programming/Final project copy/Monogame_shooting/Content/sprites/bg.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>

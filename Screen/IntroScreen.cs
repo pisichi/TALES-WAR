@@ -48,27 +48,24 @@ namespace Final_Assignment
         public void HandleInput(GameTime gameTime)
         {
 
-            //testing
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                Singleton.Instance.CurrentGameState = Singleton.GameState.GameMenu;
-            }
-
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                m_screenManager.Exit();
+                m_exitGame = true;
             }
 
+            //var keyboard = Keyboard.GetState();
 
-
-
+            //if (keyboard.IsKeyDown(Keys.Escape))
+            //{
+            //    m_exitGame = true;
+            //}
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             
-            spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800),color: Color.Brown);
-            spriteBatch.DrawString(_font, "press A to Continue", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("press A to Continue") / 2, Color.White);
+            spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800));
+            spriteBatch.DrawString(_font, "press ESC to exit", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("press ESC to exit") / 2, Color.White);
 
         }
 

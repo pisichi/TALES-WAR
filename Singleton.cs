@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,18 +18,26 @@ namespace Final_Assignment
 
         public enum GameState
         {
-            GameIntro,
             GameMenu,
             GamePlaying,
             GamePaused,
             GameLose,
-            GameWin
+            GameWin,
+            StartNewLife
         }
 
+        public Random Random;
+
+        public KeyboardState PreviousKey, CurrentKey;
         public GameState CurrentGameState;
 
         private static Singleton instance;
+        public float MasterBGMVolume;
+        public float MasterSFXVolume;
 
+        //public int Score;
+        public int Life;
+        public int Level;
         private Singleton()
         {
 
