@@ -19,20 +19,13 @@ namespace Final_Assignment
         public override void Update(GameTime gameTime, List<GameObject> gameObjects)
         {
             Position += Direction * LinearVelocity;
-            Rotation += RotationVelocity;
+            //Position.Y *= 0.5f;
             base.Update(gameTime, gameObjects);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //destroy when off screen
-            if (Position.X < 0 - Rectangle.Width ||
-                Position.X > Singleton.SCREENWIDTH + Rectangle.Width ||
-                Position.Y < 0 - Rectangle.Height ||
-                Position.Y > Singleton.SCREENHEIGHT + Rectangle.Height)
-            {
-                IsActive = false;
-            }
+
 
 
             spriteBatch.Draw(_texture, Position, null, Color.White, Rotation, Origin, 1f, SpriteEffects.None, 0);

@@ -14,15 +14,18 @@ namespace Final_Assignment
 
         public Bullet Bullet;
 
-        Random rnd = new Random();
-        bool shooting = true;
-        float cooldowntime = 0;
-        Texture2D _arrow;
+        public Bullet shoot;
 
-        public Character(Texture2D texture ,Texture2D texture2) : base(texture)
+        Random rnd = new Random();
+        public bool shooting = false;
+        float cooldowntime = 0;
+
+        
+
+
+        public Character(Texture2D texture) : base(texture)
         {
             this._texture = texture;
-            _arrow = texture2;
             
 
         }
@@ -45,15 +48,33 @@ namespace Final_Assignment
             cooldowntime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
 
 
-            if (_currentkey.IsKeyDown(Keys.Space))
+
+            if (_currentkey.IsKeyDown(Keys.A))
+            {
+                Position.X -= 10;
+            }
+
+            if (_currentkey.IsKeyDown(Keys.D))
+            {
+                Position.X += 10;
+            }
+
+
+
+
+            if (_currentkey.IsKeyDown(Keys.Space) && _currentkey != _previouskey)
             {
                 var bullet = Bullet.Clone() as Bullet;
                 bullet.Direction = this.Direction;
                 bullet.Position = this.Position;
                 bullet.LinearVelocity = this.LinearVelocity * 15;
                 gameObjects.Add(bullet);
+                shoot = bullet;
+                shooting = true;
             }
 
+
+           
 
             CheckInput();
 
@@ -63,18 +84,6 @@ namespace Final_Assignment
 
         private void CheckInput()
         {
-            if (_currentkey.IsKeyDown(Keys.A))
-            {
-                if (Rotation > -2.6)
-                    Rotation -= MathHelper.ToRadians(RotationVelocity);
-            }
-            else if (_currentkey.IsKeyDown(Keys.D))
-            {
-                if (Rotation < -0.6)
-                    Rotation += MathHelper.ToRadians(RotationVelocity);
-            }
-
-
 
         }
 
@@ -88,7 +97,6 @@ namespace Final_Assignment
         {
 
             spriteBatch.Draw(_texture, Position, null, Color.White, 0f , Origin , 1f, SpriteEffects.None, 0);
-            spriteBatch.Draw(_arrow, Position + new Vector2(100,0), null, Color.White, Rotation, Origin, 1f, SpriteEffects.None, 0);
             base.Draw(spriteBatch);
         }
     }

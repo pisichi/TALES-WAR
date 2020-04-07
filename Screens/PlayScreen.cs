@@ -12,6 +12,11 @@ namespace Final_Assignment
     {
         private readonly IGameScreenManager m_screenManager;
         private bool m_exitGame;
+        private Camera _camera;
+
+        public Bullet shoot;
+
+        public bool isPlayerTurn = true;
 
         public bool IsPaused { get; private set; }
 
@@ -36,12 +41,14 @@ namespace Final_Assignment
             _font = content.Load<SpriteFont>("font/File");
             _gameObjects = new List<GameObject>();
 
-            player = new Character(_char, _arrow)
+            player = new Character(_char)
             {
                 Position = new Vector2(100, 650),
                 Bullet = new Bullet(_arrow)
             };
             _gameObjects.Add(player);
+
+            _camera = new Camera();
 
         }
 
@@ -57,7 +64,18 @@ namespace Final_Assignment
 
         public void Update(GameTime gameTime)
         {
+            _camera.Follow(player);
 
+            if (player.shooting)
+            {
+                _camera.Follow(player.shoot);
+                if(player.shoot.Position.X > 3000)
+                {
+                    player.shooting = false;
+                }
+            }
+
+            
             for (int i = 0; i < _gameObjects.Count; i++)
             {
                 _gameObjects[i].Update(gameTime, _gameObjects);
@@ -77,14 +95,25 @@ namespace Final_Assignment
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
+            spriteBatch.Begin(transformMatrix: _camera.Transform);
+
             spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800));
-            spriteBatch.DrawString(_font, "Playing", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("Playing") / 2, Color.White);
+
+            if(isPlayerTurn)
+            spriteBatch.DrawString(_font, "player turn", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("Playing") / 2, Color.White);
+            else
+                spriteBatch.DrawString(_font, "enemy turn", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("Playing") / 2, Color.White);
+
+
             spriteBatch.DrawString(_font, "press ESC to exit", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT  / 3) - _font.MeasureString("press ESC to exit") / 2, Color.White);
 
             for (int i = 0; i < _gameObjects.Count; i++)
             {
                 _gameObjects[i].Draw(spriteBatch);
             }
+
+            spriteBatch.End();
+
         }
 
         public void ChangeBetweenScreen()

@@ -95,13 +95,12 @@ namespace Final_Assignment
             GraphicsDevice.Clear(Color.Black);
 
            
-            m_spriteBatch.Begin();
+
 
            
 
             m_screenManager.Draw(gameTime);
             
-            m_spriteBatch.End();
             graphics.BeginDraw();
 
             base.Draw(gameTime);
