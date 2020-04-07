@@ -1,7 +1,8 @@
-﻿using Final_Assignment.Models;
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,13 @@ namespace Final_Assignment
         public Vector2 Position;
 
         public float Rotation;
+        public float RotationVelocity = 3f;
+        public float LinearVelocity = 1f;
+
+
         public Vector2 Scale;
+        public Vector2 Direction;
+        public Vector2 Origin;
 
         public Vector2 Velocity;
         public Vector2 Acceleration;
@@ -28,6 +35,9 @@ namespace Final_Assignment
         public string Name;
 
         public bool IsActive;
+
+        public KeyboardState _currentkey;
+        public KeyboardState _previouskey;
 
         public Rectangle Rectangle
         {
@@ -56,6 +66,7 @@ namespace Final_Assignment
             Velocity = Vector2.Zero;
             Rotation = 0f;
             IsActive = true;
+            Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
         }
 
         public GameObject(Texture2D texture)

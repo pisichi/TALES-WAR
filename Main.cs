@@ -40,7 +40,7 @@ namespace Final_Assignment
 
             m_screenManager = new GameScreenManager(m_spriteBatch, Content);
 
-            Singleton.Instance.CurrentGameState = Singleton.GameState.GameIntro;
+            m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
 
 
             m_screenManager.OnGameExit += Exit;
@@ -65,19 +65,19 @@ namespace Final_Assignment
         protected override void Update(GameTime gameTime)
         {
 
-            switch (Singleton.Instance.CurrentGameState)
-            {
-                case Singleton.GameState.GameIntro:
-                    m_screenManager.ChangeScreen(new IntroScreen(m_screenManager));
-                    break;
-                case Singleton.GameState.GameMenu:
-                    m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
-                    break;
-                case Singleton.GameState.GamePlaying:
-                    m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
-                    break;
+            //switch (Singleton.Instance.CurrentGameState)
+            //{
+            //    case Singleton.GameState.GameIntro:
+            //        m_screenManager.ChangeScreen(new IntroScreen(m_screenManager));
+            //        break;
+            //    case Singleton.GameState.GameMenu:
+            //        m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
+            //        break;
+            //    case Singleton.GameState.GamePlaying:
+            //        m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
+            //        break;
 
-            }
+            //}
             
 
 
