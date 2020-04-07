@@ -12,6 +12,8 @@ namespace Final_Assignment
     class Character : GameObject
     {
 
+        public bool IsPlayer;
+
         public Bullet Bullet;
 
         public Bullet shoot;
@@ -26,7 +28,7 @@ namespace Final_Assignment
         public Character(Texture2D texture) : base(texture)
         {
             this._texture = texture;
-            
+            IsPlayer = true;
 
         }
 
@@ -42,7 +44,7 @@ namespace Final_Assignment
             _previouskey = _currentkey;
             _currentkey = Keyboard.GetState();
 
-            Console.WriteLine(" "+Rotation);
+            Console.WriteLine(" " + Rotation);
 
             Direction = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation));
             cooldowntime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
@@ -59,11 +61,14 @@ namespace Final_Assignment
                 Position.X += 10;
             }
 
+            CheckInput();
 
+            base.Update(gameTime, gameObjects);
+        }
 
-
-            if (_currentkey.IsKeyDown(Keys.Space) && _currentkey != _previouskey)
-            {
+        public void Shoot(List<GameObject> gameObjects)
+        {
+         
                 var bullet = Bullet.Clone() as Bullet;
                 bullet.Direction = this.Direction;
                 bullet.Position = this.Position;
@@ -71,16 +76,8 @@ namespace Final_Assignment
                 gameObjects.Add(bullet);
                 shoot = bullet;
                 shooting = true;
-            }
 
-
-           
-
-            CheckInput();
-
-            base.Update(gameTime, gameObjects);
         }
-
 
         private void CheckInput()
         {
@@ -88,10 +85,6 @@ namespace Final_Assignment
         }
 
 
-        private void Shoot(List<GameObject> gameObjects)
-        {
-
-        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
