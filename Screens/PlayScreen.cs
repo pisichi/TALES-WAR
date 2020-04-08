@@ -34,6 +34,16 @@ namespace Final_Assignment
         Texture2D _arrow;
         SpriteFont _font;
 
+        public enum TurnState
+        {
+            angle,
+            force,
+            shoot
+        }
+
+        public TurnState CurrentTurnState;
+
+
         public PlayScreen(IGameScreenManager screenManager)
         {
             m_screenManager = screenManager;
@@ -50,7 +60,14 @@ namespace Final_Assignment
             enemyList = new List<Character>();
             enemyIndex = 0;
 
+            Set();
 
+            _camera = new Camera();
+
+        }
+
+        private void Set()
+        {
             player = new Character(_char)
             {
                 Position = new Vector2(100, 650),
@@ -80,9 +97,6 @@ namespace Final_Assignment
 
             _gameObjects.Add(enemy);
             enemyList.Add(enemy);
-
-            _camera = new Camera();
-
         }
 
         public void Pause()
@@ -97,76 +111,106 @@ namespace Final_Assignment
 
         public void Update(GameTime gameTime)
         {
-           Singleton.Instance._previouskey = Singleton.Instance._currentkey;
+            Singleton.Instance._previouskey = Singleton.Instance._currentkey;
             Singleton.Instance._currentkey = Keyboard.GetState();
 
             if (player.InTurn)
             {
-                enemyIndex = 0;
-                _camera.Follow(player);
+                PlayerModule();
+            }
+            else
+            {
+                EnemyModule(gameTime);
+            }
 
-                if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
-                {
-                    player.Shoot(_gameObjects);
-                }
+            CheckColision();
 
-                if (player.shooting)
-                {
-                    _camera.Follow(player.shoot);
-                    if (player.shoot.Position.X > 3000)
-                    {
-                        player.shooting = false;
-                        player.InTurn = false;
-                        enemyList[enemyIndex].InTurn = true;
-                    }
-                }
+            for (int i = 0; i < _gameObjects.Count; i++)
+            {
+                _gameObjects[i].Update(gameTime, _gameObjects);
+            }
+        }
+
+        private void CheckColision()
+        {
+
+        }
+
+        private void EnemyModule(GameTime gameTime)
+        {
+            if (enemyIndex >= enemyList.Count)
+            {
+                player.InTurn = true;
             }
 
             else
             {
-                if (enemyIndex >= enemyList.Count)
+                _camera.Follow(enemyList[enemyIndex]);
+
+                if (enemyList[enemyIndex].InTurn)
                 {
-                    player.InTurn = true;
+                    enemyList[enemyIndex].Auto(gameTime,_gameObjects);
                 }
 
-                else
+                if (enemyList[enemyIndex].shooting)
                 {
+                    _camera.Follow(enemyList[enemyIndex].bullet);
+                }
 
-                    _camera.Follow(enemyList[enemyIndex]);
+                if (!enemyList[enemyIndex].InTurn)
+                {
+                    enemyIndex++;
 
-                    if (Singleton.Instance._currentkey.IsKeyDown(Keys.F) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+                    if (enemyIndex < enemyList.Count)
                     {
-                        enemyIndex++;
+                        enemyList[enemyIndex].InTurn = true;
                     }
-                
                 }
 
             }
+        }
 
-                for (int i = 0; i < _gameObjects.Count; i++)
-                {
-                    _gameObjects[i].Update(gameTime, _gameObjects);
-                }
-            }
 
-        
+        private void PlayerModule()
+        {
+            enemyIndex = 0;
+            _camera.Follow(player);
 
-            public void HandleInput(GameTime gameTime)
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
+                player.Shoot(_gameObjects);
+            }
 
-                if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                {
-                    m_screenManager.Exit();
-                }
+            if (player.shooting)
+            {
+                _camera.Follow(player.bullet);
+            }
+
+            else
+            {
+                enemyList[enemyIndex].InTurn = true;
+            }
+        }
+
+
+        public void HandleInput(GameTime gameTime)
+        {
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                m_screenManager.Exit();
+                //Pause();
 
             }
 
-            public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-            {
+        }
 
-                spriteBatch.Begin(transformMatrix: _camera.Transform);
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
 
-                spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800));
+            spriteBatch.Begin(transformMatrix: _camera.Transform);
+
+            spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800));
 
             if (player.InTurn)
                 spriteBatch.DrawString(_font, "player turn", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("Playing") / 2, Color.White);
@@ -175,39 +219,39 @@ namespace Final_Assignment
 
                 spriteBatch.DrawString(_font, "enemy turn " + enemyIndex, new Vector2(2000, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("Playing") / 2, Color.White);
 
-                spriteBatch.DrawString(_font, "press f to skip", new Vector2(2000, (Singleton.SCREENHEIGHT +100) / 2) - _font.MeasureString("Playing") / 2, Color.White);
+                spriteBatch.DrawString(_font, "press f to skip", new Vector2(2000, (Singleton.SCREENHEIGHT + 100) / 2) - _font.MeasureString("Playing") / 2, Color.White);
             }
 
-                spriteBatch.DrawString(_font, "press ESC to exit", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 3) - _font.MeasureString("press ESC to exit") / 2, Color.White);
+            spriteBatch.DrawString(_font, "press ESC to exit", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 3) - _font.MeasureString("press ESC to exit") / 2, Color.White);
 
-                for (int i = 0; i < _gameObjects.Count; i++)
-                {
-                    _gameObjects[i].Draw(spriteBatch);
-                }
-
-                spriteBatch.End();
-
-            }
-
-            public void ChangeBetweenScreen()
+            for (int i = 0; i < _gameObjects.Count; i++)
             {
-                if (m_exitGame)
-                {
-                    m_screenManager.Exit();
-                }
+                _gameObjects[i].Draw(spriteBatch);
             }
 
-            public void Dispose()
+            spriteBatch.End();
+
+        }
+
+        public void ChangeBetweenScreen()
+        {
+            if (m_exitGame)
             {
-
-            }
-
-            void Reset()
-            {
-
+                m_screenManager.Exit();
             }
         }
+
+        public void Dispose()
+        {
+
+        }
+
+        void Reset()
+        {
+
+        }
     }
+}
 
 
 

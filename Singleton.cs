@@ -15,6 +15,9 @@ namespace Final_Assignment
         public int Score;
         public int Charge;
 
+        public string CurrentHero;
+        public string CurrentStage;
+
         public enum GameState
         {
             GameIntro,
