@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,6 +8,9 @@ namespace Final_Assignment
 {
     class Character : GameObject
     {
+
+
+        public bool InTurn;
 
         public bool IsPlayer;
 
@@ -39,27 +39,13 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects)
         {
-
-
-            _previouskey = _currentkey;
-            _currentkey = Keyboard.GetState();
-
-            Console.WriteLine(" " + Rotation);
+            Singleton.Instance._previouskey = Singleton.Instance._currentkey;
+            Singleton.Instance._currentkey = Keyboard.GetState();
+            //Console.WriteLine(" " + Rotation);
 
             Direction = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation));
             cooldowntime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
 
-
-
-            if (_currentkey.IsKeyDown(Keys.A))
-            {
-                Position.X -= 10;
-            }
-
-            if (_currentkey.IsKeyDown(Keys.D))
-            {
-                Position.X += 10;
-            }
 
             CheckInput();
 
@@ -80,6 +66,12 @@ namespace Final_Assignment
         }
 
         private void CheckInput()
+        {
+
+        }
+
+
+        public void IsHit()
         {
 
         }

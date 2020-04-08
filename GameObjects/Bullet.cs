@@ -2,9 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Final_Assignment 
 {
@@ -21,6 +19,12 @@ namespace Final_Assignment
             Position += Direction * LinearVelocity;
             //Position.Y *= 0.5f;
             base.Update(gameTime, gameObjects);
+        }
+
+
+        public void Hit()
+        {
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)

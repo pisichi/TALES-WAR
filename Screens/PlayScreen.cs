@@ -14,6 +14,8 @@ namespace Final_Assignment
         private bool m_exitGame;
         private Camera _camera;
 
+        private int enemyIndex;
+
         public Bullet shoot;
 
         public bool isPlayerTurn = true;
@@ -21,13 +23,11 @@ namespace Final_Assignment
         public bool IsPaused { get; private set; }
 
         List<GameObject> _gameObjects;
-        private Character character;
-        private Character character2;
-        List<Character> enemy;
 
-        public KeyboardState _currentkey;
-        public KeyboardState _previouskey;
 
+        private Character player;
+        private Character enemy;
+        List<Character> enemyList;
 
         Texture2D _bg;
         Texture2D _char;
@@ -47,28 +47,39 @@ namespace Final_Assignment
             _char = content.Load<Texture2D>("sprites/char");
             _font = content.Load<SpriteFont>("font/File");
             _gameObjects = new List<GameObject>();
-            enemy = new List<Character>();
+            enemyList = new List<Character>();
+            enemyIndex = 0;
 
 
-
-            character = new Character(_char)
+            player = new Character(_char)
             {
                 Position = new Vector2(100, 650),
-                Bullet = new Bullet(_arrow)
+                Bullet = new Bullet(_arrow),
+                InTurn = true
             };
-            _gameObjects.Add(character);
+            _gameObjects.Add(player);
 
-
-
-
-            character2 = new Character(_char)
+            enemy = new Character(_char)
             {
                 Position = new Vector2(2000, 650),
                 Bullet = new Bullet(_arrow),
-                IsPlayer = false
+                IsPlayer = false,
+                InTurn = false
             };
-            _gameObjects.Add(character2);
-            enemy.Add(character2);
+            _gameObjects.Add(enemy);
+            enemyList.Add(enemy);
+
+
+            enemy = new Character(_char)
+            {
+                Position = new Vector2(2200, 650),
+                Bullet = new Bullet(_arrow),
+                IsPlayer = false,
+                InTurn = false
+            };
+
+            _gameObjects.Add(enemy);
+            enemyList.Add(enemy);
 
             _camera = new Camera();
 
@@ -86,31 +97,51 @@ namespace Final_Assignment
 
         public void Update(GameTime gameTime)
         {
-            _previouskey = _currentkey;
-            _currentkey = Keyboard.GetState();
+           Singleton.Instance._previouskey = Singleton.Instance._currentkey;
+            Singleton.Instance._currentkey = Keyboard.GetState();
 
-            if (isPlayerTurn && character.IsPlayer)
+            if (player.InTurn)
             {
-                _camera.Follow(character);
+                enemyIndex = 0;
+                _camera.Follow(player);
 
-                if (_currentkey.IsKeyDown(Keys.Space) && _currentkey != _previouskey)
+                if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                 {
-                    character.Shoot(_gameObjects); 
+                    player.Shoot(_gameObjects);
                 }
-            }
-            else
-                _camera.Follow(enemy[0]);
 
-                if (character.shooting)
+                if (player.shooting)
                 {
-                    _camera.Follow(character.shoot);
-                    if (character.shoot.Position.X > 3000)
+                    _camera.Follow(player.shoot);
+                    if (player.shoot.Position.X > 3000)
                     {
-                        character.shooting = false;
-                        isPlayerTurn = false;
+                        player.shooting = false;
+                        player.InTurn = false;
+                        enemyList[enemyIndex].InTurn = true;
                     }
                 }
+            }
 
+            else
+            {
+                if (enemyIndex >= enemyList.Count)
+                {
+                    player.InTurn = true;
+                }
+
+                else
+                {
+
+                    _camera.Follow(enemyList[enemyIndex]);
+
+                    if (Singleton.Instance._currentkey.IsKeyDown(Keys.F) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+                    {
+                        enemyIndex++;
+                    }
+                
+                }
+
+            }
 
                 for (int i = 0; i < _gameObjects.Count; i++)
                 {
@@ -137,11 +168,15 @@ namespace Final_Assignment
 
                 spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800));
 
-                if (isPlayerTurn)
-                    spriteBatch.DrawString(_font, "player turn", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("Playing") / 2, Color.White);
-                else
-                    spriteBatch.DrawString(_font, "enemy turn", new Vector2(2000, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("Playing") / 2, Color.White);
+            if (player.InTurn)
+                spriteBatch.DrawString(_font, "player turn", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("Playing") / 2, Color.White);
+            else
+            {
 
+                spriteBatch.DrawString(_font, "enemy turn " + enemyIndex, new Vector2(2000, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("Playing") / 2, Color.White);
+
+                spriteBatch.DrawString(_font, "press f to skip", new Vector2(2000, (Singleton.SCREENHEIGHT +100) / 2) - _font.MeasureString("Playing") / 2, Color.White);
+            }
 
                 spriteBatch.DrawString(_font, "press ESC to exit", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 3) - _font.MeasureString("press ESC to exit") / 2, Color.White);
 

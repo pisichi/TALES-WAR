@@ -48,6 +48,7 @@
     <Compile Include="Managers\GameScreenManager.cs" />
     <Compile Include="Models\Animation.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="Screens\ArrayList.cs" />
     <Compile Include="Screens\Interfaces.cs" />
     <Compile Include="Screens\IntroScreen.cs" />
     <Compile Include="Main.cs" />
