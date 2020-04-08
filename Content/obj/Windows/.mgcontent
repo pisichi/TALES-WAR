@@ -6,6 +6,7 @@
   <SourceFiles>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/font/File.spritefont</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/arrow.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/ball.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bg.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bullet.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/char.png</File>
@@ -13,6 +14,7 @@
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/pin.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

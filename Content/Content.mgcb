@@ -32,7 +32,7 @@
 /processorParam:TextureFormat=Color
 /build:sprites/arrow.png
 
-#begin sprites/bg.png
+#begin sprites/ball.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -42,7 +42,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:sprites/bg.png
+/build:sprites/ball.png
 
 #begin sprites/bg.png
 /importer:TextureImporter

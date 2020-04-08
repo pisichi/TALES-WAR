@@ -16,6 +16,7 @@ namespace Final_Assignment
         public Bullet(Texture2D texture) : base(texture)
         {
             _texture = texture;
+            Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
         }
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects)
