@@ -153,12 +153,16 @@ namespace Final_Assignment
 
             for (int i = 0; i < _gameObjects.Count; i++)
             {
-                _gameObjects[i].Update(gameTime, _gameObjects);
+                if (_gameObjects[i].IsActive)
+                    _gameObjects[i].Update(gameTime, _gameObjects);
             }
         }
 
         private void CheckColision()
         {
+            // yay yay yay condition
+
+            //IsHit() ot Hit
 
         }
 
@@ -302,6 +306,7 @@ namespace Final_Assignment
 
             for (int i = 0; i < _gameObjects.Count; i++)
             {
+                if(_gameObjects[i].IsActive)
                 _gameObjects[i].Draw(spriteBatch);
             }
 

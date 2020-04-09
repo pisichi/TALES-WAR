@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="GameObjects\Bullet.cs" />
     <Compile Include="GameObjects\Character.cs" />
+    <Compile Include="GameObjects\enemy\Mob.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
+    <Compile Include="GameObjects\player\Zeus.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Managers\GameScreenManager.cs" />
     <Compile Include="Models\Animation.cs" />

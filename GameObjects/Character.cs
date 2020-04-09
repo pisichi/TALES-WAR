@@ -65,6 +65,7 @@ namespace Final_Assignment
             {
                 shooting = false;
                 InTurn = false;
+                bullet.Hit();
                 bullet = null;
                 waitTime = 0;
             }
@@ -74,7 +75,8 @@ namespace Final_Assignment
 
         public void Shoot(List<GameObject> gameObjects)
         {
-                var bullet = Bullet.Clone() as Bullet;
+
+            var bullet = Bullet.Clone() as Bullet;
                 bullet.Direction = this.Direction;
                 bullet.Position = this.Position;
                 bullet.LinearVelocity = this.LinearVelocity * 15;

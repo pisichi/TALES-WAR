@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
@@ -12,24 +13,32 @@ namespace Final_Assignment
 
         public int damage;
         public bool special;
+        bool IsHit = false;
+
+
+
 
         public Bullet(Texture2D texture) : base(texture)
         {
             _texture = texture;
             Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
+           // Rotation = 6.66f;
         }
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects)
         {
+
             Position += Direction * LinearVelocity;
-            //Position.Y *= -0.1f;
+
+
             base.Update(gameTime, gameObjects);
         }
 
 
         public void Hit()
         {
-
+            IsHit = true;
+            IsActive = false;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

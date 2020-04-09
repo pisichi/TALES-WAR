@@ -31,7 +31,7 @@ namespace Final_Assignment
 
         public string Name;
 
-        public bool IsActive;
+        public bool IsActive = true;
 
 
 
@@ -113,9 +113,9 @@ namespace Final_Assignment
         public bool IsTouching(GameObject g)
         {
             return IsTouchingLeft(g) ||
-                IsTouchingTop(g) ||
-                IsTouchingRight(g) ||
-                IsTouchingBottom(g);
+                   IsTouchingTop(g) ||
+                   IsTouchingRight(g) ||
+                   IsTouchingBottom(g);
         }
 
         public bool IsTouchingLeft(GameObject g)
