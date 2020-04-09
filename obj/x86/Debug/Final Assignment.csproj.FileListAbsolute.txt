@@ -23,31 +23,76 @@ C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86\Debug\Final Assignment.pdb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\bg.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\font\File.xnb
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bg.xnb
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\Content\font\File.xnb
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\Content\Asteroid_Spritesheet.xnb
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\Final Assignment.exe
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\Final Assignment.pdb
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\MonoGame.Framework.dll
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.dll
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.DXGI.dll
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XInput.dll
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\MonoGame.Framework.xml
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.xml
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.DXGI.xml
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XInput.xml
-D:\Game Programming\Final project copy\Monogame_shooting\obj\x86\Debug\Final Assignment.csproj.CoreCompileInputs.cache
-D:\Game Programming\Final project copy\Monogame_shooting\obj\x86\Debug\Final Assignment.csproj.CopyComplete
-D:\Game Programming\Final project copy\Monogame_shooting\obj\x86\Debug\Final Assignment.exe
-D:\Game Programming\Final project copy\Monogame_shooting\obj\x86\Debug\Final Assignment.pdb
-D:\Game Programming\Final project copy\Monogame_shooting\obj\x86\Debug\Final Assignment.csprojAssemblyReference.cache
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\VelcroPhysics.MonoGame.dll
-D:\Game Programming\Final project copy\Monogame_shooting\bin\Windows\x86\Debug\VelcroPhysics.MonoGame.pdb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\arrow.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\bullet.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\char.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\gauge.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\pin.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\ball.xnb
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\obj\x86\Debug\Final Assignment.csprojAssemblyReference.cache
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\obj\x86\Debug\Final Assignment.csproj.CoreCompileInputs.cache
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\obj\x86\Debug\Final Assignment.exe
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\obj\x86\Debug\Final Assignment.pdb
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\arrow.xnb
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\ball.xnb
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bg.xnb
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bullet.xnb
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\char.xnb
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\gauge.xnb
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\pin.xnb
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\font\File.xnb
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\Final Assignment.exe
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\Final Assignment.pdb
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\MonoGame.Framework.dll
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\VelcroPhysics.MonoGame.dll
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.dll
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XInput.dll
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\MonoGame.Framework.xml
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\VelcroPhysics.MonoGame.pdb
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.xml
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XInput.xml
+D:\Game Programming\Final project copy\2020-04-08 master\Monogame_shooting\obj\x86\Debug\Final Assignment.csproj.CopyComplete
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\arrow.xnb
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\ball.xnb
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bg.xnb
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bullet.xnb
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\char.xnb
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\gauge.xnb
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\pin.xnb
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\Content\font\File.xnb
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\Content\Asteroid_Spritesheet.xnb
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\Final Assignment.exe
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\Final Assignment.pdb
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\MonoGame.Framework.dll
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\VelcroPhysics.MonoGame.dll
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.dll
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XInput.dll
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\MonoGame.Framework.xml
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\VelcroPhysics.MonoGame.pdb
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.xml
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+D:\Game Programming\Final project\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XInput.xml
+D:\Game Programming\Final project\Monogame_shooting\obj\x86\Debug\Final Assignment.csprojAssemblyReference.cache
+D:\Game Programming\Final project\Monogame_shooting\obj\x86\Debug\Final Assignment.csproj.CoreCompileInputs.cache
+D:\Game Programming\Final project\Monogame_shooting\obj\x86\Debug\Final Assignment.csproj.CopyComplete
+D:\Game Programming\Final project\Monogame_shooting\obj\x86\Debug\Final Assignment.exe
+D:\Game Programming\Final project\Monogame_shooting\obj\x86\Debug\Final Assignment.pdb

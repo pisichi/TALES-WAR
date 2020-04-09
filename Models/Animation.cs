@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Final_Assignment.Model
+namespace Final_Assignment
 {
     class Animation
     {

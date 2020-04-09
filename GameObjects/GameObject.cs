@@ -1,17 +1,16 @@
-﻿using Microsoft.Xna.Framework;
+﻿
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using Final_Assignment.Model;
-using Final_Assignment.AnimationManagers;
+using VelcroPhysics.Dynamics;
 
-
-namespace Final_Assignment.GameObjects
+namespace Final_Assignment
 {
     class GameObject : ICloneable
     {
+
         #region PUBLIC_VARIABLES
 
         public Dictionary<string, SoundEffectInstance> SoundEffects;
@@ -19,7 +18,13 @@ namespace Final_Assignment.GameObjects
         public Vector2 Position;
 
         public float Rotation;
+        public float RotationVelocity = 3f;
+        public float LinearVelocity = 1f;
+
+
         public Vector2 Scale;
+        public Vector2 Direction;
+        public Vector2 Origin;
 
         public Vector2 Velocity;
         public Vector2 Acceleration;
@@ -27,6 +32,8 @@ namespace Final_Assignment.GameObjects
         public string Name;
 
         public bool IsActive;
+
+
 
         public Rectangle Rectangle
         {
@@ -47,25 +54,27 @@ namespace Final_Assignment.GameObjects
         protected Texture2D _texture;
         #endregion
 
+        public World world = new World(Vector2.Zero);
         public GameObject()
         {
-            Position = Vector2.Zero;
-            Scale = Vector2.One;
-            Acceleration = Vector2.Zero;
-            Velocity = Vector2.Zero;
-            Rotation = 0f;
-            IsActive = true;
+            //Position = Vector2.Zero;
+            //Scale = Vector2.One;
+            //Acceleration = Vector2.Zero;
+            //Velocity = Vector2.Zero;
+            //Rotation = 0f;
+            //IsActive = true;
+            Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
         }
 
         public GameObject(Texture2D texture)
         {
-            Position = Vector2.Zero;
-            Scale = Vector2.One;
-            Acceleration = Vector2.Zero;
-            Velocity = Vector2.Zero;
-            Rotation = 0f;
-            IsActive = true;
-            _texture = texture;
+            //Position = Vector2.Zero;
+            //Scale = Vector2.One;
+            //Acceleration = Vector2.Zero;
+            //Velocity = Vector2.Zero;
+            //Rotation = 0f;
+            //IsActive = true;
+            //_texture = texture;
         }
 
         public GameObject(Dictionary<string, Animation> animations)
@@ -77,40 +86,27 @@ namespace Final_Assignment.GameObjects
             Rotation = 0f;
             IsActive = true;
             _animations = animations;
-            _animationManager = new AnimationManager(_animations.First().Value);
+            //world = new World(Vector2.Zero);
+            //_animationManager = new AnimationManager(_animations.First().Value);
         }
+
+
 
         public virtual void Update(GameTime gameTime, List<GameObject> gameObjects)
         {
-            if (_animationManager != null)
-            {
-                _animationManager.Update(gameTime);
-            }
+            //Physic time
+            world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, 1f / 30f));
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
 
-            if (_animationManager == null)
-            {
-                spriteBatch.Draw(_texture,
-                                 Position,
-                                 Viewport,
-                                 Color.White,
-                                 Rotation,
-                                 Viewport.Center.ToVector2(),
-                                 Scale,
-                                 SpriteEffects.None,
-                                 0);
-            }
-            else
-            {
-                _animationManager.Draw(spriteBatch, Position, Rotation, Scale);
-            }
+        
         }
 
         public virtual void Reset()
         {
+
         }
 
         public object Clone()
@@ -159,5 +155,6 @@ namespace Final_Assignment.GameObjects
                     this.Rectangle.Top < g.Rectangle.Bottom;
         }
         #endregion
+
     }
 }
