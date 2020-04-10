@@ -85,13 +85,15 @@ namespace Final_Assignment
 
         private void Set()
         {
-            player = new Character(_char)
+            player = new Zeus(_char)
             {
                 Position = new Vector2(100, 650),
                 Bullet = new Bullet(_bullet),
                 InTurn = true
             };
             _gameObjects.Add(player);
+
+
 
             enemy = new Character(_char)
             {

@@ -22,8 +22,6 @@ namespace Final_Assignment
         public bool shooting = false;
         float waitTime = 0;
 
-        
-
 
         public Character(Texture2D texture) : base(texture)
         {
@@ -52,12 +50,10 @@ namespace Final_Assignment
         }
 
 
-        public void Skill()
+        public virtual void Skill()
         {
 
         }
-
-
 
         private void CheckRemove()
         {
@@ -72,18 +68,11 @@ namespace Final_Assignment
         }
 
 
-
-        public void Shoot(List<GameObject> gameObjects)
+        public virtual void Shoot(List<GameObject> gameObjects)
         {
 
-            var bullet = Bullet.Clone() as Bullet;
-                bullet.Direction = this.Direction;
-                bullet.Position = this.Position;
-                bullet.LinearVelocity = this.LinearVelocity * 15;
-                gameObjects.Add(bullet);
-                this.bullet = bullet;
-                shooting = true;
         }
+
 
         public void Auto(GameTime gameTime,List<GameObject> gameObjects)
         {
