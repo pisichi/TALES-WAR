@@ -11,17 +11,34 @@ namespace Final_Assignment
 
 
         public bool InTurn;
-
         public bool IsPlayer;
-
         public Bullet Bullet;
-
         public Bullet bullet;
 
-        Random rnd = new Random();
-        public bool shooting = false;
-        float waitTime = 0;
 
+        //attribute
+         String name;
+         public int HitPoint;
+         public int attack;
+
+         public int stunted = 0;
+         public int dot = 0;
+         public int buff = 0;
+
+        public enum status
+        {
+            Normal,
+            Buffed,
+            Stunted,
+            DoT
+        }
+        public status CurrentStatus;
+        //
+        public bool shooting = false;
+        public float waitTime = 0;
+
+
+        Random rnd = new Random();
 
         public Character(Texture2D texture) : base(texture)
         {
@@ -40,12 +57,9 @@ namespace Final_Assignment
         {
             Singleton.Instance._previouskey = Singleton.Instance._currentkey;
             Singleton.Instance._currentkey = Keyboard.GetState();
-            //Console.WriteLine(" " + Rotation);
             Direction = new Vector2((float)Math.Cos(Rotation), (float)Math.Sin(Rotation));
             CheckRemove();
-
             HandleInput();
-
             base.Update(gameTime, gameObjects);
         }
 
@@ -74,27 +88,9 @@ namespace Final_Assignment
         }
 
 
-        public void Auto(GameTime gameTime,List<GameObject> gameObjects)
+        public virtual void Auto(GameTime gameTime,List<GameObject> gameObjects)
         {
-            // AI Stuff
-            Skill();
-
-            waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
-
-                if (!shooting && waitTime > 2)
-                {
-                    var bullet = Bullet.Clone() as Bullet;
-                    bullet.Direction = this.Direction * -1 ;
-                    bullet.Position = this.Position;
-                    bullet.LinearVelocity = this.LinearVelocity * 15;
-                    gameObjects.Add(bullet);
-                    this.bullet = bullet;
-                    shooting = true;
-                }
-            Console.WriteLine(waitTime);
-                
-            
-
+           
         }
 
         private void HandleInput()

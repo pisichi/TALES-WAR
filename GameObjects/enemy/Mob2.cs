@@ -1,20 +1,18 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace Final_Assignment
 {
-    class Mob : Character
+    class Mob2 : Character
     {
 
 
-       
-
-        public Mob(Texture2D texture) : base(texture)
+        public Mob2(Texture2D texture) : base(texture)
         {
         }
 
@@ -31,7 +29,9 @@ namespace Final_Assignment
                 var bullet = Bullet.Clone() as Bullet;
                 bullet.Direction = this.Direction * -1;
                 bullet.Position = this.Position;
-                bullet.LinearVelocity = this.LinearVelocity * 15;
+                bullet.LinearVelocity = this.LinearVelocity * 50;
+                bullet.Scale = new Vector2(2, 2);
+
                 gameObjects.Add(bullet);
                 this.bullet = bullet;
                 shooting = true;
@@ -54,14 +54,15 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects)
         {
-            
+
             base.Update(gameTime, gameObjects);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_texture, Position, Color.Blue);
+            spriteBatch.Draw(_texture, Position, Color.Green);
             base.Draw(spriteBatch);
         }
     }
 }
+

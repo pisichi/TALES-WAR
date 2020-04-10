@@ -67,24 +67,24 @@ namespace Final_Assignment
 
         public GameObject(Texture2D texture)
         {
-            //Position = Vector2.Zero;
-            //Scale = Vector2.One;
-            //Acceleration = Vector2.Zero;
-            //Velocity = Vector2.Zero;
-            //Rotation = 0f;
-            //IsActive = true;
-            //_texture = texture;
-        }
-
-        public GameObject(Dictionary<string, Animation> animations)
-        {
             Position = Vector2.Zero;
             Scale = Vector2.One;
             Acceleration = Vector2.Zero;
             Velocity = Vector2.Zero;
             Rotation = 0f;
             IsActive = true;
-            _animations = animations;
+            _texture = texture;
+        }
+
+        public GameObject(Dictionary<string, Animation> animations)
+        {
+            //Position = Vector2.Zero;
+            //Scale = Vector2.One;
+            //Acceleration = Vector2.Zero;
+            //Velocity = Vector2.Zero;
+            //Rotation = 0f;
+            //IsActive = true;
+            //_animations = animations;
             //_animationManager = new AnimationManager(_animations.First().Value);
         }
 

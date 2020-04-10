@@ -7,7 +7,7 @@ using System;
 
 namespace Final_Assignment
 {
-    class IntroScreen : IGameScreen
+    class UpgradeScreen : IGameScreen
     {
         private readonly IGameScreenManager m_screenManager;
         private bool m_exitGame;
@@ -18,7 +18,7 @@ namespace Final_Assignment
         Texture2D _bg;
         SpriteFont _font;
 
-        public IntroScreen(IGameScreenManager screenManager)
+        public UpgradeScreen(IGameScreenManager screenManager)
         {
             m_screenManager = screenManager;
         }

@@ -15,6 +15,7 @@ namespace Final_Assignment
         public bool special;
         bool IsHit = false;
 
+        public float HitRadius;
 
 
 
@@ -43,7 +44,7 @@ namespace Final_Assignment
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_texture, Position, null, Color.White, Rotation, Origin, 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(_texture, Position, null, Color.White, Rotation, Origin, Scale, SpriteEffects.None, 0);
             base.Draw(spriteBatch);
         }
 

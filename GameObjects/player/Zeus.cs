@@ -18,16 +18,17 @@ namespace Final_Assignment
 
         public override void Skill()
         {
+            attack++;
             base.Skill();
         }
 
         public override void Shoot(List<GameObject> gameObjects)
         {
-
             var bullet = Bullet.Clone() as Bullet;
-            bullet.Direction = this.Direction;
-            bullet.Position = this.Position;
-            bullet.LinearVelocity = this.LinearVelocity * 15;
+            bullet.Direction = Direction;
+            bullet.Position = Position;
+            bullet.damage = attack;
+            bullet.LinearVelocity = LinearVelocity * 15;
             gameObjects.Add(bullet);
             this.bullet = bullet;
             shooting = true;

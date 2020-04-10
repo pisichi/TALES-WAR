@@ -95,7 +95,7 @@ namespace Final_Assignment
 
 
 
-            enemy = new Character(_char)
+            enemy = new Mob(_char)
             {
                 Position = new Vector2(2000, 650),
                 Bullet = new Bullet(_bullet),
@@ -106,9 +106,22 @@ namespace Final_Assignment
             enemyList.Add(enemy);
 
 
-            enemy = new Character(_char)
+            enemy = new Mob(_char)
             {
                 Position = new Vector2(2200, 650),
+                Bullet = new Bullet(_bullet),
+                IsPlayer = false,
+                InTurn = false
+            };
+
+            _gameObjects.Add(enemy);
+            enemyList.Add(enemy);
+
+
+
+            enemy = new Mob2(_char)
+            {
+                Position = new Vector2(2800, 500),
                 Bullet = new Bullet(_bullet),
                 IsPlayer = false,
                 InTurn = false
@@ -280,8 +293,6 @@ namespace Final_Assignment
 
             spriteBatch.DrawString(_font, "press ESC to exit", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 3) - _font.MeasureString("press ESC to exit") / 2, Color.White);
 
-
-
             switch (CurrentTurnState)
             {
                 case TurnState.skill:
@@ -302,8 +313,6 @@ namespace Final_Assignment
                     break;
 
             }
-
-               
 
 
             for (int i = 0; i < _gameObjects.Count; i++)
