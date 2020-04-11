@@ -42,8 +42,8 @@ namespace Final_Assignment
 
         public Character(Texture2D texture) : base(texture)
         {
-            this._texture = texture;
-            Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
+            
+            
             IsPlayer = true;
 
         }

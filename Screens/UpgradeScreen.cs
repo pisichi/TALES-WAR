@@ -52,7 +52,7 @@ namespace Final_Assignment
             //testing
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                Singleton.Instance.CurrentGameState = Singleton.GameState.GameMenu;
+                //Singleton.Instance.CurrentGameState = Singleton.GameState.GameMenu;
             }
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))

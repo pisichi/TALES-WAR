@@ -43,12 +43,10 @@
   <ItemGroup>
     <Compile Include="GameObjects\Bullet.cs" />
     <Compile Include="GameObjects\Character.cs" />
-    <Compile Include="GameObjects\Components\BulletComponent.cs" />
     <Compile Include="GameObjects\Components\BulletGraphicComponent.cs" />
     <Compile Include="GameObjects\Components\BulletPhysicComponent.cs" />
     <Compile Include="GameObjects\Components\CharacterAIComponent.cs" />
     <Compile Include="GameObjects\Components\CharacterGraphicComponent.cs" />
-    <Compile Include="GameObjects\Components\CharacterComponent.cs" />
     <Compile Include="GameObjects\Components\CharacterInputComponent.cs" />
     <Compile Include="GameObjects\Components\CharacterPhysicComponent.cs" />
     <Compile Include="GameObjects\Components\Component.cs" />

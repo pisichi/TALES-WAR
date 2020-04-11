@@ -148,14 +148,11 @@ namespace Final_Assignment
 
             if (player.InTurn)
             {
-
                 if (!select)
                 {
                     CurrentTurnState = TurnState.skill;
                     select = true;
                 }
-
-
                 PlayerModule();
             }
             else
@@ -163,9 +160,7 @@ namespace Final_Assignment
                 select = false;
                 EnemyModule(gameTime);
             }
-
             CheckColision();
-
             for (int i = 0; i < _gameObjects.Count; i++)
             {
                 if (_gameObjects[i].IsActive)
@@ -176,9 +171,7 @@ namespace Final_Assignment
         private void CheckColision()
         {
             // yay yay yay condition
-
             //IsHit() ot Hit
-
         }
 
         private void EnemyModule(GameTime gameTime)
@@ -187,7 +180,6 @@ namespace Final_Assignment
             {
                 player.InTurn = true;
             }
-
             else
             {
                 _camera.Follow(enemyList[enemyIndex]);

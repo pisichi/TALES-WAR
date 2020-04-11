@@ -11,9 +11,6 @@ namespace Final_Assignment
     class Mob : Character
     {
 
-
-       
-
         public Mob(Texture2D texture) : base(texture)
         {
         }

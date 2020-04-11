@@ -54,16 +54,16 @@ namespace Final_Assignment
         protected Texture2D _texture;
         #endregion
 
-        public GameObject()
-        {
-            //Position = Vector2.Zero;
-            //Scale = Vector2.One;
-            //Acceleration = Vector2.Zero;
-            //Velocity = Vector2.Zero;
-            //Rotation = 0f;
-            //IsActive = true;
-            Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
-        }
+        //public GameObject()
+        //{
+        //    //Position = Vector2.Zero;
+        //    //Scale = Vector2.One;
+        //    //Acceleration = Vector2.Zero;
+        //    //Velocity = Vector2.Zero;
+        //    //Rotation = 0f;
+        //    //IsActive = true;
+        //    Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
+        //}
 
         public GameObject(Texture2D texture)
         {
@@ -73,6 +73,7 @@ namespace Final_Assignment
             Velocity = Vector2.Zero;
             Rotation = 0f;
             IsActive = true;
+            Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
             _texture = texture;
         }
 
@@ -108,6 +109,7 @@ namespace Final_Assignment
         {
             return this.MemberwiseClone();
         }
+
 
         #region Collision
         public bool IsTouching(GameObject g)

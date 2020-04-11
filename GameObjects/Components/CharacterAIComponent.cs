@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Final_Assignment.GameObjects.Components
+namespace Final_Assignment
 {
     class CharacterAIComponent
     {
+
     }
 }
