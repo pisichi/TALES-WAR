@@ -10,7 +10,7 @@ namespace Final_Assignment
 {
     class Component
     {
-         public Component()
+         public Component() 
         {
 
         }

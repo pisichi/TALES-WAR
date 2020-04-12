@@ -11,6 +11,15 @@ namespace Final_Assignment
     class GameObject : ICloneable
     {
 
+
+        protected InputComponent _input;
+        protected PhysicComponent _physics;
+        protected GraphicComponent _graphics;
+
+        public int attack;
+        public bool InTurn;
+        public bool shooting = false;
+
         #region PUBLIC_VARIABLES
 
         public Dictionary<string, SoundEffectInstance> SoundEffects;
@@ -51,22 +60,17 @@ namespace Final_Assignment
         protected Dictionary<string, Animation> _animations;
         protected AnimationManager _animationManager;
 
-        protected Texture2D _texture;
+        public Texture2D _texture;
         #endregion
 
-        //public GameObject()
-        //{
-        //    //Position = Vector2.Zero;
-        //    //Scale = Vector2.One;
-        //    //Acceleration = Vector2.Zero;
-        //    //Velocity = Vector2.Zero;
-        //    //Rotation = 0f;
-        //    //IsActive = true;
-        //    Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
-        //}
 
-        public GameObject(Texture2D texture)
+        public GameObject(Texture2D texture, InputComponent input,PhysicComponent physics,GraphicComponent graphics)
         {
+            _input = input;
+            _physics = physics;
+            _graphics = graphics;
+
+            _texture = texture;
             Position = Vector2.Zero;
             Scale = Vector2.One;
             Acceleration = Vector2.Zero;
@@ -74,35 +78,33 @@ namespace Final_Assignment
             Rotation = 0f;
             IsActive = true;
             Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
-            _texture = texture;
-        }
-
-        public GameObject(Dictionary<string, Animation> animations)
-        {
-            //Position = Vector2.Zero;
-            //Scale = Vector2.One;
-            //Acceleration = Vector2.Zero;
-            //Velocity = Vector2.Zero;
-            //Rotation = 0f;
-            //IsActive = true;
-            //_animations = animations;
-            //_animationManager = new AnimationManager(_animations.First().Value);
+            
         }
 
         public virtual void Update(GameTime gameTime, List<GameObject> gameObjects)
         {
-
+            if (_input != null) _input.Update(gameTime, gameObjects, this);
+            if (_physics != null) _physics.Update(gameTime, gameObjects, this);
+            if (_graphics != null) _graphics.Update(gameTime, gameObjects, this);
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            if (_graphics != null) _graphics.Draw(spriteBatch, this);
+        }
 
-        
+        public void SendMessage(Component sender,int message)
+        {
+            if (_input != null) _input.ReceiveMessage(message ,sender);
+            if (_physics != null) _physics.ReceiveMessage(message,sender);
+            if (_graphics != null) _graphics.ReceiveMessage(message,sender);
         }
 
         public virtual void Reset()
         {
-
+            if (_input != null) _input.Reset();
+            if (_physics != null) _physics.Reset();
+            if (_graphics != null) _graphics.Reset();
         }
 
         public object Clone()

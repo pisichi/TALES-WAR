@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,8 +6,10 @@ namespace Final_Assignment
 {
     class CharacterPhysicComponent : PhysicComponent
     {
+
         public CharacterPhysicComponent()
         {
+
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
@@ -31,6 +29,8 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
+
+            //parent.Position.X += 10;
             base.Update(gameTime, gameObjects, parent);
         }
     }

@@ -15,7 +15,7 @@ namespace Final_Assignment
         private Camera _camera;
         private int enemyIndex;
 
-        public Bullet shoot;
+        //public Bullet shoot;
 
         public bool isPlayerTurn = true;
 
@@ -26,9 +26,9 @@ namespace Final_Assignment
         List<GameObject> _gameObjects;
 
 
-        private Character player;
-        private Character enemy;
-        List<Character> enemyList;
+        private GameObject player;
+        private GameObject enemy;
+        List<GameObject> enemyList;
 
         Texture2D _bg;
         Texture2D _char;
@@ -73,7 +73,7 @@ namespace Final_Assignment
             _char = content.Load<Texture2D>("sprites/char");
             _font = content.Load<SpriteFont>("font/File");
             _gameObjects = new List<GameObject>();
-            enemyList = new List<Character>();
+            enemyList = new List<GameObject>();
             enemyIndex = 0;
             select = false;
 
@@ -85,50 +85,71 @@ namespace Final_Assignment
 
         private void Set()
         {
-            player = new Zeus(_char)
+            //player = new Zeus(_char)
+            //{
+            //    Position = new Vector2(100, 650),
+            //    Bullet = new Bullet(_bullet),
+            //    InTurn = true
+            //};
+
+            player = new GameObject(_char,new CharacterInputComponent(),
+                                    new CharacterPhysicComponent(),
+                                    new CharacterGraphicComponent())
             {
                 Position = new Vector2(100, 650),
-                Bullet = new Bullet(_bullet),
+                //Bullet = new Bullet(_bullet),
                 InTurn = true
+
             };
             _gameObjects.Add(player);
 
 
-
-            enemy = new Mob(_char)
+            enemy = new GameObject(_char, new CharacterInputComponent(),
+                        new CharacterPhysicComponent(),
+                        new CharacterGraphicComponent())
             {
-                Position = new Vector2(2000, 650),
-                Bullet = new Bullet(_bullet),
-                IsPlayer = false,
+                Position = new Vector2(500, 650),
+                //Bullet = new Bullet(_bullet),
                 InTurn = false
+
             };
-            _gameObjects.Add(enemy);
+            _gameObjects.Add(player);
             enemyList.Add(enemy);
 
-
-            enemy = new Mob(_char)
-            {
-                Position = new Vector2(2200, 650),
-                Bullet = new Bullet(_bullet),
-                IsPlayer = false,
-                InTurn = false
-            };
-
-            _gameObjects.Add(enemy);
-            enemyList.Add(enemy);
+            //enemy = new Mob(_char)
+            //{
+            //    Position = new Vector2(2000, 650),
+            //    Bullet = new Bullet(_bullet),
+            //    IsPlayer = false,
+            //    InTurn = false
+            //};
+            //_gameObjects.Add(enemy);
+            //enemyList.Add(enemy);
 
 
+            //enemy = new Mob(_char)
+            //{
+            //    Position = new Vector2(2200, 650),
+            //    Bullet = new Bullet(_bullet),
+            //    IsPlayer = false,
+            //    InTurn = false
+            //};
 
-            enemy = new Mob2(_char)
-            {
-                Position = new Vector2(2800, 500),
-                Bullet = new Bullet(_bullet),
-                IsPlayer = false,
-                InTurn = false
-            };
+            //_gameObjects.Add(enemy);
+            //enemyList.Add(enemy);
 
-            _gameObjects.Add(enemy);
-            enemyList.Add(enemy);
+
+
+            //enemy = new Mob2(_char)
+            //{
+            //    Position = new Vector2(2800, 500),
+            //    Bullet = new Bullet(_bullet),
+            //    IsPlayer = false,
+            //    InTurn = false
+            //};
+
+            //_gameObjects.Add(enemy);
+            //enemyList.Add(enemy);
         }
 
         public void Pause()
@@ -160,18 +181,13 @@ namespace Final_Assignment
                 select = false;
                 EnemyModule(gameTime);
             }
-            CheckColision();
+
+
             for (int i = 0; i < _gameObjects.Count; i++)
             {
                 if (_gameObjects[i].IsActive)
                     _gameObjects[i].Update(gameTime, _gameObjects);
             }
-        }
-
-        private void CheckColision()
-        {
-            // yay yay yay condition
-            //IsHit() ot Hit
         }
 
         private void EnemyModule(GameTime gameTime)
@@ -186,12 +202,12 @@ namespace Final_Assignment
 
                 if (enemyList[enemyIndex].InTurn)
                 {
-                    enemyList[enemyIndex].Auto(gameTime,_gameObjects);
+                    //enemyList[enemyIndex].Auto(gameTime,_gameObjects);
                 }
 
                 if (enemyList[enemyIndex].shooting)
                 {
-                    _camera.Follow(enemyList[enemyIndex].bullet);
+                    //_camera.Follow(enemyList[enemyIndex].bullet);
                 }
 
                 if (!enemyList[enemyIndex].InTurn)
@@ -235,7 +251,7 @@ namespace Final_Assignment
                 case TurnState.force:
                     if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                     {
-                        player.Shoot(_gameObjects);
+                        //player.Shoot(_gameObjects);
                         CurrentTurnState = TurnState.shoot;
                         Rotation = 0;
                     }
@@ -247,7 +263,7 @@ namespace Final_Assignment
 
             if (player.shooting)
             {
-                _camera.Follow(player.bullet);
+                //_camera.Follow(player.bullet);
             }
             else
             {

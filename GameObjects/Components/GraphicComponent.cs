@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,6 +6,11 @@ namespace Final_Assignment
 {
     class GraphicComponent : Component
     {
+
+        //protected Dictionary<string, Animation> _animations;
+        //protected AnimationManager _animationManager;
+        //protected Texture2D _texture;
+
         public GraphicComponent()
         {
 

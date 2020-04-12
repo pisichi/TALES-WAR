@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,11 +8,6 @@ namespace Final_Assignment
     {
         public BulletGraphicComponent()
         {
-        }
-
-        public override void Draw(SpriteBatch spriteBatch, GameObject parent)
-        {
-            base.Draw(spriteBatch, parent);
         }
 
         public override void ReceiveMessage(int message, Component sender)
@@ -32,6 +23,11 @@ namespace Final_Assignment
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
             base.Update(gameTime, gameObjects, parent);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch, GameObject parent)
+        {
+            spriteBatch.Draw(parent._texture, parent.Position, null, Color.White, parent.Rotation, parent.Origin, parent.Scale, SpriteEffects.None, 0);
         }
     }
 }

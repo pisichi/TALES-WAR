@@ -1,8 +1,6 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -14,10 +12,6 @@ namespace Final_Assignment
         {
         }
 
-        public override void Draw(SpriteBatch spriteBatch, GameObject parent)
-        {
-            base.Draw(spriteBatch, parent);
-        }
 
         public override void ReceiveMessage(int message, Component sender)
         {
@@ -31,7 +25,20 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
+
+            parent.Position += parent.Direction * parent.LinearVelocity;
+
             base.Update(gameTime, gameObjects, parent);
+        }
+
+        public void Hit(List<GameObject> gameObjects, GameObject parent)
+        {
+            parent.IsActive = false;
+        }
+
+        public override void Draw(SpriteBatch spriteBatch, GameObject parent)
+        {
+            base.Draw(spriteBatch, parent);
         }
     }
 }

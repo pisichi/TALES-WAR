@@ -41,8 +41,6 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GameObjects\Bullet.cs" />
-    <Compile Include="GameObjects\Character.cs" />
     <Compile Include="GameObjects\Components\BulletGraphicComponent.cs" />
     <Compile Include="GameObjects\Components\BulletPhysicComponent.cs" />
     <Compile Include="GameObjects\Components\CharacterAIComponent.cs" />
@@ -53,10 +51,7 @@
     <Compile Include="GameObjects\Components\GraphicComponent.cs" />
     <Compile Include="GameObjects\Components\InputComponent.cs" />
     <Compile Include="GameObjects\Components\PhysicComponent.cs" />
-    <Compile Include="GameObjects\enemy\Mob.cs" />
-    <Compile Include="GameObjects\enemy\Mob2.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
-    <Compile Include="GameObjects\player\Zeus.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Managers\GameScreenManager.cs" />
     <Compile Include="Models\Animation.cs" />
