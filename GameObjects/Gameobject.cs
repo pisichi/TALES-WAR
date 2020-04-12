@@ -16,8 +16,12 @@ namespace Final_Assignment
         protected PhysicComponent _physics;
         protected GraphicComponent _graphics;
 
+
+        public GameObject Child;
+
         public int attack;
         public bool InTurn;
+        public bool action;
         public bool shooting = false;
 
         #region PUBLIC_VARIABLES

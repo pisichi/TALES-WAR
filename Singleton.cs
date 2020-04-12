@@ -12,6 +12,9 @@ namespace Final_Assignment
         public const int SCREENWIDTH = 1200;
         public const int SCREENHEIGHT = 800;
 
+        public GameObject follow;
+
+
         public int Score;
         public int Charge;
 

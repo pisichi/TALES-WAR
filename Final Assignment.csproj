@@ -41,12 +41,12 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GameObjects\Components\BulletGraphicComponent.cs" />
-    <Compile Include="GameObjects\Components\BulletPhysicComponent.cs" />
-    <Compile Include="GameObjects\Components\CharacterAIComponent.cs" />
-    <Compile Include="GameObjects\Components\CharacterGraphicComponent.cs" />
-    <Compile Include="GameObjects\Components\CharacterInputComponent.cs" />
-    <Compile Include="GameObjects\Components\CharacterPhysicComponent.cs" />
+    <Compile Include="GameObjects\Components\Bullet\BulletGraphicComponent.cs" />
+    <Compile Include="GameObjects\Components\Bullet\BulletPhysicComponent.cs" />
+    <Compile Include="GameObjects\Components\Character\CharacterAIComponent.cs" />
+    <Compile Include="GameObjects\Components\Character\CharacterGraphicComponent.cs" />
+    <Compile Include="GameObjects\Components\Character\CharacterInputComponent.cs" />
+    <Compile Include="GameObjects\Components\Character\CharacterPhysicComponent.cs" />
     <Compile Include="GameObjects\Components\Component.cs" />
     <Compile Include="GameObjects\Components\GraphicComponent.cs" />
     <Compile Include="GameObjects\Components\InputComponent.cs" />

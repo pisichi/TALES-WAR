@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
@@ -10,6 +11,7 @@ namespace Final_Assignment
     {
         public BulletPhysicComponent()
         {
+            Console.WriteLine("bullet is here");
         }
 
 
@@ -25,10 +27,13 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-
+            
             parent.Position += parent.Direction * parent.LinearVelocity;
-
-            base.Update(gameTime, gameObjects, parent);
+            //Console.WriteLine(parent.Position.X);
+            //Console.WriteLine(parent.Position.Y);
+            //Console.WriteLine(parent.Direction.X);
+            //Console.WriteLine(parent.Direction.Y);
+            //Console.WriteLine(parent.LinearVelocity);
         }
 
         public void Hit(List<GameObject> gameObjects, GameObject parent)
