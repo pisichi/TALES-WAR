@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Final_Assignment
 {
     class BulletGraphicComponent : GraphicComponent
     {
-        public BulletGraphicComponent()
+        public BulletGraphicComponent(ContentManager content)
         {
         }
 

@@ -1,16 +1,20 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Final_Assignment
 {
     class CharacterGraphicComponent : GraphicComponent
     {
+        
         int CurrentCharState;
+        Texture2D _char;
 
-        public CharacterGraphicComponent()
+
+        public CharacterGraphicComponent(ContentManager content)
         {
-
+            _char = content.Load<Texture2D>("sprites/char");
         }
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
@@ -33,7 +37,7 @@ namespace Final_Assignment
                     break;
 
             }
-            spriteBatch.Draw(parent._texture, parent.Position, null, Color.White, 0f, parent.Origin, 1f, SpriteEffects.None, 0);
+            spriteBatch.Draw(_char, parent.Position, null, Color.White, 0f, parent.Origin, 1f, SpriteEffects.None, 0);
             base.Draw(spriteBatch, parent);
         }
 

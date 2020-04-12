@@ -33,7 +33,7 @@ namespace Final_Assignment
         List<GameObject> enemyList;
 
         Texture2D _bg;
-        Texture2D _char;
+        public Texture2D _char;
         Texture2D _bullet;
         Texture2D _arrow;
         Texture2D _gauge;
@@ -41,7 +41,7 @@ namespace Final_Assignment
         SpriteFont _font;
 
         float Rotation = 0f;
-
+        private ContentManager content;
 
         public PlayScreen(IGameScreenManager screenManager)
         {
@@ -51,13 +51,12 @@ namespace Final_Assignment
 
         public void Init(ContentManager content)
         {
+            this.content = content;
+
             _bg = content.Load<Texture2D>("sprites/bg");
             _bullet = content.Load<Texture2D>("sprites/ball");
             _pin = content.Load<Texture2D>("sprites/pin");
             _gauge = content.Load<Texture2D>("sprites/gauge");
-
-
-
 
             _arrow = content.Load<Texture2D>("sprites/arrow");
             _char = content.Load<Texture2D>("sprites/char");
@@ -77,13 +76,13 @@ namespace Final_Assignment
         {
             player = new GameObject(_char,new CharacterInputComponent(),
                                     new CharacterPhysicComponent(),
-                                    new CharacterGraphicComponent())
+                                    new CharacterGraphicComponent(content))
             {
                 Position = new Vector2(100, 650),
 
                 Child = new GameObject(_bullet, null,
                                     new BulletPhysicComponent(),
-                                    new BulletGraphicComponent()),
+                                    new BulletGraphicComponent(content)),
                 InTurn = true
 
             };
@@ -93,12 +92,12 @@ namespace Final_Assignment
 
             enemy = new GameObject(_char,null,
                         new CharacterPhysicComponent(),
-                        new CharacterGraphicComponent())
+                        new CharacterGraphicComponent(content))
             {
                 Position = new Vector2(500, 650),
                 Child = new GameObject(_bullet, null,
                                     new BulletPhysicComponent(),
-                                    new BulletGraphicComponent()),
+                                    new BulletGraphicComponent(content)),
                 InTurn = false
 
             };
@@ -108,12 +107,12 @@ namespace Final_Assignment
 
             enemy = new GameObject(_char, null,
             new CharacterPhysicComponent(),
-            new CharacterGraphicComponent())
+            new CharacterGraphicComponent(content))
             {
                 Position = new Vector2(700, 650),
                 Child = new GameObject(_bullet, null,
                         new BulletPhysicComponent(),
-                        new BulletGraphicComponent()),
+                        new BulletGraphicComponent(content)),
                 InTurn = false
 
             };
@@ -125,12 +124,12 @@ namespace Final_Assignment
 
             enemy = new GameObject(_char, null,
             new CharacterPhysicComponent(),
-            new CharacterGraphicComponent())
+            new CharacterGraphicComponent(content))
             {
                 Position = new Vector2(900, 650),
                 Child = new GameObject(_bullet, null,
                         new BulletPhysicComponent(),
-                        new BulletGraphicComponent()),
+                        new BulletGraphicComponent(content)),
                 InTurn = false
 
             };
