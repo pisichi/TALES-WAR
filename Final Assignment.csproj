@@ -51,6 +51,7 @@
     <Compile Include="GameObjects\Components\GraphicComponent.cs" />
     <Compile Include="GameObjects\Components\InputComponent.cs" />
     <Compile Include="GameObjects\Components\PhysicComponent.cs" />
+    <Compile Include="GameObjects\Components\Skill\SkillComponent.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Managers\GameScreenManager.cs" />
