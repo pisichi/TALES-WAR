@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,13 +8,15 @@ namespace Final_Assignment
     class GraphicComponent : Component
     {
 
-        //protected Dictionary<string, Animation> _animations;
-        //protected AnimationManager _animationManager;
+        protected Dictionary<string, Animation> _animations;
+        protected AnimationManager _animationManager;
         //protected Texture2D _texture;
 
-        public GraphicComponent()
+        public GraphicComponent(Dictionary<string, Animation> animations)
         {
 
+            _animations = animations;
+            _animationManager = new AnimationManager(_animations.First().Value);
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)

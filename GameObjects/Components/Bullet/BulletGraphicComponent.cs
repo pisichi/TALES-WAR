@@ -7,7 +7,8 @@ namespace Final_Assignment
 {
     class BulletGraphicComponent : GraphicComponent
     {
-        public BulletGraphicComponent(ContentManager content)
+
+        public BulletGraphicComponent(ContentManager content, Dictionary<string, Animation> animations) : base(animations)
         {
         }
 

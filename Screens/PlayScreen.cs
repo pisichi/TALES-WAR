@@ -33,7 +33,11 @@ namespace Final_Assignment
         List<GameObject> enemyList;
 
         Texture2D _bg;
-        public Texture2D _char;
+        Texture2D _char;
+
+
+        Texture2D _zeus;
+
         Texture2D _bullet;
         Texture2D _arrow;
         Texture2D _gauge;
@@ -58,6 +62,12 @@ namespace Final_Assignment
             _pin = content.Load<Texture2D>("sprites/pin");
             _gauge = content.Load<Texture2D>("sprites/gauge");
 
+
+
+
+            _zeus = content.Load<Texture2D>("sprites/ZEUSSHEET");
+
+
             _arrow = content.Load<Texture2D>("sprites/arrow");
             _char = content.Load<Texture2D>("sprites/char");
             _font = content.Load<SpriteFont>("font/File");
@@ -74,64 +84,31 @@ namespace Final_Assignment
 
         private void Set()
         {
-            player = new GameObject(_char,new CharacterInputComponent(),
-                                    new CharacterPhysicComponent(),
-                                    new CharacterGraphicComponent(content))
+            player = new GameObject(_char, new CharacterInputComponent(content),
+                                               new CharacterPhysicComponent(),
+                                               new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                                                   {
+                                            { "Alive", new Animation(_zeus, new Rectangle(0,0,400,250),2) }
+                                                   }))
             {
-                Position = new Vector2(100, 650),
-
-                Child = new GameObject(_bullet, null,
-                                    new BulletPhysicComponent(),
-                                    new BulletGraphicComponent(content)),
-                InTurn = true
+                Position = new Vector2(100, 600),
+                InTurn = true,
+                Viewport = new Rectangle(0, 0, 200, 250)
 
             };
             _gameObjects.Add(player);
 
 
-
-            enemy = new GameObject(_char,null,
-                        new CharacterPhysicComponent(),
-                        new CharacterGraphicComponent(content))
-            {
-                Position = new Vector2(500, 650),
-                Child = new GameObject(_bullet, null,
-                                    new BulletPhysicComponent(),
-                                    new BulletGraphicComponent(content)),
-                InTurn = false
-
-            };
-            _gameObjects.Add(enemy);
-            enemyList.Add(enemy);
-
-
             enemy = new GameObject(_char, null,
-            new CharacterPhysicComponent(),
-            new CharacterGraphicComponent(content))
+                                  new CharacterPhysicComponent(),
+                                  new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                                      {
+                                            { "Alive", new Animation(_zeus, new Rectangle(0,1000,400,250),2) }
+                                      }))
             {
-                Position = new Vector2(700, 650),
-                Child = new GameObject(_bullet, null,
-                        new BulletPhysicComponent(),
-                        new BulletGraphicComponent(content)),
-                InTurn = false
-
-            };
-            _gameObjects.Add(enemy);
-            enemyList.Add(enemy);
-
-
-
-
-            enemy = new GameObject(_char, null,
-            new CharacterPhysicComponent(),
-            new CharacterGraphicComponent(content))
-            {
-                Position = new Vector2(900, 650),
-                Child = new GameObject(_bullet, null,
-                        new BulletPhysicComponent(),
-                        new BulletGraphicComponent(content)),
-                InTurn = false
-
+                Position = new Vector2(600, 600),
+                InTurn = false,
+                Viewport = new Rectangle(0, 0, 200, 250)
             };
             _gameObjects.Add(enemy);
             enemyList.Add(enemy);

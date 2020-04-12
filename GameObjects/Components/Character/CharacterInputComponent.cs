@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace Final_Assignment
@@ -8,25 +10,21 @@ namespace Final_Assignment
     class CharacterInputComponent : InputComponent
     {
 
-        public KeyboardState _currentkey;
-        public KeyboardState _previouskey;
-
         int message;
+        ContentManager content;
+        Texture2D _bullet;
 
-
-
-        public GameObject Bullet;
         public GameObject bullet;
 
-        public CharacterInputComponent() 
+        public CharacterInputComponent(ContentManager content) 
         {
-
+            _bullet = content.Load<Texture2D>("sprites/ball");
+            this.content = content;
         }
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-            _previouskey = _currentkey;
-           _currentkey = Keyboard.GetState();
+
 
             parent.Direction = new Vector2((float)Math.Cos(parent.Rotation), (float)Math.Sin(parent.Rotation));
             CheckRemove(parent);
@@ -57,21 +55,14 @@ namespace Final_Assignment
 
         public void Shoot(List<GameObject> gameObjects, GameObject parent)
         {
-            //var bullet = parent.Child.Clone() as GameObject;
-
-            //Console.WriteLine("clone bullet");
-            //bullet.Direction = parent.Direction;
-            //bullet.Position = parent.Position;
-            //bullet.attack = parent.attack;
-            //bullet.LinearVelocity = parent.LinearVelocity * 15;
-            //gameObjects.Add(bullet);
-            //this.bullet = bullet;
-            //parent.shooting = true;
-
-
-           // var bullet = parent.Child.Clone() as GameObject;
 
             Console.WriteLine("add bullet");
+            parent.Child = new GameObject(_bullet, null,
+                                               new BulletPhysicComponent(),
+                                               new BulletGraphicComponent(content, new Dictionary<string, Animation>()
+                                                   {
+                                            { "Shoot", new Animation(_bullet, new Rectangle(0,0,_bullet.Width,_bullet.Height),1) }
+                                                   }));
             parent.Child.Direction = parent.Direction;
             parent.Child.Position = parent.Position;
             parent.Child.attack = parent.attack;

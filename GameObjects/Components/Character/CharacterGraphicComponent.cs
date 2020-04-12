@@ -7,18 +7,19 @@ namespace Final_Assignment
 {
     class CharacterGraphicComponent : GraphicComponent
     {
-        
+
         int CurrentCharState;
         Texture2D _char;
 
-
-        public CharacterGraphicComponent(ContentManager content)
+        public CharacterGraphicComponent(ContentManager content, Dictionary<string, Animation> animations) : base(animations)
         {
-            _char = content.Load<Texture2D>("sprites/char");
+            _char = content.Load<Texture2D>("sprites/ZEUSSHEET");
         }
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
+            _animationManager.Play(_animations["Alive"]);
+            _animationManager.Update(gameTime);
             base.Update(gameTime, gameObjects, parent);
         }
 
@@ -37,7 +38,8 @@ namespace Final_Assignment
                     break;
 
             }
-            spriteBatch.Draw(_char, parent.Position, null, Color.White, 0f, parent.Origin, 1f, SpriteEffects.None, 0);
+            //spriteBatch.Draw(_char, parent.Position, parent.Viewport, Color.White, 0f, parent.Origin, 1f, SpriteEffects.None, 0);
+            _animationManager.Draw(spriteBatch, parent.Position, 0, new Vector2(1, 1));
             base.Draw(spriteBatch, parent);
         }
 
