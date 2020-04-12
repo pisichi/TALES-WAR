@@ -4,16 +4,18 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/font/File.spritefont</File>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/arrow.png</File>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/ball.png</File>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bg.png</File>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bullet.png</File>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/char.png</File>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/gauge.png</File>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/pin.png</File>
+    <File>D:/Game Programming/Final project copy/2020-04-12 master/Monogame_shooting/Content/font/File.spritefont</File>
+    <File>D:/Game Programming/Final project copy/2020-04-12 master/Monogame_shooting/Content/sprites/arrow.png</File>
+    <File>D:/Game Programming/Final project copy/2020-04-12 master/Monogame_shooting/Content/sprites/ball.png</File>
+    <File>D:/Game Programming/Final project copy/2020-04-12 master/Monogame_shooting/Content/sprites/bg.png</File>
+    <File>D:/Game Programming/Final project copy/2020-04-12 master/Monogame_shooting/Content/sprites/bullet.png</File>
+    <File>D:/Game Programming/Final project copy/2020-04-12 master/Monogame_shooting/Content/sprites/char.png</File>
+    <File>D:/Game Programming/Final project copy/2020-04-12 master/Monogame_shooting/Content/sprites/gauge.png</File>
+    <File>D:/Game Programming/Final project copy/2020-04-12 master/Monogame_shooting/Content/sprites/pin.png</File>
+    <File>D:/Game Programming/Final project copy/2020-04-12 master/Monogame_shooting/Content/sprites/ZEUSSHEET.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

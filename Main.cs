@@ -40,14 +40,9 @@ namespace Final_Assignment
 
             m_screenManager = new GameScreenManager(m_spriteBatch, Content);
 
-            m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
-
+            m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
 
             m_screenManager.OnGameExit += Exit;
-
-            
-
-
         }
 
 
@@ -84,6 +79,7 @@ namespace Final_Assignment
             m_screenManager.ChangeBetweenScreen();
 
             m_screenManager.Update(gameTime);
+
             m_screenManager.HandleInput(gameTime);
 
             base.Update(gameTime);

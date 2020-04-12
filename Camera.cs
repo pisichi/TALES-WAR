@@ -1,10 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-
+using System;
 
 namespace Final_Assignment
 {
   class Camera
     {
+
         public Matrix Transform { get; private set; }
 
         public void Follow(GameObject target)
@@ -23,7 +24,8 @@ namespace Final_Assignment
         }
 
 
-       
+
+
 
 
     }

@@ -12,6 +12,9 @@ namespace Final_Assignment
         public const int SCREENWIDTH = 1200;
         public const int SCREENHEIGHT = 800;
 
+        public GameObject follow;
+
+
         public int Score;
         public int Charge;
 
@@ -20,8 +23,6 @@ namespace Final_Assignment
 
         public enum GameState
         {
-            GameIntro,
-            GameMenu,
             GamePlaying,
             GamePaused,
             GameLose,
@@ -29,6 +30,18 @@ namespace Final_Assignment
         }
 
         public GameState CurrentGameState;
+
+
+        public enum TurnState
+        {
+            skill,
+            angle,
+            force,
+            shoot,
+            enemy
+        }
+        public TurnState CurrentTurnState;
+
 
         private static Singleton instance;
 

@@ -4,12 +4,25 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using VelcroPhysics.Dynamics;
+using System.Linq;
 
 namespace Final_Assignment
 {
     class GameObject : ICloneable
     {
+
+
+        protected InputComponent _input;
+        protected PhysicComponent _physics;
+        protected GraphicComponent _graphics;
+
+
+        public GameObject Child;
+
+        public int attack;
+        public bool InTurn;
+        public bool action;
+        public bool shooting = false;
 
         #region PUBLIC_VARIABLES
 
@@ -29,9 +42,11 @@ namespace Final_Assignment
         public Vector2 Velocity;
         public Vector2 Acceleration;
 
+        //public AnimationManager _animationManager;
+
         public string Name;
 
-        public bool IsActive;
+        public bool IsActive = true;
 
 
 
@@ -48,65 +63,66 @@ namespace Final_Assignment
 
         #region PROTECTED_VARIABLES
 
-        protected Dictionary<string, Animation> _animations;
-        protected AnimationManager _animationManager;
+        //protected Dictionary<string, Animation> _animations;
+        //protected AnimationManager _animationManager;
 
-        protected Texture2D _texture;
+        public Texture2D _texture;
         #endregion
 
-        public World world = new World(Vector2.Zero);
-        public GameObject()
-        {
-            //Position = Vector2.Zero;
-            //Scale = Vector2.One;
-            //Acceleration = Vector2.Zero;
-            //Velocity = Vector2.Zero;
-            //Rotation = 0f;
-            //IsActive = true;
-            Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
-        }
 
-        public GameObject(Texture2D texture)
+        public GameObject(Texture2D texture, InputComponent input,PhysicComponent physics,GraphicComponent graphics)
         {
-            //Position = Vector2.Zero;
-            //Scale = Vector2.One;
-            //Acceleration = Vector2.Zero;
-            //Velocity = Vector2.Zero;
-            //Rotation = 0f;
-            //IsActive = true;
-            //_texture = texture;
-        }
+            _input = input;
+            _physics = physics;
+            _graphics = graphics;
 
-        public GameObject(Dictionary<string, Animation> animations)
-        {
+            _texture = texture;
             Position = Vector2.Zero;
             Scale = Vector2.One;
             Acceleration = Vector2.Zero;
             Velocity = Vector2.Zero;
             Rotation = 0f;
             IsActive = true;
-            _animations = animations;
-            //world = new World(Vector2.Zero);
-            //_animationManager = new AnimationManager(_animations.First().Value);
+            Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
+            
+
         }
+        /*public GameObject(Dictionary<string, Animation> animations)
+        {
+            Position = Vector2.Zero;
+            Scale = Vector2.One;
+            Rotation = 0f;
+            IsActive = true;
+            _animations = animations;
+            _animationManager = new AnimationManager(_animations.First().Value);
 
-
+        }*/
 
         public virtual void Update(GameTime gameTime, List<GameObject> gameObjects)
         {
-            //Physic time
-            world.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, 1f / 30f));
+
+            if (_input != null) _input.Update(gameTime, gameObjects, this);
+            if (_physics != null) _physics.Update(gameTime, gameObjects, this);
+            if (_graphics != null) _graphics.Update(gameTime, gameObjects, this);
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            if (_graphics != null) _graphics.Draw(spriteBatch, this);
+        }
 
-        
+        public void SendMessage(Component sender,int message)
+        {
+            if (_input != null) _input.ReceiveMessage(message ,sender);
+            if (_physics != null) _physics.ReceiveMessage(message,sender);
+            if (_graphics != null) _graphics.ReceiveMessage(message,sender);
         }
 
         public virtual void Reset()
         {
-
+            if (_input != null) _input.Reset();
+            if (_physics != null) _physics.Reset();
+            if (_graphics != null) _graphics.Reset();
         }
 
         public object Clone()
@@ -114,13 +130,14 @@ namespace Final_Assignment
             return this.MemberwiseClone();
         }
 
+
         #region Collision
         public bool IsTouching(GameObject g)
         {
             return IsTouchingLeft(g) ||
-                IsTouchingTop(g) ||
-                IsTouchingRight(g) ||
-                IsTouchingBottom(g);
+                   IsTouchingTop(g) ||
+                   IsTouchingRight(g) ||
+                   IsTouchingBottom(g);
         }
 
         public bool IsTouchingLeft(GameObject g)

@@ -5,7 +5,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using VelcroPhysics.Dynamics;
 
 namespace Final_Assignment
 {
@@ -16,7 +15,7 @@ namespace Final_Assignment
         private Camera _camera;
         private int enemyIndex;
 
-        public Bullet shoot;
+        //public Bullet shoot;
 
         public bool isPlayerTurn = true;
 
@@ -27,34 +26,23 @@ namespace Final_Assignment
         List<GameObject> _gameObjects;
 
 
-        private Character player;
-        private Character enemy;
-        List<Character> enemyList;
+        private GameObject player;
+        private GameObject enemy;
+        private GameObject bullet;
+
+        List<GameObject> enemyList;
 
         Texture2D _bg;
-        Texture2D _char;
+        public Texture2D _char;
         Texture2D _bullet;
         Texture2D _arrow;
         Texture2D _gauge;
         Texture2D _pin;
+        Texture2D _zeus;
         SpriteFont _font;
 
         float Rotation = 0f;
-
-        World world;
-
-
-        public enum TurnState
-        {
-            skill,
-            angle,
-            force,
-            shoot,
-            enemy
-        }
-
-        public TurnState CurrentTurnState;
-
+        private ContentManager content;
 
         public PlayScreen(IGameScreenManager screenManager)
         {
@@ -64,22 +52,22 @@ namespace Final_Assignment
 
         public void Init(ContentManager content)
         {
+            this.content = content;
+
             _bg = content.Load<Texture2D>("sprites/bg");
             _bullet = content.Load<Texture2D>("sprites/ball");
             _pin = content.Load<Texture2D>("sprites/pin");
             _gauge = content.Load<Texture2D>("sprites/gauge");
 
-
-
-
             _arrow = content.Load<Texture2D>("sprites/arrow");
             _char = content.Load<Texture2D>("sprites/char");
             _font = content.Load<SpriteFont>("font/File");
+            _zeus = content.Load<Texture2D>("sprites/ZEUSSHEET");
             _gameObjects = new List<GameObject>();
-            enemyList = new List<Character>();
+            enemyList = new List<GameObject>();
             enemyIndex = 0;
             select = false;
-            world = new World(Vector2.Zero);
+
             Set();
 
             _camera = new Camera();
@@ -88,35 +76,74 @@ namespace Final_Assignment
 
         private void Set()
         {
-            player = new Character(_char)
+            player = new GameObject(_char, new CharacterInputComponent(),
+                                    new CharacterPhysicComponent(),
+                                    new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                                        {
+                                            { "Alive", new Animation(_zeus, new Rectangle(0,0,408,246),2) }
+                                        }))
             {
-                Position = new Vector2(100, 650),
-                Bullet = new Bullet(_bullet),
-                InTurn = true
+                Position = new Vector2(100, 600),
+
+                Child = new GameObject(_bullet, null,
+                                    new BulletPhysicComponent(),
+                                    new BulletGraphicComponent(content, new Dictionary<string, Animation>()
+                                        {
+                                            { "Shoot", new Animation(_bullet, new Rectangle(0,0,_bullet.Width,_bullet.Height),1) }
+                                        })),
+                InTurn = true,
+                Viewport = new Rectangle(0, 0, 204, 246)
+
             };
             _gameObjects.Add(player);
 
-            enemy = new Character(_char)
+
+
+           /* enemy = new GameObject(_char,null,
+                        new CharacterPhysicComponent(),
+                        new CharacterGraphicComponent(content))
             {
-                Position = new Vector2(2000, 650),
-                Bullet = new Bullet(_bullet),
-                IsPlayer = false,
+                Position = new Vector2(500, 650),
+                Child = new GameObject(_bullet, null,
+                                    new BulletPhysicComponent(),
+                                    new BulletGraphicComponent(content)),
                 InTurn = false
+
             };
             _gameObjects.Add(enemy);
             enemyList.Add(enemy);
 
 
-            enemy = new Character(_char)
+            enemy = new GameObject(_char, null,
+            new CharacterPhysicComponent(),
+            new CharacterGraphicComponent(content))
             {
-                Position = new Vector2(2200, 650),
-                Bullet = new Bullet(_bullet),
-                IsPlayer = false,
+                Position = new Vector2(700, 650),
+                Child = new GameObject(_bullet, null,
+                        new BulletPhysicComponent(),
+                        new BulletGraphicComponent(content)),
                 InTurn = false
-            };
 
+            };
             _gameObjects.Add(enemy);
             enemyList.Add(enemy);
+
+
+
+
+            enemy = new GameObject(_char, null,
+            new CharacterPhysicComponent(),
+            new CharacterGraphicComponent(content))
+            {
+                Position = new Vector2(900, 650),
+                Child = new GameObject(_bullet, null,
+                        new BulletPhysicComponent(),
+                        new BulletGraphicComponent(content)),
+                InTurn = false
+
+            };
+            _gameObjects.Add(enemy);
+            enemyList.Add(enemy);*/
         }
 
         public void Pause()
@@ -136,15 +163,12 @@ namespace Final_Assignment
 
             if (player.InTurn)
             {
-
                 if (!select)
                 {
-                    CurrentTurnState = TurnState.skill;
+                    Singleton.Instance.CurrentTurnState = Singleton.TurnState.skill;
                     select = true;
                 }
-
-
-                PlayerModule(gameTime);
+                PlayerModule();
             }
             else
             {
@@ -152,17 +176,12 @@ namespace Final_Assignment
                 EnemyModule(gameTime);
             }
 
-            CheckColision();
 
             for (int i = 0; i < _gameObjects.Count; i++)
             {
-                _gameObjects[i].Update(gameTime, _gameObjects);
+                if (_gameObjects[i].IsActive)
+                    _gameObjects[i].Update(gameTime, _gameObjects);
             }
-        }
-
-        private void CheckColision()
-        {
-
         }
 
         private void EnemyModule(GameTime gameTime)
@@ -171,19 +190,19 @@ namespace Final_Assignment
             {
                 player.InTurn = true;
             }
-
             else
             {
                 _camera.Follow(enemyList[enemyIndex]);
 
                 if (enemyList[enemyIndex].InTurn)
                 {
-                    enemyList[enemyIndex].Auto(gameTime,_gameObjects);
+                    enemyList[enemyIndex].action = true;
+                    enemyList[enemyIndex].InTurn = false;
                 }
 
                 if (enemyList[enemyIndex].shooting)
                 {
-                    _camera.Follow(enemyList[enemyIndex].bullet);
+                    _camera.Follow(enemyList[enemyIndex].Child);
                 }
 
                 if (!enemyList[enemyIndex].InTurn)
@@ -200,50 +219,51 @@ namespace Final_Assignment
         }
 
 
-        private void PlayerModule(GameTime gameTime)
+        private void PlayerModule()
         {
             enemyIndex = 0;
             
             _camera.Follow(player);
 
 
-            switch (CurrentTurnState)
+            switch (Singleton.Instance.CurrentTurnState)
             {
-                case TurnState.skill:
+                case Singleton.TurnState.skill:
                     if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                     {
-                        CurrentTurnState = TurnState.angle;
+                        Singleton.Instance.CurrentTurnState = Singleton.TurnState.angle;
                     }
                     break;
-                case TurnState.angle:
+                case Singleton.TurnState.angle:
                     {
                         Rotation += 0.1f;
                         if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                         {
-                            CurrentTurnState = TurnState.force;
+                            Singleton.Instance.CurrentTurnState = Singleton.TurnState.force;
                         }
                     }
                     break;
-                case TurnState.force:
+                case Singleton.TurnState.force:
                     if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                     {
-                        player.Shoot(gameTime, _gameObjects);
-                        CurrentTurnState = TurnState.shoot;
+                        player.action = true;
+                        Singleton.Instance.CurrentTurnState = Singleton.TurnState.shoot;
                         Rotation = 0;
+                        bullet = player.Child;
                     }
                     break;
-                case TurnState.shoot:
+                case Singleton.TurnState.shoot:
                     break;
 
             }
 
             if (player.shooting)
             {
-                _camera.Follow(player.bullet);
+                _camera.Follow(player.Child);
             }
             else
             {
-                enemyList[enemyIndex].InTurn = true;
+               // enemyList[enemyIndex].InTurn = true;
             }
         }
 
@@ -254,8 +274,6 @@ namespace Final_Assignment
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 m_screenManager.Exit();
-                //Pause();
-
             }
 
         }
@@ -277,34 +295,30 @@ namespace Final_Assignment
 
             spriteBatch.DrawString(_font, "press ESC to exit", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 3) - _font.MeasureString("press ESC to exit") / 2, Color.White);
 
-
-
-            switch (CurrentTurnState)
+            switch (Singleton.Instance.CurrentTurnState)
             {
-                case TurnState.skill:
+                case Singleton.TurnState.skill:
                     spriteBatch.DrawString(_font, "skill state - press space ", player.Position + new Vector2(0, -130), Color.White);
                     break;
-                case TurnState.angle:
+                case Singleton.TurnState.angle:
                     spriteBatch.DrawString(_font, "angle state - press space ", player.Position + new Vector2(0, -130), Color.White);
                     spriteBatch.Draw(_arrow, player.Position + new Vector2(0, -100), null, Color.White, Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     break;
-                case TurnState.force:
+                case Singleton.TurnState.force:
                     spriteBatch.DrawString(_font, "force state - press space ", player.Position + new Vector2(0, -150), Color.White);
                     spriteBatch.DrawString(_font, "angle is " + Rotation, player.Position + new Vector2(0, -130), Color.White);
                     spriteBatch.Draw(_arrow, player.Position + new Vector2(0, -100), null, Color.White, Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     spriteBatch.Draw(_gauge, player.Position + new Vector2(0, -100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     break;
-                case TurnState.shoot:
+                case Singleton.TurnState.shoot:
                     spriteBatch.DrawString(_font, "shoot state", player.Position + new Vector2(0, -130), Color.White);
                     break;
 
             }
 
-               
-
-
             for (int i = 0; i < _gameObjects.Count; i++)
             {
+                if(_gameObjects[i].IsActive)
                 _gameObjects[i].Draw(spriteBatch);
             }
 
