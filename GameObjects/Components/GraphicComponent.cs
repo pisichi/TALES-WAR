@@ -10,11 +10,10 @@ namespace Final_Assignment
 
         protected Dictionary<string, Animation> _animations;
         protected AnimationManager _animationManager;
-        //protected Texture2D _texture;
+       // protected Texture2D _texture;
 
         public GraphicComponent(Dictionary<string, Animation> animations)
         {
-
             _animations = animations;
             _animationManager = new AnimationManager(_animations.First().Value);
         }
@@ -36,6 +35,7 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
+
             base.Update(gameTime, gameObjects, parent);
         }
     }

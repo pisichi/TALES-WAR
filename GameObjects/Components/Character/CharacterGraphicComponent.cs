@@ -9,11 +9,10 @@ namespace Final_Assignment
     {
 
         int CurrentCharState;
-        Texture2D _char;
 
         public CharacterGraphicComponent(ContentManager content, Dictionary<string, Animation> animations) : base(animations)
         {
-            _char = content.Load<Texture2D>("sprites/ZEUSSHEET");
+
         }
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
@@ -45,7 +44,6 @@ namespace Final_Assignment
 
         public override void ReceiveMessage(int message, Component sender)
         {
-
             base.ReceiveMessage(message, sender);
         }
 

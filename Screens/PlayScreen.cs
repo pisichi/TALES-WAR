@@ -27,6 +27,7 @@ namespace Final_Assignment
 
 
         private GameObject player;
+        private GameObject boss;
         private GameObject enemy;
         private GameObject bullet;
 
@@ -37,6 +38,7 @@ namespace Final_Assignment
 
 
         Texture2D _zeus;
+        Texture2D _guan;
 
         Texture2D _bullet;
         Texture2D _arrow;
@@ -65,7 +67,8 @@ namespace Final_Assignment
 
 
 
-            _zeus = content.Load<Texture2D>("sprites/ZEUSSHEET");
+            _zeus = content.Load<Texture2D>("sprites/sheet_zeus");
+            _guan = content.Load<Texture2D>("sprites/sheet_guan");
 
 
             _arrow = content.Load<Texture2D>("sprites/arrow");
@@ -85,11 +88,11 @@ namespace Final_Assignment
         private void Set()
         {
             player = new GameObject(_char, new CharacterInputComponent(content),
-                                               new CharacterPhysicComponent(),
-                                               new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
-                                                   {
+                                                new CharacterPhysicComponent(),
+                                                new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                                                    {
                                             { "Alive", new Animation(_zeus, new Rectangle(0,0,400,250),2) }
-                                                   }))
+                                                    }))
             {
                 Position = new Vector2(100, 600),
                 InTurn = true,
@@ -99,12 +102,27 @@ namespace Final_Assignment
             _gameObjects.Add(player);
 
 
-            enemy = new GameObject(_char, null,
-                                  new CharacterPhysicComponent(),
-                                  new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
-                                      {
+
+            boss = new GameObject(_char, null,
+                                   new CharacterPhysicComponent(),
+                                   new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                                       {
                                             { "Alive", new Animation(_zeus, new Rectangle(0,1000,400,250),2) }
-                                      }))
+                                       }))
+            {
+                Position = new Vector2(600, 600),
+                InTurn = false,
+                Viewport = new Rectangle(0, 0, 200, 250)
+            };
+            _gameObjects.Add(boss);
+            enemyList.Add(boss);
+
+            enemy = new GameObject(_char, null,
+                      new CharacterPhysicComponent(),
+                      new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                          {
+                                            { "Alive", new Animation(_zeus, new Rectangle(0,1000,400,250),2) }
+                          }))
             {
                 Position = new Vector2(600, 600),
                 InTurn = false,
@@ -112,6 +130,9 @@ namespace Final_Assignment
             };
             _gameObjects.Add(enemy);
             enemyList.Add(enemy);
+
+
+
         }
 
         public void Pause()
@@ -199,12 +220,14 @@ namespace Final_Assignment
                 case Singleton.TurnState.skill:
                     if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                     {
+                        player.Rotation = 0f;
                         Singleton.Instance.CurrentTurnState = Singleton.TurnState.angle;
                     }
                     break;
                 case Singleton.TurnState.angle:
                     {
                         Rotation += 0.1f;
+                        player.Rotation += 0.1f;
                         if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                         {
                             Singleton.Instance.CurrentTurnState = Singleton.TurnState.force;
@@ -217,7 +240,6 @@ namespace Final_Assignment
                         player.action = true;
                         Singleton.Instance.CurrentTurnState = Singleton.TurnState.shoot;
                         Rotation = 0;
-                        bullet = player.Child;
                     }
                     break;
                 case Singleton.TurnState.shoot:

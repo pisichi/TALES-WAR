@@ -10,6 +10,7 @@ namespace Final_Assignment
 
         public BulletGraphicComponent(ContentManager content, Dictionary<string, Animation> animations) : base(animations)
         {
+
         }
 
         public override void ReceiveMessage(int message, Component sender)
