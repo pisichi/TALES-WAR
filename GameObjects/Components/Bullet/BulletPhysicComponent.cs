@@ -27,8 +27,11 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-            
+
+            parent.Direction.Y += 0.03f;
             parent.Position += parent.Direction * parent.LinearVelocity;
+            
+
             //Console.WriteLine(parent.Position.X);
             //Console.WriteLine(parent.Position.Y);
             //Console.WriteLine(parent.Direction.X);

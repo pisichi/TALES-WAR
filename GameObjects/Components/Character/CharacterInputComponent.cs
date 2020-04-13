@@ -16,7 +16,7 @@ namespace Final_Assignment
 
         public GameObject bullet;
 
-        public CharacterInputComponent(ContentManager content) 
+        public CharacterInputComponent(ContentManager content)
         {
             _bullet = content.Load<Texture2D>("sprites/ball");
             this.content = content;
@@ -31,11 +31,16 @@ namespace Final_Assignment
 
             if (Singleton.Instance.CurrentTurnState == Singleton.TurnState.shoot)
             {
-                if (parent.action)
+                if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                 {
                     Shoot(gameObjects, parent);
-                    parent.action = false;
                 }
+
+                //if (parent.action)
+                //{
+                //    Shoot(gameObjects, parent);
+                //    parent.action = false;
+                //}
             }
 
             base.Update(gameTime, gameObjects, parent);
@@ -45,11 +50,10 @@ namespace Final_Assignment
         private void CheckRemove(GameObject parent)
         {
 
-            if (bullet != null && (bullet.Position.X > 3000 || bullet.Position.X < 0))
+            if (bullet != null && (bullet.Position.X > 6000 || bullet.Position.X < 0 || bullet.Position.Y > 3000))
             {
                 parent.shooting = false;
                 parent.InTurn = false;
-                //bullet.Hit();
                 bullet = null;
             }
 
@@ -60,19 +64,19 @@ namespace Final_Assignment
         {
 
             Console.WriteLine("add bullet");
-            parent.Child = new GameObject(_bullet, null,
-                                               new BulletPhysicComponent(),
-                                               new BulletGraphicComponent(content, new Dictionary<string, Animation>() {
-                                            { "Shoot", new Animation(_bullet, new Rectangle(0,0,_bullet.Width,_bullet.Height),1) }
-                                                   }));
+            bullet = new GameObject(null,
+                                    new BulletPhysicComponent(),
+                                    new BulletGraphicComponent(content, new Dictionary<string, Animation>() {
+                                         { "Shoot", new Animation(_bullet, new Rectangle(0,0,_bullet.Width,_bullet.Height),1) }
+                                         }));
 
-            parent.Child.Direction = parent.Direction;
-            parent.Child.Position = parent.Position - new Vector2(0,100);
-            parent.Child.attack = parent.attack;
-            parent.Child.LinearVelocity = parent.LinearVelocity * 15;
-            gameObjects.Add(parent.Child);
-            this.bullet = parent.Child;
+            bullet.Direction = parent.Direction;
+            bullet.Position = parent.Position - new Vector2(0, 100);
+            bullet.attack = parent.attack;
+            bullet.LinearVelocity = parent.LinearVelocity * 50;
+            gameObjects.Add(bullet);
             parent.shooting = true;
+            Singleton.Instance.follow = bullet;
         }
 
 

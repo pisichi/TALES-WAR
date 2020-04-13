@@ -12,12 +12,35 @@ namespace Final_Assignment
 
         public CharacterGraphicComponent(ContentManager content, Dictionary<string, Animation> animations) : base(animations)
         {
-
+            CurrentCharState = 1;
         }
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-            _animationManager.Play(_animations["Alive"]);
+
+            switch (CurrentCharState)
+            {
+                case 1:
+                    _animationManager.Play(_animations["Idle"]);
+                    break;
+                case 2:
+                    _animationManager.Play(_animations["Throw"]);
+                    break;
+                case 3:
+                    _animationManager.Play(_animations["Skill"]);
+                    break;
+                case 4:
+                    _animationManager.Play(_animations["Hit"]);
+                    break;
+                case 5:
+                    _animationManager.Play(_animations["Stunt"]);
+                    break;
+                case 6:
+                    _animationManager.Play(_animations["Die"]);
+                    break;
+            }
+
+            
             _animationManager.Update(gameTime);
             base.Update(gameTime, gameObjects, parent);
         }
@@ -25,20 +48,8 @@ namespace Final_Assignment
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
         {
 
-            switch (CurrentCharState)
-            {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-
-            }
             //spriteBatch.Draw(_char, parent.Position, parent.Viewport, Color.White, 0f, parent.Origin, 1f, SpriteEffects.None, 0);
-            _animationManager.Draw(spriteBatch, parent.Position, 0, new Vector2(1, 1));
+            _animationManager.Draw(spriteBatch, parent.Position, 0f, new Vector2(1, 1));
             base.Draw(spriteBatch, parent);
         }
 

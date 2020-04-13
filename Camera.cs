@@ -7,7 +7,6 @@ namespace Final_Assignment
     {
 
         public Matrix Transform { get; private set; }
-
         public void Follow(GameObject target)
         {
             var position = Matrix.CreateTranslation(
@@ -18,7 +17,7 @@ namespace Final_Assignment
             var offset = Matrix.CreateTranslation(
                 Singleton.SCREENWIDTH / 2,
                0,
-                0);
+               0);
 
             Transform = position * offset;
         }
