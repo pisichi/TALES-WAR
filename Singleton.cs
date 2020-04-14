@@ -15,11 +15,14 @@ namespace Final_Assignment
         public GameObject follow;
 
 
-        public int Score;
-        public int Charge;
-
         public string CurrentHero;
         public string CurrentStage;
+
+
+        public int level_s1 = 1;
+        public int level_s2 = 3;
+        public int level_s3 = 1;
+
 
         public enum GameState
         {

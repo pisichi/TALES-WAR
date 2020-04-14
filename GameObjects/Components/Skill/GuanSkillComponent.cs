@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
+﻿
+using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Final_Assignment
 {
-    class CharacterPhysicComponent : PhysicComponent
+    class GuanSkillComponent : SkillComponent
     {
 
-        public CharacterPhysicComponent()
+        Random rnd = new Random();
+        int rng;
+
+        public GuanSkillComponent()
         {
 
         }
@@ -29,21 +34,7 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-
-            //parent.Position.X += 10;
-
-            if (parent.status == 2)
-            {
-                parent.HP -= 1;
-                parent.status = 0;
-            }
-
-            if (parent.IsHit)
-            {
-                parent.SendMessage(this, 4);
-                parent.IsHit = false;
-            }
-
+            
             base.Update(gameTime, gameObjects, parent);
         }
     }

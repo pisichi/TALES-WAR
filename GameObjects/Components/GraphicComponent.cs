@@ -10,7 +10,6 @@ namespace Final_Assignment
 
         protected Dictionary<string, Animation> _animations;
         protected AnimationManager _animationManager;
-       // protected Texture2D _texture;
 
         public GraphicComponent(Dictionary<string, Animation> animations)
         {

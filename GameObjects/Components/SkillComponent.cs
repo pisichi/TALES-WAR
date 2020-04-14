@@ -4,14 +4,8 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Final_Assignment
 {
-    class CharacterPhysicComponent : PhysicComponent
+    class SkillComponent : Component
     {
-
-        public CharacterPhysicComponent()
-        {
-
-        }
-
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
         {
             base.Draw(spriteBatch, parent);
@@ -29,21 +23,6 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-
-            //parent.Position.X += 10;
-
-            if (parent.status == 2)
-            {
-                parent.HP -= 1;
-                parent.status = 0;
-            }
-
-            if (parent.IsHit)
-            {
-                parent.SendMessage(this, 4);
-                parent.IsHit = false;
-            }
-
             base.Update(gameTime, gameObjects, parent);
         }
     }

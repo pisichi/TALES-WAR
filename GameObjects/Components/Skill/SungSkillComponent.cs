@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Final_Assignment
 {
-    class CharacterPhysicComponent : PhysicComponent
+    class SungSkillComponent : SkillComponent
     {
-
-        public CharacterPhysicComponent()
+        public SungSkillComponent()
         {
-
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
@@ -29,21 +31,6 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-
-            //parent.Position.X += 10;
-
-            if (parent.status == 2)
-            {
-                parent.HP -= 1;
-                parent.status = 0;
-            }
-
-            if (parent.IsHit)
-            {
-                parent.SendMessage(this, 4);
-                parent.IsHit = false;
-            }
-
             base.Update(gameTime, gameObjects, parent);
         }
     }

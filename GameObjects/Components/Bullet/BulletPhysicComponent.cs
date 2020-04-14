@@ -28,9 +28,28 @@ namespace Final_Assignment
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
 
-            parent.Direction.Y += 0.03f;
-            parent.Position += parent.Direction * parent.LinearVelocity;
-            
+            //parent.Direction.Y += 0.03f;
+            parent.Position += parent.Direction * 10f;
+
+            if (parent.Position.X > 4000 || parent.Position.X < 0
+                || parent.Position.Y < 0 || parent.Position.Y > 1000)
+            {
+                parent.IsActive = false;
+            }
+
+
+                foreach (GameObject s in gameObjects)
+            {
+                if(s.IsActive && parent.IsActive && IsTouching(parent,s))
+                {
+                    Console.WriteLine("hitting  " + s.Name);
+                    s.HP -= parent.attack;
+                    s.IsHit = true;
+                    s.status = parent.status;
+                    parent.IsActive = false;
+                    
+                }
+            }
 
             //Console.WriteLine(parent.Position.X);
             //Console.WriteLine(parent.Position.Y);

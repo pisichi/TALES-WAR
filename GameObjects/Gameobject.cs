@@ -15,14 +15,22 @@ namespace Final_Assignment
         protected InputComponent _input;
         protected PhysicComponent _physics;
         protected GraphicComponent _graphics;
+        protected SkillComponent _skills;
 
 
         public Texture2D _hit;
 
         public int attack;
+        public int HP;
+        public int status;
+        public int skill = 0;
+
         public bool InTurn;
         public bool action;
         public bool shooting = false;
+        public bool IsHit = false;
+
+        
 
         #region PUBLIC_VARIABLES
 
@@ -30,9 +38,8 @@ namespace Final_Assignment
         public Vector2 Position;
 
         public float Rotation;
-        public float RotationVelocity = 3f;
-        public float LinearVelocity = 1f;
 
+        public float LinearVelocity = 1.3f;
 
         public Vector2 Scale;
         public Vector2 Direction;
@@ -41,7 +48,6 @@ namespace Final_Assignment
         public Vector2 Acceleration;
 
         public string Name;
-
         public bool IsActive = true;
 
 
@@ -58,12 +64,13 @@ namespace Final_Assignment
 
 
 
-
-        public GameObject(InputComponent input,PhysicComponent physics,GraphicComponent graphics)
+        public GameObject(InputComponent input,PhysicComponent physics,GraphicComponent graphics,SkillComponent skill)
         {
             _input = input;
             _physics = physics;
             _graphics = graphics;
+            _skills = skill;
+
             Position = Vector2.Zero;
             Scale = Vector2.One;
             Acceleration = Vector2.Zero;
@@ -76,8 +83,11 @@ namespace Final_Assignment
         public virtual void Update(GameTime gameTime, List<GameObject> gameObjects)
         {
             if (_input != null) _input.Update(gameTime, gameObjects, this);
+            if (_skills != null) _skills.Update(gameTime, gameObjects, this);
             if (_physics != null) _physics.Update(gameTime, gameObjects, this);
             if (_graphics != null) _graphics.Update(gameTime, gameObjects, this);
+           
+
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

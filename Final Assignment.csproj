@@ -51,7 +51,11 @@
     <Compile Include="GameObjects\Components\GraphicComponent.cs" />
     <Compile Include="GameObjects\Components\InputComponent.cs" />
     <Compile Include="GameObjects\Components\PhysicComponent.cs" />
-    <Compile Include="GameObjects\Components\Skill\SkillComponent.cs" />
+    <Compile Include="GameObjects\Components\SkillComponent.cs" />
+    <Compile Include="GameObjects\Components\Skill\GuanSkillComponent.cs" />
+    <Compile Include="GameObjects\Components\Skill\SungSkillComponent.cs" />
+    <Compile Include="GameObjects\Components\Skill\ThorSkillComponent.cs" />
+    <Compile Include="GameObjects\Components\Skill\ZeusSkillComponent.cs" />
     <Compile Include="GameObjects\GameObject.cs" />
     <Compile Include="Managers\AnimationManager.cs" />
     <Compile Include="Managers\GameScreenManager.cs" />
