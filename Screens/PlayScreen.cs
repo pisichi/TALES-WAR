@@ -80,9 +80,9 @@ namespace Final_Assignment
             Set();
 
             _camera = new Camera();
-            cam = new GameObject(null, null, null,null)
+            cam = new GameObject(null, null, null, null)
             {
-                Position = new Vector2(_bg.Width/2, _bg.Height/2),
+                Position = new Vector2(_bg.Width / 2, _bg.Height / 2),
             };
 
         }
@@ -113,10 +113,10 @@ namespace Final_Assignment
                 attack = 1,
                 skill = 1
 
-        };
+            };
             _gameObjects.Add(player);
 
-            
+
 
 
             boss = new GameObject(null,
@@ -164,7 +164,7 @@ namespace Final_Assignment
 
             #endregion
 
-            _gameObjects.Add(new GameObject(null, null, null,null)
+            _gameObjects.Add(new GameObject(null, null, null, null)
             {
                 Position = new Vector2(400, 950),
                 Viewport = new Rectangle(0, 0, 900, 50),
@@ -172,7 +172,7 @@ namespace Final_Assignment
             }
             );
 
-            _gameObjects.Add(new GameObject(null, null, null,null)
+            _gameObjects.Add(new GameObject(null, null, null, null)
             {
                 Position = new Vector2(1300, 900),
                 Viewport = new Rectangle(0, 0, 800, 50),
@@ -180,15 +180,15 @@ namespace Final_Assignment
             }
            );
 
-            _gameObjects.Add(new GameObject(null, null, null,null)
+            _gameObjects.Add(new GameObject(null, null, null, null)
             {
                 Position = new Vector2(3380, 550),
-                Viewport = new Rectangle(0, 0,200, 150),
+                Viewport = new Rectangle(0, 0, 200, 150),
                 _hit = _hit
             }
            );
 
-            _gameObjects.Add(new GameObject(null, null, null,null)
+            _gameObjects.Add(new GameObject(null, null, null, null)
             {
                 Position = new Vector2(2950, 300),
                 Viewport = new Rectangle(0, 0, 200, 150),
@@ -196,7 +196,7 @@ namespace Final_Assignment
             }
             );
 
-            _gameObjects.Add(new GameObject(null, null, null,null)
+            _gameObjects.Add(new GameObject(null, null, null, null)
             {
                 Position = new Vector2(2900, 900),
                 Viewport = new Rectangle(0, 0, 350, 150),
@@ -205,7 +205,7 @@ namespace Final_Assignment
 
 
 
-Singleton.Instance.follow = player;
+            Singleton.Instance.follow = player;
         }
 
         public void Pause()
@@ -223,7 +223,6 @@ Singleton.Instance.follow = player;
             Singleton.Instance._previouskey = Singleton.Instance._currentkey;
             Singleton.Instance._currentkey = Keyboard.GetState();
 
-           // Console.WriteLine(_gameObjects.Count);
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
@@ -234,8 +233,8 @@ Singleton.Instance.follow = player;
             if (freecam)
                 testcam();
             else
-            _camera.Follow(Singleton.Instance.follow);
-            
+                _camera.Follow(Singleton.Instance.follow);
+
 
             if (player.InTurn)
             {
@@ -267,8 +266,8 @@ Singleton.Instance.follow = player;
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Right))
             {
-                if(cam.Position.X < 4000 - Singleton.SCREENWIDTH/2)
-                cam.Position.X += 10;
+                if (cam.Position.X < 4000 - Singleton.SCREENWIDTH / 2)
+                    cam.Position.X += 10;
             }
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Left))
             {
@@ -331,13 +330,16 @@ Singleton.Instance.follow = player;
         {
             enemyIndex = 0;
 
-            if(Singleton.Instance.CurrentTurnState != Singleton.TurnState.shoot)
-            Singleton.Instance.follow = player;
+            if (Singleton.Instance.CurrentTurnState != Singleton.TurnState.shoot && Singleton.Instance.CurrentTurnState != Singleton.TurnState.enemy)
+                Singleton.Instance.follow = player;
 
             switch (Singleton.Instance.CurrentTurnState)
             {
                 case Singleton.TurnState.skill:
-                    if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+                    if (player.status == 1)
+                    { Singleton.Instance.CurrentTurnState = Singleton.TurnState.shoot; }
+
+                    else if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                     {
                         player.Rotation = 0f;
                         Singleton.Instance.CurrentTurnState = Singleton.TurnState.angle;
@@ -345,6 +347,8 @@ Singleton.Instance.follow = player;
                     break;
                 case Singleton.TurnState.angle:
                     {
+
+
                         Rotation += 0.1f;
                         player.Rotation += 0.1f;
                         if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
@@ -354,6 +358,7 @@ Singleton.Instance.follow = player;
                     }
                     break;
                 case Singleton.TurnState.force:
+
                     if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                     {
                         player.action = true;
@@ -366,10 +371,13 @@ Singleton.Instance.follow = player;
                     break;
             }
 
+
             if (!player.shooting)
             {
                 enemyList[enemyIndex].InTurn = true;
+
             }
+
         }
 
 
@@ -397,7 +405,7 @@ Singleton.Instance.follow = player;
                 case Singleton.TurnState.angle:
                     spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     break;
-                case Singleton.TurnState.force:   
+                case Singleton.TurnState.force:
                     spriteBatch.DrawString(_font, "angle is " + Rotation, player.Position + new Vector2(0, -130), Color.White);
                     spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     spriteBatch.Draw(_gauge, player.Position + new Vector2(120, -100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
@@ -409,8 +417,8 @@ Singleton.Instance.follow = player;
 
             for (int i = 0; i < _gameObjects.Count; i++)
             {
-                if(_gameObjects[i].IsActive)
-                _gameObjects[i].Draw(spriteBatch);
+                if (_gameObjects[i].IsActive)
+                    _gameObjects[i].Draw(spriteBatch);
             }
 
             spriteBatch.End();

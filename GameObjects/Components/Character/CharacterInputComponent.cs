@@ -30,21 +30,31 @@ namespace Final_Assignment
             parent.Direction = new Vector2((float)Math.Cos(parent.Rotation + (float)Math.PI / 2), (float)Math.Sin(parent.Rotation + (float)Math.PI / 2));
             CheckRemove(parent);
 
+
+
             if (Singleton.Instance.CurrentTurnState == Singleton.TurnState.shoot)
             {
-                if (parent.status == 1)
+                if (parent.status == 1 && parent.InTurn)
                 {
-                        parent.shooting = false;
-                        parent.InTurn = false;
-                        bullet = null;
+                    parent.shooting = false;
+                    parent.InTurn = false;
+                    count += 1;
+                    Console.WriteLine(count);
+                    Singleton.Instance.CurrentTurnState = Singleton.TurnState.enemy;
+                    if (count >= 1)
+                    {
+                        count = 0;
+                        parent.status = 0;
+                    }
+
                 }
+
 
                 if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                 {
                     Shoot(gameObjects, parent);
-                    //Singleton.Instance.CurrentTurnState = Singleton.TurnState.enemy;
+                    Singleton.Instance.CurrentTurnState = Singleton.TurnState.enemy;
                 }
-
             }
 
             base.Update(gameTime, gameObjects, parent);

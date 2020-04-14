@@ -32,7 +32,6 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-            Console.WriteLine(parent.status);
           
 
             if (parent.IsHit)
