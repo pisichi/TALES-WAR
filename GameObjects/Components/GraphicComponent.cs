@@ -16,6 +16,7 @@ namespace Final_Assignment
         {
             _animations = animations;
             _animationManager = new AnimationManager(_animations.First().Value);
+
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)

@@ -68,7 +68,11 @@ namespace Final_Assignment
                                     new BulletPhysicComponent(),
                                     new BulletGraphicComponent(content, new Dictionary<string, Animation>() {
                                          { "Shoot", new Animation(_bullet, new Rectangle(0,0,_bullet.Width,_bullet.Height),1) }
-                                         }));
+                                         }))
+            {
+                Viewport = new Rectangle(0, 0, _bullet.Width, _bullet.Height),
+                _hit = parent._hit
+            };
 
             bullet.Direction = parent.Direction;
             bullet.Position = parent.Position - new Vector2(0, 100);

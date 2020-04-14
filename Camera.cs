@@ -11,12 +11,12 @@ namespace Final_Assignment
         {
             var position = Matrix.CreateTranslation(
               -target.Position.X - (target.Rectangle.Width / 2),
-              0,
+              -target.Position.Y - (target.Rectangle.Height / 2),
               0);
 
             var offset = Matrix.CreateTranslation(
                 Singleton.SCREENWIDTH / 2,
-               0,
+               Singleton.SCREENHEIGHT / 2,
                0);
 
             Transform = position * offset;

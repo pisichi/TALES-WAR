@@ -24,8 +24,8 @@ namespace Final_Assignment
             };
 
             IsMouseVisible = true;
-            
 
+            graphics.GraphicsProfile = GraphicsProfile.HiDef;
             graphics.ApplyChanges();
 
             Content.RootDirectory = "Content";

@@ -11,11 +11,13 @@
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bullet.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/char.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/gauge.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/hitbox.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/pin.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/sheet_guan.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/sheet_zeus.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

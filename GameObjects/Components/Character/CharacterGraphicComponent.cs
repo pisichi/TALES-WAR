@@ -9,10 +9,17 @@ namespace Final_Assignment
     {
 
         int CurrentCharState;
+        ContentManager content;
+        //Texture2D _hit;
+
 
         public CharacterGraphicComponent(ContentManager content, Dictionary<string, Animation> animations) : base(animations)
         {
             CurrentCharState = 1;
+            //_hit = content.Load<Texture2D>("sprites/hitbox");
+
+
+            this.content = content;
         }
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
@@ -48,7 +55,7 @@ namespace Final_Assignment
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
         {
 
-            //spriteBatch.Draw(_char, parent.Position, parent.Viewport, Color.White, 0f, parent.Origin, 1f, SpriteEffects.None, 0);
+           // spriteBatch.Draw(_hit, parent.Rectangle, Color.Red);
             _animationManager.Draw(spriteBatch, parent.Position, 0f, new Vector2(1, 1));
             base.Draw(spriteBatch, parent);
         }

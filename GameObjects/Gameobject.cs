@@ -17,6 +17,8 @@ namespace Final_Assignment
         protected GraphicComponent _graphics;
 
 
+        public Texture2D _hit;
+
         public int attack;
         public bool InTurn;
         public bool action;
@@ -48,7 +50,7 @@ namespace Final_Assignment
         {
             get
             {
-                return new Rectangle((int)Position.X, (int)Position.Y, Viewport.Width, Viewport.Height);
+                return new Rectangle((int)Position.X - Viewport.Width/2, (int)Position.Y - Viewport.Height/2, Viewport.Width, Viewport.Height);
             }
         }
         public Rectangle Viewport;
@@ -81,6 +83,7 @@ namespace Final_Assignment
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (_graphics != null) _graphics.Draw(spriteBatch, this);
+            if(_hit != null) spriteBatch.Draw(_hit, Rectangle, Color.Red);
         }
 
         public void SendMessage(Component sender,int message)
