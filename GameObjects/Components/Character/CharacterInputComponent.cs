@@ -94,10 +94,14 @@ namespace Final_Assignment
             bullet.Position = parent.Position + new Vector2(120, -100);
             bullet.attack = parent.attack;
             bullet.LinearVelocity = parent.LinearVelocity * 50;
+
             if(message == 201)
             {
                 bullet.status = 1;
+                message = 0;
             }
+
+
             gameObjects.Add(bullet);
             parent.shooting = true;
             Singleton.Instance.follow = bullet;

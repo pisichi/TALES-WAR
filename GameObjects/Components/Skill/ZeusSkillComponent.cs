@@ -58,17 +58,21 @@ namespace Final_Assignment
             if (parent.skill == 1)
             {
                 Console.WriteLine("use skill 1");
-                parent.SendMessage(this, 201);
+                rng = rnd.Next(1, 11);
+                //parent.SendMessage(this, 201);
                 switch (Singleton.Instance.level_s1)
                 {
                     case 1:
-                        parent.attack += 1;
+                        if (rng >= 1)
+                            parent.SendMessage(this, 201);
                         break;
                     case 2:
-                        parent.attack += 2;
+                        if (rng >= 6)
+                            parent.SendMessage(this, 201);
                         break;
                     case 3:
-                        parent.attack += 3;
+                        if (rng >= 3)
+                            parent.SendMessage(this, 201);
                         break;
                 }
                 parent.skill = 0;
@@ -79,13 +83,13 @@ namespace Final_Assignment
                 switch (Singleton.Instance.level_s3)
                 {
                     case 1:
-                        parent.attack += 2;
+                        parent.attack += 1;
                         break;
                     case 2:
-                        parent.attack += 3;
+                        parent.attack += 2;
                         break;
                     case 3:
-                        parent.attack += 4;
+                        parent.attack += 3;
                         break;
                 }
                 parent.skill = 0;

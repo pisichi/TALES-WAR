@@ -119,7 +119,7 @@ namespace Final_Assignment
 
 
 
-            boss = new GameObject(null,
+            boss = new GameObject(new CharacterAIComponent(content),
                                    new CharacterPhysicComponent(),
                                    new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
                                        {
@@ -143,24 +143,29 @@ namespace Final_Assignment
             _gameObjects.Add(boss);
             enemyList.Add(boss);
 
-            //enemy = new GameObject(null,
-            //          new CharacterPhysicComponent(),
-            //          new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
-            //              {
-            //                                { "Idle", new Animation(_guan, new Rectangle(0,0,400,250),2) },
-            //                                { "Throw", new Animation(_guan, new Rectangle(0,250,400,250),2) },
-            //                                { "Skill", new Animation(_guan, new Rectangle(0,500,400,250),2) },
-            //                                { "Hit", new Animation(_guan, new Rectangle(0,750,200,250),1) },
-            //                                { "Stunt", new Animation(_guan, new Rectangle(0,1000,400,250),2) },
-            //                                { "Die", new Animation(_guan, new Rectangle(0,1250,400,250),2) }
-            //              }))
-            //{
-            //    Position = new Vector2(300, 600),
-            //    InTurn = false,
-            //    Viewport = new Rectangle(0, 0, 200, 250)
-            //};
-            //_gameObjects.Add(enemy);
-            //enemyList.Add(enemy);
+            enemy = new GameObject(new CharacterAIComponent(content),
+                      new CharacterPhysicComponent(),
+                      new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                          {
+                                            { "Idle", new Animation(_guan, new Rectangle(0,0,400,250),2) },
+                                            { "Throw", new Animation(_guan, new Rectangle(0,250,400,250),2) },
+                                            { "Skill", new Animation(_guan, new Rectangle(0,500,400,250),2) },
+                                            { "Hit", new Animation(_guan, new Rectangle(0,750,200,250),1) },
+                                            { "Stunt", new Animation(_guan, new Rectangle(0,1000,400,250),2) },
+                                            { "Die", new Animation(_guan, new Rectangle(0,1250,400,250),2) }
+                          }),
+                      new GuanSkillComponent())
+            {
+                Position = new Vector2(1000, 700),
+                InTurn = false,
+                Viewport = new Rectangle(0, 0, 200, 250),
+                _hit = _hit,
+                Name = "guan",
+                HP = 10,
+                attack = 1
+            };
+            _gameObjects.Add(enemy);
+            enemyList.Add(enemy);
 
             #endregion
 
@@ -240,7 +245,7 @@ namespace Final_Assignment
             {
                 if (!select)
                 {
-                    Singleton.Instance.CurrentTurnState = Singleton.TurnState.skill;
+                    
                     select = true;
                 }
                 PlayerModule();
@@ -291,26 +296,24 @@ namespace Final_Assignment
             if (enemyIndex >= enemyList.Count)
             {
                 player.InTurn = true;
+                Singleton.Instance.CurrentTurnState = Singleton.TurnState.skill;
             }
             else
             {
-                Singleton.Instance.follow = enemyList[enemyIndex];
+                
 
                 if (enemyList[enemyIndex].InTurn)
                 {
-                    enemyList[enemyIndex].action = true;
+                    if(!enemyList[enemyIndex].shooting)
+                        Singleton.Instance.follow = enemyList[enemyIndex];
 
                     waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
-                    if (waitTime > 5)
+                    if (waitTime > 1)
                     {
-                        enemyList[enemyIndex].InTurn = false;
+                        enemyList[enemyIndex].action = true;
+                       // enemyList[enemyIndex].InTurn = false;
                         waitTime = 0;
                     }
-                }
-
-                if (enemyList[enemyIndex].shooting)
-                {
-                    //_camera.Follow(enemyList[enemyIndex].Child);
                 }
 
                 if (!enemyList[enemyIndex].InTurn)
@@ -320,6 +323,7 @@ namespace Final_Assignment
                     if (enemyIndex < enemyList.Count)
                     {
                         enemyList[enemyIndex].InTurn = true;
+                        
                     }
                 }
 
@@ -375,7 +379,6 @@ namespace Final_Assignment
             if (!player.shooting)
             {
                 enemyList[enemyIndex].InTurn = true;
-
             }
 
         }
