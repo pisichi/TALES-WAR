@@ -7,8 +7,14 @@ namespace Final_Assignment
 {
     class BulletGraphicComponent : GraphicComponent
     {
+        int CurrentCharState;
+        ContentManager content;
+        //Texture2D _hit;
+
         public BulletGraphicComponent(ContentManager content, Dictionary<string, Animation> animations) : base(animations)
         {
+            //_hit = content.Load<Texture2D>("sprites/hitbox");
+            this.content = content;
         }
 
         public override void ReceiveMessage(int message, Component sender)
@@ -23,12 +29,16 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
+            _animationManager.Play(_animations["Shoot"]);
+            _animationManager.Update(gameTime);
+
             base.Update(gameTime, gameObjects, parent);
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
         {
-            spriteBatch.Draw(parent._texture, parent.Position, null, Color.White, parent.Rotation, parent.Origin, parent.Scale, SpriteEffects.None, 0);
+             
+            _animationManager.Draw(spriteBatch, parent.Position, 0, new Vector2(1, 1));
         }
     }
 }

@@ -15,30 +15,35 @@ namespace Final_Assignment
         private Camera _camera;
         private int enemyIndex;
 
-        //public Bullet shoot;
-
-        public bool isPlayerTurn = true;
-
         private bool select = false;
+        private bool freecam = false;
 
         public bool IsPaused { get; private set; }
 
         List<GameObject> _gameObjects;
 
+        float waitTime = 0;
 
         private GameObject player;
+        private GameObject boss;
         private GameObject enemy;
         private GameObject bullet;
+
+        private GameObject cam;
 
         List<GameObject> enemyList;
 
         Texture2D _bg;
-        public Texture2D _char;
-        Texture2D _bullet;
+        Texture2D _char;
+
+        Texture2D _hit;
+
+        Texture2D _zeus;
+        Texture2D _guan;
+
         Texture2D _arrow;
         Texture2D _gauge;
         Texture2D _pin;
-        Texture2D _zeus;
         SpriteFont _font;
 
         float Rotation = 0f;
@@ -55,95 +60,152 @@ namespace Final_Assignment
             this.content = content;
 
             _bg = content.Load<Texture2D>("sprites/bg");
-            _bullet = content.Load<Texture2D>("sprites/ball");
             _pin = content.Load<Texture2D>("sprites/pin");
             _gauge = content.Load<Texture2D>("sprites/gauge");
 
+            _zeus = content.Load<Texture2D>("sprites/sheet_zeus");
+            _guan = content.Load<Texture2D>("sprites/sheet_guan");
+
             _arrow = content.Load<Texture2D>("sprites/arrow");
-            _char = content.Load<Texture2D>("sprites/char");
             _font = content.Load<SpriteFont>("font/File");
-            _zeus = content.Load<Texture2D>("sprites/ZEUSSHEET");
+
+            _hit = content.Load<Texture2D>("sprites/hitbox");
+
             _gameObjects = new List<GameObject>();
             enemyList = new List<GameObject>();
             enemyIndex = 0;
+
             select = false;
 
             Set();
 
             _camera = new Camera();
+            cam = new GameObject(null, null, null,null)
+            {
+                Position = new Vector2(_bg.Width/2, _bg.Height/2),
+            };
 
         }
 
         private void Set()
         {
-            player = new GameObject(_char, new CharacterInputComponent(),
-                                    new CharacterPhysicComponent(),
-                                    new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
-                                        {
-                                            { "Alive", new Animation(_zeus, new Rectangle(0,0,408,246),2) }
-                                        }))
+
+            #region character
+            player = new GameObject(new CharacterInputComponent(content),
+                                                new CharacterPhysicComponent(),
+                                                new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                                                    {
+                                            { "Idle", new Animation(_zeus, new Rectangle(0,0,400,250),2) },
+                                            { "Throw", new Animation(_zeus, new Rectangle(0,250,400,250),2) },
+                                            { "Skill", new Animation(_zeus, new Rectangle(0,500,400,250),2) },
+                                            { "Hit", new Animation(_zeus, new Rectangle(0,750,200,250),1) },
+                                            { "Stunt", new Animation(_zeus, new Rectangle(0,1000,400,250),2) },
+                                            { "Die", new Animation(_zeus, new Rectangle(0,1250,400,250),2) }
+                                                    }),
+                                                new ZeusSkillComponent())
             {
-                Position = new Vector2(100, 600),
-
-                Child = new GameObject(_bullet, null,
-                                    new BulletPhysicComponent(),
-                                    new BulletGraphicComponent(content, new Dictionary<string, Animation>()
-                                        {
-                                            { "Shoot", new Animation(_bullet, new Rectangle(0,0,_bullet.Width,_bullet.Height),1) }
-                                        })),
+                Position = new Vector2(600, 800),
                 InTurn = true,
-                Viewport = new Rectangle(0, 0, 204, 246)
+                Viewport = new Rectangle(0, 0, 200, 250),
+                _hit = _hit,
+                Name = "zeus",
+                HP = 5,
+                attack = 1,
+                skill = 1
 
-            };
+        };
             _gameObjects.Add(player);
 
+            
 
 
-           /* enemy = new GameObject(_char,null,
-                        new CharacterPhysicComponent(),
-                        new CharacterGraphicComponent(content))
+            boss = new GameObject(null,
+                                   new CharacterPhysicComponent(),
+                                   new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                                       {
+                                            { "Idle", new Animation(_guan, new Rectangle(0,0,400,250),2) },
+                                            { "Throw", new Animation(_guan, new Rectangle(0,250,400,250),2) },
+                                            { "Skill", new Animation(_guan, new Rectangle(0,500,400,250),2) },
+                                            { "Hit", new Animation(_guan, new Rectangle(0,750,200,250),1) },
+                                            { "Stunt", new Animation(_guan, new Rectangle(0,1000,400,250),2) },
+                                            { "Die", new Animation(_guan, new Rectangle(0,1250,400,250),2) }
+                                       }),
+                                   new GuanSkillComponent())
             {
-                Position = new Vector2(500, 650),
-                Child = new GameObject(_bullet, null,
-                                    new BulletPhysicComponent(),
-                                    new BulletGraphicComponent(content)),
-                InTurn = false
-
+                Position = new Vector2(3400, 350),
+                InTurn = false,
+                Viewport = new Rectangle(0, 0, 200, 250),
+                _hit = _hit,
+                Name = "guan",
+                HP = 10,
+                attack = 1
             };
-            _gameObjects.Add(enemy);
-            enemyList.Add(enemy);
+            _gameObjects.Add(boss);
+            enemyList.Add(boss);
 
+            //enemy = new GameObject(null,
+            //          new CharacterPhysicComponent(),
+            //          new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+            //              {
+            //                                { "Idle", new Animation(_guan, new Rectangle(0,0,400,250),2) },
+            //                                { "Throw", new Animation(_guan, new Rectangle(0,250,400,250),2) },
+            //                                { "Skill", new Animation(_guan, new Rectangle(0,500,400,250),2) },
+            //                                { "Hit", new Animation(_guan, new Rectangle(0,750,200,250),1) },
+            //                                { "Stunt", new Animation(_guan, new Rectangle(0,1000,400,250),2) },
+            //                                { "Die", new Animation(_guan, new Rectangle(0,1250,400,250),2) }
+            //              }))
+            //{
+            //    Position = new Vector2(300, 600),
+            //    InTurn = false,
+            //    Viewport = new Rectangle(0, 0, 200, 250)
+            //};
+            //_gameObjects.Add(enemy);
+            //enemyList.Add(enemy);
 
-            enemy = new GameObject(_char, null,
-            new CharacterPhysicComponent(),
-            new CharacterGraphicComponent(content))
+            #endregion
+
+            _gameObjects.Add(new GameObject(null, null, null,null)
             {
-                Position = new Vector2(700, 650),
-                Child = new GameObject(_bullet, null,
-                        new BulletPhysicComponent(),
-                        new BulletGraphicComponent(content)),
-                InTurn = false
+                Position = new Vector2(400, 950),
+                Viewport = new Rectangle(0, 0, 900, 50),
+                _hit = _hit
+            }
+            );
 
-            };
-            _gameObjects.Add(enemy);
-            enemyList.Add(enemy);
-
-
-
-
-            enemy = new GameObject(_char, null,
-            new CharacterPhysicComponent(),
-            new CharacterGraphicComponent(content))
+            _gameObjects.Add(new GameObject(null, null, null,null)
             {
-                Position = new Vector2(900, 650),
-                Child = new GameObject(_bullet, null,
-                        new BulletPhysicComponent(),
-                        new BulletGraphicComponent(content)),
-                InTurn = false
+                Position = new Vector2(1300, 900),
+                Viewport = new Rectangle(0, 0, 800, 50),
+                _hit = _hit
+            }
+           );
 
-            };
-            _gameObjects.Add(enemy);
-            enemyList.Add(enemy);*/
+            _gameObjects.Add(new GameObject(null, null, null,null)
+            {
+                Position = new Vector2(3380, 550),
+                Viewport = new Rectangle(0, 0,200, 150),
+                _hit = _hit
+            }
+           );
+
+            _gameObjects.Add(new GameObject(null, null, null,null)
+            {
+                Position = new Vector2(2950, 300),
+                Viewport = new Rectangle(0, 0, 200, 150),
+                _hit = _hit
+            }
+            );
+
+            _gameObjects.Add(new GameObject(null, null, null,null)
+            {
+                Position = new Vector2(2900, 900),
+                Viewport = new Rectangle(0, 0, 350, 150),
+                _hit = _hit
+            });
+
+
+
+            Singleton.Instance.follow = player;
         }
 
         public void Pause()
@@ -158,8 +220,24 @@ namespace Final_Assignment
 
         public void Update(GameTime gameTime)
         {
+            
             Singleton.Instance._previouskey = Singleton.Instance._currentkey;
             Singleton.Instance._currentkey = Keyboard.GetState();
+
+           // Console.WriteLine(_gameObjects.Count);
+
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+            {
+                freecam = !freecam;
+            }
+
+
+            if (freecam)
+                testcam();
+            else
+                _camera.Follow(Singleton.Instance.follow);
+
+
 
             if (player.InTurn)
             {
@@ -181,6 +259,54 @@ namespace Final_Assignment
             {
                 if (_gameObjects[i].IsActive)
                     _gameObjects[i].Update(gameTime, _gameObjects);
+                else _gameObjects.Remove(_gameObjects[i]);
+            }
+            
+        }
+
+        /*private void cameraCollision()
+        {
+           
+
+            *//*if (Singleton.Instance.follow.Position.X > 4000 - Singleton.SCREENWIDTH / 2)
+                Singleton.Instance.follow.CameraPosition.X = 4000 - Singleton.SCREENWIDTH / 2;
+
+            if (Singleton.Instance.follow.Position.X < Singleton.SCREENWIDTH / 2)
+                Singleton.Instance.follow.CameraPosition.X = Singleton.SCREENWIDTH / 2;
+
+            if (Singleton.Instance.follow.Position.Y < Singleton.SCREENHEIGHT / 2)
+                Singleton.Instance.follow.CameraPosition.Y = Singleton.SCREENHEIGHT / 2;
+
+            if (Singleton.Instance.follow.Position.Y > 1000 - Singleton.SCREENHEIGHT / 2)
+                Singleton.Instance.follow.CameraPosition.Y = 1000 - Singleton.SCREENHEIGHT / 2;*//*
+            _camera.Follow(Singleton.Instance.follow);
+
+
+        }*/
+
+        private void testcam()
+        {
+            _camera.Follow(cam);
+
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Right))
+            {
+                if(cam.Position.X < 4000 - Singleton.SCREENWIDTH/2)
+                cam.Position.X += 10;
+            }
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Left))
+            {
+                if (cam.Position.X > Singleton.SCREENWIDTH / 2)
+                    cam.Position.X -= 10;
+            }
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up))
+            {
+                if (cam.Position.Y > Singleton.SCREENHEIGHT / 2)
+                    cam.Position.Y -= 10;
+            }
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down))
+            {
+                if (cam.Position.Y < 1000 - Singleton.SCREENHEIGHT / 2)
+                    cam.Position.Y += 10;
             }
         }
 
@@ -192,17 +318,23 @@ namespace Final_Assignment
             }
             else
             {
-                _camera.Follow(enemyList[enemyIndex]);
+                Singleton.Instance.follow = enemyList[enemyIndex];
 
                 if (enemyList[enemyIndex].InTurn)
                 {
                     enemyList[enemyIndex].action = true;
-                    enemyList[enemyIndex].InTurn = false;
+
+                    waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
+                    if (waitTime > 5)
+                    {
+                        enemyList[enemyIndex].InTurn = false;
+                        waitTime = 0;
+                    }
                 }
 
                 if (enemyList[enemyIndex].shooting)
                 {
-                    _camera.Follow(enemyList[enemyIndex].Child);
+                    //_camera.Follow(enemyList[enemyIndex].Child);
                 }
 
                 if (!enemyList[enemyIndex].InTurn)
@@ -218,25 +350,26 @@ namespace Final_Assignment
             }
         }
 
-
         private void PlayerModule()
         {
             enemyIndex = 0;
-            
-            _camera.Follow(player);
 
+            if(Singleton.Instance.CurrentTurnState != Singleton.TurnState.shoot)
+            Singleton.Instance.follow = player;
 
             switch (Singleton.Instance.CurrentTurnState)
             {
                 case Singleton.TurnState.skill:
                     if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                     {
+                        player.Rotation = 0f;
                         Singleton.Instance.CurrentTurnState = Singleton.TurnState.angle;
                     }
                     break;
                 case Singleton.TurnState.angle:
                     {
                         Rotation += 0.1f;
+                        player.Rotation += 0.1f;
                         if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                         {
                             Singleton.Instance.CurrentTurnState = Singleton.TurnState.force;
@@ -249,21 +382,16 @@ namespace Final_Assignment
                         player.action = true;
                         Singleton.Instance.CurrentTurnState = Singleton.TurnState.shoot;
                         Rotation = 0;
-                        bullet = player.Child;
                     }
                     break;
+
                 case Singleton.TurnState.shoot:
                     break;
-
             }
 
-            if (player.shooting)
+            if (!player.shooting)
             {
-                _camera.Follow(player.Child);
-            }
-            else
-            {
-               // enemyList[enemyIndex].InTurn = true;
+                enemyList[enemyIndex].InTurn = true;
             }
         }
 
@@ -282,36 +410,22 @@ namespace Final_Assignment
         {
 
             spriteBatch.Begin(transformMatrix: _camera.Transform);
+            spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 4000, 1000));
 
-            spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800));
-
-            if (player.InTurn)
-                spriteBatch.DrawString(_font, "player turn", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("Playing") / 2, Color.White);
-            else
-            {
-                spriteBatch.DrawString(_font, "enemy turn " + enemyIndex, new Vector2(2000, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("Playing") / 2, Color.White);
-                spriteBatch.DrawString(_font, "press f to skip", new Vector2(2000, (Singleton.SCREENHEIGHT + 100) / 2) - _font.MeasureString("Playing") / 2, Color.White);
-            }
-
-            spriteBatch.DrawString(_font, "press ESC to exit", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 3) - _font.MeasureString("press ESC to exit") / 2, Color.White);
 
             switch (Singleton.Instance.CurrentTurnState)
             {
                 case Singleton.TurnState.skill:
-                    spriteBatch.DrawString(_font, "skill state - press space ", player.Position + new Vector2(0, -130), Color.White);
                     break;
                 case Singleton.TurnState.angle:
-                    spriteBatch.DrawString(_font, "angle state - press space ", player.Position + new Vector2(0, -130), Color.White);
-                    spriteBatch.Draw(_arrow, player.Position + new Vector2(0, -100), null, Color.White, Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     break;
-                case Singleton.TurnState.force:
-                    spriteBatch.DrawString(_font, "force state - press space ", player.Position + new Vector2(0, -150), Color.White);
+                case Singleton.TurnState.force:   
                     spriteBatch.DrawString(_font, "angle is " + Rotation, player.Position + new Vector2(0, -130), Color.White);
-                    spriteBatch.Draw(_arrow, player.Position + new Vector2(0, -100), null, Color.White, Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
-                    spriteBatch.Draw(_gauge, player.Position + new Vector2(0, -100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(_gauge, player.Position + new Vector2(120, -100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     break;
                 case Singleton.TurnState.shoot:
-                    spriteBatch.DrawString(_font, "shoot state", player.Position + new Vector2(0, -130), Color.White);
                     break;
 
             }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,19 +8,57 @@ namespace Final_Assignment
 {
     class CharacterGraphicComponent : GraphicComponent
     {
-        
+
         int CurrentCharState;
-        Texture2D _char;
-        //public AnimationManager _animationManager;
+        ContentManager content;
+        Texture2D _hp;
+        float waitTime = 0;
+
+
 
         public CharacterGraphicComponent(ContentManager content, Dictionary<string, Animation> animations) : base(animations)
         {
-            _char = content.Load<Texture2D>("sprites/ZEUSSHEET");
+            CurrentCharState = 1;
+            _hp =  content.Load<Texture2D>("sprites/heart");
+            this.content = content;
         }
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-            _animationManager.Play(_animations["Alive"]);
+           
+
+            switch (CurrentCharState)
+            {
+                case 1:
+                    if(parent.status == 1)
+                        _animationManager.Play(_animations["Stunt"]);
+                    else
+                        _animationManager.Play(_animations["Idle"]);
+                    break;
+                case 2:
+                    _animationManager.Play(_animations["Throw"]);
+                    break;
+                case 3:
+                    _animationManager.Play(_animations["Skill"]);
+                    break;
+                case 4:
+                    waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
+                    if (waitTime > 0.5)
+                    {
+                        CurrentCharState = 1;
+                        waitTime = 0;
+                    }
+                    _animationManager.Play(_animations["Hit"]);
+                    break;
+                case 5:
+                    _animationManager.Play(_animations["Stunt"]);
+                    break;
+                case 6:
+                    _animationManager.Play(_animations["Die"]);
+                    break;
+            }
+
+            
             _animationManager.Update(gameTime);
             base.Update(gameTime, gameObjects, parent);
         }
@@ -27,26 +66,19 @@ namespace Final_Assignment
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
         {
 
-            switch (CurrentCharState)
+            for(int i = 1; i<= parent.HP; i++)
             {
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-                case 4:
-                    break;
-
+                spriteBatch.Draw(_hp, new Rectangle((int)parent.Position.X + (i * 50),(int)parent.Position.Y + 100,50,50), Color.Red);
             }
-            //spriteBatch.Draw(_char, parent.Position, parent.Viewport, Color.White, 0f, parent.Origin, 1f, SpriteEffects.None, 0);
-            _animationManager.Draw(spriteBatch, parent.Position,0,new Vector2(1,1));
+
+            // spriteBatch.Draw(_hit, parent.Rectangle, Color.Red);
+            _animationManager.Draw(spriteBatch, parent.Position, 0f, new Vector2(1, 1));
             base.Draw(spriteBatch, parent);
         }
 
         public override void ReceiveMessage(int message, Component sender)
         {
-
+            CurrentCharState = message;
             base.ReceiveMessage(message, sender);
         }
 

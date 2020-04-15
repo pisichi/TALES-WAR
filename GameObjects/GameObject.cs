@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+
 
 namespace Final_Assignment
 {
@@ -15,37 +15,43 @@ namespace Final_Assignment
         protected InputComponent _input;
         protected PhysicComponent _physics;
         protected GraphicComponent _graphics;
+        protected SkillComponent _skills;
 
 
-        public GameObject Child;
+        public Texture2D _hit;
 
         public int attack;
+        public int HP;
+        public int status;
+        public int skill = 0;
+
         public bool InTurn;
         public bool action;
         public bool shooting = false;
+        public bool IsHit = false;
+
+        
 
         #region PUBLIC_VARIABLES
 
         public Dictionary<string, SoundEffectInstance> SoundEffects;
-
         public Vector2 Position;
+        public Vector2 CameraPosition;
 
         public float Rotation;
-        public float RotationVelocity = 3f;
-        public float LinearVelocity = 1f;
 
+        public float LinearVelocity = 1.3f;
+        public float force = 1f;
+        public float gravity = 1f;
 
         public Vector2 Scale;
         public Vector2 Direction;
+        public Vector2 PreviousDirection;
         public Vector2 Origin;
-
         public Vector2 Velocity;
         public Vector2 Acceleration;
 
-        //public AnimationManager _animationManager;
-
         public string Name;
-
         public bool IsActive = true;
 
 
@@ -54,61 +60,45 @@ namespace Final_Assignment
         {
             get
             {
-                return new Rectangle((int)Position.X, (int)Position.Y, Viewport.Width, Viewport.Height);
+                return new Rectangle((int)Position.X - Viewport.Width/2, (int)Position.Y - Viewport.Height/2, Viewport.Width, Viewport.Height);
             }
         }
-
         public Rectangle Viewport;
         #endregion
 
-        #region PROTECTED_VARIABLES
-
-        //protected Dictionary<string, Animation> _animations;
-        //protected AnimationManager _animationManager;
-
-        public Texture2D _texture;
-        #endregion
 
 
-        public GameObject(Texture2D texture, InputComponent input,PhysicComponent physics,GraphicComponent graphics)
+        public GameObject(InputComponent input,PhysicComponent physics,GraphicComponent graphics,SkillComponent skill)
         {
             _input = input;
             _physics = physics;
             _graphics = graphics;
+            _skills = skill;
 
-            _texture = texture;
             Position = Vector2.Zero;
+            CameraPosition = Vector2.Zero;
             Scale = Vector2.One;
             Acceleration = Vector2.Zero;
             Velocity = Vector2.Zero;
             Rotation = 0f;
             IsActive = true;
-            Origin = new Vector2(_texture.Width / 2, _texture.Height / 2);
-            
-
+            Origin = new Vector2(Viewport.Width / 2, Viewport.Height / 2);
         }
-        /*public GameObject(Dictionary<string, Animation> animations)
-        {
-            Position = Vector2.Zero;
-            Scale = Vector2.One;
-            Rotation = 0f;
-            IsActive = true;
-            _animations = animations;
-            _animationManager = new AnimationManager(_animations.First().Value);
-
-        }*/
 
         public virtual void Update(GameTime gameTime, List<GameObject> gameObjects)
         {
-
             if (_input != null) _input.Update(gameTime, gameObjects, this);
+            if (_skills != null) _skills.Update(gameTime, gameObjects, this);
             if (_physics != null) _physics.Update(gameTime, gameObjects, this);
             if (_graphics != null) _graphics.Update(gameTime, gameObjects, this);
+           
+
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (_graphics != null) _graphics.Draw(spriteBatch, this);
+            if(_hit != null) spriteBatch.Draw(_hit, Rectangle, Color.Red);
         }
 
         public void SendMessage(Component sender,int message)
@@ -131,47 +121,7 @@ namespace Final_Assignment
         }
 
 
-        #region Collision
-        public bool IsTouching(GameObject g)
-        {
-            return IsTouchingLeft(g) ||
-                   IsTouchingTop(g) ||
-                   IsTouchingRight(g) ||
-                   IsTouchingBottom(g);
-        }
-
-        public bool IsTouchingLeft(GameObject g)
-        {
-            return this.Rectangle.Right > g.Rectangle.Left &&
-                    this.Rectangle.Left < g.Rectangle.Left &&
-                    this.Rectangle.Bottom > g.Rectangle.Top &&
-                    this.Rectangle.Top < g.Rectangle.Bottom;
-        }
-
-        public bool IsTouchingRight(GameObject g)
-        {
-            return this.Rectangle.Right > g.Rectangle.Right &&
-                    this.Rectangle.Left < g.Rectangle.Right &&
-                    this.Rectangle.Bottom > g.Rectangle.Top &&
-                    this.Rectangle.Top < g.Rectangle.Bottom;
-        }
-
-        public bool IsTouchingTop(GameObject g)
-        {
-            return this.Rectangle.Right > g.Rectangle.Left &&
-                    this.Rectangle.Left < g.Rectangle.Right &&
-                    this.Rectangle.Bottom > g.Rectangle.Top &&
-                    this.Rectangle.Top < g.Rectangle.Top;
-        }
-
-        public bool IsTouchingBottom(GameObject g)
-        {
-            return this.Rectangle.Right > g.Rectangle.Left &&
-                    this.Rectangle.Left < g.Rectangle.Right &&
-                    this.Rectangle.Bottom > g.Rectangle.Bottom &&
-                    this.Rectangle.Top < g.Rectangle.Bottom;
-        }
-        #endregion
+       
 
     }
 }

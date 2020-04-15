@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Final_Assignment
@@ -11,13 +10,12 @@ namespace Final_Assignment
 
         protected Dictionary<string, Animation> _animations;
         protected AnimationManager _animationManager;
-        //protected Texture2D _texture;
 
         public GraphicComponent(Dictionary<string, Animation> animations)
         {
-
             _animations = animations;
             _animationManager = new AnimationManager(_animations.First().Value);
+
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
@@ -37,6 +35,7 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
+
             base.Update(gameTime, gameObjects, parent);
         }
     }
