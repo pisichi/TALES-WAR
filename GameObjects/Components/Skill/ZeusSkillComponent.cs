@@ -41,18 +41,31 @@ namespace Final_Assignment
                 switch (Singleton.Instance.level_s2)
                 {
                     case 1:
-                        if (rng >= 10)
+                        if (rng >= 5)
+                        {
                             parent.HP += 2; //10%
+                            parent.SendMessage(this, 3);
+                        }
+                        else parent.SendMessage(this, 4);
                         break;
                     case 2:
                         if (rng >= 9)
+                        {
                             parent.HP += 2; //20%
+                            parent.SendMessage(this, 3);
+                        }
+                        else parent.SendMessage(this, 4);
                         break;
                     case 3:
                         if (rng >= 8)
+                        {
                             parent.HP += 2; //30%
+                            parent.SendMessage(this, 3);
+                        }
+                        else parent.SendMessage(this, 4);
                         break;
                 }
+                parent.IsHit = false;
             }
 
             if (parent.skill == 1)
