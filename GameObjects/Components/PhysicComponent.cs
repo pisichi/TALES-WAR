@@ -8,6 +8,7 @@ namespace Final_Assignment
     {
         public PhysicComponent()
         {
+            id = 3;
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)

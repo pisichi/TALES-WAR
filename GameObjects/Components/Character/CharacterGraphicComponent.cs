@@ -38,6 +38,12 @@ namespace Final_Assignment
                         _animationManager.Play(_animations["Idle"]);
                     break;
                 case 2:
+                    waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
+                    if (waitTime > 0.5)
+                    {
+                        CurrentCharState = 1;
+                        waitTime = 0;
+                    }
                     _animationManager.Play(_animations["Throw"]);
                     break;
                 case 3:

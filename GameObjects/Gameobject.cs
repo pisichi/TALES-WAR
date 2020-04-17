@@ -90,8 +90,6 @@ namespace Final_Assignment
             if (_skills != null) _skills.Update(gameTime, gameObjects, this);
             if (_physics != null) _physics.Update(gameTime, gameObjects, this);
             if (_graphics != null) _graphics.Update(gameTime, gameObjects, this);
-           
-
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -103,6 +101,7 @@ namespace Final_Assignment
         public void SendMessage(Component sender,int message)
         {
             if (_input != null) _input.ReceiveMessage(message ,sender);
+            if (_skills != null) _skills.ReceiveMessage(message, sender);
             if (_physics != null) _physics.ReceiveMessage(message,sender);
             if (_graphics != null) _graphics.ReceiveMessage(message,sender);
         }

@@ -70,28 +70,12 @@ namespace Final_Assignment
 
             if (parent.skill == 1)
             {
-                Console.WriteLine("use skill 1");
-                rng = rnd.Next(1, 11);
-                //parent.SendMessage(this, 201);
-                switch (Singleton.Instance.level_s1)
-                {
-                    case 1:
-                        if (rng >= 1)
-                            parent.SendMessage(this, 201);
-                        break;
-                    case 2:
-                        if (rng >= 6)
-                            parent.SendMessage(this, 201);
-                        break;
-                    case 3:
-                        if (rng >= 3)
-                            parent.SendMessage(this, 201);
-                        break;
-                }
+                Console.WriteLine( parent.Name +" use skill 1");
+                parent.SendMessage(this, 201);
                 parent.skill = 0;
             }
 
-            if (parent.skill == 3)
+            if (parent.skill == 2)
             {
                 switch (Singleton.Instance.level_s3)
                 {

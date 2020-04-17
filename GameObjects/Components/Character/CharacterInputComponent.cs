@@ -11,15 +11,25 @@ namespace Final_Assignment
     {
 
         int message;
+
+        int _bulletSkill;
         int count = 0;
         ContentManager content;
         Texture2D _bullet;
 
 
+
+        float waitTime = 0;
+        private bool _throw;
+
+        private int Cooldown_1;
+        private int Cooldown_2;
+
         public GameObject bullet;
 
         public CharacterInputComponent(ContentManager content)
         {
+            _throw = false;
             _bullet = content.Load<Texture2D>("sprites/ball");
             this.content = content;
         }
@@ -52,8 +62,21 @@ namespace Final_Assignment
 
                 if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                 {
-                    Shoot(gameObjects, parent);
-                    Singleton.Instance.CurrentTurnState = Singleton.TurnState.enemy;
+                    _throw = true;
+                    //Singleton.Instance.CurrentTurnState = Singleton.TurnState.enemy;
+                }
+
+                if (_throw)
+                {
+                    parent.SendMessage(this, 2);
+                    waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
+                    if (waitTime > 0.3)
+                    {
+                        Shoot(gameObjects, parent);
+                        Singleton.Instance.CurrentTurnState = Singleton.TurnState.enemy;
+                        _throw = false;
+                        waitTime = 0;
+                    }
                 }
             }
 
@@ -95,12 +118,11 @@ namespace Final_Assignment
             bullet.attack = parent.attack;
             bullet.LinearVelocity = parent.LinearVelocity * 50;
 
-            if(message == 201)
+            if(_bulletSkill == 201)
             {
                 bullet.status = 1;
-                message = 0;
+                _bulletSkill = 0;
             }
-
 
             gameObjects.Add(bullet);
             parent.shooting = true;
@@ -111,7 +133,13 @@ namespace Final_Assignment
         public override void ReceiveMessage(int message, Component sender)
         {
             base.ReceiveMessage(message, sender);
-            this.message = message;
+
+            if(sender.id == 4)
+            {
+                _bulletSkill = message;
+            }
+           else
+                this.message = message;
         }
 
         public override void Reset()
