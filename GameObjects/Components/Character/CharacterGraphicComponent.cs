@@ -76,7 +76,7 @@ namespace Final_Assignment
 
             for(int i = 1; i<= parent.HP; i++)
             {
-                spriteBatch.Draw(_hp, new Rectangle((int)parent.Position.X + (i * 50),(int)parent.Position.Y + 100,50,50), Color.Red);
+                spriteBatch.Draw(_hp, new Rectangle((int)parent.Position.X + (i * 50), (int)parent.Position.Y + 100,50,50), Color.Red);
             }
 
             // spriteBatch.Draw(_hit, parent.Rectangle, Color.Red);

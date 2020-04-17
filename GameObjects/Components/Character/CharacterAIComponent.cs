@@ -18,6 +18,13 @@ namespace Final_Assignment
         Texture2D _bullet;
 
 
+        private Vector2 _direction;
+        private float _rotation;
+        private float _force;
+
+
+        Random rnd = new Random();
+
         public GameObject bullet;
 
         public CharacterAIComponent(ContentManager content)
@@ -29,7 +36,7 @@ namespace Final_Assignment
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
 
-            parent.Direction = new Vector2((float)Math.Cos(parent.Rotation + (float)Math.PI / 2), (float)Math.Sin(parent.Rotation + (float)Math.PI / 2));
+            _rotation = rnd.Next(1, 6);
             CheckRemove(parent);
 
 
@@ -44,7 +51,6 @@ namespace Final_Assignment
                     parent.status = 0;
                     Console.WriteLine(parent.Name + " count : " +count);
                     Console.WriteLine(parent.Name + " status : " + parent.status);
-                    // Singleton.Instance.CurrentTurnState = Singleton.TurnState.enemy;
 
 
                 }
@@ -56,7 +62,7 @@ namespace Final_Assignment
                         Shoot(gameObjects, parent);
                 }
             }
-                    //Singleton.Instance.CurrentTurnState = Singleton.TurnState.enemy;
+                   
             
 
             base.Update(gameTime, gameObjects, parent);
@@ -93,8 +99,10 @@ namespace Final_Assignment
 
             };
 
-            bullet.Direction = parent.Direction;
-            bullet.Position = parent.Position + new Vector2(120, -100);
+            _direction = new Vector2((float)Math.Cos(_rotation + (float)Math.PI / 2), (float)Math.Sin(_rotation + (float)Math.PI / 2));
+
+            bullet.Direction = _direction;
+            bullet.Position = parent.Position + new Vector2(-120, -100);
             bullet.attack = parent.attack;
             bullet.LinearVelocity = parent.LinearVelocity * 50;
             if (message == 201)

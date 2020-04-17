@@ -25,6 +25,7 @@ namespace Final_Assignment
 
             if (rng >= 8 && !parent.InTurn && !parent.action)
             {
+
                 Console.WriteLine(parent.Name + "  activated skill 2");
                 
                 parent.InTurn = true;
@@ -34,28 +35,6 @@ namespace Final_Assignment
             }
                 
                
-                //switch (Singleton.Instance.level_s2)
-                //{
-                //    case 1:
-                //        if (rng >= 5)
-                //        {
-                            
-                //        }
-                //        break;
-                //    case 2:
-                //        if (rng >= 9)
-                //        {
-
-                //        }
-
-                //        break;
-                //    case 3:
-                //        if (rng >= 8)
-                //        {
-
-                //        }
-                //        break;
-                //}
 
 
 

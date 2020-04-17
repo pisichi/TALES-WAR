@@ -10,12 +10,14 @@ namespace Final_Assignment
     {
 
        private bool hitting;
+       private bool touch;
        private GameObject target;
        private float waitTime;
 
         public BulletPhysicComponent()
         {
             hitting = false;
+            touch = false;
             Console.WriteLine("bullet is here");
         }
 
@@ -50,26 +52,41 @@ namespace Final_Assignment
 
 
                 if (parent.Position.X > 4000 || parent.Position.X < 0
-                    || parent.Position.Y < 0 || parent.Position.Y > 1000)
+                   || parent.Position.Y > 1000)
                 {
                     parent.IsActive = false;
                 }
 
-                foreach (GameObject s in gameObjects)
+                if (!touch)
                 {
-                    if (s.IsActive && parent.IsActive && IsTouching(parent, s))
+                    foreach (GameObject s in gameObjects)
                     {
 
-                        parent.Scale = new Vector2(5, 5);
-                        s.HP -= parent.attack;
-                        s.IsHit = true;
-                        s.status = parent.status;
-                        target = s;
-                        hitting = true;
-                        break;
+                        if (s.IsActive && parent.IsActive && IsTouching(parent, s))
+                        {
+                            //parent.Scale = new Vector2(2, 2);
+                            parent.Viewport = new Rectangle(0,0,200, 200);
+                            touch = true;
+                        }
                     }
+                }
 
+                else
+                {
+                    foreach (GameObject s in gameObjects)
+                    {
 
+                        if (s.IsActive && parent.IsActive && IsTouching(parent, s))
+                        {
+
+                            s.HP -= parent.attack;
+                            s.IsHit = true;
+                            s.status = parent.status;
+                            target = s;
+                            hitting = true;
+
+                        }
+                    }
                 }
             }
 
@@ -85,21 +102,13 @@ namespace Final_Assignment
                     //target.status = parent.status;
                     parent.IsActive = false;
                     hitting = false;
+                    touch = false;
                     waitTime = 0;
                 }
             }
             parent.PreviousDirection = parent.Direction;
-            //Console.WriteLine(parent.Position.X);
-            //Console.WriteLine(parent.Position.Y);
-            //Console.WriteLine(parent.Direction.X);
-            //Console.WriteLine(parent.Direction.Y);
-            //Console.WriteLine(parent.LinearVelocity);
         }
 
-        public void Hit(List<GameObject> gameObjects, GameObject parent)
-        {
-            parent.IsActive = false;
-        }
 
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
         {

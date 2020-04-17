@@ -313,7 +313,7 @@ namespace Final_Assignment
                         Singleton.Instance.follow = enemyList[enemyIndex];
 
                     waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
-                    if (waitTime > 1)
+                    if (waitTime > 2)
                     {
                         enemyList[enemyIndex].action = true;
                        // enemyList[enemyIndex].InTurn = false;
