@@ -97,7 +97,7 @@ namespace Final_Assignment
 
             if(message == 201)
             {
-                bullet.status = 2;
+                bullet.status = 1;
                 message = 0;
             }
 

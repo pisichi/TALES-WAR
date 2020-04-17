@@ -32,7 +32,7 @@ namespace Final_Assignment
                 case 1:
                     if(parent.status == 1)
                         _animationManager.Play(_animations["Stunt"]);
-                    if(parent.HP <= 0)
+                    else if(parent.HP <= 0)
                     _animationManager.Play(_animations["Die"]);
                     else
                         _animationManager.Play(_animations["Idle"]);

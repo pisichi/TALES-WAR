@@ -36,7 +36,7 @@ namespace Final_Assignment
 
             if (parent.IsHit)
             {
-                Console.WriteLine("activated skill 2");
+                Console.WriteLine(parent.Name + " activated skill 2");
                 rng = rnd.Next(1, 11);
                 switch (Singleton.Instance.level_s2)
                 {

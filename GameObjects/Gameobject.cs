@@ -40,6 +40,9 @@ namespace Final_Assignment
         public float Rotation;
 
         public float LinearVelocity = 1.3f;
+        public float force = 1f;
+        public float gravity = 1f;
+        public Vector2 PreviousDirection;
 
         public Vector2 Scale;
         public Vector2 Direction;
@@ -56,7 +59,8 @@ namespace Final_Assignment
         {
             get
             {
-                return new Rectangle((int)Position.X - Viewport.Width/2, (int)Position.Y - Viewport.Height/2, Viewport.Width, Viewport.Height);
+                return new Rectangle((int)(Position.X - Viewport.Width/2 * Scale.X), (int)(Position.Y - Viewport.Height/2 * Scale.Y)
+                                           , (int)(Viewport.Width * Scale.X), (int)(Viewport.Height * Scale.Y));
             }
         }
         public Rectangle Viewport;

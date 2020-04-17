@@ -106,7 +106,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(600, 800),
                 InTurn = true,
-                Viewport = new Rectangle(0, 0, 200, 250),
+                Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
                 Name = "zeus",
                 HP = 5,
@@ -134,7 +134,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(3400, 350),
                 InTurn = false,
-                Viewport = new Rectangle(0, 0, 200, 250),
+                Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
                 Name = "guan",
                 HP = 10,
@@ -158,7 +158,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(1000, 700),
                 InTurn = false,
-                Viewport = new Rectangle(0, 0, 200, 250),
+                Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
                 Name = "guan",
                 HP = 10,
@@ -173,6 +173,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(400, 950),
                 Viewport = new Rectangle(0, 0, 900, 50),
+                Name = "floor",
                 _hit = _hit
             }
             );
@@ -181,6 +182,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(1300, 900),
                 Viewport = new Rectangle(0, 0, 800, 50),
+                Name = "floor",
                 _hit = _hit
             }
            );
@@ -189,6 +191,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(3380, 550),
                 Viewport = new Rectangle(0, 0, 200, 150),
+                Name = "floor",
                 _hit = _hit
             }
            );
@@ -197,6 +200,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(2950, 300),
                 Viewport = new Rectangle(0, 0, 200, 150),
+                Name = "floor",
                 _hit = _hit
             }
             );
@@ -205,6 +209,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(2900, 900),
                 Viewport = new Rectangle(0, 0, 350, 150),
+                Name = "floor",
                 _hit = _hit
             });
 
@@ -316,7 +321,7 @@ namespace Final_Assignment
                     }
                 }
 
-                if (!enemyList[enemyIndex].InTurn)
+                if (!enemyList[enemyIndex].InTurn || enemyList[enemyIndex].HP <= 0)
                 {
                     enemyIndex++;
 

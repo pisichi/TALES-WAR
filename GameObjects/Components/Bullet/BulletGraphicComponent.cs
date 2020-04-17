@@ -38,7 +38,7 @@ namespace Final_Assignment
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
         {
              
-            _animationManager.Draw(spriteBatch, parent.Position, 0, new Vector2(1, 1));
+            _animationManager.Draw(spriteBatch, parent.Position, parent.Rotation, parent.Scale);
         }
     }
 }
