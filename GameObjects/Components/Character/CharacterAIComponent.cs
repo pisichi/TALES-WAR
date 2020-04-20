@@ -133,16 +133,17 @@ namespace Final_Assignment
             bullet = new GameObject(null,
                                     new BulletPhysicComponent(),
                                     new BulletGraphicComponent(content, new Dictionary<string, Animation>() {
-                                         { "Shoot", new Animation(_bullet, new Rectangle(0,0,_bullet.Width,_bullet.Height),1) }
+                                         { "Shoot", new Animation(_bullet, new Rectangle(0,0,100,200),1) }
                                          }),
                                     null)
             {
-                Viewport = new Rectangle(0, 0, _bullet.Width, _bullet.Height),
+                Viewport = new Rectangle(0, 0, 50, 100),
                 _hit = parent._hit,
 
             };
 
             _direction = new Vector2((float)Math.Cos(_rotation + (float)Math.PI / 2), (float)Math.Sin(_rotation + (float)Math.PI / 2));
+            bullet.Rotation = _rotation - (float)Math.PI;
 
             bullet.Direction = _direction;
             bullet.Position = parent.Position + new Vector2(-120, -100);

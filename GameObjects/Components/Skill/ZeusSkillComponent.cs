@@ -34,7 +34,7 @@ namespace Final_Assignment
         {
           
 
-            if (parent.IsHit)
+            if (parent.IsHit && parent.status != 1)
             {
                 Console.WriteLine(parent.Name + " activated skill 2");
                 rng = rnd.Next(1, 11);

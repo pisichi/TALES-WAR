@@ -36,7 +36,7 @@ namespace Final_Assignment
         {
             //Start Potato Physics
 
-
+            parent.Rotation+=0.001f;
             if (!hitting)
             {
                 parent.Direction.Y += parent.gravity * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;

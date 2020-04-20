@@ -36,10 +36,13 @@ namespace Final_Assignment
         Texture2D _bg;
         Texture2D _char;
 
+        
+
         Texture2D _hit;
 
         Texture2D _zeus;
         Texture2D _guan;
+        Texture2D _thor;
 
         Texture2D _arrow;
         Texture2D _gauge;
@@ -65,6 +68,7 @@ namespace Final_Assignment
 
             _zeus = content.Load<Texture2D>("sprites/sheet_zeus");
             _guan = content.Load<Texture2D>("sprites/sheet_guan");
+            _thor = content.Load<Texture2D>("sprites/sheet_thor");
 
             _arrow = content.Load<Texture2D>("sprites/arrow");
             _font = content.Load<SpriteFont>("font/File");
@@ -100,7 +104,7 @@ namespace Final_Assignment
                                             { "Skill", new Animation(_zeus, new Rectangle(0,500,400,250),2) },
                                             { "Hit", new Animation(_zeus, new Rectangle(0,750,200,250),1) },
                                             { "Stunt", new Animation(_zeus, new Rectangle(0,1000,400,250),2) },
-                                            { "Die", new Animation(_zeus, new Rectangle(0,1250,400,250),2) }
+                                             { "Die", new Animation(_zeus, new Rectangle(200,1250,200,250),1) }
                                                     }),
                                                 new ZeusSkillComponent())
             {
@@ -110,7 +114,7 @@ namespace Final_Assignment
                 _hit = _hit,
                 Name = "zeus",
                 HP = 5,
-                attack = 1,
+                attack = 10,
                 skill = 1
 
             };
@@ -128,7 +132,7 @@ namespace Final_Assignment
                                             { "Skill", new Animation(_guan, new Rectangle(0,500,400,250),2) },
                                             { "Hit", new Animation(_guan, new Rectangle(0,750,200,250),1) },
                                             { "Stunt", new Animation(_guan, new Rectangle(0,1000,400,250),2) },
-                                            { "Die", new Animation(_guan, new Rectangle(0,1250,400,250),2) }
+                                            { "Die", new Animation(_guan, new Rectangle(200,1250,200,250),1) }
                                        }),
                                    new GuanSkillComponent())
             {
@@ -137,7 +141,7 @@ namespace Final_Assignment
                 Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
                 Name = "guan",
-                HP = 10,
+                HP = 1,
                 attack = 1
             };
             _gameObjects.Add(boss);
@@ -152,7 +156,7 @@ namespace Final_Assignment
                                             { "Skill", new Animation(_guan, new Rectangle(0,500,400,250),2) },
                                             { "Hit", new Animation(_guan, new Rectangle(0,750,200,250),1) },
                                             { "Stunt", new Animation(_guan, new Rectangle(0,1000,400,250),2) },
-                                            { "Die", new Animation(_guan, new Rectangle(0,1250,400,250),2) }
+                                             { "Die", new Animation(_guan, new Rectangle(200,1250,200,250),1) }
                           }),
                       new GuanSkillComponent())
             {
@@ -161,7 +165,7 @@ namespace Final_Assignment
                 Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
                 Name = "guan",
-                HP = 10,
+                HP = 1,
                 attack = 1
             };
             _gameObjects.Add(enemy);

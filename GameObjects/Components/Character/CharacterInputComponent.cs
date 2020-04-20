@@ -17,8 +17,6 @@ namespace Final_Assignment
         ContentManager content;
         Texture2D _bullet;
 
-
-
         float waitTime = 0;
         private bool _throw;
 
@@ -59,7 +57,7 @@ namespace Final_Assignment
 
                 }
 
-
+                Console.WriteLine("status " + parent.status);
                 if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                 {
                     _throw = true;
@@ -104,26 +102,31 @@ namespace Final_Assignment
             bullet = new GameObject(null,
                                     new BulletPhysicComponent(),
                                     new BulletGraphicComponent(content, new Dictionary<string, Animation>() {
-                                         { "Shoot", new Animation(_bullet, new Rectangle(0,0,_bullet.Width,_bullet.Height),1) }
+                                         { "Shoot", new Animation(_bullet, new Rectangle(300,400,100,100),1) }
                                          }),
                                     null)
             {
-                Viewport = new Rectangle(0, 0, _bullet.Width, _bullet.Height),
+                Viewport = new Rectangle(0, 0, 50, 50),
                 _hit = parent._hit,
 
             };
 
             bullet.Direction = parent.Direction;
             bullet.Position = parent.Position + new Vector2(120, -100);
+            bullet.Rotation = parent.Rotation - (float)Math.PI;
             bullet.attack = parent.attack;
             bullet.LinearVelocity = parent.LinearVelocity * 50;
 
-            if(_bulletSkill == 201)
-            {
-                bullet.status = 1;
-                _bulletSkill = 0;
-            }
-
+            //if(_bulletSkill == 201)
+            //{
+            //    bullet.status = 1;
+            //    _bulletSkill = 0;
+            //}
+            //else if (_bulletSkill == 202)
+            //{
+            //    bullet.status = 2;
+            //    _bulletSkill = 0;
+            //}
             gameObjects.Add(bullet);
             parent.shooting = true;
             Singleton.Instance.follow = bullet;

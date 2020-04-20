@@ -26,7 +26,7 @@ namespace Final_Assignment
 
             rng = rnd.Next(1, 11);
 
-            if (rng >= 8 && !parent.InTurn && !parent.action)
+            if (rng >= 8 && !parent.InTurn && !parent.action && parent.status!= 1)
             {
                 Console.WriteLine(parent.Name + "  activated passive");
                 

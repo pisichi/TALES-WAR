@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,9 +10,13 @@ namespace Final_Assignment
     class CharacterGraphicComponent : GraphicComponent
     {
 
+
         int CurrentCharState;
         ContentManager content;
         Texture2D _hp;
+        Texture2D _burn;
+
+
         float waitTime = 0;
 
 
@@ -20,6 +25,9 @@ namespace Final_Assignment
         {
             CurrentCharState = 1;
             _hp =  content.Load<Texture2D>("sprites/heart");
+            //Texture2D _burn = content.Load<Texture2D>("sprites/fx_burn");
+            //Texture2D _bari = content.Load<Texture2D>("sprites/fx_barrier");
+            _burn = content.Load<Texture2D>("sprites/fx_burn");
             this.content = content;
         }
 
@@ -72,7 +80,8 @@ namespace Final_Assignment
                     break;
             }
 
-            
+
+
             _animationManager.Update(gameTime);
             base.Update(gameTime, gameObjects, parent);
         }
@@ -85,8 +94,14 @@ namespace Final_Assignment
                 spriteBatch.Draw(_hp, new Rectangle((int)parent.Position.X + (i * 50), (int)parent.Position.Y + 100,50,50), Color.Red);
             }
 
-            // spriteBatch.Draw(_hit, parent.Rectangle, Color.Red);
+
             _animationManager.Draw(spriteBatch, parent.Position, 0f, new Vector2(1, 1));
+            if(parent.status == 2)
+            {
+                spriteBatch.Draw(_burn, parent.Position, Color.Red);
+            }
+
+
             base.Draw(spriteBatch, parent);
         }
 
