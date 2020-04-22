@@ -77,22 +77,26 @@ namespace Final_Assignment
 
             _gameObjects = new List<GameObject>();
             enemyList = new List<GameObject>();
-            enemyIndex = 0;
-
-            select = false;
-
-            Set();
-
             _camera = new Camera();
+
             cam = new GameObject(null, null, null, null)
             {
                 Position = new Vector2(_bg.Width / 2, _bg.Height / 2),
             };
 
+            Set();
+
         }
 
         private void Set()
         {
+            enemyIndex = 0;
+
+            select = false;
+
+
+            Singleton.Instance.CurrentTurnState = Singleton.TurnState.skill;
+
 
             #region character
             player = new GameObject(new CharacterInputComponent(content),
@@ -395,6 +399,12 @@ namespace Final_Assignment
 
         public void HandleInput(GameTime gameTime)
         {
+
+            if ((Singleton.Instance._currentkey.IsKeyDown(Keys.L) && Singleton.Instance._currentkey != Singleton.Instance._previouskey) || player.HP <= 0)
+            {
+                m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
+            }
+
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
