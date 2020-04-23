@@ -102,13 +102,14 @@ namespace Final_Assignment
             bullet = new GameObject(null,
                                     new BulletPhysicComponent(),
                                     new BulletGraphicComponent(content, new Dictionary<string, Animation>() {
-                                         { "Shoot", new Animation(_bullet, new Rectangle(300,400,100,100),1) }
+                                         { "Shoot", new Animation(_bullet, new Rectangle(300,400,100,100),1) },
+                                         { "Hit", new Animation(_bullet, new Rectangle(300,400,100,100),1) },
+                                         { "Skill", new Animation(_bullet, new Rectangle(300,400,100,100),1) },
                                          }),
                                     null)
             {
                 Viewport = new Rectangle(0, 0, 50, 50),
                 _hit = parent._hit,
-
             };
 
             bullet.Direction = parent.Direction;

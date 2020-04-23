@@ -7,7 +7,6 @@ namespace Final_Assignment
 {
     class BulletGraphicComponent : GraphicComponent
     {
-        int CurrentCharState;
         ContentManager content;
         //Texture2D _hit;
 
@@ -29,7 +28,19 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-            _animationManager.Play(_animations["Shoot"]);
+            if (parent.IsHit)
+            {
+                _animationManager.Play(_animations["Hit"]);
+            }
+            else if(parent.status != 0)
+            {
+                _animationManager.Play(_animations["Skill"]);
+            }
+            else{
+                _animationManager.Play(_animations["Shoot"]);
+            }
+
+
             _animationManager.Update(gameTime);
 
             base.Update(gameTime, gameObjects, parent);

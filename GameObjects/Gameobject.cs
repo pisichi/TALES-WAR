@@ -29,7 +29,7 @@ namespace Final_Assignment
         public bool action;
         public bool shooting = false;
         public bool IsHit = false;
-
+        
         
 
         #region PUBLIC_VARIABLES
@@ -51,6 +51,7 @@ namespace Final_Assignment
         public Vector2 Acceleration;
 
         public string Name;
+        public string Weapon;
         public bool IsActive = true;
 
 

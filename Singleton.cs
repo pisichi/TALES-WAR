@@ -15,8 +15,8 @@ namespace Final_Assignment
         public GameObject follow;
 
 
-        public string CurrentHero;
-        public string CurrentStage;
+        public string CurrentHero = "thor";
+        public int CurrentStage = 1;
 
 
         public int level_s1 = 1;

@@ -28,6 +28,7 @@ namespace Final_Assignment
         {
             _bg = content.Load<Texture2D>("sprites/bg");
             _font = content.Load<SpriteFont>("font/File");
+            Singleton.Instance.CurrentStage += 1;
 
         }
 
