@@ -34,9 +34,6 @@ namespace Final_Assignment
 
         Texture2D _bg;
 
-
-        
-
         Texture2D _hit;
         Texture2D _arrow;
         Texture2D _gauge;
@@ -65,15 +62,12 @@ namespace Final_Assignment
             enemyList = new List<GameObject>();
             _camera = new Camera();
 
-
             _bg = content.Load<Texture2D>("sprites/bg");
             _pin = content.Load<Texture2D>("sprites/pin");
             _gauge = content.Load<Texture2D>("sprites/gauge");
             _arrow = content.Load<Texture2D>("sprites/arrow");
             _font = content.Load<SpriteFont>("font/File");
             _hit = content.Load<Texture2D>("sprites/hitbox");
-
-
 
             _guan = content.Load<Texture2D>("sprites/sheet_guan");
 
@@ -265,8 +259,6 @@ namespace Final_Assignment
             _gameObjects.Add(boss);
             enemyList.Add(boss);
 
-          
-
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
                 Position = new Vector2(400, 950),
@@ -310,8 +302,6 @@ namespace Final_Assignment
                 Name = "floor",
                 _hit = _hit
             });
-
-
 
             Singleton.Instance.follow = player;
         }

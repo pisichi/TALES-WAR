@@ -128,23 +128,10 @@ namespace Final_Assignment
         {
 
             Console.WriteLine("add bullet");
-            bullet = new GameObject(null,
-                                    new BulletPhysicComponent(),
-                                    new BulletGraphicComponent(content, new Dictionary<string, Animation>() {
-                                         { "Shoot", new Animation(_bullet, new Rectangle(0,0,100,200),1) },
-                                         { "Hit", new Animation(_bullet, new Rectangle(300,400,100,100),1) },
-                                         { "Skill", new Animation(_bullet, new Rectangle(300,400,100,100),1) },
-                                         }),
-                                    null)
-            {
-                Viewport = new Rectangle(0, 0, 50, 100),
-                _hit = parent._hit,
-
-            };
+            bullet = BulletFactory.create(content, parent.Weapon);
 
             _direction = new Vector2((float)Math.Cos(_rotation + (float)Math.PI / 2), (float)Math.Sin(_rotation + (float)Math.PI / 2));
             bullet.Rotation = _rotation - (float)Math.PI;
-
             bullet.Direction = _direction;
             bullet.Position = parent.Position + new Vector2(-120, -100);
             bullet.attack = parent.attack;
