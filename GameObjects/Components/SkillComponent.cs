@@ -37,6 +37,21 @@ namespace Final_Assignment
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
 
+            if (parent.status == 2 && parent.InTurn)
+            {
+                parent.HP -= 1;
+                parent.SendMessage(this, 4);
+                parent.status = 0;
+            }
+
+            if (parent.IsHit)
+            {
+                parent.SendMessage(this, 4);
+                parent.IsHit = false;
+            }
+
+
+
             base.Update(gameTime, gameObjects, parent);
         }
     }

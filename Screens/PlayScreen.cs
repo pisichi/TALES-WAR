@@ -154,7 +154,7 @@ namespace Final_Assignment
                 _hit = _hit,
                 Name = "guan",
                 Weapon = "lance",
-                HP = 1,
+                HP = 10,
                 attack = 1
             };
             _gameObjects.Add(boss);
@@ -179,7 +179,7 @@ namespace Final_Assignment
                 _hit = _hit,
                 Name = "guan",
                 Weapon = "lance",
-                HP = 1,
+                HP = 10,
                 attack = 1
             };
             _gameObjects.Add(enemy);

@@ -41,7 +41,7 @@ namespace Final_Assignment
                 switch (Singleton.Instance.level_s2)
                 {
                     case 1:
-                        if (rng >= 5)
+                        if (rng >= 10)
                         {
                             parent.HP += 2; //10%
                             parent.SendMessage(this, 3);
