@@ -50,6 +50,7 @@ namespace Final_Assignment
         public Vector2 Velocity;
         public Vector2 Acceleration;
         public Vector2 CameraPosition;
+        public Vector2 PreviousPosition;
 
         public string Name;
         public string Weapon;

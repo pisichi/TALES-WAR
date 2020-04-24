@@ -11,8 +11,12 @@ namespace Final_Assignment
 
        private bool hitting;
        private bool touch;
+       private bool hasPreviousPosition = false;
+       private bool HasMaxY = false;
+       public float maxY;
        private GameObject target;
        private float waitTime;
+       
 
         public BulletPhysicComponent()
         {
@@ -40,15 +44,47 @@ namespace Final_Assignment
             //parent.force = 2000f;
             if (!hitting)
             {
+                //Start Potato Projectile
                 parent.Direction.Y += parent.gravity * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                parent.force = 1.3f;
+                parent.force = 2.3f;
 
-                //if (parent.PreviousDirection.Y < parent.Direction.Y)
+                if (HasMaxY)
+                {
+                    if (maxY >= parent.Position.Y)
+                    {
+                        parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                        maxY = parent.Position.Y;
+                        //if ()
+                        HasMaxY = true;
+                        Console.WriteLine("has y up" + maxY);
+                    }
+                    else
+                    {
+                        parent.Position.Y += parent.Direction.Y * 1000f * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                        Console.WriteLine("has y down" + maxY);
+                    }
+
+                }
+                else
+                {
                     parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                /*else
-                    parent.Position += parent.Direction * 1000f * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;*/
+                    maxY = parent.Position.Y;
+                    HasMaxY = true;
+                    Console.WriteLine("no y up" + maxY);
+                }
+
+
+
                 parent.Position.X += parent.Direction.X * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                //End Potato Physics
+
+                if (parent.PreviousPosition.Y < parent.Position.Y && parent.PreviousPosition.Y < maxY && hasPreviousPosition)
+                {
+                    maxY = parent.PreviousPosition.Y;
+                }
+
+                parent.PreviousPosition = parent.Position;
+                hasPreviousPosition = true;
+                //End Potato Projectile
 
 
 
