@@ -146,6 +146,16 @@ namespace Final_Assignment
                      bullet.status = 2;
                     _bulletSkill = 0;
                 }
+            else if (_bulletSkill == 203)
+            {
+                bullet.status = 3;
+                _bulletSkill = 0;
+            }
+            else if (_bulletSkill == 204)
+            {
+                bullet.Scale = new Vector2(2, 2);
+                _bulletSkill = 0;
+            }
 
             gameObjects.Add(bullet);
             parent.shooting = true;

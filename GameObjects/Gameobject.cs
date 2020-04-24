@@ -88,7 +88,7 @@ namespace Final_Assignment
         public virtual void Update(GameTime gameTime, List<GameObject> gameObjects)
         {
             if (_input != null) _input.Update(gameTime, gameObjects, this);
-            if (_skills != null) _skills.Update(gameTime, gameObjects, this);
+            if (_skills != null && HP > 0) _skills.Update(gameTime, gameObjects, this);
             if (_physics != null) _physics.Update(gameTime, gameObjects, this);
             if (_graphics != null) _graphics.Update(gameTime, gameObjects, this);
         }

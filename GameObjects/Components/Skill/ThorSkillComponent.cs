@@ -13,6 +13,7 @@ namespace Final_Assignment
 
         Random rnd = new Random();
         int rng;
+        int barier;
         int count;
 
         public ThorSkillComponent()
@@ -38,11 +39,19 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
+            if (parent.IsHit)
+            {
+                if (barier > 0)
+                    barier -= 1;
+                parent.SendMessage(this, 4);
+                parent.IsHit = false;
+            }
+
 
             rng = rnd.Next(1, 11);
             count += 1;
             if ( parent.InTurn && parent.status != 1 && count == 1) {
-                switch (Singleton.Instance.level_s2)
+                switch (Singleton.Instance.level_s3)
                 {
                     case 1:
                         if (rng >= 10)
@@ -84,12 +93,30 @@ namespace Final_Assignment
 
             if (parent.skill == 1)
             {
-
+                parent.status = 3;
+                switch (Singleton.Instance.level_s1)
+                {
+                    case 1:
+                        barier = 3;
+                        break;
+                    case 2:
+                        barier = 2;
+                        break;
+                    case 3:
+                        barier = 3;
+                        break;
+                }
+                parent.skill = 0;
             }
 
             if(parent.skill == 2)
             {
+                parent.skill = 0;
+            }
 
+            if(barier <= 0)
+            {
+                parent.status = 0;
             }
 
             base.Update(gameTime, gameObjects, parent);

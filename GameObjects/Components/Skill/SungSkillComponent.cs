@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,6 +10,7 @@ namespace Final_Assignment
 
         Random rnd = new Random();
         int rng;
+        int count;
 
         public SungSkillComponent()
         {
@@ -35,6 +33,12 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
+            if (parent.IsHit)
+            {
+                parent.SendMessage(this, 4);
+                parent.IsHit = false;
+            }
+
 
             if (parent.skill == 1)
             {
@@ -46,18 +50,25 @@ namespace Final_Assignment
             else if (parent.skill == 2)
             {
                 Console.WriteLine(parent.Name + " use skill 2");
-                parent.SendMessage(this, 201);
+                parent.SendMessage(this, 204);
                 parent.skill = 0;
             }
 
-            if (parent.IsHit && parent.status != 1)
+            count += 1;
+            if (parent.InTurn && parent.status != 1 && count == 1)
             {
-                if (rng >= 5)
-                {
-                    parent.SendMessage(this, 3);
-                }
+                Console.WriteLine(parent.Name + "  activated passive");
+                parent.HP++;
+                parent.SendMessage(this, 3);
             }
-                base.Update(gameTime, gameObjects, parent);
+
+            if (!parent.InTurn)
+            {
+                count = 0;
+            }
+
+
+            base.Update(gameTime, gameObjects, parent);
         }
     }
 }

@@ -64,7 +64,7 @@ namespace Final_Assignment
 
                         if (s.IsActive && parent.IsActive && IsTouching(parent, s))
                         {
-                            parent.Scale = new Vector2(2, 2);
+                            //parent.Scale = new Vector2(2, 2);
                             parent.Viewport = new Rectangle(0,0,150, 150);
                             parent.IsHit = true;
                             touch = true;
@@ -79,10 +79,15 @@ namespace Final_Assignment
 
                         if (s.IsActive && parent.IsActive && IsTouching(parent, s))
                         {
-
-                            s.HP -= parent.attack;
+                            if (s.status != 3)
+                            {
+                                s.HP -= parent.attack;
+                            }
                             s.IsHit = true;
-                            s.status = parent.status;
+                            if (s.status == 0)
+                            {
+                                s.status = parent.status;
+                            }
                             target = s;
                             hitting = true;
 

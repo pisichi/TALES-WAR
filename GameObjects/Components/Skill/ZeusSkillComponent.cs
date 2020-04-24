@@ -32,7 +32,12 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-          
+            if (parent.IsHit)
+            {
+                parent.SendMessage(this, 4);
+                parent.IsHit = false;
+            }
+
 
             if (parent.IsHit && parent.status != 1)
             {
@@ -77,20 +82,31 @@ namespace Final_Assignment
 
             if (parent.skill == 2)
             {
+               
                 switch (Singleton.Instance.level_s3)
                 {
                     case 1:
-                        parent.attack += 1;
+                        parent.attack = 2;
+                        parent.SendMessage(this, 203);
                         break;
                     case 2:
-                        parent.attack += 2;
+                        parent.attack = 4;
+                        parent.SendMessage(this, 203);
                         break;
                     case 3:
-                        parent.attack += 3;
+                        parent.attack = 6;
+                        parent.SendMessage(this, 203);
                         break;
                 }
                 parent.skill = 0;
             }
+
+            if (!parent.InTurn)
+            {
+                parent.attack = 1;
+            }
+           // Console.WriteLine(parent.Name + " "+parent.attack);
+
 
             base.Update(gameTime, gameObjects, parent);
         }

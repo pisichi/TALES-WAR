@@ -24,6 +24,14 @@ namespace Final_Assignment
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
 
+
+            if (parent.IsHit)
+            {
+                parent.SendMessage(this, 4);
+                parent.IsHit = false;
+            }
+
+
             rng = rnd.Next(1, 11);
 
             if (rng >= 8 && !parent.InTurn && !parent.action && parent.status!= 1)

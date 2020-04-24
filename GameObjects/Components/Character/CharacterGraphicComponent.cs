@@ -15,6 +15,7 @@ namespace Final_Assignment
         ContentManager content;
         Texture2D _hp;
         Texture2D _burn;
+        Texture2D _bari;
 
 
         float waitTime = 0;
@@ -26,7 +27,7 @@ namespace Final_Assignment
             CurrentCharState = 1;
             _hp =  content.Load<Texture2D>("sprites/heart");
             //Texture2D _burn = content.Load<Texture2D>("sprites/fx_burn");
-            //Texture2D _bari = content.Load<Texture2D>("sprites/fx_barrier");
+            _bari = content.Load<Texture2D>("sprites/fx_barrier");
             _burn = content.Load<Texture2D>("sprites/fx_burn");
             this.content = content;
         }
@@ -101,9 +102,9 @@ namespace Final_Assignment
                 spriteBatch.Draw(_burn, parent.Position - new Vector2(_burn.Width/2,_burn.Height/2));
             }
 
-            if (parent.status == 2)
+            if (parent.status == 3)
             {
-                spriteBatch.Draw(_burn, parent.Position - new Vector2(_burn.Width / 2, _burn.Height / 2));
+                spriteBatch.Draw(_bari, parent.Position - new Vector2(_bari.Width / 2, _bari.Height / 2));
             }
 
 

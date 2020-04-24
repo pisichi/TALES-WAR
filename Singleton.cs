@@ -8,10 +8,8 @@ namespace Final_Assignment
 
         public KeyboardState _currentkey;
         public KeyboardState _previouskey;
-
         public const int SCREENWIDTH = 1200;
         public const int SCREENHEIGHT = 800;
-
         public GameObject follow;
 
 

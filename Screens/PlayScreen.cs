@@ -42,6 +42,8 @@ namespace Final_Assignment
 
         Texture2D _player;
         Texture2D _guan;
+        Texture2D _sung;
+        Texture2D _mob;
 
 
 
@@ -70,6 +72,8 @@ namespace Final_Assignment
             _hit = content.Load<Texture2D>("sprites/hitbox");
 
             _guan = content.Load<Texture2D>("sprites/sheet_guan");
+            _sung = content.Load<Texture2D>("sprites/sheet_sung");
+            _mob = content.Load<Texture2D>("sprites/sheet_mob");
 
 
             cam = new GameObject(null, null, null, null)
@@ -78,16 +82,19 @@ namespace Final_Assignment
             };
 
             SkillComponent skill = null;
+            String _weapon = null;
 
             if (Singleton.Instance.CurrentHero == "zeus")
             {
                 _player = content.Load<Texture2D>("sprites/sheet_zeus");
                 skill = new ZeusSkillComponent();
+                _weapon = "thunder";
             }
             else if (Singleton.Instance.CurrentHero == "thor")
             {
                 _player = content.Load<Texture2D>("sprites/sheet_thor");
                 skill = new ThorSkillComponent();
+                _weapon = "hammer";
             }
 
             player = new GameObject(new CharacterInputComponent(content),
@@ -108,9 +115,10 @@ namespace Final_Assignment
                 Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
                 Name = Singleton.Instance.CurrentHero,
-                Weapon = "hammer",
+                Weapon = _weapon,
                 HP = 5,
                 attack = 1,
+                skill = 1
             };
             _gameObjects.Add(player);
 
@@ -156,6 +164,7 @@ namespace Final_Assignment
                 Weapon = "lance",
                 HP = 10,
                 attack = 1
+                
             };
             _gameObjects.Add(boss);
             enemyList.Add(boss);
@@ -164,22 +173,49 @@ namespace Final_Assignment
                       new CharacterPhysicComponent(),
                       new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
                           {
-                                            { "Idle", new Animation(_guan, new Rectangle(0,0,400,250),2) },
-                                            { "Throw", new Animation(_guan, new Rectangle(0,250,400,250),2) },
-                                            { "Skill", new Animation(_guan, new Rectangle(0,500,400,250),2) },
-                                            { "Hit", new Animation(_guan, new Rectangle(0,750,200,250),1) },
-                                            { "Stunt", new Animation(_guan, new Rectangle(0,1000,400,250),2) },
-                                             { "Die", new Animation(_guan, new Rectangle(200,1250,200,250),1) }
+                                            { "Idle", new Animation(_mob, new Rectangle(0,0,400,250),2) },
+                                            { "Throw", new Animation(_mob, new Rectangle(0,250,400,250),2) },
+                                            { "Skill", new Animation(_mob, new Rectangle(0,0,400,250),2) },
+                                            { "Hit", new Animation(_mob, new Rectangle(0,500,200,250),1) },
+                                            { "Stunt", new Animation(_mob, new Rectangle(0,750,400,250),2) },
+                                             { "Die", new Animation(_mob, new Rectangle(200,1000,200,250),1) }
                           }),
-                      new GuanSkillComponent())
+                      new MobSkillComponent())
             {
                 Position = new Vector2(1000, 700),
                 InTurn = false,
                 Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
-                Name = "guan",
-                Weapon = "lance",
-                HP = 10,
+                Name = "mob",
+                Weapon = "rock",
+                HP = 3,
+                attack = 1
+            };
+            _gameObjects.Add(enemy);
+            enemyList.Add(enemy);
+
+
+
+            enemy = new GameObject(new CharacterAIComponent(content),
+                     new CharacterPhysicComponent(),
+                     new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                         {
+                                            { "Idle", new Animation(_mob, new Rectangle(0,0,400,250),2) },
+                                            { "Throw", new Animation(_mob, new Rectangle(0,250,400,250),2) },
+                                            { "Skill", new Animation(_mob, new Rectangle(0,0,400,250),2) },
+                                            { "Hit", new Animation(_mob, new Rectangle(0,500,200,250),1) },
+                                            { "Stunt", new Animation(_mob, new Rectangle(0,750,400,250),2) },
+                                             { "Die", new Animation(_mob, new Rectangle(200,1000,200,250),1) }
+                         }),
+                     new MobSkillComponent())
+            {
+                Position = new Vector2(2000, 700),
+                InTurn = false,
+                Viewport = new Rectangle(0, 0, 150, 230),
+                _hit = _hit,
+                Name = "mob",
+                Weapon = "rock",
+                HP = 3,
                 attack = 1
             };
             _gameObjects.Add(enemy);

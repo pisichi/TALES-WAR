@@ -107,16 +107,27 @@ namespace Final_Assignment
             bullet.attack = parent.attack;
             bullet.LinearVelocity = parent.LinearVelocity * 50;
 
-            //if(_bulletSkill == 201)
-            //{
-            //    bullet.status = 1;
-            //    _bulletSkill = 0;
-            //}
-            //else if (_bulletSkill == 202)
-            //{
-            //    bullet.status = 2;
-            //    _bulletSkill = 0;
-            //}
+            if (_bulletSkill == 201)
+            {
+                bullet.status = 1;
+                _bulletSkill = 0;
+            }
+            else if (_bulletSkill == 202)
+            {
+                bullet.status = 2;
+                _bulletSkill = 0;
+            }
+            else if (_bulletSkill == 203)
+            {
+                bullet.status = 3;
+                _bulletSkill = 0;
+            }
+            else if (_bulletSkill == 204)
+            {
+                bullet.Scale = new Vector2(2, 2);
+                _bulletSkill = 0;
+            }
+
             gameObjects.Add(bullet);
             parent.shooting = true;
             Singleton.Instance.follow = bullet;
