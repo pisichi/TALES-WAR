@@ -108,6 +108,7 @@ namespace Final_Assignment
                 Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
                 Name = Singleton.Instance.CurrentHero,
+                Weapon = "hammer",
                 HP = 5,
                 attack = 1,
             };
@@ -152,6 +153,7 @@ namespace Final_Assignment
                 Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
                 Name = "guan",
+                Weapon = "lance",
                 HP = 1,
                 attack = 1
             };
@@ -176,6 +178,7 @@ namespace Final_Assignment
                 Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
                 Name = "guan",
+                Weapon = "lance",
                 HP = 1,
                 attack = 1
             };
@@ -253,6 +256,7 @@ namespace Final_Assignment
                 Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
                 Name = "guan",
+                Weapon = "lance",
                 HP = 1,
                 attack = 1
             };
