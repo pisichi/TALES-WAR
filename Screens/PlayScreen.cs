@@ -27,24 +27,23 @@ namespace Final_Assignment
         private GameObject player;
         private GameObject boss;
         private GameObject enemy;
-        private GameObject bullet;
 
         private GameObject cam;
 
         List<GameObject> enemyList;
 
         Texture2D _bg;
-        Texture2D _char;
 
         Texture2D _hit;
-
-        Texture2D _zeus;
-        Texture2D _guan;
-
         Texture2D _arrow;
         Texture2D _gauge;
         Texture2D _pin;
         SpriteFont _font;
+
+        Texture2D _player;
+        Texture2D _guan;
+
+
 
         float Rotation = 0f;
         private ContentManager content;
@@ -59,67 +58,84 @@ namespace Final_Assignment
         {
             this.content = content;
 
+            _gameObjects = new List<GameObject>();
+            enemyList = new List<GameObject>();
+            _camera = new Camera();
+
             _bg = content.Load<Texture2D>("sprites/bg");
             _pin = content.Load<Texture2D>("sprites/pin");
             _gauge = content.Load<Texture2D>("sprites/gauge");
-
-            _zeus = content.Load<Texture2D>("sprites/sheet_zeus");
-            _guan = content.Load<Texture2D>("sprites/sheet_guan");
-
             _arrow = content.Load<Texture2D>("sprites/arrow");
             _font = content.Load<SpriteFont>("font/File");
-
             _hit = content.Load<Texture2D>("sprites/hitbox");
 
-            _gameObjects = new List<GameObject>();
-            enemyList = new List<GameObject>();
+            _guan = content.Load<Texture2D>("sprites/sheet_guan");
+
+
+            cam = new GameObject(null, null, null, null)
+            {
+                Position = new Vector2(_bg.Width / 2, _bg.Height / 2),
+            };
+
+            SkillComponent skill = null;
+
+            if (Singleton.Instance.CurrentHero == "zeus")
+            {
+                _player = content.Load<Texture2D>("sprites/sheet_zeus");
+                skill = new ZeusSkillComponent();
+            }
+            else if (Singleton.Instance.CurrentHero == "thor")
+            {
+                _player = content.Load<Texture2D>("sprites/sheet_thor");
+                skill = new ThorSkillComponent();
+            }
+
+            player = new GameObject(new CharacterInputComponent(content),
+                                    new CharacterPhysicComponent(),
+                                    new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                                        {
+                                            { "Idle", new Animation(_player, new Rectangle(0,0,400,250),2) },
+                                            { "Throw", new Animation(_player, new Rectangle(0,250,400,250),2) },
+                                            { "Skill", new Animation(_player, new Rectangle(0,500,400,250),2) },
+                                            { "Hit", new Animation(_player, new Rectangle(0,750,200,250),1) },
+                                            { "Stunt", new Animation(_player, new Rectangle(0,1000,400,250),2) },
+                                             { "Die", new Animation(_player, new Rectangle(200,1250,200,250),1) }
+                                        }),
+                                    skill)
+            {
+                Position = new Vector2(600, 800),
+                InTurn = true,
+                Viewport = new Rectangle(0, 0, 150, 230),
+                _hit = _hit,
+                Name = Singleton.Instance.CurrentHero,
+                Weapon = "hammer",
+                HP = 5,
+                attack = 1,
+            };
+            _gameObjects.Add(player);
+
+
+
             enemyIndex = 0;
 
             select = false;
 
-            Set();
+            Singleton.Instance.CurrentTurnState = Singleton.TurnState.skill;
 
-            _camera = new Camera();
-            cam = new GameObject(null, null, null,null)
-            {
-                Position = new Vector2(_bg.Width/2, _bg.Height/2),
-            };
+            if (Singleton.Instance.CurrentStage == 1)
+            SetStage1();
+            else if(Singleton.Instance.CurrentStage == 2)
+            SetStage2();
 
         }
 
-        private void Set()
+        private void SetStage1()
         {
-
+           
             #region character
-            player = new GameObject(new CharacterInputComponent(content),
-                                                new CharacterPhysicComponent(),
-                                                new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
-                                                    {
-                                            { "Idle", new Animation(_zeus, new Rectangle(0,0,400,250),2) },
-                                            { "Throw", new Animation(_zeus, new Rectangle(0,250,400,250),2) },
-                                            { "Skill", new Animation(_zeus, new Rectangle(0,500,400,250),2) },
-                                            { "Hit", new Animation(_zeus, new Rectangle(0,750,200,250),1) },
-                                            { "Stunt", new Animation(_zeus, new Rectangle(0,1000,400,250),2) },
-                                            { "Die", new Animation(_zeus, new Rectangle(0,1250,400,250),2) }
-                                                    }),
-                                                new ZeusSkillComponent())
-            {
-                Position = new Vector2(600, 800),
-                InTurn = true,
-                Viewport = new Rectangle(0, 0, 200, 250),
-                _hit = _hit,
-                Name = "zeus",
-                HP = 5,
-                attack = 1,
-                skill = 1
-
-        };
-            _gameObjects.Add(player);
-
-            
 
 
-            boss = new GameObject(null,
+            boss = new GameObject(new CharacterAIComponent(content),
                                    new CharacterPhysicComponent(),
                                    new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
                                        {
@@ -128,82 +144,168 @@ namespace Final_Assignment
                                             { "Skill", new Animation(_guan, new Rectangle(0,500,400,250),2) },
                                             { "Hit", new Animation(_guan, new Rectangle(0,750,200,250),1) },
                                             { "Stunt", new Animation(_guan, new Rectangle(0,1000,400,250),2) },
-                                            { "Die", new Animation(_guan, new Rectangle(0,1250,400,250),2) }
+                                            { "Die", new Animation(_guan, new Rectangle(200,1250,200,250),1) }
                                        }),
                                    new GuanSkillComponent())
             {
                 Position = new Vector2(3400, 350),
                 InTurn = false,
-                Viewport = new Rectangle(0, 0, 200, 250),
+                Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
                 Name = "guan",
+                Weapon = "lance",
                 HP = 10,
                 attack = 1
             };
             _gameObjects.Add(boss);
             enemyList.Add(boss);
 
-            //enemy = new GameObject(null,
-            //          new CharacterPhysicComponent(),
-            //          new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
-            //              {
-            //                                { "Idle", new Animation(_guan, new Rectangle(0,0,400,250),2) },
-            //                                { "Throw", new Animation(_guan, new Rectangle(0,250,400,250),2) },
-            //                                { "Skill", new Animation(_guan, new Rectangle(0,500,400,250),2) },
-            //                                { "Hit", new Animation(_guan, new Rectangle(0,750,200,250),1) },
-            //                                { "Stunt", new Animation(_guan, new Rectangle(0,1000,400,250),2) },
-            //                                { "Die", new Animation(_guan, new Rectangle(0,1250,400,250),2) }
-            //              }))
-            //{
-            //    Position = new Vector2(300, 600),
-            //    InTurn = false,
-            //    Viewport = new Rectangle(0, 0, 200, 250)
-            //};
-            //_gameObjects.Add(enemy);
-            //enemyList.Add(enemy);
+            enemy = new GameObject(new CharacterAIComponent(content),
+                      new CharacterPhysicComponent(),
+                      new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                          {
+                                            { "Idle", new Animation(_guan, new Rectangle(0,0,400,250),2) },
+                                            { "Throw", new Animation(_guan, new Rectangle(0,250,400,250),2) },
+                                            { "Skill", new Animation(_guan, new Rectangle(0,500,400,250),2) },
+                                            { "Hit", new Animation(_guan, new Rectangle(0,750,200,250),1) },
+                                            { "Stunt", new Animation(_guan, new Rectangle(0,1000,400,250),2) },
+                                             { "Die", new Animation(_guan, new Rectangle(200,1250,200,250),1) }
+                          }),
+                      new GuanSkillComponent())
+            {
+                Position = new Vector2(1000, 700),
+                InTurn = false,
+                Viewport = new Rectangle(0, 0, 150, 230),
+                _hit = _hit,
+                Name = "guan",
+                Weapon = "lance",
+                HP = 10,
+                attack = 1
+            };
+            _gameObjects.Add(enemy);
+            enemyList.Add(enemy);
 
             #endregion
 
-            _gameObjects.Add(new GameObject(null, null, null,null)
+            _gameObjects.Add(new GameObject(null, null, null, null)
             {
                 Position = new Vector2(400, 950),
                 Viewport = new Rectangle(0, 0, 900, 50),
+                Name = "floor",
                 _hit = _hit
             }
             );
 
-            _gameObjects.Add(new GameObject(null, null, null,null)
+            _gameObjects.Add(new GameObject(null, null, null, null)
             {
                 Position = new Vector2(1300, 900),
                 Viewport = new Rectangle(0, 0, 800, 50),
+                Name = "floor",
                 _hit = _hit
             }
            );
 
-            _gameObjects.Add(new GameObject(null, null, null,null)
+            _gameObjects.Add(new GameObject(null, null, null, null)
             {
                 Position = new Vector2(3380, 550),
-                Viewport = new Rectangle(0, 0,200, 150),
+                Viewport = new Rectangle(0, 0, 200, 150),
+                Name = "floor",
                 _hit = _hit
             }
            );
 
-            _gameObjects.Add(new GameObject(null, null, null,null)
+            _gameObjects.Add(new GameObject(null, null, null, null)
             {
                 Position = new Vector2(2950, 300),
                 Viewport = new Rectangle(0, 0, 200, 150),
+                Name = "floor",
                 _hit = _hit
             }
             );
 
-            _gameObjects.Add(new GameObject(null, null, null,null)
+            _gameObjects.Add(new GameObject(null, null, null, null)
             {
                 Position = new Vector2(2900, 900),
                 Viewport = new Rectangle(0, 0, 350, 150),
+                Name = "floor",
                 _hit = _hit
             });
 
 
+
+            Singleton.Instance.follow = player;
+        }
+
+        private void SetStage2()
+        {
+            boss = new GameObject(new CharacterAIComponent(content),
+                                  new CharacterPhysicComponent(),
+                                  new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                                      {
+                                            { "Idle", new Animation(_guan, new Rectangle(0,0,400,250),2) },
+                                            { "Throw", new Animation(_guan, new Rectangle(0,250,400,250),2) },
+                                            { "Skill", new Animation(_guan, new Rectangle(0,500,400,250),2) },
+                                            { "Hit", new Animation(_guan, new Rectangle(0,750,200,250),1) },
+                                            { "Stunt", new Animation(_guan, new Rectangle(0,1000,400,250),2) },
+                                            { "Die", new Animation(_guan, new Rectangle(200,1250,200,250),1) }
+                                      }),
+                                  new GuanSkillComponent())
+            {
+                Position = new Vector2(3400, 350),
+                InTurn = false,
+                Viewport = new Rectangle(0, 0, 150, 230),
+                _hit = _hit,
+                Name = "guan",
+                Weapon = "lance",
+                HP = 1,
+                attack = 1
+            };
+            _gameObjects.Add(boss);
+            enemyList.Add(boss);
+
+            _gameObjects.Add(new GameObject(null, null, null, null)
+            {
+                Position = new Vector2(400, 950),
+                Viewport = new Rectangle(0, 0, 900, 50),
+                Name = "floor",
+                _hit = _hit
+            }
+            );
+
+            _gameObjects.Add(new GameObject(null, null, null, null)
+            {
+                Position = new Vector2(1300, 900),
+                Viewport = new Rectangle(0, 0, 800, 50),
+                Name = "floor",
+                _hit = _hit
+            }
+           );
+
+            _gameObjects.Add(new GameObject(null, null, null, null)
+            {
+                Position = new Vector2(3380, 550),
+                Viewport = new Rectangle(0, 0, 200, 150),
+                Name = "floor",
+                _hit = _hit
+            }
+           );
+
+            _gameObjects.Add(new GameObject(null, null, null, null)
+            {
+                Position = new Vector2(2950, 300),
+                Viewport = new Rectangle(0, 0, 200, 150),
+                Name = "floor",
+                _hit = _hit
+            }
+            );
+
+            _gameObjects.Add(new GameObject(null, null, null, null)
+            {
+                Position = new Vector2(2900, 900),
+                Viewport = new Rectangle(0, 0, 350, 150),
+                Name = "floor",
+                _hit = _hit
+            });
 
             Singleton.Instance.follow = player;
         }
@@ -220,11 +322,9 @@ namespace Final_Assignment
 
         public void Update(GameTime gameTime)
         {
-            
             Singleton.Instance._previouskey = Singleton.Instance._currentkey;
             Singleton.Instance._currentkey = Keyboard.GetState();
 
-           // Console.WriteLine(_gameObjects.Count);
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
@@ -232,18 +332,14 @@ namespace Final_Assignment
             }
 
 
-            if (freecam)
-                testcam();
-            else
-                _camera.Follow(Singleton.Instance.follow);
-
+            
 
 
             if (player.InTurn)
             {
                 if (!select)
                 {
-                    Singleton.Instance.CurrentTurnState = Singleton.TurnState.skill;
+                    
                     select = true;
                 }
                 PlayerModule();
@@ -261,28 +357,12 @@ namespace Final_Assignment
                     _gameObjects[i].Update(gameTime, _gameObjects);
                 else _gameObjects.Remove(_gameObjects[i]);
             }
-            
+
+            if (freecam)
+                testcam();
+            else
+                _camera.Follow(Singleton.Instance.follow);
         }
-
-        /*private void cameraCollision()
-        {
-           
-
-            *//*if (Singleton.Instance.follow.Position.X > 4000 - Singleton.SCREENWIDTH / 2)
-                Singleton.Instance.follow.CameraPosition.X = 4000 - Singleton.SCREENWIDTH / 2;
-
-            if (Singleton.Instance.follow.Position.X < Singleton.SCREENWIDTH / 2)
-                Singleton.Instance.follow.CameraPosition.X = Singleton.SCREENWIDTH / 2;
-
-            if (Singleton.Instance.follow.Position.Y < Singleton.SCREENHEIGHT / 2)
-                Singleton.Instance.follow.CameraPosition.Y = Singleton.SCREENHEIGHT / 2;
-
-            if (Singleton.Instance.follow.Position.Y > 1000 - Singleton.SCREENHEIGHT / 2)
-                Singleton.Instance.follow.CameraPosition.Y = 1000 - Singleton.SCREENHEIGHT / 2;*//*
-            _camera.Follow(Singleton.Instance.follow);
-
-
-        }*/
 
         private void testcam()
         {
@@ -290,8 +370,8 @@ namespace Final_Assignment
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Right))
             {
-                if(cam.Position.X < 4000 - Singleton.SCREENWIDTH/2)
-                cam.Position.X += 10;
+                if (cam.Position.X < 4000 - Singleton.SCREENWIDTH / 2)
+                    cam.Position.X += 10;
             }
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Left))
             {
@@ -315,35 +395,34 @@ namespace Final_Assignment
             if (enemyIndex >= enemyList.Count)
             {
                 player.InTurn = true;
+                Singleton.Instance.CurrentTurnState = Singleton.TurnState.skill;
             }
             else
             {
-                Singleton.Instance.follow = enemyList[enemyIndex];
+                
 
                 if (enemyList[enemyIndex].InTurn)
                 {
-                    enemyList[enemyIndex].action = true;
+                    if(!enemyList[enemyIndex].shooting)
+                        Singleton.Instance.follow = enemyList[enemyIndex];
 
                     waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
-                    if (waitTime > 5)
+                    if (waitTime > 2)
                     {
-                        enemyList[enemyIndex].InTurn = false;
+                        enemyList[enemyIndex].action = true;
+                       // enemyList[enemyIndex].InTurn = false;
                         waitTime = 0;
                     }
                 }
 
-                if (enemyList[enemyIndex].shooting)
-                {
-                    //_camera.Follow(enemyList[enemyIndex].Child);
-                }
-
-                if (!enemyList[enemyIndex].InTurn)
+                if (!enemyList[enemyIndex].InTurn || enemyList[enemyIndex].HP <= 0)
                 {
                     enemyIndex++;
 
                     if (enemyIndex < enemyList.Count)
                     {
                         enemyList[enemyIndex].InTurn = true;
+                        
                     }
                 }
 
@@ -354,13 +433,16 @@ namespace Final_Assignment
         {
             enemyIndex = 0;
 
-            if(Singleton.Instance.CurrentTurnState != Singleton.TurnState.shoot)
-            Singleton.Instance.follow = player;
+            if (Singleton.Instance.CurrentTurnState != Singleton.TurnState.shoot && Singleton.Instance.CurrentTurnState != Singleton.TurnState.enemy)
+                Singleton.Instance.follow = player;
 
             switch (Singleton.Instance.CurrentTurnState)
             {
                 case Singleton.TurnState.skill:
-                    if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+                    if (player.status == 1)
+                    { Singleton.Instance.CurrentTurnState = Singleton.TurnState.shoot; }
+
+                    else if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                     {
                         player.Rotation = 0f;
                         Singleton.Instance.CurrentTurnState = Singleton.TurnState.angle;
@@ -368,6 +450,8 @@ namespace Final_Assignment
                     break;
                 case Singleton.TurnState.angle:
                     {
+
+
                         Rotation += 0.1f;
                         player.Rotation += 0.1f;
                         if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
@@ -377,6 +461,7 @@ namespace Final_Assignment
                     }
                     break;
                 case Singleton.TurnState.force:
+
                     if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                     {
                         player.action = true;
@@ -389,15 +474,23 @@ namespace Final_Assignment
                     break;
             }
 
+
             if (!player.shooting)
             {
                 enemyList[enemyIndex].InTurn = true;
             }
+
         }
 
 
         public void HandleInput(GameTime gameTime)
         {
+
+            if ((Singleton.Instance._currentkey.IsKeyDown(Keys.L) && Singleton.Instance._currentkey != Singleton.Instance._previouskey) || player.HP <= 0)
+            {
+                m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
+            }
+
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
@@ -420,7 +513,7 @@ namespace Final_Assignment
                 case Singleton.TurnState.angle:
                     spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     break;
-                case Singleton.TurnState.force:   
+                case Singleton.TurnState.force:
                     spriteBatch.DrawString(_font, "angle is " + Rotation, player.Position + new Vector2(0, -130), Color.White);
                     spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     spriteBatch.Draw(_gauge, player.Position + new Vector2(120, -100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
@@ -432,8 +525,8 @@ namespace Final_Assignment
 
             for (int i = 0; i < _gameObjects.Count; i++)
             {
-                if(_gameObjects[i].IsActive)
-                _gameObjects[i].Draw(spriteBatch);
+                if (_gameObjects[i].IsActive)
+                    _gameObjects[i].Draw(spriteBatch);
             }
 
             spriteBatch.End();

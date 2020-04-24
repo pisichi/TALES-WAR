@@ -29,29 +29,30 @@ namespace Final_Assignment
         public bool action;
         public bool shooting = false;
         public bool IsHit = false;
-
+        
         
 
         #region PUBLIC_VARIABLES
 
         public Dictionary<string, SoundEffectInstance> SoundEffects;
         public Vector2 Position;
-        public Vector2 CameraPosition;
 
         public float Rotation;
 
         public float LinearVelocity = 1.3f;
         public float force = 1f;
         public float gravity = 1f;
+        public Vector2 PreviousDirection;
 
         public Vector2 Scale;
         public Vector2 Direction;
-        public Vector2 PreviousDirection;
         public Vector2 Origin;
         public Vector2 Velocity;
         public Vector2 Acceleration;
+        public Vector2 CameraPosition;
 
         public string Name;
+        public string Weapon;
         public bool IsActive = true;
 
 
@@ -60,9 +61,13 @@ namespace Final_Assignment
         {
             get
             {
-                return new Rectangle((int)Position.X - Viewport.Width/2, (int)Position.Y - Viewport.Height/2, Viewport.Width, Viewport.Height);
+                return new Rectangle((int)(Position.X - Viewport.Width/2 * Scale.X), (int)(Position.Y - Viewport.Height/2 * Scale.Y)
+                                           , (int)(Viewport.Width * Scale.X), (int)(Viewport.Height * Scale.Y));
             }
         }
+
+        
+
         public Rectangle Viewport;
         #endregion
 
@@ -76,7 +81,6 @@ namespace Final_Assignment
             _skills = skill;
 
             Position = Vector2.Zero;
-            CameraPosition = Vector2.Zero;
             Scale = Vector2.One;
             Acceleration = Vector2.Zero;
             Velocity = Vector2.Zero;
@@ -91,8 +95,6 @@ namespace Final_Assignment
             if (_skills != null) _skills.Update(gameTime, gameObjects, this);
             if (_physics != null) _physics.Update(gameTime, gameObjects, this);
             if (_graphics != null) _graphics.Update(gameTime, gameObjects, this);
-           
-
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -104,6 +106,7 @@ namespace Final_Assignment
         public void SendMessage(Component sender,int message)
         {
             if (_input != null) _input.ReceiveMessage(message ,sender);
+            if (_skills != null) _skills.ReceiveMessage(message, sender);
             if (_physics != null) _physics.ReceiveMessage(message,sender);
             if (_graphics != null) _graphics.ReceiveMessage(message,sender);
         }

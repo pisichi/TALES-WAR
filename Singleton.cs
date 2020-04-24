@@ -15,12 +15,12 @@ namespace Final_Assignment
         public GameObject follow;
 
 
-        public string CurrentHero;
-        public string CurrentStage;
+        public string CurrentHero = "thor";
+        public int CurrentStage = 1;
 
 
         public int level_s1 = 1;
-        public int level_s2 = 3;
+        public int level_s2 = 1;
         public int level_s3 = 1;
 
 
@@ -34,7 +34,6 @@ namespace Final_Assignment
 
         public GameState CurrentGameState;
 
-
         public enum TurnState
         {
             skill,
@@ -43,8 +42,8 @@ namespace Final_Assignment
             shoot,
             enemy
         }
-        public TurnState CurrentTurnState;
 
+        public TurnState CurrentTurnState;
 
         private static Singleton instance;
 
