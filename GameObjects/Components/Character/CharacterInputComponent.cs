@@ -97,6 +97,8 @@ namespace Final_Assignment
 
         public void Shoot(List<GameObject> gameObjects, GameObject parent)
         {
+            Singleton.Instance.Cooldown_1 -= 1;
+            Singleton.Instance.Cooldown_2 -= 1;
 
             Console.WriteLine("add bullet");
             bullet = BulletFactory.create(content,parent.Weapon);
@@ -123,6 +125,16 @@ namespace Final_Assignment
                 _bulletSkill = 0;
             }
             else if (_bulletSkill == 204)
+            {
+                bullet.Scale = new Vector2(1.25f, 1.25f);
+                _bulletSkill = 0;
+            }
+            else if (_bulletSkill == 205)
+            {
+                bullet.Scale = new Vector2(1.5f, 1.5f);
+                _bulletSkill = 0;
+            }
+            else if (_bulletSkill == 206)
             {
                 bullet.Scale = new Vector2(2, 2);
                 _bulletSkill = 0;

@@ -15,6 +15,7 @@ namespace Final_Assignment
         int rng;
         int barier;
         int count;
+        int _attack = 1;
 
         public ThorSkillComponent()
         {
@@ -47,7 +48,7 @@ namespace Final_Assignment
                 parent.IsHit = false;
             }
 
-
+            parent.attack = _attack;
             rng = rnd.Next(1, 11);
             count += 1;
             if ( parent.InTurn && parent.status != 1 && count == 1) {
@@ -57,7 +58,7 @@ namespace Final_Assignment
                         if (rng >= 10)
                         {
                             Console.WriteLine(parent.Name + "  activated passive");
-                            parent.attack++;
+                            _attack++;
 
                             parent.SendMessage(this, 3);
                         }
@@ -67,7 +68,7 @@ namespace Final_Assignment
                         if (rng >= 9)
                         {
                             Console.WriteLine(parent.Name + "  activated passive");
-                            parent.attack++;
+                            _attack++;
 
                             parent.SendMessage(this, 3);
                         }
@@ -77,7 +78,7 @@ namespace Final_Assignment
                         if (rng >= 8)
                         {
                             Console.WriteLine(parent.Name + "  activated passive");
-                            parent.attack++;
+                            _attack++;
 
                             parent.SendMessage(this, 3);
                         }
@@ -111,6 +112,22 @@ namespace Final_Assignment
 
             if(parent.skill == 2)
             {
+                switch (Singleton.Instance.level_s2)
+                {
+                    case 1:
+                        parent.SendMessage(this, 204);
+
+                        break;
+                    case 2:
+                        parent.SendMessage(this, 205);
+
+                        break;
+                    case 3:
+                        parent.SendMessage(this, 206);
+
+                        break;
+                }
+
                 parent.skill = 0;
             }
 
@@ -118,6 +135,9 @@ namespace Final_Assignment
             {
                 parent.status = 0;
             }
+
+
+            
 
             base.Update(gameTime, gameObjects, parent);
         }

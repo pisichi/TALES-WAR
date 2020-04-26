@@ -15,6 +15,8 @@ namespace Final_Assignment
         private Camera _camera;
         private int enemyIndex;
 
+        private bool swap;
+
         private bool select = false;
         private bool freecam = false;
 
@@ -118,7 +120,6 @@ namespace Final_Assignment
                 Weapon = _weapon,
                 HP = 5,
                 attack = 1,
-                skill = 1
             };
             _gameObjects.Add(player);
 
@@ -278,22 +279,22 @@ namespace Final_Assignment
                                   new CharacterPhysicComponent(),
                                   new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
                                       {
-                                            { "Idle", new Animation(_guan, new Rectangle(0,0,400,250),2) },
-                                            { "Throw", new Animation(_guan, new Rectangle(0,250,400,250),2) },
-                                            { "Skill", new Animation(_guan, new Rectangle(0,500,400,250),2) },
-                                            { "Hit", new Animation(_guan, new Rectangle(0,750,200,250),1) },
-                                            { "Stunt", new Animation(_guan, new Rectangle(0,1000,400,250),2) },
-                                            { "Die", new Animation(_guan, new Rectangle(200,1250,200,250),1) }
+                                            { "Idle", new Animation(_sung, new Rectangle(0,0,400,250),2) },
+                                            { "Throw", new Animation(_sung, new Rectangle(0,250,400,250),2) },
+                                            { "Skill", new Animation(_sung, new Rectangle(0,500,400,250),2) },
+                                            { "Hit", new Animation(_sung, new Rectangle(0,750,200,250),1) },
+                                            { "Stunt", new Animation(_sung, new Rectangle(0,1000,400,250),2) },
+                                            { "Die", new Animation(_sung, new Rectangle(200,1250,200,250),1) }
                                       }),
-                                  new GuanSkillComponent())
+                                  new SungSkillComponent())
             {
                 Position = new Vector2(3400, 350),
                 InTurn = false,
                 Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
-                Name = "guan",
-                Weapon = "lance",
-                HP = 1,
+                Name = "sung",
+                Weapon = "bar",
+                HP = 8,
                 attack = 1
             };
             _gameObjects.Add(boss);
@@ -476,6 +477,18 @@ namespace Final_Assignment
                     if (player.status == 1)
                     { Singleton.Instance.CurrentTurnState = Singleton.TurnState.shoot; }
 
+                    if(Singleton.Instance._currentkey.IsKeyDown(Keys.NumPad1) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.Cooldown_1 <= 0)
+                    {
+                        player.skill = 1;
+                        Singleton.Instance.Cooldown_1 = 4;
+                    }
+
+                    if (Singleton.Instance._currentkey.IsKeyDown(Keys.NumPad2) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.Cooldown_2 <= 0)
+                    {
+                        player.skill = 2;
+                        Singleton.Instance.Cooldown_2 = 5;
+                    }
+
                     else if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                     {
                         player.Rotation = 0f;
@@ -486,8 +499,25 @@ namespace Final_Assignment
                     {
 
 
-                        Rotation += 0.1f;
-                        player.Rotation += 0.1f;
+                        if (swap)
+                        {
+                            player.Rotation += 0.1f;
+                        }
+                        else
+                        {
+                            player.Rotation -= 0.1f;
+                        }
+
+                        if (player.Rotation < -3.25)
+                        {
+                            swap = true;
+                        }
+                        if (player.Rotation >= 0)
+                        {
+                            swap = false;
+                        }
+
+
                         if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                         {
                             Singleton.Instance.CurrentTurnState = Singleton.TurnState.force;
@@ -495,6 +525,24 @@ namespace Final_Assignment
                     }
                     break;
                 case Singleton.TurnState.force:
+
+                    if (swap)
+                    {
+                        player.force += 0.1f;
+                    }
+                    else
+                    {
+                        player.force -= 0.1f;
+                    }
+
+                    if (player.force < 0)
+                    {
+                        swap = true;
+                    }
+                    if (player.force >= 5)
+                    {
+                        swap = false;
+                    }
 
                     if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                     {
@@ -545,11 +593,11 @@ namespace Final_Assignment
                 case Singleton.TurnState.skill:
                     break;
                 case Singleton.TurnState.angle:
-                    spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, player.Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     break;
                 case Singleton.TurnState.force:
                     spriteBatch.DrawString(_font, "angle is " + Rotation, player.Position + new Vector2(0, -130), Color.White);
-                    spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, player.Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     spriteBatch.Draw(_gauge, player.Position + new Vector2(120, -100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     break;
                 case Singleton.TurnState.shoot:

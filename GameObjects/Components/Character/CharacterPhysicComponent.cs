@@ -29,7 +29,7 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-            if(parent.HP == 0)
+            if(parent.HP <= 0)
             {
                 parent.Viewport = new Rectangle(0, 0, 0, 0);
             }

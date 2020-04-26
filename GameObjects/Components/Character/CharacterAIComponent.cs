@@ -153,6 +153,16 @@ namespace Final_Assignment
             }
             else if (_bulletSkill == 204)
             {
+                bullet.Scale = new Vector2(1.25f, 1.25f);
+                _bulletSkill = 0;
+            }
+            else if (_bulletSkill == 205)
+            {
+                bullet.Scale = new Vector2(1.5f, 1.5f);
+                _bulletSkill = 0;
+            }
+            else if (_bulletSkill == 206)
+            {
                 bullet.Scale = new Vector2(2, 2);
                 _bulletSkill = 0;
             }
