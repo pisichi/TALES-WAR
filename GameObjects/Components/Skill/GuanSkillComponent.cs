@@ -14,7 +14,6 @@ namespace Final_Assignment
 
 
 
-        private bool extra;
 
         public GuanSkillComponent()
         {
@@ -44,6 +43,7 @@ namespace Final_Assignment
             }
 
 
+
             if(parent.skill == 1)
             {
                 Console.WriteLine(parent.Name + " use skill 1");
@@ -51,16 +51,15 @@ namespace Final_Assignment
                 parent.skill = 0;
             }
 
+
             else if(parent.skill == 2)
             {
                 Console.WriteLine(parent.Name + " use skill 2");
-                parent.SendMessage(this, 202);
+                parent.attack += 2;
+                parent.SendMessage(this, 3);
                 parent.skill = 0;
             }
                 
-               
-
-
 
             base.Update(gameTime, gameObjects, parent);
         }

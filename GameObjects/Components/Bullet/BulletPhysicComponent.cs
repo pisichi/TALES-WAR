@@ -9,16 +9,20 @@ namespace Final_Assignment
     class BulletPhysicComponent : PhysicComponent
     {
 
-       private bool hitting;
-       private bool touch;
-       private GameObject target;
-       private float waitTime;
+        private bool hitting;
+        private bool touch;
+        private bool hasPreviousPosition = false;
+        private bool HasMaxY = false;
+        public float maxY;
+        private GameObject target;
+        private float waitTime;
+
+        public Vector2 PreviousPosition;
 
         public BulletPhysicComponent()
         {
             hitting = false;
             touch = false;
-            Console.WriteLine("bullet is here");
         }
 
 
@@ -34,20 +38,46 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-            //Start Potato Physics
 
-            parent.Rotation+=0.001f;
+
             if (!hitting)
             {
-                parent.Direction.Y += parent.gravity * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                parent.force = 1.3f;
 
-                if (parent.PreviousDirection.Y < parent.Direction.Y)
-                    parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                parent.Direction.Y += parent.gravity * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                
+
+                if (HasMaxY)
+                {
+                    if (maxY >= parent.Position.Y)
+                    {
+                        parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                        maxY = parent.Position.Y;
+                        HasMaxY = true;
+                    }
+                    else
+                    {
+                        parent.Position.Y += parent.Direction.Y * 1000f * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                    }
+
+                }
                 else
-                    parent.Position += parent.Direction * 1000f * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                {
+                    parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                    maxY = parent.Position.Y;
+                    HasMaxY = true;
+                }
+
+
+
                 parent.Position.X += parent.Direction.X * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                //End Potato Physics
+
+                if (PreviousPosition.Y < parent.Position.Y && PreviousPosition.Y < maxY && hasPreviousPosition)
+                {
+                    maxY = PreviousPosition.Y;
+                }
+
+                PreviousPosition = parent.Position;
+                hasPreviousPosition = true;
 
 
 
@@ -64,7 +94,6 @@ namespace Final_Assignment
 
                         if (s.IsActive && parent.IsActive && IsTouching(parent, s))
                         {
-                            //parent.Scale = new Vector2(2, 2);
                             parent.Viewport = new Rectangle(0,0,150, 150);
                             parent.IsHit = true;
                             touch = true;
@@ -109,7 +138,8 @@ namespace Final_Assignment
                     waitTime = 0;
                 }
             }
-            parent.PreviousDirection = parent.Direction;
+
+            parent.Rotation = (float)Math.Atan2(parent.Direction.X, -parent.Direction.Y);
         }
 
 

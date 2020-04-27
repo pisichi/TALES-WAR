@@ -42,7 +42,10 @@ namespace Final_Assignment
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
 
-            _rotation = rnd.Next(1, 6);
+            _rotation = rnd.Next(1, 5);
+
+            _force = rnd.Next(100, 300)/100;
+            parent.Rotation = _rotation;
             CheckRemove(parent);
 
 
@@ -55,8 +58,6 @@ namespace Final_Assignment
                     parent.InTurn = false;
                     parent.action = false;
                     parent.status = 0;
-                    Console.WriteLine(parent.Name + " count : " +count);
-                    Console.WriteLine(parent.Name + " status : " + parent.status);
 
 
                 }
@@ -127,14 +128,15 @@ namespace Final_Assignment
         public void Shoot(List<GameObject> gameObjects, GameObject parent)
         {
 
-            Console.WriteLine("add bullet");
             bullet = BulletFactory.create(content, parent.Weapon);
 
             _direction = new Vector2((float)Math.Cos(_rotation + (float)Math.PI / 2), (float)Math.Sin(_rotation + (float)Math.PI / 2));
             bullet.Rotation = _rotation - (float)Math.PI;
+
             bullet.Direction = _direction;
             bullet.Position = parent.Position + new Vector2(-120, -100);
             bullet.attack = parent.attack;
+            bullet.force = _force;
             bullet.LinearVelocity = parent.LinearVelocity * 50;
             if (_bulletSkill == 201)
             {
@@ -164,6 +166,11 @@ namespace Final_Assignment
             else if (_bulletSkill == 206)
             {
                 bullet.Scale = new Vector2(2, 2);
+                _bulletSkill = 0;
+            }
+            else if (_bulletSkill == 299)
+            {
+                bullet.status = 99;
                 _bulletSkill = 0;
             }
 

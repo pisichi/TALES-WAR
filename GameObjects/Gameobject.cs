@@ -42,7 +42,6 @@ namespace Final_Assignment
         public float LinearVelocity = 1.3f;
         public float force = 1f;
         public float gravity = 1f;
-        public Vector2 PreviousDirection;
 
         public Vector2 Scale;
         public Vector2 Direction;

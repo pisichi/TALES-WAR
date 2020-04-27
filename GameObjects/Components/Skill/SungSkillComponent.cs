@@ -9,7 +9,6 @@ namespace Final_Assignment
     {
 
         Random rnd = new Random();
-        int rng;
         int count;
 
         public SungSkillComponent()
@@ -40,6 +39,14 @@ namespace Final_Assignment
             }
 
 
+            if (parent.InTurn && parent.status != 1 && count == 1)
+            {
+                parent.HP++;
+                parent.SendMessage(this, 3);
+            }
+
+
+
             if (parent.skill == 1)
             {
                 Console.WriteLine(parent.Name + " use skill 1");
@@ -54,17 +61,14 @@ namespace Final_Assignment
                 parent.skill = 0;
             }
 
-            count += 1;
-            if (parent.InTurn && parent.status != 1 && count == 1)
-            {
-                Console.WriteLine(parent.Name + "  activated passive");
-                parent.HP++;
-                parent.SendMessage(this, 3);
-            }
 
             if (!parent.InTurn)
             {
                 count = 0;
+            }
+            else
+            {
+               count += 1;
             }
 
 

@@ -25,6 +25,7 @@ namespace Final_Assignment
         List<GameObject> _gameObjects;
 
         float waitTime = 0;
+        
 
         private GameObject player;
         private GameObject boss;
@@ -40,6 +41,10 @@ namespace Final_Assignment
         Texture2D _arrow;
         Texture2D _gauge;
         Texture2D _pin;
+
+        Texture2D _skill1;
+        Texture2D _skill2;
+
         SpriteFont _font;
 
         Texture2D _player;
@@ -49,7 +54,8 @@ namespace Final_Assignment
 
 
 
-        float Rotation = 0f;
+
+
         private ContentManager content;
 
         public PlayScreen(IGameScreenManager screenManager)
@@ -89,12 +95,16 @@ namespace Final_Assignment
             if (Singleton.Instance.CurrentHero == "zeus")
             {
                 _player = content.Load<Texture2D>("sprites/sheet_zeus");
+                _skill1 = content.Load<Texture2D>("sprites/skill_zeus_1");
+                _skill2 = content.Load<Texture2D>("sprites/skill_zeus_2");
                 skill = new ZeusSkillComponent();
                 _weapon = "thunder";
             }
             else if (Singleton.Instance.CurrentHero == "thor")
             {
                 _player = content.Load<Texture2D>("sprites/sheet_thor");
+                _skill1 = content.Load<Texture2D>("sprites/skill_thor_1");
+                _skill2 = content.Load<Texture2D>("sprites/skill_thor_2");
                 skill = new ThorSkillComponent();
                 _weapon = "hammer";
             }
@@ -535,7 +545,7 @@ namespace Final_Assignment
                         player.force -= 0.1f;
                     }
 
-                    if (player.force < 0)
+                    if (player.force <= 0)
                     {
                         swap = true;
                     }
@@ -548,7 +558,7 @@ namespace Final_Assignment
                     {
                         player.action = true;
                         Singleton.Instance.CurrentTurnState = Singleton.TurnState.shoot;
-                        Rotation = 0;
+                        //Rotation = 0;
                     }
                     break;
 
@@ -563,7 +573,6 @@ namespace Final_Assignment
             }
 
         }
-
 
         public void HandleInput(GameTime gameTime)
         {
@@ -591,14 +600,31 @@ namespace Final_Assignment
             switch (Singleton.Instance.CurrentTurnState)
             {
                 case Singleton.TurnState.skill:
+                    if (Singleton.Instance.Cooldown_1 <= 0)
+                    {
+                        spriteBatch.Draw(_skill1, player.Position + new Vector2(-80, -150), null, Color.White, 0, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 1f, SpriteEffects.None, 0);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(_skill1, player.Position + new Vector2(-80, -150), null, Color.Gray,0, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 1f, SpriteEffects.None, 0);
+                    }
+
+                    if (Singleton.Instance.Cooldown_2 <= 0)
+                    {
+                        spriteBatch.Draw(_skill2, player.Position + new Vector2(80, -150), null, Color.White, 0f, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 1f, SpriteEffects.None, 0);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(_skill2, player.Position + new Vector2(80, -150), null, Color.Gray, 0, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 1f, SpriteEffects.None, 0);
+                    }
                     break;
                 case Singleton.TurnState.angle:
                     spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, player.Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     break;
                 case Singleton.TurnState.force:
-                    spriteBatch.DrawString(_font, "angle is " + Rotation, player.Position + new Vector2(0, -130), Color.White);
                     spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, player.Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     spriteBatch.Draw(_gauge, player.Position + new Vector2(120, -100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(_arrow, player.Position + new Vector2(120 + player.force * 10, -100), null, Color.Red, 0f, Vector2.Zero, new Vector2(2, 0.5f), SpriteEffects.None, 0);
                     break;
                 case Singleton.TurnState.shoot:
                     break;

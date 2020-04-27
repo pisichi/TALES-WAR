@@ -87,15 +87,15 @@ namespace Final_Assignment
                 {
                     case 1:
                         parent.attack = 2;
-                        parent.SendMessage(this, 203);
+                        parent.SendMessage(this, 299);
                         break;
                     case 2:
-                        parent.attack = 4;
-                        parent.SendMessage(this, 203);
+                        parent.attack = 3;
+                        parent.SendMessage(this, 299);
                         break;
                     case 3:
-                        parent.attack = 6;
-                        parent.SendMessage(this, 203);
+                        parent.attack = 5;
+                        parent.SendMessage(this, 299);
                         break;
                 }
                 parent.skill = 0;
@@ -105,7 +105,6 @@ namespace Final_Assignment
             {
                 parent.attack = 1;
             }
-           // Console.WriteLine(parent.Name + " "+parent.attack);
 
 
             base.Update(gameTime, gameObjects, parent);

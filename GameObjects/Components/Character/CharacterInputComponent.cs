@@ -19,10 +19,6 @@ namespace Final_Assignment
 
         float waitTime = 0;
         private bool _throw;
-
-        private int Cooldown_1;
-        private int Cooldown_2;
-
         public GameObject bullet;
 
         public CharacterInputComponent(ContentManager content)
@@ -57,11 +53,9 @@ namespace Final_Assignment
 
                 }
 
-                Console.WriteLine("status " + parent.status);
                 if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                 {
                     _throw = true;
-                    //Singleton.Instance.CurrentTurnState = Singleton.TurnState.enemy;
                 }
 
                 if (_throw)
@@ -107,6 +101,7 @@ namespace Final_Assignment
             bullet.Position = parent.Position + new Vector2(120, -100);
             bullet.Rotation = parent.Rotation - (float)Math.PI;
             bullet.attack = parent.attack;
+            bullet.force = parent.force;
             bullet.LinearVelocity = parent.LinearVelocity * 50;
 
             if (_bulletSkill == 201)
@@ -119,7 +114,7 @@ namespace Final_Assignment
                 bullet.status = 2;
                 _bulletSkill = 0;
             }
-            else if (_bulletSkill == 203)
+            else if (_bulletSkill == 207)
             {
                 bullet.status = 3;
                 _bulletSkill = 0;
@@ -137,6 +132,11 @@ namespace Final_Assignment
             else if (_bulletSkill == 206)
             {
                 bullet.Scale = new Vector2(2, 2);
+                _bulletSkill = 0;
+            }
+            else if (_bulletSkill == 299)
+            {
+                bullet.status = 99;
                 _bulletSkill = 0;
             }
 

@@ -13,7 +13,7 @@ namespace Final_Assignment
         public GameObject follow;
 
 
-        public string CurrentHero = "thor";
+        public string CurrentHero = "zeus";
         public int CurrentStage = 1;
 
 
