@@ -10,8 +10,17 @@ namespace Final_Assignment
 {
     class ThorSkillComponent : SkillComponent
     {
+
+        Random rnd = new Random();
+        int rng;
+        int barier;
+        int count;
+        int _attack = 1;
+
         public ThorSkillComponent()
         {
+            
+
         }
 
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
@@ -31,6 +40,105 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
+            if (parent.IsHit)
+            {
+                if (barier > 0)
+                    barier -= 1;
+                parent.SendMessage(this, 4);
+                parent.IsHit = false;
+            }
+
+            parent.attack = _attack;
+            rng = rnd.Next(1, 11);
+            count += 1;
+            if ( parent.InTurn && parent.status != 1 && count == 1) {
+                switch (Singleton.Instance.level_s3)
+                {
+                    case 1:
+                        if (rng >= 10)
+                        {
+                            Console.WriteLine(parent.Name + "  activated passive");
+                            _attack++;
+
+                            parent.SendMessage(this, 3);
+                        }
+                      
+                        break;
+                    case 2:
+                        if (rng >= 9)
+                        {
+                            Console.WriteLine(parent.Name + "  activated passive");
+                            _attack++;
+
+                            parent.SendMessage(this, 3);
+                        }
+                     
+                        break;
+                    case 3:
+                        if (rng >= 8)
+                        {
+                            Console.WriteLine(parent.Name + "  activated passive");
+                            _attack++;
+
+                            parent.SendMessage(this, 3);
+                        }
+                      
+                        break;
+                }
+            }
+           
+            if (!parent.InTurn)
+            {
+                count = 0;
+            }
+
+            if (parent.skill == 1)
+            {
+                parent.status = 3;
+                switch (Singleton.Instance.level_s1)
+                {
+                    case 1:
+                        barier = 3;
+                        break;
+                    case 2:
+                        barier = 2;
+                        break;
+                    case 3:
+                        barier = 3;
+                        break;
+                }
+                parent.skill = 0;
+            }
+
+            if(parent.skill == 2)
+            {
+                switch (Singleton.Instance.level_s2)
+                {
+                    case 1:
+                        parent.SendMessage(this, 204);
+
+                        break;
+                    case 2:
+                        parent.SendMessage(this, 205);
+
+                        break;
+                    case 3:
+                        parent.SendMessage(this, 206);
+
+                        break;
+                }
+
+                parent.skill = 0;
+            }
+
+            if(barier <= 0)
+            {
+                parent.status = 0;
+            }
+
+
+            
+
             base.Update(gameTime, gameObjects, parent);
         }
     }

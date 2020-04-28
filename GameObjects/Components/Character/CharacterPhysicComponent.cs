@@ -29,20 +29,11 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-
+            if(parent.HP <= 0)
+            {
+                parent.Viewport = new Rectangle(0, 0, 0, 0);
+            }
             //parent.Position.X += 10;
-
-            if (parent.status == 2)
-            {
-                parent.HP -= 1;
-                parent.status = 0;
-            }
-
-            if (parent.IsHit)
-            {
-                parent.SendMessage(this, 4);
-                parent.IsHit = false;
-            }
 
             base.Update(gameTime, gameObjects, parent);
         }

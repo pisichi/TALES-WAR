@@ -2,15 +2,11 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Final_Assignment.Screens
+namespace Final_Assignment
 {
-    class CharScreen : IGameScreen
+    class SelectCharScreen : IGameScreen
     {
         private readonly IGameScreenManager m_screenManager;
         //private bool m_exitGame;
@@ -26,7 +22,7 @@ namespace Final_Assignment.Screens
         Texture2D _guan;
         Texture2D _zeus;
 
-        public CharScreen(IGameScreenManager screenManager)
+        public SelectCharScreen(IGameScreenManager screenManager)
         {
             m_screenManager = screenManager;
         }
@@ -69,7 +65,7 @@ namespace Final_Assignment.Screens
                 Viewport = new Rectangle(0, 0, 150, 230),
                 /*_hit = _hit,
                 Name = "guan",*/
-               /* Weapon = "lance",*/
+                /* Weapon = "lance",*/
                 HP = 1,
                 attack = 1
             };
@@ -95,8 +91,8 @@ namespace Final_Assignment.Screens
             }
 
             spriteBatch.DrawString(_font,
-                    Singleton.Instance._currentmouse.Position.X+", "+ Singleton.Instance._currentmouse.Position.Y,
-                    new Vector2(200,200),
+                    Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
+                    new Vector2(200, 200),
                     Color.White);
             spriteBatch.End();
         }

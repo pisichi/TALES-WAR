@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
@@ -9,14 +8,21 @@ namespace Final_Assignment
 {
     class BulletPhysicComponent : PhysicComponent
     {
-        public float _tick;
-        public float PreviousTime;
-        public float CurrentTime;
-        float dt;
-        bool hasPreviousPosition = false;
+
+        private bool hitting;
+        private bool touch;
+        private bool hasPreviousPosition = false;
+        private bool HasMaxY = false;
+        public float maxY;
+        private GameObject target;
+        private float waitTime;
+
+        public Vector2 PreviousPosition;
+
         public BulletPhysicComponent()
         {
-            //Console.WriteLine("bullet is here");
+            hitting = false;
+            touch = false;
         }
 
 
@@ -32,101 +38,110 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-            /*PreviousTime = _tick;
-            _tick = gameTime.ElapsedGameTime.Milliseconds;
-            Console.WriteLine(_tick);
-            dt = _tick - PreviousTime;
-            if (dt > 0.15f) dt = 0.15f;
-            //parent.Direction += parent.Gravity * dt;
-            parent.Position += parent.Velocity * dt;
-            parent.Velocity += parent.Gravity * dt;*/
 
-            //Start Potato Physics
-            parent.Direction.Y += parent.gravity * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
 
-            parent.force = 0.1f;
-            /*if (parent.PreviousDirection.Y > parent.Direction.Y)
+            if (!hitting)
             {
-                parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                Console.WriteLine("if");
-            }
 
-            else 
-            {
-                parent.Position.Y += parent.Direction.Y * 1000f * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                Console.WriteLine("else");
-            }*/
+                parent.Direction.Y += parent.gravity * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
                 
 
-            if (parent.HasMaxY)
-            {
-                if (parent.maxY >= parent.Position.Y)
+                if (HasMaxY)
                 {
-                    parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                    parent.maxY = parent.Position.Y;
-                    //if ()
-                        parent.HasMaxY = true;
-                    Console.WriteLine("has y up" + parent.maxY);
+                    if (maxY >= parent.Position.Y)
+                    {
+                        parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                        maxY = parent.Position.Y;
+                        HasMaxY = true;
+                    }
+                    else
+                    {
+                        parent.Position.Y += parent.Direction.Y * 1000f * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                    }
+
                 }
                 else
                 {
-                    parent.Position.Y += parent.Direction.Y * 1000f * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                    Console.WriteLine("has y down" + parent.maxY);
+                    parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                    maxY = parent.Position.Y;
+                    HasMaxY = true;
                 }
 
+
+
+                parent.Position.X += parent.Direction.X * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+
+                if (PreviousPosition.Y < parent.Position.Y && PreviousPosition.Y < maxY && hasPreviousPosition)
+                {
+                    maxY = PreviousPosition.Y;
+                }
+
+                PreviousPosition = parent.Position;
+                hasPreviousPosition = true;
+
+
+
+                if (parent.Position.X > 4000 || parent.Position.X < 0
+                   || parent.Position.Y > 1000)
+                {
+                    parent.IsActive = false;
+                }
+
+                if (!touch)
+                {
+                    foreach (GameObject s in gameObjects)
+                    {
+
+                        if (s.IsActive && parent.IsActive && IsTouching(parent, s))
+                        {
+                            parent.Viewport = new Rectangle(0,0,150, 150);
+                            parent.IsHit = true;
+                            touch = true;
+                        }
+                    }
+                }
+
+                else
+                {
+                    foreach (GameObject s in gameObjects)
+                    {
+
+                        if (s.IsActive && parent.IsActive && IsTouching(parent, s))
+                        {
+                            if (s.status != 3)
+                            {
+                                s.HP -= parent.attack;
+                            }
+                            s.IsHit = true;
+                            if (s.status == 0)
+                            {
+                                s.status = parent.status;
+                            }
+                            target = s;
+                            hitting = true;
+
+                        }
+                    }
+                }
             }
+
             else
             {
-                parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                parent.maxY = parent.Position.Y;
-                parent.HasMaxY = true;
-                Console.WriteLine("no y up" + parent.maxY);
-            }
+                waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
 
-
-
-            parent.Position.X += parent.Direction.X * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-
-            if (parent.PreviousPosition.Y < parent.Position.Y && parent.PreviousPosition.Y < parent.maxY && hasPreviousPosition)
-            {
-                parent.maxY = parent.PreviousPosition.Y;
-            }
-            
-            parent.PreviousPosition = parent.Position;
-            hasPreviousPosition = true;
-            //End Potato Physics
-            if (parent.Position.X > 4000 || parent.Position.X < 0
-                /*|| parent.Position.Y < 0*/ || parent.Position.Y > 1000)
-            {
-                parent.IsActive = false;
-            }
-
-
-                foreach (GameObject s in gameObjects)
-            {
-                if(s.IsActive && parent.IsActive && IsTouching(parent,s))
+                if (waitTime > 0.5)
                 {
-                    //Console.WriteLine("hitting  " + s.Name);
-                    s.HP -= parent.attack;
-                    s.IsHit = true;
-                    s.status = parent.status;
+                    Console.WriteLine("hitting  " + target.Name);
                     parent.IsActive = false;
-                    
+                    hitting = false;
+                    touch = false;
+                    waitTime = 0;
                 }
             }
-            
-            
-            //Console.WriteLine(parent.Position.X);
-            //Console.WriteLine(parent.Position.Y);
-            //Console.WriteLine(parent.Direction.X);
-            //Console.WriteLine(parent.Direction.Y);
-            //Console.WriteLine(parent.LinearVelocity);
+
+            parent.Rotation = (float)Math.Atan2(parent.Direction.X, -parent.Direction.Y);
         }
 
-        public void Hit(List<GameObject> gameObjects, GameObject parent)
-        {
-            parent.IsActive = false;
-        }
 
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
         {

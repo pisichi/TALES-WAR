@@ -12,30 +12,61 @@ namespace Final_Assignment
         Random rnd = new Random();
         int rng;
 
+
+
+
         public GuanSkillComponent()
         {
 
         }
 
-        public override void Draw(SpriteBatch spriteBatch, GameObject parent)
+        public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-            base.Draw(spriteBatch, parent);
+
+
+            if (parent.IsHit)
+            {
+                parent.SendMessage(this, 4);
+                parent.IsHit = false;
+            }
+
+
+            rng = rnd.Next(1, 11);
+
+            if (rng >= 8 && !parent.InTurn && !parent.action && parent.status!= 1)
+            {
+                Console.WriteLine(parent.Name + "  activated passive");
+                
+                parent.InTurn = true;
+
+                parent.SendMessage(this, 3);
+            }
+
+
+
+            if(parent.skill == 1)
+            {
+                Console.WriteLine(parent.Name + " use skill 1");
+                parent.SendMessage(this, 202);
+                parent.skill = 0;
+            }
+
+
+            else if(parent.skill == 2)
+            {
+                Console.WriteLine(parent.Name + " use skill 2");
+                parent.attack += 2;
+                parent.SendMessage(this, 3);
+                parent.skill = 0;
+            }
+                
+
+            base.Update(gameTime, gameObjects, parent);
         }
 
         public override void ReceiveMessage(int message, Component sender)
         {
             base.ReceiveMessage(message, sender);
-        }
-
-        public override void Reset()
-        {
-            base.Reset();
-        }
-
-        public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
-        {
-            
-            base.Update(gameTime, gameObjects, parent);
         }
     }
 }
