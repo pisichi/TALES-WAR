@@ -7,7 +7,6 @@ namespace Final_Assignment
 {
     class GraphicComponent : Component
     {
-        
 
         protected Dictionary<string, Animation> _animations;
         protected AnimationManager _animationManager;
@@ -16,7 +15,6 @@ namespace Final_Assignment
         {
             _animations = animations;
             _animationManager = new AnimationManager(_animations.First().Value);
-            id = 1;
 
         }
 

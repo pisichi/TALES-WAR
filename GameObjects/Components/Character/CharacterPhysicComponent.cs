@@ -32,6 +32,18 @@ namespace Final_Assignment
 
             //parent.Position.X += 10;
 
+            if (parent.status == 2)
+            {
+                parent.HP -= 1;
+                parent.status = 0;
+            }
+
+            if (parent.IsHit)
+            {
+                parent.SendMessage(this, 4);
+                parent.IsHit = false;
+            }
+
             base.Update(gameTime, gameObjects, parent);
         }
     }

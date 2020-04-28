@@ -10,7 +10,6 @@ namespace Final_Assignment
 {
     class Component
     {
-        public int id;
          public Component() 
         {
 

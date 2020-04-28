@@ -54,6 +54,11 @@ namespace Final_Assignment
                 m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
             }
 
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+            {
+                m_screenManager.ChangeScreen(new Screens.CharScreen(m_screenManager));
+            }
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 m_screenManager.Exit();

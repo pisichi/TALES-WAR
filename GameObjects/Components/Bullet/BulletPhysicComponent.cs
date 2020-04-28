@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
@@ -8,21 +9,14 @@ namespace Final_Assignment
 {
     class BulletPhysicComponent : PhysicComponent
     {
-
-       private bool hitting;
-       private bool touch;
-       private bool hasPreviousPosition = false;
-       private bool HasMaxY = false;
-       public float maxY;
-       private GameObject target;
-       private float waitTime;
-       
-
+        public float _tick;
+        public float PreviousTime;
+        public float CurrentTime;
+        float dt;
+        bool hasPreviousPosition = false;
         public BulletPhysicComponent()
         {
-            hitting = false;
-            touch = false;
-            Console.WriteLine("bullet is here");
+            //Console.WriteLine("bullet is here");
         }
 
 
@@ -38,112 +32,101 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
+            /*PreviousTime = _tick;
+            _tick = gameTime.ElapsedGameTime.Milliseconds;
+            Console.WriteLine(_tick);
+            dt = _tick - PreviousTime;
+            if (dt > 0.15f) dt = 0.15f;
+            //parent.Direction += parent.Gravity * dt;
+            parent.Position += parent.Velocity * dt;
+            parent.Velocity += parent.Gravity * dt;*/
+
             //Start Potato Physics
+            parent.Direction.Y += parent.gravity * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
 
-            parent.Rotation+=0.001f;
-            //parent.force = 2000f;
-            if (!hitting)
+            parent.force = 0.1f;
+            /*if (parent.PreviousDirection.Y > parent.Direction.Y)
             {
-                //Start Potato Projectile
-                parent.Direction.Y += parent.gravity * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                parent.force = 2.3f;
+                parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                Console.WriteLine("if");
+            }
 
-                if (HasMaxY)
-                {
-                    if (maxY >= parent.Position.Y)
-                    {
-                        parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                        maxY = parent.Position.Y;
-                        //if ()
-                        HasMaxY = true;
-                        Console.WriteLine("has y up" + maxY);
-                    }
-                    else
-                    {
-                        parent.Position.Y += parent.Direction.Y * 1000f * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                        Console.WriteLine("has y down" + maxY);
-                    }
+            else 
+            {
+                parent.Position.Y += parent.Direction.Y * 1000f * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                Console.WriteLine("else");
+            }*/
+                
 
-                }
-                else
+            if (parent.HasMaxY)
+            {
+                if (parent.maxY >= parent.Position.Y)
                 {
                     parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-                    maxY = parent.Position.Y;
-                    HasMaxY = true;
-                    Console.WriteLine("no y up" + maxY);
+                    parent.maxY = parent.Position.Y;
+                    //if ()
+                        parent.HasMaxY = true;
+                    Console.WriteLine("has y up" + parent.maxY);
                 }
-
-
-
-                parent.Position.X += parent.Direction.X * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
-
-                if (parent.PreviousPosition.Y < parent.Position.Y && parent.PreviousPosition.Y < maxY && hasPreviousPosition)
-                {
-                    maxY = parent.PreviousPosition.Y;
-                }
-
-                parent.PreviousPosition = parent.Position;
-                hasPreviousPosition = true;
-                //End Potato Projectile
-
-
-
-                if (parent.Position.X > 4000 || parent.Position.X < 0
-                   || parent.Position.Y > 1000)
-                {
-                    parent.IsActive = false;
-                }
-
-                if (!touch)
-                {
-                    foreach (GameObject s in gameObjects)
-                    {
-
-                        if (s.IsActive && parent.IsActive && IsTouching(parent, s))
-                        {
-                            parent.Scale = new Vector2(2, 2);
-                            parent.Viewport = new Rectangle(0,0,150, 150);
-                            parent.IsHit = true;
-                            touch = true;
-                        }
-                    }
-                }
-
                 else
                 {
-                    foreach (GameObject s in gameObjects)
-                    {
-
-                        if (s.IsActive && parent.IsActive && IsTouching(parent, s))
-                        {
-
-                            s.HP -= parent.attack;
-                            s.IsHit = true;
-                            s.status = parent.status;
-                            target = s;
-                            hitting = true;
-
-                        }
-                    }
+                    parent.Position.Y += parent.Direction.Y * 1000f * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                    Console.WriteLine("has y down" + parent.maxY);
                 }
-            }
 
+            }
             else
             {
-                waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
+                parent.Position.Y += parent.Direction.Y * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+                parent.maxY = parent.Position.Y;
+                parent.HasMaxY = true;
+                Console.WriteLine("no y up" + parent.maxY);
+            }
 
-                if (waitTime > 0.5)
+
+
+            parent.Position.X += parent.Direction.X * (1000f * parent.force) * gameTime.ElapsedGameTime.Ticks / TimeSpan.TicksPerSecond;
+
+            if (parent.PreviousPosition.Y < parent.Position.Y && parent.PreviousPosition.Y < parent.maxY && hasPreviousPosition)
+            {
+                parent.maxY = parent.PreviousPosition.Y;
+            }
+            
+            parent.PreviousPosition = parent.Position;
+            hasPreviousPosition = true;
+            //End Potato Physics
+            if (parent.Position.X > 4000 || parent.Position.X < 0
+                /*|| parent.Position.Y < 0*/ || parent.Position.Y > 1000)
+            {
+                parent.IsActive = false;
+            }
+
+
+                foreach (GameObject s in gameObjects)
+            {
+                if(s.IsActive && parent.IsActive && IsTouching(parent,s))
                 {
-                    Console.WriteLine("hitting  " + target.Name);
+                    //Console.WriteLine("hitting  " + s.Name);
+                    s.HP -= parent.attack;
+                    s.IsHit = true;
+                    s.status = parent.status;
                     parent.IsActive = false;
-                    hitting = false;
-                    touch = false;
-                    waitTime = 0;
+                    
                 }
             }
-            parent.PreviousDirection = parent.Direction;
+            
+            
+            //Console.WriteLine(parent.Position.X);
+            //Console.WriteLine(parent.Position.Y);
+            //Console.WriteLine(parent.Direction.X);
+            //Console.WriteLine(parent.Direction.Y);
+            //Console.WriteLine(parent.LinearVelocity);
         }
 
+        public void Hit(List<GameObject> gameObjects, GameObject parent)
+        {
+            parent.IsActive = false;
+        }
 
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
         {

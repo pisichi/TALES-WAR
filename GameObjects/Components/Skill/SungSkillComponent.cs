@@ -10,10 +10,6 @@ namespace Final_Assignment
 {
     class SungSkillComponent : SkillComponent
     {
-
-        Random rnd = new Random();
-        int rng;
-
         public SungSkillComponent()
         {
         }
@@ -35,29 +31,7 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-
-            if (parent.skill == 1)
-            {
-                Console.WriteLine(parent.Name + " use skill 1");
-                parent.SendMessage(this, 201);
-                parent.skill = 0;
-            }
-
-            else if (parent.skill == 2)
-            {
-                Console.WriteLine(parent.Name + " use skill 2");
-                parent.SendMessage(this, 201);
-                parent.skill = 0;
-            }
-
-            if (parent.IsHit && parent.status != 1)
-            {
-                if (rng >= 5)
-                {
-                    parent.SendMessage(this, 3);
-                }
-            }
-                base.Update(gameTime, gameObjects, parent);
+            base.Update(gameTime, gameObjects, parent);
         }
     }
 }

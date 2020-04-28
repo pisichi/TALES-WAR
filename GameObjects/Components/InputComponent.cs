@@ -9,7 +9,7 @@ namespace Final_Assignment
 
         public InputComponent()
         {
-            id = 2;
+
         }
         public override void Update(GameTime gameTime, List<GameObject> gameObjects,
         GameObject parent)

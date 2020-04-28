@@ -28,7 +28,6 @@ namespace Final_Assignment
         {
             _bg = content.Load<Texture2D>("sprites/bg");
             _font = content.Load<SpriteFont>("font/File");
-            Singleton.Instance.CurrentStage += 1;
 
         }
 
@@ -44,32 +43,34 @@ namespace Final_Assignment
 
         public void Update(GameTime gameTime)
         {
-            Singleton.Instance._previouskey = Singleton.Instance._currentkey;
-            Singleton.Instance._currentkey = Keyboard.GetState();
+
         }
 
         public void HandleInput(GameTime gameTime)
         {
-            // Console.WriteLine("still in menu");
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+
+            //testing
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
+                //Singleton.Instance.CurrentGameState = Singleton.GameState.GameMenu;
             }
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 m_screenManager.Exit();
-
             }
+
+
+
 
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
+            
             spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800),color: Color.Brown);
             spriteBatch.DrawString(_font, "press A to Continue", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("press A to Continue") / 2, Color.White);
-            spriteBatch.End();
+
         }
 
         public void ChangeBetweenScreen()

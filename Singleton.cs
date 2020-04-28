@@ -9,18 +9,21 @@ namespace Final_Assignment
         public KeyboardState _currentkey;
         public KeyboardState _previouskey;
 
+        public MouseState _currentmouse;
+        public MouseState _previousmouse;
+
         public const int SCREENWIDTH = 1200;
         public const int SCREENHEIGHT = 800;
 
         public GameObject follow;
 
 
-        public string CurrentHero = "thor";
-        public int CurrentStage = 1;
+        public string CurrentHero;
+        public string CurrentStage;
 
 
         public int level_s1 = 1;
-        public int level_s2 = 1;
+        public int level_s2 = 3;
         public int level_s3 = 1;
 
 
@@ -34,6 +37,7 @@ namespace Final_Assignment
 
         public GameState CurrentGameState;
 
+
         public enum TurnState
         {
             skill,
@@ -42,8 +46,8 @@ namespace Final_Assignment
             shoot,
             enemy
         }
-
         public TurnState CurrentTurnState;
+
 
         private static Singleton instance;
 
