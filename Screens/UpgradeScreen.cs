@@ -22,7 +22,6 @@ namespace Final_Assignment
         private List<GameObject> _gameObjects;
         private List<Vector2> skill_button_poslist;
         private List<Vector2> skill_button_scalelist;
-        private AnimationManager _animationManager;
         //ContentManager content;
 
         Texture2D _bg;
@@ -33,18 +32,7 @@ namespace Final_Assignment
         Texture2D _skill2;
         Texture2D _skill3;
 
-
-        private Vector2 skill1_button_scale;
-        private Vector2 skill2_button_scale;
-        private Vector2 skill3_button_scale;
-
-        private Vector2 skill1_button_pos;
-        private Vector2 skill2_button_pos;
-        private Vector2 skill3_button_pos;
-
         private Vector2 KeyboardCursorPos;
-
-        Rectangle Rectangle;
         public UpgradeScreen(IGameScreenManager screenManager)
         {
             m_screenManager = screenManager;
@@ -117,21 +105,16 @@ namespace Final_Assignment
 
                     break;
             }
-            skill1_button_scale = Vector2.One;
-            skill2_button_scale = Vector2.One;
-            skill3_button_scale = Vector2.One;
-            skill_button_scalelist.Add(skill1_button_scale);
-            skill_button_scalelist.Add(skill2_button_scale);
-            skill_button_scalelist.Add(skill3_button_scale);
 
-            skill1_button_pos = new Vector2(Singleton.SCREENWIDTH / 2 - 150, Singleton.SCREENHEIGHT / 2);
-            skill2_button_pos = new Vector2(Singleton.SCREENWIDTH / 2 + 150, Singleton.SCREENHEIGHT / 2);
-            skill3_button_pos = new Vector2(Singleton.SCREENWIDTH / 2 + 450, Singleton.SCREENHEIGHT / 2);
-            skill_button_poslist.Add(skill1_button_pos);
-            skill_button_poslist.Add(skill2_button_pos);
-            skill_button_poslist.Add(skill3_button_pos);
+            skill_button_scalelist.Add(Vector2.One);
+            skill_button_scalelist.Add(Vector2.One);
+            skill_button_scalelist.Add(Vector2.One);
 
-            KeyboardCursorPos = skill1_button_pos;
+            skill_button_poslist.Add(new Vector2(Singleton.SCREENWIDTH / 2 - 150, Singleton.SCREENHEIGHT / 2));
+            skill_button_poslist.Add(new Vector2(Singleton.SCREENWIDTH / 2 + 150, Singleton.SCREENHEIGHT / 2));
+            skill_button_poslist.Add(new Vector2(Singleton.SCREENWIDTH / 2 + 450, Singleton.SCREENHEIGHT / 2));
+
+            KeyboardCursorPos = skill_button_poslist[0];
             isKeyboardCursorActive = false;
 
             isMouseActive = false;
@@ -296,12 +279,9 @@ namespace Final_Assignment
             spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800),color: Color.Brown);
             spriteBatch.DrawString(_font, "press A to Continue", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("press A to Continue") / 2, Color.White);
 
-            /*spriteBatch.Draw(_skill1, new Vector2((Singleton.SCREENWIDTH / 2 - _skill1.Width / 2) - 150, (Singleton.SCREENHEIGHT / 2 - _skill1.Height / 2)), null, null, null, 0, skill1_scale);
-            spriteBatch.Draw(_skill2, new Vector2((Singleton.SCREENWIDTH / 2 - _skill2.Width / 2) + 150, (Singleton.SCREENHEIGHT / 2 - _skill1.Height / 2)), null, null, null, 0, skill2_scale);
-            spriteBatch.Draw(_skill3, new Vector2((Singleton.SCREENWIDTH / 2 - _skill3.Width / 2) + 450, (Singleton.SCREENHEIGHT / 2 - _skill1.Height / 2)), null, null, null, 0, skill3_scale);*/
-            spriteBatch.Draw(_skill1, skill1_button_pos, null, null, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 0, skill_button_scalelist[0], null, 0);
-            spriteBatch.Draw(_skill2, skill2_button_pos, null, null, new Vector2(_skill2.Width / 2, _skill2.Height / 2), 0, skill_button_scalelist[1], null, 0);
-            spriteBatch.Draw(_skill3, skill3_button_pos, null, null, new Vector2(_skill3.Width / 2, _skill3.Height / 2), 0, skill_button_scalelist[2], null, 0);
+            spriteBatch.Draw(_skill1, skill_button_poslist[0], null, null, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 0, skill_button_scalelist[0], null, 0);
+            spriteBatch.Draw(_skill2, skill_button_poslist[1], null, null, new Vector2(_skill2.Width / 2, _skill2.Height / 2), 0, skill_button_scalelist[1], null, 0);
+            spriteBatch.Draw(_skill3, skill_button_poslist[2], null, null, new Vector2(_skill3.Width / 2, _skill3.Height / 2), 0, skill_button_scalelist[2], null, 0);
 
             if(isKeyboardCursorActive)
                 spriteBatch.Draw(_KeyboardCursor, KeyboardCursorPos, null, new Rectangle(0, 0, 100, 100), new Vector2(50, 50), 0, new Vector2(1.5f, 1.5f), Color.Red, 0);
