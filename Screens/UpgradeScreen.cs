@@ -289,11 +289,19 @@ namespace Final_Assignment
         {
             spriteBatch.Begin();
             spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800), color: Color.Brown);
+
+            spriteBatch.DrawString(_font, "Upgrade skill", new Vector2(Singleton.SCREENWIDTH / 2, 100), Color.White, 0, _font.MeasureString("Upgrade skill") / 2, 2f, SpriteEffects.None, 0);
+
             spriteBatch.DrawString(_font, "Remaining Skill Points :  " + skillPoint, new Vector2(Singleton.SCREENWIDTH / 2,600) - _font.MeasureString("Remaining Skill Points :") / 2, Color.White);
 
             spriteBatch.Draw(_skill1, skill_button_poslist[0], null, null, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 0, skill_button_scalelist[0], null, 0);
             spriteBatch.Draw(_skill2, skill_button_poslist[1], null, null, new Vector2(_skill2.Width / 2, _skill2.Height / 2), 0, skill_button_scalelist[1], null, 0);
             spriteBatch.Draw(_skill3, skill_button_poslist[2], null, null, new Vector2(_skill3.Width / 2, _skill3.Height / 2), 0, skill_button_scalelist[2], null, 0);
+
+            spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_s1, skill_button_poslist[0], Color.White, 0, new Vector2((_skill1.Width - 100)/ 2, (_skill1.Height + 100) / 2) + _font.MeasureString("level") / 2 ,1, SpriteEffects.None, 0);
+            spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_s2, skill_button_poslist[1], Color.White, 0, new Vector2((_skill1.Width - 100)/ 2, (_skill1.Height + 100) / 2) + _font.MeasureString("level") / 2 ,1, SpriteEffects.None, 0);
+            spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_s3, skill_button_poslist[2], Color.White, 0, new Vector2((_skill1.Width - 100)/ 2, (_skill1.Height + 100) / 2) + _font.MeasureString("level") / 2 ,1, SpriteEffects.None, 0);
+
 
             if (isKeyboardCursorActive)
                 spriteBatch.Draw(_KeyboardCursor, KeyboardCursorPos, null, new Rectangle(0, 0, 100, 100), new Vector2(50, 50), 0, new Vector2(1.5f, 1.5f), Color.Red, 0);
