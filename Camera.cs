@@ -9,24 +9,9 @@ namespace Final_Assignment
         public Matrix Transform { get; private set; }
         public void Follow(GameObject target)
         {
-
-            //Start check camera collision
-            target.CameraPosition = target.Position;
-            if (target.Position.X > 4000 - Singleton.SCREENWIDTH / 2 - target.Rectangle.Height / 2)
-                target.CameraPosition.X = 4000 - Singleton.SCREENWIDTH / 2 - target.Rectangle.Height / 2;
-
-            if (target.Position.X < Singleton.SCREENWIDTH / 2)
-                target.CameraPosition.X = Singleton.SCREENWIDTH / 2;
-
-            if (target.Position.Y < Singleton.SCREENHEIGHT / 2)
-                target.CameraPosition.Y = Singleton.SCREENHEIGHT / 2;
-
-            if (target.Position.Y > 1000 - Singleton.SCREENHEIGHT / 2 - target.Rectangle.Height / 2)
-                target.CameraPosition.Y = 1000 - Singleton.SCREENHEIGHT / 2 - target.Rectangle.Height / 2;
-            //End check camera collision
             var position = Matrix.CreateTranslation(
-              -target.CameraPosition.X - (target.Rectangle.Width / 2),
-              -target.CameraPosition.Y - (target.Rectangle.Height / 2),
+              -target.Position.X - (target.Rectangle.Width / 2),
+              -target.Position.Y - (target.Rectangle.Height / 2),
               0);
 
             var offset = Matrix.CreateTranslation(

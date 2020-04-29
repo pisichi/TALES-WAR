@@ -36,6 +36,8 @@ namespace Final_Assignment
         List<GameObject> enemyList;
 
         Texture2D _bg;
+        Texture2D _sky;
+        Texture2D _platform;
 
         Texture2D _hit;
         Texture2D _arrow;
@@ -72,7 +74,7 @@ namespace Final_Assignment
             enemyList = new List<GameObject>();
             _camera = new Camera();
 
-            _bg = content.Load<Texture2D>("sprites/bg");
+            _bg = content.Load<Texture2D>("sprites/stage_bg");
             _pin = content.Load<Texture2D>("sprites/pin");
             _gauge = content.Load<Texture2D>("sprites/gauge");
             _arrow = content.Load<Texture2D>("sprites/arrow");
@@ -142,9 +144,17 @@ namespace Final_Assignment
             Singleton.Instance.CurrentTurnState = Singleton.TurnState.skill;
 
             if (Singleton.Instance.CurrentStage == 1)
-            SetStage1();
-            else if(Singleton.Instance.CurrentStage == 2)
-            SetStage2();
+            {
+                _sky = content.Load<Texture2D>("sprites/stage_sky_1");
+                _platform = content.Load<Texture2D>("sprites/stage_platform_1");
+                SetStage1();
+            }
+            else if (Singleton.Instance.CurrentStage == 2)
+            {
+                _sky = content.Load<Texture2D>("sprites/stage_sky_2");
+                _platform = content.Load<Texture2D>("sprites/stage_platform_2");
+                SetStage2();
+            }
 
         }
 
@@ -254,7 +264,7 @@ namespace Final_Assignment
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
-                Position = new Vector2(3380, 550),
+                Position = new Vector2(3800, 400),
                 Viewport = new Rectangle(0, 0, 200, 150),
                 Name = "floor",
                 _hit = _hit
@@ -263,7 +273,7 @@ namespace Final_Assignment
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
-                Position = new Vector2(2950, 300),
+                Position = new Vector2(3200, 650),
                 Viewport = new Rectangle(0, 0, 200, 150),
                 Name = "floor",
                 _hit = _hit
@@ -272,7 +282,7 @@ namespace Final_Assignment
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
-                Position = new Vector2(2900, 900),
+                Position = new Vector2(2420, 750),
                 Viewport = new Rectangle(0, 0, 350, 150),
                 Name = "floor",
                 _hit = _hit
@@ -285,6 +295,8 @@ namespace Final_Assignment
 
         private void SetStage2()
         {
+
+            #region character
             boss = new GameObject(new CharacterAIComponent(content),
                                   new CharacterPhysicComponent(),
                                   new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
@@ -309,6 +321,7 @@ namespace Final_Assignment
             };
             _gameObjects.Add(boss);
             enemyList.Add(boss);
+            #endregion
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
@@ -330,7 +343,7 @@ namespace Final_Assignment
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
-                Position = new Vector2(3380, 550),
+                Position = new Vector2(3500, 670),
                 Viewport = new Rectangle(0, 0, 200, 150),
                 Name = "floor",
                 _hit = _hit
@@ -435,45 +448,6 @@ namespace Final_Assignment
             }
         }
 
-        private void EnemyModule(GameTime gameTime)
-        {
-            if (enemyIndex >= enemyList.Count)
-            {
-                player.InTurn = true;
-                Singleton.Instance.CurrentTurnState = Singleton.TurnState.skill;
-            }
-            else
-            {
-                
-
-                if (enemyList[enemyIndex].InTurn)
-                {
-                    if(!enemyList[enemyIndex].shooting)
-                        Singleton.Instance.follow = enemyList[enemyIndex];
-
-                    waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
-                    if (waitTime > 2)
-                    {
-                        enemyList[enemyIndex].action = true;
-                       // enemyList[enemyIndex].InTurn = false;
-                        waitTime = 0;
-                    }
-                }
-
-                if (!enemyList[enemyIndex].InTurn || enemyList[enemyIndex].HP <= 0)
-                {
-                    enemyIndex++;
-
-                    if (enemyIndex < enemyList.Count)
-                    {
-                        enemyList[enemyIndex].InTurn = true;
-                        
-                    }
-                }
-
-            }
-        }
-
         private void PlayerModule()
         {
             enemyIndex = 0;
@@ -487,7 +461,7 @@ namespace Final_Assignment
                     if (player.status == 1)
                     { Singleton.Instance.CurrentTurnState = Singleton.TurnState.shoot; }
 
-                    if(Singleton.Instance._currentkey.IsKeyDown(Keys.NumPad1) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.Cooldown_1 <= 0)
+                    if (Singleton.Instance._currentkey.IsKeyDown(Keys.NumPad1) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.Cooldown_1 <= 0)
                     {
                         player.skill = 1;
                         Singleton.Instance.Cooldown_1 = 4;
@@ -538,18 +512,18 @@ namespace Final_Assignment
 
                     if (swap)
                     {
-                        player.force += 0.1f;
+                        player.force += 0.05f;
                     }
                     else
                     {
-                        player.force -= 0.1f;
+                        player.force -= 0.05f;
                     }
 
-                    if (player.force <= 0)
+                    if (player.force <= 1)
                     {
                         swap = true;
                     }
-                    if (player.force >= 5)
+                    if (player.force >= 3)
                     {
                         swap = false;
                     }
@@ -558,7 +532,6 @@ namespace Final_Assignment
                     {
                         player.action = true;
                         Singleton.Instance.CurrentTurnState = Singleton.TurnState.shoot;
-                        //Rotation = 0;
                     }
                     break;
 
@@ -574,10 +547,49 @@ namespace Final_Assignment
 
         }
 
+        private void EnemyModule(GameTime gameTime)
+        {
+            if (enemyIndex >= enemyList.Count)
+            {
+                player.InTurn = true;
+                Singleton.Instance.CurrentTurnState = Singleton.TurnState.skill;
+            }
+            else
+            {
+                
+
+                if (enemyList[enemyIndex].InTurn)
+                {
+                    if(!enemyList[enemyIndex].shooting)
+                        Singleton.Instance.follow = enemyList[enemyIndex];
+
+                    waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
+                    if (waitTime > 2)
+                    {
+                        enemyList[enemyIndex].action = true;
+                       // enemyList[enemyIndex].InTurn = false;
+                        waitTime = 0;
+                    }
+                }
+
+                if (!enemyList[enemyIndex].InTurn || enemyList[enemyIndex].HP <= 0)
+                {
+                    enemyIndex++;
+
+                    if (enemyIndex < enemyList.Count)
+                    {
+                        enemyList[enemyIndex].InTurn = true;
+                        
+                    }
+                }
+
+            }
+        }
+
         public void HandleInput(GameTime gameTime)
         {
 
-            if ((Singleton.Instance._currentkey.IsKeyDown(Keys.L) && Singleton.Instance._currentkey != Singleton.Instance._previouskey) || player.HP <= 0)
+            if ((Singleton.Instance._currentkey.IsKeyDown(Keys.L) && Singleton.Instance._currentkey != Singleton.Instance._previouskey) || player.HP <= 0 || boss.HP <= 0)
             {
                 m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
             }
@@ -594,7 +606,9 @@ namespace Final_Assignment
         {
 
             spriteBatch.Begin(transformMatrix: _camera.Transform);
+            spriteBatch.Draw(_sky, destinationRectangle: new Rectangle(0, 0, 4000, 1000));
             spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 4000, 1000));
+            spriteBatch.Draw(_platform, destinationRectangle: new Rectangle(0, 0, 4000, 1000));
 
 
             switch (Singleton.Instance.CurrentTurnState)
@@ -624,7 +638,7 @@ namespace Final_Assignment
                 case Singleton.TurnState.force:
                     spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, player.Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     spriteBatch.Draw(_gauge, player.Position + new Vector2(120, -100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
-                    spriteBatch.Draw(_arrow, player.Position + new Vector2(120 + player.force * 10, -100), null, Color.Red, 0f, Vector2.Zero, new Vector2(2, 0.5f), SpriteEffects.None, 0);
+                    spriteBatch.Draw(_pin, player.Position + new Vector2(120 + (player.force - 1) * 30, -100), null, Color.Red, 0f, Vector2.Zero, new Vector2(2, 0.5f), SpriteEffects.None, 0);
                     break;
                 case Singleton.TurnState.shoot:
                     break;

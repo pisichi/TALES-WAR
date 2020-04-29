@@ -36,7 +36,6 @@ namespace Final_Assignment
 
         public Dictionary<string, SoundEffectInstance> SoundEffects;
         public Vector2 Position;
-        public Vector2 CameraPosition;
 
         public float Rotation;
 
@@ -53,7 +52,6 @@ namespace Final_Assignment
         public string Name;
         public string Weapon;
         public bool IsActive = true;
-
 
 
         public Rectangle Rectangle
