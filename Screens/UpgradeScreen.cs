@@ -21,6 +21,7 @@ namespace Final_Assignment
         private List<GameObject> _gameObjects;
         private List<Vector2> skill_button_poslist;
         private List<Vector2> skill_button_scalelist;
+        private int skillPoint;
         //ContentManager content;
 
         Texture2D _bg;
@@ -48,6 +49,7 @@ namespace Final_Assignment
             _font = content.Load<SpriteFont>("font/File");
             _KeyboardCursor = content.Load<Texture2D>("sprites/hitbox");
             Singleton.Instance.CurrentStage += 1;
+            skillPoint = 2;
             switch (Singleton.Instance.CurrentHero)
             {
                 case "zeus":
@@ -146,9 +148,11 @@ namespace Final_Assignment
                 skill_button_scalelist[0] = new Vector2(1.2f, 1.2f);
                 KeyboardCursorPos = skill_button_poslist[0];
                 keyboardCursorPosCounter = 0;
-                if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed)
+                if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed && Singleton.Instance._previousmouse.LeftButton != ButtonState.Pressed && Singleton.Instance.level_s1 < 3)
                 {
-
+                    Singleton.Instance.level_s1 += 1;
+                    skillPoint -= 1;
+                  
                 }
             }
             else
@@ -165,9 +169,10 @@ namespace Final_Assignment
                 skill_button_scalelist[1] = new Vector2(1.2f, 1.2f);
                 KeyboardCursorPos = skill_button_poslist[1];
                 keyboardCursorPosCounter = 1;
-                if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed)
+                if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed && Singleton.Instance._previousmouse.LeftButton != ButtonState.Pressed && Singleton.Instance.level_s2 < 3)
                 {
-
+                    Singleton.Instance.level_s2 += 1;
+                    skillPoint -= 1;
                 }
             }
             else
@@ -184,14 +189,21 @@ namespace Final_Assignment
                 skill_button_scalelist[2] = new Vector2(1.2f, 1.2f);
                 KeyboardCursorPos = skill_button_poslist[2];
                 keyboardCursorPosCounter = 2;
-                if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed)
+                if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed && Singleton.Instance._previousmouse.LeftButton != ButtonState.Pressed && Singleton.Instance.level_s3 < 3)
                 {
-
+                    Singleton.Instance.level_s3 += 1;
+                    skillPoint -= 1;
                 }
             }
             else
             {
                 skill_button_scalelist[2] = Vector2.One;
+            }
+
+
+            if(skillPoint == 0)
+            {
+                m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
             }
 
             for (int i = 0; i < _gameObjects.Count; i++)
@@ -205,10 +217,7 @@ namespace Final_Assignment
         public void HandleInput(GameTime gameTime)
         {
 
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
-            {
-                m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
-            }
+
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Right) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
@@ -248,15 +257,27 @@ namespace Final_Assignment
                 switch (keyboardCursorPosCounter)
                 {
                     case 0:
-
+                        if (Singleton.Instance.level_s1 < 3)
+                        {
+                            Singleton.Instance.level_s1 += 1;
+                            skillPoint -= 1;
+                        }
                         break;
 
                     case 1:
-
+                        if (Singleton.Instance.level_s2 < 3)
+                        {
+                            Singleton.Instance.level_s2 += 1;
+                            skillPoint -= 1;
+                        }
                         break;
 
                     case 2:
-
+                        if (Singleton.Instance.level_s3 < 3)
+                        {
+                            Singleton.Instance.level_s3 += 1;
+                            skillPoint -= 1;
+                        }
                         break;
                 }
                
@@ -268,7 +289,7 @@ namespace Final_Assignment
         {
             spriteBatch.Begin();
             spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800), color: Color.Brown);
-            spriteBatch.DrawString(_font, "press A to Continue", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("press A to Continue") / 2, Color.White);
+            spriteBatch.DrawString(_font, "Remaining Skill Points :  " + skillPoint, new Vector2(Singleton.SCREENWIDTH / 2,600) - _font.MeasureString("Remaining Skill Points :") / 2, Color.White);
 
             spriteBatch.Draw(_skill1, skill_button_poslist[0], null, null, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 0, skill_button_scalelist[0], null, 0);
             spriteBatch.Draw(_skill2, skill_button_poslist[1], null, null, new Vector2(_skill2.Width / 2, _skill2.Height / 2), 0, skill_button_scalelist[1], null, 0);

@@ -80,6 +80,10 @@ namespace Final_Assignment
             _gameObjects.Add(thor);
 
             KeyboardCursorPos = _charPosition[0];
+
+            Singleton.Instance.level_s1 = 1;
+            Singleton.Instance.level_s2 = 1;
+            Singleton.Instance.level_s3 = 1;
         }
         public void ChangeBetweenScreen()
         {

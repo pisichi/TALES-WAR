@@ -22,9 +22,9 @@ namespace Final_Assignment
         public int CurrentStage;
 
 
-        public int level_s1 = 1;
-        public int level_s2 = 1;
-        public int level_s3 = 3;
+        public int level_s1;
+        public int level_s2;
+        public int level_s3;
 
         public int Cooldown_1;
         public int Cooldown_2;
