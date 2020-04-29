@@ -8,13 +8,18 @@ namespace Final_Assignment
 
         public KeyboardState _currentkey;
         public KeyboardState _previouskey;
+
+        public MouseState _currentmouse;
+        public MouseState _previousmouse;
+
+
         public const int SCREENWIDTH = 1200;
         public const int SCREENHEIGHT = 800;
         public GameObject follow;
 
 
-        public string CurrentHero = "zeus";
-        public int CurrentStage = 1;
+        public string CurrentHero;
+        public int CurrentStage;
 
 
         public int level_s1 = 1;

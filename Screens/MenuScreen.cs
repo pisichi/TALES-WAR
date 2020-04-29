@@ -25,7 +25,7 @@ namespace Final_Assignment
 
         public void Init(ContentManager content)
         {
-            _bg = content.Load<Texture2D>("sprites/bg");
+            _bg = content.Load<Texture2D>("sprites/menu_4");
             _font = content.Load<SpriteFont>("font/File");
 
         }
@@ -48,16 +48,14 @@ namespace Final_Assignment
 
         public void HandleInput(GameTime gameTime)
         {
-          // Console.WriteLine("still in menu");
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
-                m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
+                m_screenManager.ChangeScreen(new SelectCharScreen(m_screenManager));
             }
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 m_screenManager.Exit();
-
             }
 
         }
@@ -67,8 +65,8 @@ namespace Final_Assignment
 
             spriteBatch.Begin();
 
-            spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800), color: Color.Blue);
-            spriteBatch.DrawString(_font, "Game Menu", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT  / 3) - _font.MeasureString("Game Menu") / 2, Color.White);
+            spriteBatch.Draw(_bg, Vector2.Zero, color: Color.White);
+            spriteBatch.DrawString(_font, "TALES WAR", new Vector2(300,200) - _font.MeasureString("TALE WARS") / 2, Color.White);
             spriteBatch.DrawString(_font, "press space to continue", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("press space to continue") / 2, Color.White);
             spriteBatch.DrawString(_font, "press ESC to exit", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT  / 4) - _font.MeasureString("press ESC to exit") / 2, Color.White);
 

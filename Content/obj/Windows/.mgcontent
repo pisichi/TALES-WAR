@@ -7,14 +7,15 @@
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/font/File.spritefont</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/arrow.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/ball.png</File>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bg.png</File>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bullet.png</File>
-    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/char.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/fx_barrier.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/fx_burn.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/gauge.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/heart.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/hitbox.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/menu_1.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/menu_2.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/menu_3.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/menu_4.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/pin.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/sheet_guan.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/sheet_mob.png</File>
@@ -27,8 +28,19 @@
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/skill_zeus_1.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/skill_zeus_2.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/skill_zeus_3.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/stage_bg.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/stage_platform_1.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/stage_platform_2.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/stage_sky_1.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/stage_sky_2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

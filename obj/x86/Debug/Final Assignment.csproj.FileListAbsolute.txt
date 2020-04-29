@@ -21,11 +21,9 @@ C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86\Debug\Final Assignment.csproj.CopyComplete
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86\Debug\Final Assignment.exe
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86\Debug\Final Assignment.pdb
-C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\bg.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\font\File.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\arrow.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\bullet.xnb
-C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\char.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\gauge.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\pin.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\ball.xnb
@@ -44,3 +42,12 @@ C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Win
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\skill_zeus_1.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\skill_zeus_2.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\skill_zeus_3.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\menu_1.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\menu_2.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\menu_3.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\menu_4.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\stage_bg.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\stage_platform_1.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\stage_platform_2.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\stage_sky_1.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\stage_sky_2.xnb

@@ -96,7 +96,7 @@ namespace Final_Assignment
         }
 
 
-            _animationManager.Draw(spriteBatch, parent.Position, 0f, new Vector2(1, 1));
+            _animationManager.Draw(spriteBatch, parent.Position, 0f, parent.Scale);
             if(parent.status == 2)
             {
                 spriteBatch.Draw(_burn, parent.Position - new Vector2(_burn.Width/2,_burn.Height/2));
