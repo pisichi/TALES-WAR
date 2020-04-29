@@ -42,7 +42,8 @@ namespace Final_Assignment
         public void Init(ContentManager content)
         {
             _gameObjects = new List<GameObject>();
-            _bg = content.Load<Texture2D>("sprites/stage_bg");
+
+            _bg = content.Load<Texture2D>("sprites/stage_sky_2");
             _font = content.Load<SpriteFont>("font/File");
             _thor = content.Load<Texture2D>("sprites/sheet_thor");
             _zeus = content.Load<Texture2D>("sprites/sheet_zeus");
@@ -59,13 +60,8 @@ namespace Final_Assignment
                                     null)
             {
                 Position = _charPosition[0],
-                InTurn = false,
-                Viewport = new Rectangle(0, 0, 150, 230),
-                /*_hit = _hit,
-                Name = Singleton.Instance.CurrentHero,*/
-                /*Weapon = "hammer",*/
                 HP = 1,
-                attack = 1,
+                IsActive = false
             };
             thor = new GameObject(null,
                                     null,
@@ -77,12 +73,8 @@ namespace Final_Assignment
             {
                 Position = _charPosition[1],
                 InTurn = false,
-                Viewport = new Rectangle(0, 0, 150, 230),
-                /*_hit = _hit,
-                Name = "guan",*/
-                /* Weapon = "lance",*/
                 HP = 1,
-                attack = 1
+                IsActive = false
             };
             _gameObjects.Add(zeus);
             _gameObjects.Add(thor);
@@ -100,8 +92,8 @@ namespace Final_Assignment
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            //spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800), color: Color.Blue);
-            //_animationManager.Draw(spriteBatch, new Vector2(Singleton.SCREENWIDTH / 2 - 300, Singleton.SCREENHEIGHT / 2 - 125), 0f, new Vector2(1, 1));
+
+            spriteBatch.Draw(_bg, Vector2.Zero, color: Color.White);
             if (isKeyboardCursorActive)
                 spriteBatch.Draw(_KeyboardCursor, KeyboardCursorPos, null, new Rectangle(0, 0, 100, 100), new Vector2(50, 50), 0, new Vector2(2.5f, 3.5f), Color.Red, 0);
 
@@ -110,10 +102,8 @@ namespace Final_Assignment
                 _gameObjects[i].Draw(spriteBatch);
             }
 
-            spriteBatch.DrawString(_font,
-                    Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
-                    new Vector2(200, 200),
-                    Color.White);
+            spriteBatch.DrawString(_font,"Select Character", new Vector2(Singleton.SCREENWIDTH/2, 100), Color.White,0, _font.MeasureString("Select Character") / 2 , 2f, SpriteEffects.None, 0);
+
             spriteBatch.End();
         }
 

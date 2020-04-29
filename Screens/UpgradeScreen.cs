@@ -61,13 +61,8 @@ namespace Final_Assignment
                                    null)
                     {
                         Position = new Vector2(Singleton.SCREENWIDTH / 2 - 400, Singleton.SCREENHEIGHT / 2),
-                        InTurn = false,
-                        Viewport = new Rectangle(0, 0, 150, 230),
-                        /*_hit = _hit,
-                        Name = Singleton.Instance.CurrentHero,*/
-                        /*Weapon = "hammer",*/
                         HP = 1,
-                        attack = 1,
+                        IsActive = false
                     };
                     _gameObjects.Add(selectedChar);
 
@@ -88,13 +83,9 @@ namespace Final_Assignment
                                             null)
                     {
                         Position = new Vector2(Singleton.SCREENWIDTH / 2 - 400, Singleton.SCREENHEIGHT / 2),
-                        InTurn = false,
-                        Viewport = new Rectangle(0, 0, 150, 230),
-                        /*_hit = _hit,
-                        Name = "guan",*/
-                        /* Weapon = "lance",*/
                         HP = 1,
-                        attack = 1
+                        IsActive = false
+
                     };
                     _gameObjects.Add(selectedChar);
 
@@ -136,6 +127,7 @@ namespace Final_Assignment
 
             Singleton.Instance._previousmouse = Singleton.Instance._currentmouse;
             Singleton.Instance._currentmouse = Mouse.GetState();
+
             //Mouse and Keyboard Detect
             if (Singleton.Instance._currentmouse.Position != Singleton.Instance._previousmouse.Position || Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed || !isKeyboardCursorActive)
             {
@@ -144,6 +136,7 @@ namespace Final_Assignment
             }
             else isMouseActive = false;
             //End Mouse and Keyboard Detect
+
             if (Singleton.Instance._currentmouse.Position.X > (Singleton.SCREENWIDTH / 2 - _skill1.Width / 2) - 150
                     && Singleton.Instance._currentmouse.Position.X < (Singleton.SCREENWIDTH / 2 + _skill1.Width / 2) - 150
                     && Singleton.Instance._currentmouse.Position.Y > Singleton.SCREENHEIGHT / 2 - _skill1.Height / 2
@@ -266,7 +259,7 @@ namespace Final_Assignment
 
                         break;
                 }
-                //m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
+               
             }
 
         }

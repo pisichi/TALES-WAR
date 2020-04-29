@@ -54,7 +54,6 @@ namespace Final_Assignment
         public bool IsActive = true;
 
 
-
         public Rectangle Rectangle
         {
             get

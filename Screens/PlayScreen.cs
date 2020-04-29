@@ -589,7 +589,7 @@ namespace Final_Assignment
         public void HandleInput(GameTime gameTime)
         {
 
-            if ((Singleton.Instance._currentkey.IsKeyDown(Keys.L) && Singleton.Instance._currentkey != Singleton.Instance._previouskey) || player.HP <= 0)
+            if ((Singleton.Instance._currentkey.IsKeyDown(Keys.L) && Singleton.Instance._currentkey != Singleton.Instance._previouskey) || player.HP <= 0 || boss.HP <= 0)
             {
                 m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
             }

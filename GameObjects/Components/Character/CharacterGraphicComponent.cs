@@ -90,10 +90,13 @@ namespace Final_Assignment
         public override void Draw(SpriteBatch spriteBatch, GameObject parent)
         {
 
-            for(int i = 1; i<= parent.HP; i++)
+            if (parent.IsActive)
             {
-                spriteBatch.Draw(_hp, new Vector2((int)parent.Position.X + (i * 60) - (60 * parent.HP / 2), (int)parent.Position.Y + 150), null, Color.White, 0, new Vector2(_hp.Width / 2, _hp.Height / 2), 1f, SpriteEffects.None, 0);    
-        }
+                for (int i = 1; i <= parent.HP; i++)
+                {
+                    spriteBatch.Draw(_hp, new Vector2((int)parent.Position.X + (i * 60) - (60 * parent.HP / 2), (int)parent.Position.Y + 150), null, Color.White, 0, new Vector2(_hp.Width / 2, _hp.Height / 2), 1f, SpriteEffects.None, 0);
+                }
+            }
 
 
             _animationManager.Draw(spriteBatch, parent.Position, 0f, parent.Scale);
