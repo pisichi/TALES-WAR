@@ -264,7 +264,7 @@ namespace Final_Assignment
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
-                Position = new Vector2(3380, 550),
+                Position = new Vector2(3800, 400),
                 Viewport = new Rectangle(0, 0, 200, 150),
                 Name = "floor",
                 _hit = _hit
@@ -273,7 +273,7 @@ namespace Final_Assignment
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
-                Position = new Vector2(2950, 300),
+                Position = new Vector2(3200, 650),
                 Viewport = new Rectangle(0, 0, 200, 150),
                 Name = "floor",
                 _hit = _hit
@@ -282,7 +282,7 @@ namespace Final_Assignment
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
-                Position = new Vector2(2900, 900),
+                Position = new Vector2(2420, 750),
                 Viewport = new Rectangle(0, 0, 350, 150),
                 Name = "floor",
                 _hit = _hit
@@ -295,6 +295,8 @@ namespace Final_Assignment
 
         private void SetStage2()
         {
+
+            #region character
             boss = new GameObject(new CharacterAIComponent(content),
                                   new CharacterPhysicComponent(),
                                   new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
@@ -319,6 +321,7 @@ namespace Final_Assignment
             };
             _gameObjects.Add(boss);
             enemyList.Add(boss);
+            #endregion
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
@@ -340,7 +343,7 @@ namespace Final_Assignment
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
-                Position = new Vector2(3380, 550),
+                Position = new Vector2(3500, 670),
                 Viewport = new Rectangle(0, 0, 200, 150),
                 Name = "floor",
                 _hit = _hit
