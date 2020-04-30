@@ -51,3 +51,11 @@ C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Win
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\stage_platform_2.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\stage_sky_1.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\stage_sky_2.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\fram1.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\newmainskill.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\newplus.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\select.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\t1.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\t2.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\z1.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\z2.xnb
