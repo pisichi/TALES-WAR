@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -28,12 +29,17 @@ namespace Final_Assignment
         Texture2D _zeus;
         Texture2D _KeyboardCursor;
 
+        SoundEffectInstance _selected;
+        SoundEffectInstance _cursorselection;
+
         Rectangle Rectangle;
 
         private bool isKeyboardCursorActive;
         private int keyboardCursorPosCounter;
         private Keycursorstate keycursorstate;
+        private int cursorselectionPlayedcount;
         private bool isMouseActive;
+        private bool iscursorselectionPlayed;
         private enum Keycursorstate
         {
             Charater,
@@ -60,8 +66,12 @@ namespace Final_Assignment
             _font = content.Load<SpriteFont>("font/File");
             _thor = content.Load<Texture2D>("sprites/sheet_thor");
             _zeus = content.Load<Texture2D>("sprites/sheet_zeus");
-
             _KeyboardCursor = content.Load<Texture2D>("sprites/hitbox");
+
+            _selected = content.Load<SoundEffect>("sounds/selected_sound").CreateInstance();
+            _cursorselection = content.Load<SoundEffect>("sounds/selection_sound").CreateInstance();
+
+            
             _charPosition = new List<Vector2>();
             _charPosition.Add(new Vector2(Singleton.SCREENWIDTH / 2 - 150, Singleton.SCREENHEIGHT / 2));
             _charPosition.Add(new Vector2(Singleton.SCREENWIDTH / 2 + 150, Singleton.SCREENHEIGHT / 2));
@@ -97,6 +107,12 @@ namespace Final_Assignment
             nav_button_poslist.Add(new Vector2(Singleton.SCREENWIDTH / 2, 650));
             nav_button_scalelist.Add(new Vector2(1.5f, 1.5f));
             nav_button_colorlist.Add(Color.White);
+
+            Singleton.Instance.level_s1 = 1;
+            Singleton.Instance.level_s2 = 1;
+            Singleton.Instance.level_s3 = 1;
+
+            Singleton.Instance.CurrentStage = 0;
 
             KeyboardCursorPos = _charPosition[0];
         }
@@ -138,7 +154,7 @@ namespace Final_Assignment
                                     "Back",
                                     nav_button_poslist[0],
                                     Color.Red, 0, _font.MeasureString("Back") / 2, new Vector2(1.5f, 1.5f), 0, 0);
-                        break; 
+                        break;
                 }
             }
 
@@ -148,7 +164,7 @@ namespace Final_Assignment
             }
 
             spriteBatch.DrawString(_font,
-                 Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y + "   Res: "+Singleton.SCREENWIDTH+"x"+Singleton.SCREENHEIGHT,
+                 "[console log] Res: " + Singleton.SCREENWIDTH + "x" + Singleton.SCREENHEIGHT + "  MousePos: " + Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
                  new Vector2(1, Singleton.SCREENHEIGHT - 20),
                  Color.White, 0, new Vector2(0, 0), new Vector2(0.8f, 0.8f), 0, 0);
             spriteBatch.End();
@@ -165,20 +181,6 @@ namespace Final_Assignment
             {
                 isKeyboardCursorActive = true;
                 keyboardCursorPosCounter++;
-                /*if (keyboardCursorPosCounter > skill_button_poslist.Count - 1 && keycursorstate == Keycursorstate.Skill)
-                {
-                    keyboardCursorPosCounter = 0;
-                    KeyboardCursorPos = skill_button_poslist[keyboardCursorPosCounter];
-                    Console.WriteLine("Skill Right key Pos: "+ keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                    Console.WriteLine("State = " + (int)keycursorstate);
-                }
-                else if(keyboardCursorPosCounter > (nav_button_poslist.Count - 1) + (skill_button_poslist.Count - 1) && keycursorstate == Keycursorstate.Navigation)
-                {
-                    keyboardCursorPosCounter = 3;
-                    KeyboardCursorPos = skill_button_poslist[keyboardCursorPosCounter - skill_button_poslist.Count];
-                    Console.WriteLine("Nav Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                    Console.WriteLine("State = " + (int)keycursorstate);
-                }*/
                 switch (keycursorstate)
                 {
                     case Keycursorstate.Charater:
@@ -187,6 +189,11 @@ namespace Final_Assignment
                             keyboardCursorPosCounter = 0;
                         }
                         KeyboardCursorPos = _gameObjects[keyboardCursorPosCounter].Position;
+
+                        //to do play selection cursor sound
+                        _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                        _cursorselection.Play();
+                        //End to do play selection cursor sound
 
                         break;
                     case Keycursorstate.Navigation:
@@ -206,20 +213,7 @@ namespace Final_Assignment
                 isKeyboardCursorActive = true;
 
                 keyboardCursorPosCounter--;
-                /*if (keyboardCursorPosCounter < 0 && keycursorstate == Keycursorstate.Skill)
-                {
-                    keyboardCursorPosCounter = skill_button_poslist.Count - 1;
-                    KeyboardCursorPos = skill_button_poslist[keyboardCursorPosCounter];
-                    Console.WriteLine("Skill Left key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                    Console.WriteLine("State = " + (int)keycursorstate);
-                }
-                else if (keyboardCursorPosCounter < 3 && keycursorstate == Keycursorstate.Navigation)
-                {
-                    keyboardCursorPosCounter = (nav_button_poslist.Count - 1) + (skill_button_poslist.Count - 1);
-                    KeyboardCursorPos = skill_button_poslist[keyboardCursorPosCounter - skill_button_poslist.Count];
-                    Console.WriteLine("Nav Left key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                    Console.WriteLine("State = " + (int)keycursorstate);
-                }*/
+                
                 switch (keycursorstate)
                 {
                     case Keycursorstate.Charater:
@@ -228,6 +222,12 @@ namespace Final_Assignment
                             keyboardCursorPosCounter = _gameObjects.Count - 1;
                         }
                         KeyboardCursorPos = _gameObjects[keyboardCursorPosCounter].Position;
+
+                        //to do play selection cursor sound
+                        _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                        _cursorselection.Play();
+                        //End to do play selection cursor sound
+
                         Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
                         Console.WriteLine("State = " + (int)keycursorstate);
 
@@ -253,6 +253,10 @@ namespace Final_Assignment
                 keyboardCursorPosCounter = _gameObjects.Count;
                 KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - _gameObjects.Count];
                 keycursorstate = Keycursorstate.Navigation;
+                //to do play selection cursor sound
+                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                _cursorselection.Play();
+                //End to do play selection cursor sound
             }
             else if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down) && Singleton.Instance._currentkey != Singleton.Instance._previouskey
                 && keycursorstate == Keycursorstate.Navigation
@@ -262,6 +266,10 @@ namespace Final_Assignment
                 keyboardCursorPosCounter = 0;
                 KeyboardCursorPos = _gameObjects[keyboardCursorPosCounter].Position;
                 keycursorstate = Keycursorstate.Charater;
+                //to do play selection cursor sound
+                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                _cursorselection.Play();
+                //End to do play selection cursor sound
             }
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up) && Singleton.Instance._currentkey != Singleton.Instance._previouskey
@@ -272,6 +280,10 @@ namespace Final_Assignment
                 keyboardCursorPosCounter = _gameObjects.Count;
                 KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - _gameObjects.Count];
                 keycursorstate = Keycursorstate.Navigation;
+                //to do play selection cursor sound
+                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                _cursorselection.Play();
+                //End to do play selection cursor sound
             }
             else if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up) && Singleton.Instance._currentkey != Singleton.Instance._previouskey
                 && keycursorstate == Keycursorstate.Navigation
@@ -281,6 +293,10 @@ namespace Final_Assignment
                 keyboardCursorPosCounter = 0;
                 KeyboardCursorPos = _gameObjects[keyboardCursorPosCounter].Position;
                 keycursorstate = Keycursorstate.Charater;
+                //to do play selection cursor sound
+                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                _cursorselection.Play();
+                //End to do play selection cursor sound
             }
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && isKeyboardCursorActive)
@@ -293,6 +309,10 @@ namespace Final_Assignment
                         _gameObjects.Remove(zeus);
                         _gameObjects.Remove(thor);
                         m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
+                        //Start to do play selected button sound
+                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
+                        _selected.Play();
+                        //End to do play selected button sound
                         break;
 
                     case 1:
@@ -300,14 +320,22 @@ namespace Final_Assignment
                         _gameObjects.Remove(zeus);
                         _gameObjects.Remove(thor);
                         m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
+                        //Start to do play selected button sound
+                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
+                        _selected.Play();
+                        //End to do play selected button sound
                         break;
                     case 2:
                         _gameObjects.Remove(zeus);
                         _gameObjects.Remove(thor);
                         m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
+                        //Start to do play selected button sound
+                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
+                        _selected.Play();
+                        //End to do play selected button sound
                         break;
                 }
-                
+
             }
         }
 
@@ -323,6 +351,8 @@ namespace Final_Assignment
 
         public void Update(GameTime gameTime)
         {
+            cursorselectionPlayedcount = nav_button_colorlist.Count + _gameObjects.Count;//Initial check cursor selection
+
             Singleton.Instance._previouskey = Singleton.Instance._currentkey;
             Singleton.Instance._currentkey = Keyboard.GetState();
             Singleton.Instance._previousmouse = Singleton.Instance._currentmouse;
@@ -344,9 +374,21 @@ namespace Final_Assignment
                 zeus.Scale = new Vector2(1.2f, 1.2f);
                 KeyboardCursorPos = _charPosition[0];
                 keyboardCursorPosCounter = 0;
+                //Start to do play selection cursor sound
+                cursorselectionPlayedcount++;
+                //_cursorselection.IsLooped = false;
+                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+
+                if (!iscursorselectionPlayed && cursorselectionPlayedcount > 0)
+                {
+                    _cursorselection.Play();
+                    iscursorselectionPlayed = true;
+                }
+
+                //End to do play selection cursor sound
                 if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed)
                 {
-                        zeus.Scale = new Vector2(1.1f, 1.1f);   
+                    zeus.Scale = new Vector2(1.1f, 1.1f);
                 }
                 else if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Released && Singleton.Instance._previousmouse.LeftButton == ButtonState.Pressed)
                 {
@@ -354,15 +396,40 @@ namespace Final_Assignment
                     _gameObjects.Remove(zeus);
                     _gameObjects.Remove(thor);
                     m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
+                    //Start to do play selected button sound
+                    _selected.Volume = Singleton.Instance.MasterSFXVolume;
+                    _selected.Play();
+                    //End to do play selected button sound
                 }
             }
-            else zeus.Scale = Vector2.One;
+            else
+            {
+                zeus.Scale = Vector2.One;
+                //Check cursor sound played
+                cursorselectionPlayedcount--;
+                if (cursorselectionPlayedcount == 0)
+                    iscursorselectionPlayed = false;
+                //End check cursor sound played
+            }
+
             if (Singleton.Instance._currentmouse.Position.X > 680 && Singleton.Instance._currentmouse.Position.X < 840 &&
                 Singleton.Instance._currentmouse.Position.Y > 280 && Singleton.Instance._currentmouse.Position.Y < 520 && isMouseActive)
             {
                 thor.Scale = new Vector2(1.2f, 1.2f);
                 KeyboardCursorPos = _charPosition[1];
                 keyboardCursorPosCounter = 1;
+                //Start to do play selection cursor sound
+                cursorselectionPlayedcount++;
+                //_cursorselection.IsLooped = false;
+                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+
+                if (!iscursorselectionPlayed && cursorselectionPlayedcount > 0)
+                {
+                    _cursorselection.Play();
+                    iscursorselectionPlayed = true;
+                }
+
+                //End to do play selection cursor sound
                 if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed)
                 {
                     thor.Scale = new Vector2(1.1f, 1.1f);
@@ -373,9 +440,21 @@ namespace Final_Assignment
                     _gameObjects.Remove(zeus);
                     _gameObjects.Remove(thor);
                     m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
+                    //Start to do play selected button sound
+                    _selected.Volume = Singleton.Instance.MasterSFXVolume;
+                    _selected.Play();
+                    //End to do play selected button sound
                 }
             }
-            else thor.Scale = Vector2.One;
+            else 
+            { 
+                thor.Scale = Vector2.One;
+                //Check cursor sound played
+                cursorselectionPlayedcount--;
+                if (cursorselectionPlayedcount == 0)
+                    iscursorselectionPlayed = false;
+                //End check cursor sound played
+            }
 
             if (Singleton.Instance._currentmouse.Position.X > nav_button_poslist[0].X - _font.MeasureString("Back").X
                     && Singleton.Instance._currentmouse.Position.X < nav_button_poslist[0].X + _font.MeasureString("Back").X
@@ -388,6 +467,18 @@ namespace Final_Assignment
                 nav_button_scalelist[0] = new Vector2(1.7f, 1.7f);
                 keycursorstate = Keycursorstate.Navigation;
                 keyboardCursorPosCounter = _gameObjects.Count;
+                //Start to do play selection cursor sound
+                cursorselectionPlayedcount++;
+                //_cursorselection.IsLooped = false;
+                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+
+                if (!iscursorselectionPlayed && cursorselectionPlayedcount > 0)
+                {
+                    _cursorselection.Play();
+                    iscursorselectionPlayed = true;
+                }
+
+                //End to do play selection cursor sound
                 if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed)
                 {
                     nav_button_colorlist[0] = Color.OrangeRed;
@@ -396,15 +487,24 @@ namespace Final_Assignment
                 else if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Released && Singleton.Instance._previousmouse.LeftButton == ButtonState.Pressed)
                 {
                     nav_button_colorlist[0] = Color.Red;
-                    
+
                     //Do when click Back button
                     m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
+                    //Start to do play selected button sound
+                    _selected.Volume = Singleton.Instance.MasterSFXVolume;
+                    _selected.Play();
+                    //End to do play selected button sound
                 }
             }
             else
             {
                 nav_button_colorlist[0] = Color.White;
                 nav_button_scalelist[0] = new Vector2(1.5f, 1.5f);
+                //Check cursor sound played
+                cursorselectionPlayedcount--;
+                if (cursorselectionPlayedcount == 0)
+                    iscursorselectionPlayed = false;
+                //End check cursor sound played
             }
             for (int i = 0; i < _gameObjects.Count; i++)
             {

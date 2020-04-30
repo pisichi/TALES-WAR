@@ -20,6 +20,18 @@
 /processorParam:TextureFormat=Compressed
 /build:font/File.spritefont
 
+#begin sounds/selected_sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/selected_sound.wav
+
+#begin sounds/selection_sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/selection_sound.wav
+
 #begin sprites/arrow.png
 /importer:TextureImporter
 /processor:TextureProcessor

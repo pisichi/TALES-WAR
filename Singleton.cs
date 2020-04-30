@@ -16,15 +16,20 @@ namespace Final_Assignment
         public const int SCREENWIDTH = 1200;
         public const int SCREENHEIGHT = 800;
         public GameObject follow;
+       // public IGameScreenManager previous_screen;
 
 
         public string CurrentHero;
         public int CurrentStage;
 
 
-        public int level_s1 = 1;
-        public int level_s2 = 1;
-        public int level_s3 = 3;
+        public int level_s1;
+        public int level_s2;
+        public int level_s3;
+
+        public int previous_level_s1;
+        public int previous_level_s2;
+        public int previous_level_s3;
 
         public int Cooldown_1;
         public int Cooldown_2;
@@ -50,6 +55,8 @@ namespace Final_Assignment
         }
 
         public TurnState CurrentTurnState;
+        public float MasterBGMVolume = 0.5f;
+        public float MasterSFXVolume = 0.3f;
 
         private static Singleton instance;
 

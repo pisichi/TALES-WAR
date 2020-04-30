@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Game Programming/Final project copy/2020-04-29 master bug fixed/Monogame_shooting/Content/sprites/skill_zeus_3.png</SourceFile>
+  <SourceFile>D:/Game Programming/Final project copy/2020-04-30 master/Monogame_shooting/Content/sprites/skill_zeus_3.png</SourceFile>
   <SourceTime>2020-04-28T15:15:14.2786636+07:00</SourceTime>
-  <DestFile>D:/Game Programming/Final project copy/2020-04-29 master bug fixed/Monogame_shooting/Content/bin/Windows/sprites/skill_zeus_3.xnb</DestFile>
-  <DestTime>2020-04-29T15:45:09.7754949+07:00</DestTime>
+  <DestFile>D:/Game Programming/Final project copy/2020-04-30 master/Monogame_shooting/Content/bin/Windows/sprites/skill_zeus_3.xnb</DestFile>
+  <DestTime>2020-04-30T22:13:02.3167863+07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T23:35:54+07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

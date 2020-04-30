@@ -651,6 +651,11 @@ namespace Final_Assignment
                     _gameObjects[i].Draw(spriteBatch);
             }
 
+            spriteBatch.DrawString(_font,
+                 "[console log] Res: " + Singleton.SCREENWIDTH + "x" + Singleton.SCREENHEIGHT + "  MousePos: " + Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
+                 new Vector2(1, Singleton.SCREENHEIGHT - 20),
+                 Color.White, 0, new Vector2(0, 0), new Vector2(0.8f, 0.8f), 0, 0);
+
             spriteBatch.End();
 
         }
