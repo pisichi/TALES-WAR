@@ -43,7 +43,7 @@ namespace Final_Assignment
             {
                 Console.WriteLine(parent.Name + " activated skill 2");
                 rng = rnd.Next(1, 11);
-                switch (Singleton.Instance.level_s3)
+                switch (Singleton.Instance.level_sk3)
                 {
                     case 1:
                         if (rng >= 10)
@@ -83,7 +83,7 @@ namespace Final_Assignment
             if (parent.skill == 2)
             {
                
-                switch (Singleton.Instance.level_s2)
+                switch (Singleton.Instance.level_sk2)
                 {
                     case 1:
                         parent.attack = 2;

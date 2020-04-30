@@ -108,9 +108,13 @@ namespace Final_Assignment
             nav_button_scalelist.Add(new Vector2(1.5f, 1.5f));
             nav_button_colorlist.Add(Color.White);
 
-            Singleton.Instance.level_s1 = 1;
-            Singleton.Instance.level_s2 = 1;
-            Singleton.Instance.level_s3 = 1;
+            Singleton.Instance.level_sk1 = 1;
+            Singleton.Instance.level_sk2 = 1;
+            Singleton.Instance.level_sk3 = 1;
+
+            Singleton.Instance.previous_level_sk1 = Singleton.Instance.level_sk1;
+            Singleton.Instance.previous_level_sk2 = Singleton.Instance.level_sk2;
+            Singleton.Instance.previous_level_sk3 = Singleton.Instance.level_sk3;
 
             Singleton.Instance.CurrentStage = 0;
 

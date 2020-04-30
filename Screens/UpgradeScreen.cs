@@ -217,9 +217,9 @@ namespace Final_Assignment
                 else if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Released && Singleton.Instance._previousmouse.LeftButton == ButtonState.Pressed)
                 {
                     //Do when click skill1 button
-                    if (Singleton.Instance.level_s1 < 3 && skillPoint > 0)
+                    if (Singleton.Instance.level_sk1 < 3 && skillPoint > 0)
                     {
-                        Singleton.Instance.level_s1 += 1;
+                        Singleton.Instance.level_sk1 += 1;
                         skillPoint -= 1;
                         //Start to do play selected button sound
                         _selected.Volume = Singleton.Instance.MasterSFXVolume;
@@ -270,9 +270,9 @@ namespace Final_Assignment
                 else if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Released && Singleton.Instance._previousmouse.LeftButton == ButtonState.Pressed)
                 {
                     //Do when click skill2 button
-                    if (Singleton.Instance.level_s2 < 3 && skillPoint > 0)
+                    if (Singleton.Instance.level_sk2 < 3 && skillPoint > 0)
                     {
-                        Singleton.Instance.level_s2 += 1;
+                        Singleton.Instance.level_sk2 += 1;
                         skillPoint -= 1;
                         //Start to do play selected button sound
                         _selected.Volume = Singleton.Instance.MasterSFXVolume;
@@ -322,9 +322,9 @@ namespace Final_Assignment
                 else if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Released && Singleton.Instance._previousmouse.LeftButton == ButtonState.Pressed)
                 {
                     //Do when click skill3 button
-                    if (Singleton.Instance.level_s3 < 3 && skillPoint > 0)
+                    if (Singleton.Instance.level_sk3 < 3 && skillPoint > 0)
                     {
-                        Singleton.Instance.level_s3 += 1;
+                        Singleton.Instance.level_sk3 += 1;
                         skillPoint -= 1;
                         //Start to do play selected button sound
                         _selected.Volume = Singleton.Instance.MasterSFXVolume;
@@ -485,9 +485,9 @@ namespace Final_Assignment
                 {
                     nav_button_colorlist[2] = Color.Red;
                     //Do when click Reset skill button
-                    Singleton.Instance.level_s1 = Singleton.Instance.previous_level_s1;
-                    Singleton.Instance.level_s2 = Singleton.Instance.previous_level_s2;
-                    Singleton.Instance.level_s3 = Singleton.Instance.previous_level_s3;
+                    Singleton.Instance.level_sk1 = Singleton.Instance.previous_level_sk1;
+                    Singleton.Instance.level_sk2 = Singleton.Instance.previous_level_sk2;
+                    Singleton.Instance.level_sk3 = Singleton.Instance.previous_level_sk3;
                     skillPoint = 2;
                     //Start to do play selected button sound
                     //_selected.Stop();
@@ -645,25 +645,25 @@ namespace Final_Assignment
                 switch (keyboardCursorPosCounter)
                 {
                     case 0://skill1
-                        if (Singleton.Instance.level_s1 < 3 && skillPoint > 0)
+                        if (Singleton.Instance.level_sk1 < 3 && skillPoint > 0)
                         {
-                            Singleton.Instance.level_s1 += 1;
+                            Singleton.Instance.level_sk1 += 1;
                             skillPoint -= 1;
                         }
                         break;
 
                     case 1://skill2
-                        if (Singleton.Instance.level_s2 < 3 && skillPoint > 0)
+                        if (Singleton.Instance.level_sk2 < 3 && skillPoint > 0)
                         {
-                            Singleton.Instance.level_s2 += 1;
+                            Singleton.Instance.level_sk2 += 1;
                             skillPoint -= 1;
                         }
                         break;
 
                     case 2://skill3
-                        if (Singleton.Instance.level_s3 < 3 && skillPoint > 0)
+                        if (Singleton.Instance.level_sk3 < 3 && skillPoint > 0)
                         {
-                            Singleton.Instance.level_s3 += 1;
+                            Singleton.Instance.level_sk3 += 1;
                             skillPoint -= 1;
                         }
                         break;
@@ -681,9 +681,9 @@ namespace Final_Assignment
                         break;
                     case 5://Reset skill
                            //Do when enter Reset skill button
-                        Singleton.Instance.level_s1 = Singleton.Instance.previous_level_s1;
-                        Singleton.Instance.level_s2 = Singleton.Instance.previous_level_s2;
-                        Singleton.Instance.level_s3 = Singleton.Instance.previous_level_s3;
+                        Singleton.Instance.level_sk1 = Singleton.Instance.previous_level_sk1;
+                        Singleton.Instance.level_sk2 = Singleton.Instance.previous_level_sk2;
+                        Singleton.Instance.level_sk3 = Singleton.Instance.previous_level_sk3;
                         skillPoint = 2;
                         break;
 
@@ -727,16 +727,16 @@ namespace Final_Assignment
 
             if (skillPoint == 0)
             {
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_s1, skill_button_poslist[0], Color.Red, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height - 100) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_s2, skill_button_poslist[1], Color.Red, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height - 100) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_s3, skill_button_poslist[2], Color.Red, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height - 100) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk1, skill_button_poslist[0], Color.Red, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height - 100) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk2, skill_button_poslist[1], Color.Red, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height - 100) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk3, skill_button_poslist[2], Color.Red, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height - 100) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
 
             }
             else
             {
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_s1, skill_button_poslist[0], Color.White, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height - 100) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[0], SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_s2, skill_button_poslist[1], Color.White, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height - 100) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[1], SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_s3, skill_button_poslist[2], Color.White, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height - 100) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[2], SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk1, skill_button_poslist[0], Color.White, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height - 100) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[0], SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk2, skill_button_poslist[1], Color.White, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height - 100) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[1], SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk3, skill_button_poslist[2], Color.White, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height - 100) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[2], SpriteEffects.None, 0);
 
             }
             if (Singleton.Instance.CurrentStage == 0)
