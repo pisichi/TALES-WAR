@@ -98,6 +98,12 @@ namespace Final_Assignment
             nav_button_scalelist.Add(new Vector2(1.5f, 1.5f));
             nav_button_colorlist.Add(Color.White);
 
+            Singleton.Instance.level_s1 = 1;
+            Singleton.Instance.level_s2 = 1;
+            Singleton.Instance.level_s3 = 1;
+
+            Singleton.Instance.CurrentStage = 0;
+
             KeyboardCursorPos = _charPosition[0];
         }
         public void ChangeBetweenScreen()

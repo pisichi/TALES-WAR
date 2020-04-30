@@ -143,6 +143,7 @@ namespace Final_Assignment
             isKeyboardCursorActive = false;
 
             isMouseActive = false;
+            skillPoint = 2;
 
             keycursorstate = Keycursorstate.Skill;
         }
@@ -191,7 +192,7 @@ namespace Final_Assignment
                 else if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Released && Singleton.Instance._previousmouse.LeftButton == ButtonState.Pressed)
                 {
                     //Do when click skill1 button
-                    if (Singleton.Instance.level_s1 < 3)
+                    if (Singleton.Instance.level_s1 < 3 && skillPoint > 0)
                     {
                         Singleton.Instance.level_s1 += 1;
                         skillPoint -= 1;
@@ -223,7 +224,7 @@ namespace Final_Assignment
                 else if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Released && Singleton.Instance._previousmouse.LeftButton == ButtonState.Pressed)
                 {
                     //Do when click skill2 button
-                    if (Singleton.Instance.level_s2 < 3)
+                    if (Singleton.Instance.level_s2 < 3 && skillPoint > 0)
                     {
                         Singleton.Instance.level_s2 += 1;
                         skillPoint -= 1;
@@ -254,7 +255,7 @@ namespace Final_Assignment
                 else if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Released && Singleton.Instance._previousmouse.LeftButton == ButtonState.Pressed)
                 {
                     //Do when click skill3 button
-                    if (Singleton.Instance.level_s3 < 3)
+                    if (Singleton.Instance.level_s3 < 3 && skillPoint > 0)
                     {
                         Singleton.Instance.level_s3 += 1;
                         skillPoint -= 1;
@@ -456,11 +457,6 @@ namespace Final_Assignment
                 m_screenManager.ChangeScreen(new SelectCharScreen(m_screenManager));
             }
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                m_screenManager.Exit();
-
-            }
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
@@ -468,7 +464,7 @@ namespace Final_Assignment
                 switch (keyboardCursorPosCounter)
                 {
                     case 0://skill1
-                        if (Singleton.Instance.level_s1 < 3)
+                        if (Singleton.Instance.level_s1 < 3 && skillPoint > 0)
                         {
                             Singleton.Instance.level_s1 += 1;
                             skillPoint -= 1;
@@ -476,7 +472,7 @@ namespace Final_Assignment
                         break;
 
                     case 1://skill2
-                        if (Singleton.Instance.level_s2 < 3)
+                        if (Singleton.Instance.level_s2 < 3 && skillPoint > 0)
                         {
                             Singleton.Instance.level_s2 += 1;
                             skillPoint -= 1;
@@ -484,7 +480,7 @@ namespace Final_Assignment
                         break;
 
                     case 2://skill3
-                        if (Singleton.Instance.level_s3 < 3)
+                        if (Singleton.Instance.level_s3 < 3 && skillPoint > 0)
                         {
                             Singleton.Instance.level_s3 += 1;
                             skillPoint -= 1;
