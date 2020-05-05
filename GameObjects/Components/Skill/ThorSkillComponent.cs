@@ -52,7 +52,7 @@ namespace Final_Assignment
             rng = rnd.Next(1, 11);
             count += 1;
             if ( parent.InTurn && parent.status != 1 && count == 1) {
-                switch (Singleton.Instance.level_s3)
+                switch (Singleton.Instance.level_sk3)
                 {
                     case 1:
                         if (rng >= 10)
@@ -95,7 +95,7 @@ namespace Final_Assignment
             if (parent.skill == 1)
             {
                 parent.status = 3;
-                switch (Singleton.Instance.level_s1)
+                switch (Singleton.Instance.level_sk1)
                 {
                     case 1:
                         barier = 3;
@@ -112,7 +112,7 @@ namespace Final_Assignment
 
             if(parent.skill == 2)
             {
-                switch (Singleton.Instance.level_s2)
+                switch (Singleton.Instance.level_sk2)
                 {
                     case 1:
                         parent.SendMessage(this, 204);

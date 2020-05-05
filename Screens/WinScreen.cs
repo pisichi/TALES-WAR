@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Final_Assignment
 {
-    class WinScreen
+    class WinScreen : IGameScreen
     {
         private readonly IGameScreenManager m_screenManager;
         private bool m_exitGame;
@@ -24,7 +24,7 @@ namespace Final_Assignment
 
         public void Init(ContentManager content)
         {
-            _bg = content.Load<Texture2D>("sprites/bg");
+            _bg = content.Load<Texture2D>("sprites/z1");
             _font = content.Load<SpriteFont>("font/File");
             Singleton.Instance.CurrentStage += 1;
 
@@ -66,7 +66,7 @@ namespace Final_Assignment
         {
             spriteBatch.Begin();
             spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800), color: Color.Brown);
-            spriteBatch.DrawString(_font, "press A to Continue", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("press A to Continue") / 2, Color.White);
+            spriteBatch.DrawString(_font, "You win", new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2) - _font.MeasureString("press A to Continue") / 2, Color.White);
             spriteBatch.End();
         }
 
