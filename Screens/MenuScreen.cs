@@ -30,7 +30,6 @@ namespace Final_Assignment
         private List<Vector2> menu_button_scalelist;
         private List<Color> menu_button_colorlist;
 
-        Song _bgm;
         SoundEffectInstance _selected;
         SoundEffectInstance _cursorselection;
 

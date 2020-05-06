@@ -62,7 +62,9 @@
     <Compile Include="Managers\GameScreenManager.cs" />
     <Compile Include="Models\Animation.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="Screens\AboutScreen.cs" />
     <Compile Include="Screens\Components\Button.cs" />
+    <Compile Include="Screens\ControlScreen.cs" />
     <Compile Include="Screens\LoseScreen.cs" />
     <Compile Include="Screens\SelectCharScreen.cs" />
     <Compile Include="Screens\Interfaces.cs" />

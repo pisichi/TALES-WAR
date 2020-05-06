@@ -391,6 +391,15 @@ namespace Final_Assignment
             Singleton.Instance._previouskey = Singleton.Instance._currentkey;
             Singleton.Instance._currentkey = Keyboard.GetState();
 
+            if (player.HP <= 0)
+            {
+                m_screenManager.ChangeScreen(new LoseScreen(m_screenManager));
+            }
+
+            if (boss.HP <= 0)
+            {
+                m_screenManager.ChangeScreen(new WinScreen(m_screenManager));
+            }
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
@@ -601,7 +610,7 @@ namespace Final_Assignment
 
             if ((Singleton.Instance._currentkey.IsKeyDown(Keys.L) && Singleton.Instance._currentkey != Singleton.Instance._previouskey) || player.HP <= 0 || boss.HP <= 0)
             {
-                m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
+                m_screenManager.ChangeScreen(new WinScreen(m_screenManager));
             }
 
 
