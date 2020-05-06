@@ -55,7 +55,7 @@ namespace Final_Assignment
             else if(parent.skill == 2)
             {
                 Console.WriteLine(parent.Name + " use skill 2");
-                parent.attack += 2;
+                parent.attack += 1;
                 parent.SendMessage(this, 3);
                 parent.skill = 0;
             }

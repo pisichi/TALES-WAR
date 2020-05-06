@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -17,6 +18,7 @@ namespace Final_Assignment
         int _action = 0;
         ContentManager content;
         Texture2D _bullet;
+        SoundEffectInstance _shoot;
 
         float waitTime = 0;
         private bool _throw;
@@ -36,15 +38,17 @@ namespace Final_Assignment
         public CharacterAIComponent(ContentManager content)
         {
             _bullet = content.Load<Texture2D>("sprites/ball");
+            _shoot = content.Load<SoundEffect>("sounds/shoot").CreateInstance();
+            _shoot.Volume = Singleton.Instance.MasterSFXVolume;
             this.content = content;
         }
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
 
-            _rotation = rnd.Next(1, 5);
+            _rotation = rnd.Next(1, 4);
 
-            _force = rnd.Next(100, 300)/100;
+            _force = rnd.Next(200, 300)/100;
             parent.Rotation = _rotation;
             CheckRemove(parent);
 
@@ -97,6 +101,8 @@ namespace Final_Assignment
             Cooldown_1 -= 1;
             Cooldown_2 -= 1;
 
+
+
             if (Cooldown_1 <= 0)
             {
                 Console.WriteLine(parent.Name + " call skill 1");
@@ -129,6 +135,8 @@ namespace Final_Assignment
         {
 
             bullet = BulletFactory.create(content, parent.Weapon);
+
+            _shoot.Play();
 
             _direction = new Vector2((float)Math.Cos(_rotation + (float)Math.PI / 2), (float)Math.Sin(_rotation + (float)Math.PI / 2));
             bullet.Rotation = _rotation - (float)Math.PI;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,6 +17,7 @@ namespace Final_Assignment
         int count = 0;
         ContentManager content;
         Texture2D _bullet;
+        SoundEffectInstance _shoot;
 
         float waitTime = 0;
         private bool _throw;
@@ -25,6 +27,8 @@ namespace Final_Assignment
         {
             _throw = false;
             _bullet = content.Load<Texture2D>("sprites/ball");
+            _shoot = content.Load<SoundEffect>("sounds/shoot").CreateInstance();
+            _shoot.Volume = Singleton.Instance.MasterSFXVolume;
             this.content = content;
         }
 
@@ -93,6 +97,8 @@ namespace Final_Assignment
         {
             Singleton.Instance.Cooldown_1 -= 1;
             Singleton.Instance.Cooldown_2 -= 1;
+
+            _shoot.Play();
 
             Console.WriteLine("add bullet");
             bullet = BulletFactory.create(content,parent.Weapon);

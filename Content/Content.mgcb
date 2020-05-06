@@ -20,6 +20,30 @@
 /processorParam:TextureFormat=Compressed
 /build:font/File.spritefont
 
+#begin sounds/hit_char.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/hit_char.wav
+
+#begin sounds/hit_floor.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/hit_floor.wav
+
+#begin sounds/hit_iron.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/hit_iron.wav
+
+#begin sounds/selected_sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/selected_sound.wav
+
 #begin sounds/selected_sound.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -31,6 +55,18 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sounds/selection_sound.wav
+
+#begin sounds/selection_sound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/selection_sound.wav
+
+#begin sounds/shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/shoot.wav
 
 #begin sprites/arrow.png
 /importer:TextureImporter
@@ -175,6 +211,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:sprites/menu_4.png
+
+#begin sprites/menu_strip.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/menu_strip.png
 
 #begin sprites/newmainskill.png
 /importer:TextureImporter
