@@ -37,6 +37,10 @@ namespace Final_Assignment
         private List<Color> nav_button_colorlist;
         private List<Vector2> _addskill_button_scalelist;
 
+        private String[,] _skillDes;
+
+
+
         private int skillPoint;
 
         //ContentManager content;
@@ -76,6 +80,8 @@ namespace Final_Assignment
             nav_button_poslist = new List<Vector2>();
             nav_button_colorlist = new List<Color>();
             _addskill_button_scalelist = new List<Vector2>();
+            _skillDes = new string[3, 3];
+
 
             _bg2 = content.Load<Texture2D>("sprites/fram1");
             _font = content.Load<SpriteFont>("font/File");
@@ -85,6 +91,7 @@ namespace Final_Assignment
 
             _selected = content.Load<SoundEffect>("sounds/selected_sound").CreateInstance();
             _cursorselection = content.Load<SoundEffect>("sounds/selection_sound").CreateInstance();
+
 
             switch (Singleton.Instance.CurrentHero)
             {
@@ -108,6 +115,18 @@ namespace Final_Assignment
                     skill_button_texturelist.Add(content.Load<Texture2D>("sprites/skill_zeus_1"));
                     skill_button_texturelist.Add(content.Load<Texture2D>("sprites/skill_zeus_2"));
                     skill_button_texturelist.Add(content.Load<Texture2D>("sprites/skill_zeus_3"));
+
+                    _skillDes[0, 0] = "lv.1  +2 damage";
+                    _skillDes[0, 1] = "lv.2  +3 damage";
+                    _skillDes[0, 2] = "lv.3  +4 damage";
+
+                    _skillDes[1, 0] = "lv.1  +2 damage";
+                    _skillDes[1, 1] = "lv.2  +4 damage";
+                    _skillDes[1, 2] = "lv.3  +6 damage";
+
+                    _skillDes[2, 0] = "lv.1  30% chance";
+                    _skillDes[2, 1] = "lv.2  40% chance";
+                    _skillDes[2, 2] = "lv.3  50% chance";
                     break;
 
                 case "thor":
@@ -130,6 +149,18 @@ namespace Final_Assignment
                     skill_button_texturelist.Add(content.Load<Texture2D>("sprites/skill_thor_1"));
                     skill_button_texturelist.Add(content.Load<Texture2D>("sprites/skill_thor_2"));
                     skill_button_texturelist.Add(content.Load<Texture2D>("sprites/skill_thor_3"));
+
+                    _skillDes[0, 0] = "lv.1  +1 armor";
+                    _skillDes[0, 1] = "lv.2  +2 armor";
+                    _skillDes[0, 2] = "lv.3  +3 armor";
+
+                    _skillDes[1, 0] = "lv.1  +25% size";
+                    _skillDes[1, 1] = "lv.2  +50% size";
+                    _skillDes[1, 2] = "lv.3  +100% size";
+
+                    _skillDes[2, 0] = "lv.1  10% chance";
+                    _skillDes[2, 1] = "lv.2  20% chance";
+                    _skillDes[2, 2] = "lv.3  30% chance";
                     break;
             }
 
@@ -734,18 +765,36 @@ namespace Final_Assignment
 
             if (skillPoint == 0)
             {
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk1, skill_button_poslist[0], Color.Red, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height - 100) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk2, skill_button_poslist[1], Color.Red, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height - 100) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk3, skill_button_poslist[2], Color.Red, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height - 100) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk1, skill_button_poslist[0], Color.Red, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height + 150) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk2, skill_button_poslist[1], Color.Red, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height + 150) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk3, skill_button_poslist[2], Color.Red, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height + 150) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
 
             }
             else
             {
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk1, skill_button_poslist[0], Color.White, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height - 100) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[0], SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk2, skill_button_poslist[1], Color.White, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height - 100) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[1], SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk3, skill_button_poslist[2], Color.White, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height - 100) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[2], SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk1, skill_button_poslist[0], Color.White, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height + 150) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[0], SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk2, skill_button_poslist[1], Color.White, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height + 150) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[1], SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk3, skill_button_poslist[2], Color.White, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height + 150) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[2], SpriteEffects.None, 0);
 
             }
+
+
+
+
+
+            for (int i = 0; i <= _skillDes.GetLength(0) - 1; i++)
+            {
+                spriteBatch.DrawString(_font, _skillDes[0,i], skill_button_poslist[0],Color.White, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height - 150 - 80*i ) / 2) + _font.MeasureString(_skillDes[0, i]) / 2, 0.8f,SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, _skillDes[1,i], skill_button_poslist[1],Color.White, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height - 150 - 80 * i) / 2) + _font.MeasureString(_skillDes[1, i]) / 2, 0.8f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, _skillDes[2,i], skill_button_poslist[2],Color.White, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height - 150 - 80 * i) / 2) + _font.MeasureString(_skillDes[2, i]) / 2, 0.8f, SpriteEffects.None, 0);
+            }
+
+
+
+             
+
+
+
             if (Singleton.Instance.CurrentStage == 0)
             {
                 spriteBatch.DrawString(_font,
