@@ -129,6 +129,7 @@ namespace Final_Assignment
                             }
                             target = s;
                             hitting = true;
+                            Singleton.Instance._camera.shake = true;
 
                         }
                     }
@@ -138,13 +139,14 @@ namespace Final_Assignment
             else
             {
                 waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
-
-                if (waitTime > 0.5)
+                
+                if (waitTime > 0.3)
                 {
                     Console.WriteLine("hitting  " + target.Name);
                     parent.IsActive = false;
                     hitting = false;
                     touch = false;
+                    Singleton.Instance._camera.shake = false;
                     waitTime = 0;
                 }
             }

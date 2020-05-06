@@ -557,11 +557,6 @@ namespace Final_Assignment
         public void HandleInput(GameTime gameTime)
         {
 
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
-            {
-                m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
-            }
-
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Right) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
                 isKeyboardCursorActive = true;

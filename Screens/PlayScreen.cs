@@ -13,7 +13,7 @@ namespace Final_Assignment
     {
         private readonly IGameScreenManager m_screenManager;
         private bool m_exitGame;
-        private Camera _camera;
+      
         private int enemyIndex;
 
         private bool swap;
@@ -73,7 +73,7 @@ namespace Final_Assignment
 
             _gameObjects = new List<GameObject>();
             enemyList = new List<GameObject>();
-            _camera = new Camera();
+            Singleton.Instance._camera = new Camera();
 
             _bg = content.Load<Texture2D>("sprites/stage_bg");
             _pin = content.Load<Texture2D>("sprites/pin");
@@ -401,7 +401,7 @@ namespace Final_Assignment
             if (freecam)
                 testcam();
             else
-                _camera.Follow(Singleton.Instance.follow);
+                Singleton.Instance._camera.Follow(Singleton.Instance.follow);
 
 
             if (player.InTurn)
@@ -429,7 +429,7 @@ namespace Final_Assignment
 
         private void testcam()
         {
-            _camera.Follow(cam);
+            Singleton.Instance._camera.Follow(cam);
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Right))
             {
@@ -532,7 +532,7 @@ namespace Final_Assignment
                     {
                         swap = true;
                     }
-                    if (player.force >= 3)
+                    if (player.force >= 3.5)
                     {
                         swap = false;
                     }
@@ -615,7 +615,7 @@ namespace Final_Assignment
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
-            spriteBatch.Begin(transformMatrix: _camera.Transform);
+            spriteBatch.Begin(transformMatrix: Singleton.Instance._camera.Transform);
             spriteBatch.Draw(_sky, destinationRectangle: new Rectangle(-100, -500, 4200, 2000));
             spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(-100, -250, 4200, 1500));
             spriteBatch.Draw(_platform, destinationRectangle: new Rectangle(0, 0, 4000, 1000));
@@ -646,7 +646,7 @@ namespace Final_Assignment
                     break;
                 case Singleton.TurnState.force:
                     spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, player.Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
-                    spriteBatch.Draw(_gauge, player.Position + new Vector2(120, -100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(_gauge, player.Position + new Vector2(130, -100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     spriteBatch.Draw(_pin, player.Position + new Vector2(120 + (player.force - 1) * 50, -100), null, Color.White, 0f, Vector2.Zero, new Vector2(2, 0.5f), SpriteEffects.None, 0);
                     break;
                 case Singleton.TurnState.shoot:
