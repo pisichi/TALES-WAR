@@ -4,47 +4,59 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/font/File.spritefont</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sounds/selected_sound.wav</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sounds/selection_sound.wav</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/arrow.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/ball.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/fram1.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/fx_barrier.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/fx_burn.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/gauge.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/heart.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/hitbox.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/menu_1.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/menu_2.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/menu_3.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/menu_4.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/newmainskill.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/newplus.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/pin.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/select.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/sheet_guan.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/sheet_mob.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/sheet_sung.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/sheet_thor.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/sheet_zeus.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/skill_thor_1.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/skill_thor_2.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/skill_thor_3.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/skill_zeus_1.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/skill_zeus_2.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/skill_zeus_3.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/stage_bg.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/stage_platform_1.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/stage_platform_2.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/stage_sky_1.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/stage_sky_2.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/t1.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/t2.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/z1.png</File>
-    <File>D:/Game Programming/Final project/Monogame_shooting/Content/sprites/z2.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/font/File.spritefont</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sounds/hit_char.wav</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sounds/hit_floor.wav</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sounds/hit_iron.wav</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sounds/selected_sound.wav</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sounds/selection_sound.wav</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sounds/shoot.wav</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/about.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/arrow.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/ball.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/fram1.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/fx_barrier.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/fx_burn.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/gauge.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/heart.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/hitbox.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/menu_1.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/menu_2.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/menu_3.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/menu_4.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/menu_strip.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/newmainskill.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/newplus.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/pin.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/select.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/sheet_guan.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/sheet_mob.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/sheet_sung.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/sheet_thor.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/sheet_zeus.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/skill_thor_1.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/skill_thor_2.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/skill_thor_3.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/skill_zeus_1.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/skill_zeus_2.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/skill_zeus_3.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/stage_bg.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/stage_platform_1.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/stage_platform_2.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/stage_sky_1.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/stage_sky_2.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/t1.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/t2.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/z1.png</File>
+    <File>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/sprites/z2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

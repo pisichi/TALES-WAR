@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Game Programming/Final project copy/2020-04-30 master/Monogame_shooting/Content/sprites/menu_2.png</SourceFile>
-  <SourceTime>2020-04-29T10:28:56.6657024+07:00</SourceTime>
-  <DestFile>D:/Game Programming/Final project copy/2020-04-30 master/Monogame_shooting/Content/bin/Windows/sprites/menu_2.xnb</DestFile>
-  <DestTime>2020-04-30T22:13:01.7952083+07:00</DestTime>
+  <SourceFile>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/menu_2.png</SourceFile>
+  <SourceTime>2020-04-28T12:51:59.9195215+07:00</SourceTime>
+  <DestFile>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/bin/Windows/sprites/menu_2.xnb</DestFile>
+  <DestTime>2020-04-28T12:53:17.0851527+07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T23:35:54+07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

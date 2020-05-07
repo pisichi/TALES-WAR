@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Game Programming/Final project/Monogame_shooting/Content/font/File.spritefont</SourceFile>
-  <SourceTime>2020-04-29T10:28:56.6487477+07:00</SourceTime>
-  <DestFile>D:/Game Programming/Final project/Monogame_shooting/Content/bin/Windows/Content/font/File.xnb</DestFile>
-  <DestTime>2020-05-01T00:07:19.2324783+07:00</DestTime>
+  <SourceFile>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/font/File.spritefont</SourceFile>
+  <SourceTime>2020-05-05T12:59:39.6102925+07:00</SourceTime>
+  <DestFile>D:/Game Programming/Final project copy/2020-05-07/Monogame_shooting/Content/bin/Windows/Content/font/File.xnb</DestFile>
+  <DestTime>2020-05-07T18:00:31.7104908+07:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2018-12-08T23:35:54+07:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

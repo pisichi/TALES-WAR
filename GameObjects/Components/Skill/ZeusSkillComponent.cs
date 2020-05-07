@@ -32,39 +32,35 @@ namespace Final_Assignment
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
-            if (parent.IsHit)
-            {
-                parent.SendMessage(this, 4);
-                parent.IsHit = false;
-            }
+
 
 
             if (parent.IsHit && parent.status != 1)
             {
-                Console.WriteLine(parent.Name + " activated skill 2");
+                Console.WriteLine(parent.Name + " activated skill 3");
                 rng = rnd.Next(1, 11);
                 switch (Singleton.Instance.level_sk3)
                 {
                     case 1:
-                        if (rng >= 10)
+                        if (rng >= 8)
                         {
-                            parent.HP += 2; //10%
+                            parent.HP += 2; //30%
                             parent.SendMessage(this, 3);
                         }
                         else parent.SendMessage(this, 4);
                         break;
                     case 2:
-                        if (rng >= 9)
+                        if (rng >= 7)
                         {
-                            parent.HP += 2; //20%
+                            parent.HP += 2; //40%
                             parent.SendMessage(this, 3);
                         }
                         else parent.SendMessage(this, 4);
                         break;
                     case 3:
-                        if (rng >= 8)
+                        if (rng >= 6)
                         {
-                            parent.HP += 2; //30%
+                            parent.HP += 2; //50%
                             parent.SendMessage(this, 3);
                         }
                         else parent.SendMessage(this, 4);
@@ -77,7 +73,20 @@ namespace Final_Assignment
             {
                 Console.WriteLine( parent.Name +" use skill 1");
                 parent.SendMessage(this, 201);
+                switch (Singleton.Instance.level_sk1)
+                {
+                    case 1:
+                        parent.attack = 2;
+                        break;
+                    case 2:
+                        parent.attack = 4;
+                        break;
+                    case 3:
+                        parent.attack = 6;
+                        break;
+                }
                 parent.skill = 0;
+
             }
 
             if (parent.skill == 2)
@@ -94,11 +103,17 @@ namespace Final_Assignment
                         parent.SendMessage(this, 299);
                         break;
                     case 3:
-                        parent.attack = 5;
+                        parent.attack = 4;
                         parent.SendMessage(this, 299);
                         break;
                 }
                 parent.skill = 0;
+            }
+
+            if (parent.IsHit)
+            {
+                parent.SendMessage(this, 4);
+                parent.IsHit = false;
             }
 
             if (!parent.InTurn)

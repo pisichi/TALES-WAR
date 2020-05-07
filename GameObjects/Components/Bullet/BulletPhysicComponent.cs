@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Final_Assignment
@@ -17,10 +19,16 @@ namespace Final_Assignment
         private GameObject target;
         private float waitTime;
 
+        SoundEffectInstance _hit;
+
+
         public Vector2 PreviousPosition;
 
-        public BulletPhysicComponent()
+        public BulletPhysicComponent(ContentManager content)
         {
+            _hit = content.Load<SoundEffect>("sounds/hit_floor").CreateInstance();
+            _hit.Volume = Singleton.Instance.MasterSFXVolume;
+
             hitting = false;
             touch = false;
         }
@@ -96,6 +104,7 @@ namespace Final_Assignment
                         {
                             parent.Viewport = new Rectangle(0,0,150, 150);
                             parent.IsHit = true;
+                            _hit.Play();
                             touch = true;
                         }
                     }
@@ -111,14 +120,16 @@ namespace Final_Assignment
                             if (s.status != 3)
                             {
                                 s.HP -= parent.attack;
+                               
                             }
                             s.IsHit = true;
-                            if (s.status == 0)
+                            if (s.status == 0 && parent.status != 99)
                             {
                                 s.status = parent.status;
                             }
                             target = s;
                             hitting = true;
+                            Singleton.Instance._camera.shake = true;
 
                         }
                     }
@@ -128,13 +139,14 @@ namespace Final_Assignment
             else
             {
                 waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
-
-                if (waitTime > 0.5)
+                
+                if (waitTime > 0.3)
                 {
                     Console.WriteLine("hitting  " + target.Name);
                     parent.IsActive = false;
                     hitting = false;
                     touch = false;
+                    Singleton.Instance._camera.shake = false;
                     waitTime = 0;
                 }
             }

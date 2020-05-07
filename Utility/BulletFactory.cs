@@ -26,7 +26,7 @@ namespace Final_Assignment
 
                 case "lance":
                     bullet = new GameObject(null,
-                               new BulletPhysicComponent(),
+                               new BulletPhysicComponent(content),
                                new BulletGraphicComponent(content, new Dictionary<string, Animation>() {
                                          { "Shoot", new Animation(_bullet, new Rectangle(0,400,100,200),1) },
                                          { "Hit", new Animation(_bullet, new Rectangle(0,0,100,200),1) },
@@ -41,7 +41,7 @@ namespace Final_Assignment
 
                 case "bar":
                     bullet = new GameObject(null,
-                               new BulletPhysicComponent(),
+                               new BulletPhysicComponent(content),
                                new BulletGraphicComponent(content, new Dictionary<string, Animation>() {
                                          { "Shoot", new Animation(_bullet, new Rectangle(100,400,100,200),1) },
                                          { "Hit", new Animation(_bullet, new Rectangle(100,0,100,200),1) },
@@ -56,7 +56,7 @@ namespace Final_Assignment
 
                 case "hammer":
                     bullet = new GameObject(null,
-                               new BulletPhysicComponent(),
+                               new BulletPhysicComponent(content),
                                new BulletGraphicComponent(content, new Dictionary<string, Animation>() {
                                          { "Shoot", new Animation(_bullet, new Rectangle(200,400,100,100),1) },
                                          { "Hit", new Animation(_bullet, new Rectangle(200,0,100,100),1) },
@@ -71,7 +71,7 @@ namespace Final_Assignment
 
                 case "thunder":
                      bullet = new GameObject(null,
-                                new BulletPhysicComponent(),
+                                new BulletPhysicComponent(content),
                                 new BulletGraphicComponent(content, new Dictionary<string, Animation>() {
                                          { "Shoot", new Animation(_bullet, new Rectangle(300,400,100,100),1) },
                                          { "Hit", new Animation(_bullet, new Rectangle(300,0,100,100),1) },
@@ -86,7 +86,7 @@ namespace Final_Assignment
 
                 case "rock":
                     bullet = new GameObject(null,
-                               new BulletPhysicComponent(),
+                               new BulletPhysicComponent(content),
                                new BulletGraphicComponent(content, new Dictionary<string, Animation>() {
                                          { "Shoot", new Animation(_bullet, new Rectangle(400,400,100,100),1) },
                                          { "Hit", new Animation(_bullet, new Rectangle(400,0,100,100),1) },

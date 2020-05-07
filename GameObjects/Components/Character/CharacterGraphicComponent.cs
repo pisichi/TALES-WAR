@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -16,7 +17,7 @@ namespace Final_Assignment
         Texture2D _hp;
         Texture2D _burn;
         Texture2D _bari;
-
+        SoundEffectInstance _ouch;
 
         float waitTime = 0;
 
@@ -26,9 +27,11 @@ namespace Final_Assignment
         {
             CurrentCharState = 1;
             _hp =  content.Load<Texture2D>("sprites/heart");
-            //Texture2D _burn = content.Load<Texture2D>("sprites/fx_burn");
             _bari = content.Load<Texture2D>("sprites/fx_barrier");
             _burn = content.Load<Texture2D>("sprites/fx_burn");
+
+            _ouch = content.Load<SoundEffect>("sounds/hit_char").CreateInstance();
+            _ouch.Volume = Singleton.Instance.MasterSFXVolume;
             this.content = content;
         }
 
@@ -66,8 +69,10 @@ namespace Final_Assignment
                     break;
                 case 4:
                     waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
-                    if (waitTime > 0.5)
+                   
+                    if (waitTime > 0.3)
                     {
+                        _ouch.Play();
                         CurrentCharState = 1;
                         waitTime = 0;
                     }

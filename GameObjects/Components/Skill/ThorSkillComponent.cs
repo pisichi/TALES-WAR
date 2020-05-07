@@ -98,7 +98,7 @@ namespace Final_Assignment
                 switch (Singleton.Instance.level_sk1)
                 {
                     case 1:
-                        barier = 3;
+                        barier = 1;
                         break;
                     case 2:
                         barier = 2;

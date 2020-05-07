@@ -24,7 +24,6 @@ namespace Final_Assignment
             };
 
             IsMouseVisible = true;
-
             graphics.GraphicsProfile = GraphicsProfile.HiDef;
             graphics.ApplyChanges();
 
@@ -60,22 +59,6 @@ namespace Final_Assignment
         protected override void Update(GameTime gameTime)
         {
 
-            //switch (Singleton.Instance.CurrentGameState)
-            //{
-            //    case Singleton.GameState.GameIntro:
-            //        m_screenManager.ChangeScreen(new IntroScreen(m_screenManager));
-            //        break;
-            //    case Singleton.GameState.GameMenu:
-            //        m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
-            //        break;
-            //    case Singleton.GameState.GamePlaying:
-            //        m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
-            //        break;
-
-            //}
-            
-
-
             m_screenManager.ChangeBetweenScreen();
 
             m_screenManager.Update(gameTime);
@@ -89,11 +72,6 @@ namespace Final_Assignment
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
-           
-
-
-           
 
             m_screenManager.Draw(gameTime);
             

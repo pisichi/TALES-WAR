@@ -12,16 +12,13 @@ namespace Final_Assignment
         public MouseState _currentmouse;
         public MouseState _previousmouse;
 
-
         public const int SCREENWIDTH = 1200;
         public const int SCREENHEIGHT = 800;
         public GameObject follow;
-       // public IGameScreenManager previous_screen;
-
+        public Camera _camera;
 
         public string CurrentHero;
         public int CurrentStage;
-
 
         public int level_sk1;
         public int level_sk2;
@@ -31,9 +28,16 @@ namespace Final_Assignment
         public int previous_level_sk2;
         public int previous_level_sk3;
 
+
         public int Cooldown_1;
         public int Cooldown_2;
 
+
+        public float MasterBGMVolume = 0.5f;
+        public float MasterSFXVolume = 0.3f;
+
+        public bool isKeyboardCursorActive;
+        public bool isMouseActive;
 
         public enum GameState
         {
@@ -42,7 +46,6 @@ namespace Final_Assignment
             GameLose,
             GameWin
         }
-
         public GameState CurrentGameState;
 
         public enum TurnState
@@ -55,8 +58,6 @@ namespace Final_Assignment
         }
 
         public TurnState CurrentTurnState;
-        public float MasterBGMVolume = 0.5f;
-        public float MasterSFXVolume = 0.3f;
 
         private static Singleton instance;
 

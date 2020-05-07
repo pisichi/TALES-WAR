@@ -39,6 +39,18 @@ namespace Final_Assignment
             }
 
 
+
+
+            if (!parent.InTurn)
+            {
+                count = 0;
+            }
+            else
+            {
+                count += 1;
+            }
+
+
             if (parent.InTurn && parent.status != 1 && count == 1)
             {
                 parent.HP++;
@@ -62,14 +74,6 @@ namespace Final_Assignment
             }
 
 
-            if (!parent.InTurn)
-            {
-                count = 0;
-            }
-            else
-            {
-               count += 1;
-            }
 
 
             base.Update(gameTime, gameObjects, parent);
