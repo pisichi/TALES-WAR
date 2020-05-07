@@ -39,7 +39,7 @@ namespace Final_Assignment
 
             m_screenManager = new GameScreenManager(m_spriteBatch, Content);
 
-            m_screenManager.ChangeScreen(new LoseScreen(m_screenManager));
+            m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
 
             m_screenManager.OnGameExit += Exit;
         }

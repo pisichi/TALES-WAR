@@ -173,6 +173,7 @@ namespace Final_Assignment
                             _selected.Volume = Singleton.Instance.MasterSFXVolume;
                             _selected.Play();
                             //End to do play selected button sound
+                            m_screenManager.ChangeScreen(new AboutScreen(m_screenManager));
                             break;
                         case 3:
                             //Start to do play selected button sound

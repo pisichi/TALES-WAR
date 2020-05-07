@@ -66,3 +66,4 @@ C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Win
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sounds\hit_iron.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sounds\shoot.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\menu_strip.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\about.xnb

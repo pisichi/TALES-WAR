@@ -11,6 +11,7 @@
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sounds/selected_sound.wav</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sounds/selection_sound.wav</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sounds/shoot.wav</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/about.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/arrow.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/ball.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/fram1.png</File>
@@ -50,6 +51,7 @@
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/z2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
