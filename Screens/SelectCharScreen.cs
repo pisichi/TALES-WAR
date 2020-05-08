@@ -71,7 +71,6 @@ namespace Final_Assignment
             _selected = content.Load<SoundEffect>("sounds/selected_sound").CreateInstance();
             _cursorselection = content.Load<SoundEffect>("sounds/selection_sound").CreateInstance();
 
-
             _charPosition = new List<Vector2>();
             _charPosition.Add(new Vector2(Singleton.SCREENWIDTH / 2 - 150, Singleton.SCREENHEIGHT / 2));
             _charPosition.Add(new Vector2(Singleton.SCREENWIDTH / 2 + 150, Singleton.SCREENHEIGHT / 2));
@@ -119,6 +118,22 @@ namespace Final_Assignment
             Singleton.Instance.CurrentStage = 0;
 
             KeyboardCursorPos = _charPosition[0];
+
+            Console.WriteLine("Select char Screen");
+            Console.WriteLine("Hero value: " + Singleton.Instance.CurrentHero);
+            Console.WriteLine("Stage value: " + Singleton.Instance.CurrentStage);
+            Console.WriteLine("skill 1 value: " + Singleton.Instance.level_sk1);
+            Console.WriteLine("skill 2 value: " + Singleton.Instance.level_sk2);
+            Console.WriteLine("skill 3 value: " + Singleton.Instance.level_sk3);
+            Console.WriteLine("Previous skill 1 value: " + Singleton.Instance.previous_level_sk1);
+            Console.WriteLine("Previous skill 2 value: " + Singleton.Instance.previous_level_sk2);
+            Console.WriteLine("Previous skill 3 value: " + Singleton.Instance.previous_level_sk3);
+            Console.WriteLine("Keyboard status: " + Singleton.Instance.isKeyboardCursorActive);
+            Console.WriteLine("Mouse status: " + Singleton.Instance.isMouseActive);
+            Console.WriteLine("BGM Value: " + Singleton.Instance.MasterBGMVolume);
+            Console.WriteLine("SFX Value: " + Singleton.Instance.MasterSFXVolume);
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+
         }
         public void ChangeBetweenScreen()
         {
@@ -136,8 +151,8 @@ namespace Final_Assignment
 
             spriteBatch.DrawString(_font,
                 "Select character",
-                 new Vector2(Singleton.SCREENWIDTH / 2 - 200, 100),
-                 Color.White, 0, new Vector2(0, 0), new Vector2(2f, 2f), 0, 0);
+                 new Vector2(Singleton.SCREENWIDTH / 2, 150),
+                 Color.White, 0, _font.MeasureString("Select character") / 2, new Vector2(2f, 2f), 0, 0);
 
             spriteBatch.DrawString(_font,
                                     "Back",
@@ -168,7 +183,7 @@ namespace Final_Assignment
             }
 
             spriteBatch.DrawString(_font,
-                 "[console log] Res: " + Singleton.SCREENWIDTH + "x" + Singleton.SCREENHEIGHT + "  MousePos: " + Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
+                 "[Console] Res: " + Singleton.SCREENWIDTH + "x" + Singleton.SCREENHEIGHT + "    Keyboard status: " + Singleton.Instance.isKeyboardCursorActive + "    Mouse status: " + Singleton.Instance.isMouseActive + "   MousePos: " + Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
                  new Vector2(1, Singleton.SCREENHEIGHT - 20),
                  Color.White, 0, new Vector2(0, 0), new Vector2(0.8f, 0.8f), 0, 0);
             spriteBatch.End();
@@ -176,7 +191,7 @@ namespace Final_Assignment
 
         public void HandleInput(GameTime gameTime)
         {
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Back) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Escape) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
                 m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
             }
@@ -211,7 +226,7 @@ namespace Final_Assignment
                         break;
                     case Keycursorstate.Navigation:
 
-                        if (keyboardCursorPosCounter >= nav_button_poslist.Count + _gameObjects.Count)
+                        if (keyboardCursorPosCounter >= nav_button_poslist.Count + _gameObjects.Count - 1)
                         {
                             keyboardCursorPosCounter = _gameObjects.Count;
                         }
@@ -234,7 +249,7 @@ namespace Final_Assignment
                     isFirstActive = false;
                     keyboardCursorPosCounter--;
                 }
-                
+
                 switch (keycursorstate)
                 {
                     case Keycursorstate.Charater:
@@ -249,8 +264,8 @@ namespace Final_Assignment
                         _cursorselection.Play();
                         //End to do play selection cursor sound
 
-                        Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);
+/*                        Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                        Console.WriteLine("State = " + (int)keycursorstate);*/
 
                         break;
                     case Keycursorstate.Navigation:
@@ -409,7 +424,7 @@ namespace Final_Assignment
             // _animationManager.Update(gameTime);
 
             //Mouse and Keyboard Detect
-            if (Singleton.Instance._currentmouse.Position != Singleton.Instance._previousmouse.Position || Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed || !        Singleton.Instance.isKeyboardCursorActive)
+            if (Singleton.Instance._currentmouse.Position != Singleton.Instance._previousmouse.Position || Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed || !Singleton.Instance.isKeyboardCursorActive)
             {
                 Singleton.Instance.isMouseActive = true;
                 Singleton.Instance.isKeyboardCursorActive = false;
@@ -505,10 +520,10 @@ namespace Final_Assignment
                 //End check cursor sound played
             }
 
-            if (Singleton.Instance._currentmouse.Position.X > nav_button_poslist[0].X - _font.MeasureString("Back").X
-                    && Singleton.Instance._currentmouse.Position.X < nav_button_poslist[0].X + _font.MeasureString("Back").X
-                    && Singleton.Instance._currentmouse.Position.Y > nav_button_poslist[0].Y - _font.MeasureString("Back").Y
-                    && Singleton.Instance._currentmouse.Position.Y < nav_button_poslist[0].Y + _font.MeasureString("Back").Y && Singleton.Instance.isMouseActive)
+            if (Singleton.Instance._currentmouse.Position.X > nav_button_poslist[0].X - _font.MeasureString("BACK").X
+                    && Singleton.Instance._currentmouse.Position.X < nav_button_poslist[0].X + _font.MeasureString("BACK").X
+                    && Singleton.Instance._currentmouse.Position.Y > nav_button_poslist[0].Y - _font.MeasureString("BACK").Y
+                    && Singleton.Instance._currentmouse.Position.Y < nav_button_poslist[0].Y + _font.MeasureString("BACK").Y && Singleton.Instance.isMouseActive)
             //Back button
             {
                 KeyboardCursorPos = nav_button_poslist[0];

@@ -67,7 +67,7 @@ namespace Final_Assignment
         {
 
 
-            if(Singleton.Instance.CurrentStage >= 2)
+            if (Singleton.Instance.CurrentStage >= 2)
             {
                 Singleton.Instance.CurrentStage = 0;
                 m_screenManager.ChangeScreen(new WinScreen(m_screenManager));
@@ -191,7 +191,7 @@ namespace Final_Assignment
             nav_button_colorlist.Add(Color.White);
 
             nav_button_name_list.Add("Back");
-            nav_button_name_list.Add("Start");
+            nav_button_name_list.Add("START");
             nav_button_name_list.Add("Reset skill");
 
             KeyboardCursorPos = skill_button_poslist[0];
@@ -202,6 +202,21 @@ namespace Final_Assignment
 
             _selected.Volume = Singleton.Instance.MasterSFXVolume;
             _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+
+            Console.WriteLine("Upgrade Screen stage "+Singleton.Instance.CurrentStage);
+            Console.WriteLine("Hero value: "+Singleton.Instance.CurrentHero);
+            Console.WriteLine("Stage value: " + Singleton.Instance.CurrentStage);
+            Console.WriteLine("skill 1 value: " + Singleton.Instance.level_sk1);
+            Console.WriteLine("skill 2 value: " + Singleton.Instance.level_sk2);
+            Console.WriteLine("skill 3 value: " + Singleton.Instance.level_sk3);
+            Console.WriteLine("Previous skill 1 value: " + Singleton.Instance.previous_level_sk1);
+            Console.WriteLine("Previous skill 2 value: " + Singleton.Instance.previous_level_sk2);
+            Console.WriteLine("Previous skill 3 value: " + Singleton.Instance.previous_level_sk3);
+            Console.WriteLine("Keyboard status: " + Singleton.Instance.isKeyboardCursorActive);
+            Console.WriteLine("Mouse status: " + Singleton.Instance.isMouseActive);
+            Console.WriteLine("BGM Value: " + Singleton.Instance.MasterBGMVolume);
+            Console.WriteLine("SFX Value: " + Singleton.Instance.MasterSFXVolume);
+            Console.WriteLine("----------------------------------------------------------------------------------------------------");
         }
 
         public void Pause()
@@ -224,12 +239,12 @@ namespace Final_Assignment
             Singleton.Instance._previousmouse = Singleton.Instance._currentmouse;
             Singleton.Instance._currentmouse = Mouse.GetState();
             //Mouse and Keyboard Detect
-            if (Singleton.Instance._currentmouse.Position != Singleton.Instance._previousmouse.Position || Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed || !        Singleton.Instance.isKeyboardCursorActive)
+            if (Singleton.Instance._currentmouse.Position != Singleton.Instance._previousmouse.Position || Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed || !Singleton.Instance.isKeyboardCursorActive)
             {
                 Singleton.Instance.isMouseActive = true;
                 Singleton.Instance.isKeyboardCursorActive = false;
             }
-            else    Singleton.Instance.isMouseActive = false;
+            else Singleton.Instance.isMouseActive = false;
             //End Mouse and Keyboard Detect
 
             //Start skill1-3 button loop
@@ -263,7 +278,7 @@ namespace Final_Assignment
                     else if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Released && Singleton.Instance._previousmouse.LeftButton == ButtonState.Pressed)
                     {
                         //Do when click skill3 button
-                        skillCommandList(i);
+                        SkillCommandList(i);
                     }
                 }
                 else
@@ -286,7 +301,7 @@ namespace Final_Assignment
                 && Singleton.Instance._currentmouse.Position.X < nav_button_poslist[i].X + _font.MeasureString(nav_button_name_list[i]).X
                 && Singleton.Instance._currentmouse.Position.Y > nav_button_poslist[i].Y - _font.MeasureString(nav_button_name_list[i]).Y
                 && Singleton.Instance._currentmouse.Position.Y < nav_button_poslist[i].Y + _font.MeasureString(nav_button_name_list[i]).Y && Singleton.Instance.isMouseActive)
-                
+
                 {
                     KeyboardCursorPos = nav_button_poslist[i];
                     nav_button_colorlist[i] = Color.Red;
@@ -316,7 +331,7 @@ namespace Final_Assignment
                     {
                         nav_button_colorlist[i] = Color.Red;
                         //Do when click Reset skill button
-                        navCommandList(i);
+                        NavCommandList(i);
 
                         //Start to do play selected button sound
                         _selected.Play();
@@ -351,10 +366,10 @@ namespace Final_Assignment
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Right) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
                 bool isFirstActive;
-                if (!        Singleton.Instance.isKeyboardCursorActive)
+                if (!Singleton.Instance.isKeyboardCursorActive)
                 {
                     isFirstActive = true;
-                            Singleton.Instance.isKeyboardCursorActive = true;
+                    Singleton.Instance.isKeyboardCursorActive = true;
                 }
                 else
                 {
@@ -369,8 +384,8 @@ namespace Final_Assignment
                             keyboardCursorPosCounter = 0;
                         }
                         KeyboardCursorPos = skill_button_poslist[keyboardCursorPosCounter];
-                        Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);
+/*                        Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                        Console.WriteLine("State = " + (int)keycursorstate);*/
 
                         break;
                     case Keycursorstate.Navigation:
@@ -380,8 +395,8 @@ namespace Final_Assignment
                             keyboardCursorPosCounter = skill_button_poslist.Count;
                         }
                         KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - skill_button_poslist.Count];
-                        Console.WriteLine("Nav Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + (nav_button_poslist.Count + skill_button_poslist.Count));
-                        Console.WriteLine("State = " + (int)keycursorstate);
+/*                        Console.WriteLine("Nav Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + (nav_button_poslist.Count + skill_button_poslist.Count));
+                        Console.WriteLine("State = " + (int)keycursorstate);*/
 
                         break;
                 }
@@ -391,13 +406,13 @@ namespace Final_Assignment
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Left) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
                 bool isFirstActive;
-                if (!        Singleton.Instance.isKeyboardCursorActive)
+                if (!Singleton.Instance.isKeyboardCursorActive)
                 {
                     isFirstActive = true;
-                            Singleton.Instance.isKeyboardCursorActive = true;
+                    Singleton.Instance.isKeyboardCursorActive = true;
                 }
                 else
-                {     
+                {
                     isFirstActive = false;
                     keyboardCursorPosCounter--;
                 }
@@ -409,8 +424,8 @@ namespace Final_Assignment
                             keyboardCursorPosCounter = skill_button_poslist.Count - 1;
                         }
                         KeyboardCursorPos = skill_button_poslist[keyboardCursorPosCounter];
-                        Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);
+/*                        Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                        Console.WriteLine("State = " + (int)keycursorstate);*/
 
                         break;
                     case Keycursorstate.Navigation:
@@ -420,8 +435,8 @@ namespace Final_Assignment
                             keyboardCursorPosCounter = nav_button_poslist.Count + skill_button_poslist.Count - 1;
                         }
                         KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - skill_button_poslist.Count];
-                        Console.WriteLine("Nav Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + ((nav_button_poslist.Count - 1) + (skill_button_poslist.Count - 1)));
-                        Console.WriteLine("State = " + (int)keycursorstate);
+/*                        Console.WriteLine("Nav Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + ((nav_button_poslist.Count - 1) + (skill_button_poslist.Count - 1)));
+                        Console.WriteLine("State = " + (int)keycursorstate);*/
 
                         break;
                 }
@@ -432,10 +447,10 @@ namespace Final_Assignment
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
                 bool isFirstActive;
-                if (!        Singleton.Instance.isKeyboardCursorActive)
+                if (!Singleton.Instance.isKeyboardCursorActive)
                 {
                     isFirstActive = true;
-                            Singleton.Instance.isKeyboardCursorActive = true;
+                    Singleton.Instance.isKeyboardCursorActive = true;
                 }
                 else
                 {
@@ -451,8 +466,8 @@ namespace Final_Assignment
                             keycursorstate = Keycursorstate.Navigation;
                         }
                         _cursorselection.Play();
-                        Console.WriteLine("Nav Down key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);
+/*                        Console.WriteLine("Nav Down key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                        Console.WriteLine("State = " + (int)keycursorstate);*/
                         break;
                     case Keycursorstate.Navigation:
                         if (!isFirstActive)
@@ -462,8 +477,8 @@ namespace Final_Assignment
                             keycursorstate = Keycursorstate.Skill;
                         }
                         _cursorselection.Play();
-                        Console.WriteLine("Skill Down key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);
+/*                        Console.WriteLine("Skill Down key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                        Console.WriteLine("State = " + (int)keycursorstate);*/
                         break;
                 }
             }
@@ -471,10 +486,10 @@ namespace Final_Assignment
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
                 bool isFirstActive;
-                if (!        Singleton.Instance.isKeyboardCursorActive)
+                if (!Singleton.Instance.isKeyboardCursorActive)
                 {
                     isFirstActive = true;
-                            Singleton.Instance.isKeyboardCursorActive = true;
+                    Singleton.Instance.isKeyboardCursorActive = true;
                 }
                 else
                 {
@@ -484,14 +499,14 @@ namespace Final_Assignment
                 {
                     case Keycursorstate.Skill:
                         if (!isFirstActive)
-                        { 
+                        {
                             keyboardCursorPosCounter = nav_button_poslist.Count + skill_button_poslist.Count - 1;
                             KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - skill_button_poslist.Count];
                             keycursorstate = Keycursorstate.Navigation;
                         }
                         _cursorselection.Play();
-                        Console.WriteLine("Nav Up key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);
+/*                        Console.WriteLine("Nav Up key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                        Console.WriteLine("State = " + (int)keycursorstate);*/
                         break;
                     case Keycursorstate.Navigation:
                         if (!isFirstActive)
@@ -501,20 +516,20 @@ namespace Final_Assignment
                             keycursorstate = Keycursorstate.Skill;
                             _cursorselection.Play();
                         }
-                        Console.WriteLine("Skill Up key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);
+ /*                       Console.WriteLine("Skill Up key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                        Console.WriteLine("State = " + (int)keycursorstate);*/
                         break;
                 }
             }
 
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Back) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Escape) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
 
                 m_screenManager.ChangeScreen(new SelectCharScreen(m_screenManager));
             }
 
 
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey &&         Singleton.Instance.isKeyboardCursorActive)
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.isKeyboardCursorActive)
             {
 
                 switch (keyboardCursorPosCounter)
@@ -557,21 +572,28 @@ namespace Final_Assignment
                         //Start to do play selected button sound
                         _selected.Play();
                         //End to do play selected button sound
-                        Singleton.Instance.CurrentHero = "";
+                        
+                        
                         if (Singleton.Instance.CurrentStage == 0)
                             m_screenManager.ChangeScreen(new SelectCharScreen(m_screenManager));
                         else
-                            m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
-
+                        {
+                            m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));     
+                        }
+                        Singleton.Instance.CurrentStage = 0;    
+                        Singleton.Instance.CurrentHero = "";
                         break;
                     case 4://Start
                            //Do when enter Start button
 
                         //Start to do play selected button sound
                         _selected.Play();
-                        //End to do play selected button sound
                         Singleton.Instance.CurrentStage += 1;
-                        m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
+                        //End to do play selected button sound
+                        if (Singleton.Instance.CurrentStage == 1)
+                            m_screenManager.ChangeScreen(new HowToPlayScreen(m_screenManager));
+                        else 
+                            m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
                         break;
                     case 5://Reset skill
                            //Do when enter Reset skill button
@@ -639,17 +661,17 @@ namespace Final_Assignment
 
             for (int i = 0; i <= _skillDes.GetLength(0) - 1; i++)
             {
-                spriteBatch.DrawString(_font, _skillDes[0,i], skill_button_poslist[0],Color.White, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height - 150 - 80*i ) / 2) + _font.MeasureString(_skillDes[0, i]) / 2, 0.8f,SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, _skillDes[1,i], skill_button_poslist[1],Color.White, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height - 150 - 80 * i) / 2) + _font.MeasureString(_skillDes[1, i]) / 2, 0.8f, SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, _skillDes[2,i], skill_button_poslist[2],Color.White, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height - 150 - 80 * i) / 2) + _font.MeasureString(_skillDes[2, i]) / 2, 0.8f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, _skillDes[0, i], skill_button_poslist[0], Color.White, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height - 150 - 80 * i) / 2) + _font.MeasureString(_skillDes[0, i]) / 2, 0.8f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, _skillDes[1, i], skill_button_poslist[1], Color.White, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height - 150 - 80 * i) / 2) + _font.MeasureString(_skillDes[1, i]) / 2, 0.8f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, _skillDes[2, i], skill_button_poslist[2], Color.White, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height - 150 - 80 * i) / 2) + _font.MeasureString(_skillDes[2, i]) / 2, 0.8f, SpriteEffects.None, 0);
             }
 
             if (Singleton.Instance.CurrentStage == 0)
             {
                 spriteBatch.DrawString(_font,
-                                    "Back",
+                                    nav_button_name_list[0],
                                     nav_button_poslist[0],
-                                    nav_button_colorlist[0], 0, _font.MeasureString("Back") / 2, nav_button_scalelist[0], 0, 0);
+                                    nav_button_colorlist[0], 0, _font.MeasureString(nav_button_name_list[0]) / 2, nav_button_scalelist[0], 0, 0);
             }
             else
             {
@@ -661,16 +683,16 @@ namespace Final_Assignment
 
 
             spriteBatch.DrawString(_font,
-                    "Start",
+                    nav_button_name_list[1],
                     nav_button_poslist[1],
-                    nav_button_colorlist[1], 0, _font.MeasureString("Start") / 2, nav_button_scalelist[1], 0, 0);
+                    nav_button_colorlist[1], 0, _font.MeasureString(nav_button_name_list[1]) / 2, nav_button_scalelist[1], 0, 0);
 
             spriteBatch.DrawString(_font,
-                        "Reset skill",
+                        nav_button_name_list[2],
                         nav_button_poslist[2],
-                        nav_button_colorlist[2], 0, _font.MeasureString("Reset skill") / 2, nav_button_scalelist[2], 0, 0);
+                        nav_button_colorlist[2], 0, _font.MeasureString(nav_button_name_list[2]) / 2, nav_button_scalelist[2], 0, 0);
 
-            if (        Singleton.Instance.isKeyboardCursorActive)
+            if (Singleton.Instance.isKeyboardCursorActive)
             {
 
                 switch (keyboardCursorPosCounter)
@@ -698,9 +720,9 @@ namespace Final_Assignment
                         break;
                     case 4:
                         spriteBatch.DrawString(_font,
-                        "Start",
+                        "START",
                         nav_button_poslist[1],
-                        Color.Red, 0, _font.MeasureString("Start") / 2, new Vector2(1.5f, 1.5f), 0, 0);
+                        Color.Red, 0, _font.MeasureString("START") / 2, new Vector2(1.5f, 1.5f), 0, 0);
                         break;
                     case 5:
                         spriteBatch.DrawString(_font,
@@ -717,7 +739,7 @@ namespace Final_Assignment
 
 
             spriteBatch.DrawString(_font,
-                 "[console log] Res: " + Singleton.SCREENWIDTH + "x" + Singleton.SCREENHEIGHT + "  MousePos: " + Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
+                 "[Console] Res: " + Singleton.SCREENWIDTH + "x" + Singleton.SCREENHEIGHT + "    Keyboard status: " + Singleton.Instance.isKeyboardCursorActive + "    Mouse status: " + Singleton.Instance.isMouseActive + "   MousePos: " + Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
                  new Vector2(1, Singleton.SCREENHEIGHT - 20),
                  Color.White, 0, new Vector2(0, 0), new Vector2(0.8f, 0.8f), 0, 0);
 
@@ -741,23 +763,25 @@ namespace Final_Assignment
 
         }
 
-        public void navCommandList(int i)
+        public void NavCommandList(int i)
         {
-            switch(i)
+            switch (i)
             {
                 case 0://back command
+
                     if (Singleton.Instance.CurrentStage == 0)
                         m_screenManager.ChangeScreen(new SelectCharScreen(m_screenManager));
-
                     else
-                    {
                         m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
-                        Singleton.Instance.CurrentStage = 0;
-                    }
+                    Singleton.Instance.CurrentStage = 0;
+                    Singleton.Instance.CurrentHero = "";
                     break;
                 case 1://start command
                     Singleton.Instance.CurrentStage += 1;
-                    m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
+                    if (Singleton.Instance.CurrentStage == 1)
+                        m_screenManager.ChangeScreen(new HowToPlayScreen(m_screenManager));
+                    else
+                        m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
                     break;
                 case 2://reset command
                     Singleton.Instance.level_sk1 = Singleton.Instance.previous_level_sk1;
@@ -768,7 +792,7 @@ namespace Final_Assignment
             }
         }
 
-        public void skillCommandList(int i)
+        public void SkillCommandList(int i)
         {
             switch (i)
             {

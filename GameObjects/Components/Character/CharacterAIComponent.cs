@@ -46,9 +46,9 @@ namespace Final_Assignment
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
 
-            _rotation = rnd.Next(1, 4);
+            _rotation = (float)rnd.Next(150, 240)/100;
 
-            _force = rnd.Next(200, 300)/100;
+            _force = (float)rnd.Next(150, 230)/100;
             parent.Rotation = _rotation;
             CheckRemove(parent);
 
@@ -105,13 +105,11 @@ namespace Final_Assignment
 
             if (Cooldown_1 <= 0)
             {
-                Console.WriteLine(parent.Name + " call skill 1");
                 parent.skill = 1;
                 Cooldown_1 = 5;
             }
             else if (Cooldown_2 <= 0)
             {
-                Console.WriteLine(parent.Name + " call skill 2");
                 parent.skill = 2;
                 Cooldown_2 = 6;
             }
@@ -135,9 +133,9 @@ namespace Final_Assignment
         {
 
             bullet = BulletFactory.create(content, parent.Weapon);
-
+           
             _shoot.Play();
-
+            //Console.WriteLine("rotation  " + _rotation);
             _direction = new Vector2((float)Math.Cos(_rotation + (float)Math.PI / 2), (float)Math.Sin(_rotation + (float)Math.PI / 2));
             bullet.Rotation = _rotation - (float)Math.PI;
 

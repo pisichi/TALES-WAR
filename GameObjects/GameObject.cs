@@ -94,7 +94,8 @@ namespace Final_Assignment
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (_graphics != null) _graphics.Draw(spriteBatch, this);
-            if(_hit != null) spriteBatch.Draw(_hit, Rectangle, Color.Red);
+            //if(_hit != null) spriteBatch.Draw(_hit, Rectangle, Color.Red);
+            //check hit box
         }
 
         public void SendMessage(Component sender,int message)

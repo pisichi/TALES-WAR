@@ -35,7 +35,7 @@ namespace Final_Assignment
                                null)
                     {
                         Viewport = new Rectangle(0, 0, 50, 50),
-                        _hit = hit,
+                     
                     };
                     break;
 
@@ -50,7 +50,7 @@ namespace Final_Assignment
                                null)
                     {
                         Viewport = new Rectangle(0, 0, 50, 50),
-                        _hit = hit,
+                     
                     };
                     break;
 
@@ -65,7 +65,7 @@ namespace Final_Assignment
                                null)
                     {
                         Viewport = new Rectangle(0, 0, 50, 50),
-                        _hit = hit,
+                      
                     };
                     break;
 
@@ -80,7 +80,7 @@ namespace Final_Assignment
                                 null)
                     {
                         Viewport = new Rectangle(0, 0, 50, 50),
-                        _hit = hit,
+                        
                     };
                     break;
 
@@ -95,7 +95,7 @@ namespace Final_Assignment
                                null)
                     {
                         Viewport = new Rectangle(0, 0, 50, 50),
-                        _hit = hit,
+                       
                     };
                     break;
             }

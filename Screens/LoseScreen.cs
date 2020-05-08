@@ -46,7 +46,7 @@ namespace Final_Assignment
 
         public void Init(ContentManager content)
         {
-            _bg = content.Load<Texture2D>("sprites/stage_sky_2");
+            _bg = content.Load<Texture2D>("sprites/bg_lose");
             _font = content.Load<SpriteFont>("font/File");
 
             Singleton.Instance.CurrentHero = "zeus";
@@ -54,7 +54,7 @@ namespace Final_Assignment
             switch (Singleton.Instance.CurrentHero)
             {
                 case "zeus":
-                    _bg = content.Load<Texture2D>("sprites/z1");
+                    
                     _selectedChar = content.Load<Texture2D>("sprites/sheet_zeus");
                     _character = new GameObject(null,
                                    null,
@@ -72,7 +72,7 @@ namespace Final_Assignment
                     break;
 
                 case "thor":
-                    _bg = content.Load<Texture2D>("sprites/t1");
+                   
                     _selectedChar = content.Load<Texture2D>("sprites/sheet_thor");
                     _character = new GameObject(null,
                                             null,
@@ -115,7 +115,8 @@ namespace Final_Assignment
 
             isMouseActive = false;
 
-
+            _selected.Volume = Singleton.Instance.MasterSFXVolume;
+            _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
 
 
         }
@@ -192,15 +193,15 @@ namespace Final_Assignment
                     switch (i)
                     {
                         case 0:
+                            Singleton.Instance.CurrentStage = 0;
+                            Singleton.Instance.CurrentHero = "";
                             //Start to do play selected button sound
-                            _selected.Volume = Singleton.Instance.MasterSFXVolume;
                             _selected.Play();
                             //End to do play selected button sound
                             m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
                             break;
                         case 1:
                             //Start to do play selected button sound
-                            _selected.Volume = Singleton.Instance.MasterSFXVolume;
                             _selected.Play();
                             //End to do play selected button sound
  
@@ -265,7 +266,8 @@ namespace Final_Assignment
                 {
                     case 0:
                         //Start to do play selected button sound
-                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
+                        Singleton.Instance.CurrentStage = 0;
+                        Singleton.Instance.CurrentHero = "";
                         _selected.Play();
                         //End to do play selected button sound
                         m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
@@ -273,7 +275,6 @@ namespace Final_Assignment
 
                     case 1:
                         //Start to do play selected button sound
-                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
                         _selected.Play();
                         //End to do play selected button sound
                             m_exitGame = true;
@@ -289,7 +290,7 @@ namespace Final_Assignment
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(_bg, destinationRectangle: new Rectangle(0, 0, 3000, 800), color: Color.White);
+            spriteBatch.Draw(_bg,Vector2.Zero, color: Color.White);
 
 
             spriteBatch.DrawString(_font, "MENU", menu_button_poslist[0], menu_button_colorlist[0], 0, _font.MeasureString("MENU") / 2, menu_button_scalelist[0], SpriteEffects.None, 0);

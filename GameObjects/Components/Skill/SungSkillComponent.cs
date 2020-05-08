@@ -53,7 +53,11 @@ namespace Final_Assignment
 
             if (parent.InTurn && parent.status != 1 && count == 1)
             {
-                parent.HP++;
+                int rand = rnd.Next(1, 4);
+                if (rand > 2)
+                {
+                    parent.HP++;
+                }
                 parent.SendMessage(this, 3);
             }
 
@@ -61,14 +65,14 @@ namespace Final_Assignment
 
             if (parent.skill == 1)
             {
-                Console.WriteLine(parent.Name + " use skill 1");
+
                 parent.SendMessage(this, 201);
                 parent.skill = 0;
             }
 
             else if (parent.skill == 2)
             {
-                Console.WriteLine(parent.Name + " use skill 2");
+
                 parent.SendMessage(this, 206);
                 parent.skill = 0;
             }

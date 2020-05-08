@@ -57,7 +57,7 @@ namespace Final_Assignment
                     case 1:
                         if (rng >= 10)
                         {
-                            Console.WriteLine(parent.Name + "  activated passive");
+
                             _attack++;
 
                             parent.SendMessage(this, 3);
@@ -67,7 +67,7 @@ namespace Final_Assignment
                     case 2:
                         if (rng >= 9)
                         {
-                            Console.WriteLine(parent.Name + "  activated passive");
+
                             _attack++;
 
                             parent.SendMessage(this, 3);
@@ -77,7 +77,7 @@ namespace Final_Assignment
                     case 3:
                         if (rng >= 8)
                         {
-                            Console.WriteLine(parent.Name + "  activated passive");
+
                             _attack++;
 
                             parent.SendMessage(this, 3);

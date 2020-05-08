@@ -35,7 +35,7 @@ namespace Final_Assignment
 
             if (rng >= 8 && !parent.InTurn && !parent.action && parent.status!= 1)
             {
-                Console.WriteLine(parent.Name + "  activated passive");
+
                 
                 parent.InTurn = true;
 
@@ -46,7 +46,7 @@ namespace Final_Assignment
 
             if(parent.skill == 1)
             {
-                Console.WriteLine(parent.Name + " use skill 1");
+
                 parent.SendMessage(this, 202);
                 parent.skill = 0;
             }
@@ -54,7 +54,7 @@ namespace Final_Assignment
 
             else if(parent.skill == 2)
             {
-                Console.WriteLine(parent.Name + " use skill 2");
+
                 parent.attack += 1;
                 parent.SendMessage(this, 3);
                 parent.skill = 0;

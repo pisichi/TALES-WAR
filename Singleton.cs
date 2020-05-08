@@ -36,17 +36,10 @@ namespace Final_Assignment
         public float MasterBGMVolume = 0.5f;
         public float MasterSFXVolume = 0.3f;
 
+
         public bool isKeyboardCursorActive;
         public bool isMouseActive;
 
-        public enum GameState
-        {
-            GamePlaying,
-            GamePaused,
-            GameLose,
-            GameWin
-        }
-        public GameState CurrentGameState;
 
         public enum TurnState
         {
