@@ -642,9 +642,8 @@ namespace Final_Assignment
                     waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
                     if (waitTime > 2.3f)
                     {
-                        enemyList[enemyIndex].action = true;
-                        //enemyList[enemyIndex].InTurn = false;
                         waitTime = 0;
+                        enemyList[enemyIndex].action = true;
                     }
                 }
 

@@ -33,7 +33,7 @@ namespace Final_Assignment
         public int Cooldown_2;
 
 
-        public float MasterBGMVolume = 0.5f;
+        public float MasterBGMVolume = 0.2f;
         public float MasterSFXVolume = 0.3f;
 
 

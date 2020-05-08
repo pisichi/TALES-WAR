@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Final_Assignment
 {
@@ -13,7 +14,7 @@ namespace Final_Assignment
         private IGameScreenManager m_screenManager;
 
         SpriteFont _font;
-
+        protected Song song;
 
         public Main()
         {
@@ -24,6 +25,7 @@ namespace Final_Assignment
             };
 
             IsMouseVisible = true;
+            
             graphics.GraphicsProfile = GraphicsProfile.HiDef;
             graphics.ApplyChanges();
 
@@ -35,9 +37,14 @@ namespace Final_Assignment
         {
             _font = Content.Load<SpriteFont>("font/File");
 
+            song = Content.Load<Song>("sounds/bgm_1");
+            MediaPlayer.Volume = Singleton.Instance.MasterBGMVolume;
+            MediaPlayer.Play(song);
+
             m_spriteBatch = new SpriteBatch(GraphicsDevice);
 
             m_screenManager = new GameScreenManager(m_spriteBatch, Content);
+           
 
             m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
 

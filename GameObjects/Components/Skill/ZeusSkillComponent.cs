@@ -79,10 +79,10 @@ namespace Final_Assignment
                         parent.attack = 2;
                         break;
                     case 2:
-                        parent.attack = 4;
+                        parent.attack = 3;
                         break;
                     case 3:
-                        parent.attack = 6;
+                        parent.attack = 4;
                         break;
                 }
                 parent.skill = 0;
@@ -99,11 +99,11 @@ namespace Final_Assignment
                         parent.SendMessage(this, 299);
                         break;
                     case 2:
-                        parent.attack = 3;
+                        parent.attack = 4;
                         parent.SendMessage(this, 299);
                         break;
                     case 3:
-                        parent.attack = 4;
+                        parent.attack = 6;
                         parent.SendMessage(this, 299);
                         break;
                 }

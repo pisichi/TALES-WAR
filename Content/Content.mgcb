@@ -20,6 +20,18 @@
 /processorParam:TextureFormat=Compressed
 /build:font/File.spritefont
 
+#begin sounds/bgm_1.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/bgm_1.mp3
+
+#begin sounds/dead.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/dead.wav
+
 #begin sounds/hit_char.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
