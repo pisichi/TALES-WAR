@@ -53,7 +53,11 @@ namespace Final_Assignment
 
             if (parent.InTurn && parent.status != 1 && count == 1)
             {
-                parent.HP++;
+                int rand = rnd.Next(1, 4);
+                if (rand > 2)
+                {
+                    parent.HP++;
+                }
                 parent.SendMessage(this, 3);
             }
 

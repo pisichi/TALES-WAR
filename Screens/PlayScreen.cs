@@ -71,9 +71,12 @@ namespace Final_Assignment
         {
             this.content = content;
 
+
             _gameObjects = new List<GameObject>();
             enemyList = new List<GameObject>();
             Singleton.Instance._camera = new Camera();
+            Singleton.Instance.Cooldown_1 = 0;
+            Singleton.Instance.Cooldown_2 = 0;
 
             _bg = content.Load<Texture2D>("sprites/stage_bg");
             _pin = content.Load<Texture2D>("sprites/pin");
@@ -136,7 +139,7 @@ namespace Final_Assignment
                 _hit = _hit,
                 Name = Singleton.Instance.CurrentHero,
                 Weapon = _weapon,
-                HP = 5,
+                HP = 8,
                 attack = 1,
             };
             _gameObjects.Add(player);
@@ -316,14 +319,14 @@ namespace Final_Assignment
                                       }),
                                   new SungSkillComponent())
             {
-                Position = new Vector2(3450, 470),
+                Position = new Vector2(3250, 550),
                 InTurn = false,
                 Viewport = new Rectangle(0, 0, 150, 230),
                 _hit = _hit,
                 Name = "sung",
                 Weapon = "bar",
                 HP = 6,
-                attack = 1
+                attack = 2
             };
             _gameObjects.Add(boss);
             enemyList.Add(boss);
@@ -333,6 +336,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(400, 950),
                 Viewport = new Rectangle(0, 0, 900, 50),
+
                 Name = "floor",
               
             }
@@ -342,6 +346,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(1300, 900),
                 Viewport = new Rectangle(0, 0, 800, 50),
+                _hit = _hit,
                 Name = "floor",
              
             }
@@ -349,8 +354,9 @@ namespace Final_Assignment
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
-                Position = new Vector2(3500, 670),
-                Viewport = new Rectangle(0, 0, 200, 150),
+                Position = new Vector2(3250, 750),
+                Viewport = new Rectangle(0, 0, 400, 200),
+                _hit = _hit,
                 Name = "floor",
                
             }
@@ -358,8 +364,9 @@ namespace Final_Assignment
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
-                Position = new Vector2(2950, 300),
-                Viewport = new Rectangle(0, 0, 200, 150),
+                Position = new Vector2(2100, 900),
+                Viewport = new Rectangle(0, 0, 150, 150),
+                _hit = _hit,
                 Name = "floor",
              
             }
@@ -367,8 +374,9 @@ namespace Final_Assignment
 
             _gameObjects.Add(new GameObject(null, null, null, null)
             {
-                Position = new Vector2(2900, 900),
-                Viewport = new Rectangle(0, 0, 350, 150),
+                Position = new Vector2(2700, 900),
+                Viewport = new Rectangle(0, 0, 150, 150),
+                _hit = _hit,
                 Name = "floor",
               
             });
@@ -480,6 +488,7 @@ namespace Final_Assignment
                         player.skill = 1;
                         _selected.Play();
                         Singleton.Instance.Cooldown_1 = 4;
+                        Singleton.Instance.CurrentTurnState = Singleton.TurnState.angle;
                     }
 
                     if (Singleton.Instance._currentkey.IsKeyDown(Keys.NumPad2) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.Cooldown_2 <= 0)
@@ -487,6 +496,7 @@ namespace Final_Assignment
                         player.skill = 2;
                         _selected.Play();
                         Singleton.Instance.Cooldown_2 = 5;
+                        Singleton.Instance.CurrentTurnState = Singleton.TurnState.angle;
                     }
 
                     else if (Singleton.Instance._currentkey.IsKeyDown(Keys.Space) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
@@ -608,7 +618,7 @@ namespace Final_Assignment
         public void HandleInput(GameTime gameTime)
         {
 
-            if ((Singleton.Instance._currentkey.IsKeyDown(Keys.L) && Singleton.Instance._currentkey != Singleton.Instance._previouskey) || player.HP <= 0 || boss.HP <= 0)
+            if ((Singleton.Instance._currentkey.IsKeyDown(Keys.L) && Singleton.Instance._currentkey != Singleton.Instance._previouskey))
             {
                 m_screenManager.ChangeScreen(new WinScreen(m_screenManager));
             }
@@ -638,15 +648,18 @@ namespace Final_Assignment
                     }
                     else
                     {
+                        spriteBatch.DrawString(_font, "cool down: "+ Singleton.Instance.Cooldown_1, player.Position + new Vector2(-80, -220), Color.White, 0, _font.MeasureString("cool down: " + Singleton.Instance.Cooldown_1) / 2, 1, SpriteEffects.None, 0);
                         spriteBatch.Draw(_skill1, player.Position + new Vector2(-80, -150), null, Color.Gray,0, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 1f, SpriteEffects.None, 0);
                     }
 
                     if (Singleton.Instance.Cooldown_2 <= 0)
                     {
+
                         spriteBatch.Draw(_skill2, player.Position + new Vector2(80, -150), null, Color.White, 0f, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 1f, SpriteEffects.None, 0);
                     }
                     else
                     {
+                        spriteBatch.DrawString(_font, "cool down: " + Singleton.Instance.Cooldown_2, player.Position + new Vector2(80, -220), Color.White, 0, _font.MeasureString("cool down: " + Singleton.Instance.Cooldown_2) / 2, 1, SpriteEffects.None, 0);
                         spriteBatch.Draw(_skill2, player.Position + new Vector2(80, -150), null, Color.Gray, 0, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 1f, SpriteEffects.None, 0);
                     }
                     break;

@@ -25,6 +25,7 @@ namespace Final_Assignment
 
 
         Texture2D _bg;
+        Texture2D _strip;
         SpriteFont _font;
         private List<Vector2> menu_button_poslist;
         private List<Vector2> menu_button_scalelist;
@@ -48,6 +49,7 @@ namespace Final_Assignment
         {
             int rand = rnd.Next(1, 5);
             _bg = content.Load<Texture2D>("sprites/menu_" + rand);
+            _strip = content.Load<Texture2D>("sprites/menu_strip");
             _font = content.Load<SpriteFont>("font/File");
 
             _selected = content.Load<SoundEffect>("sounds/selected_sound").CreateInstance();
@@ -278,7 +280,8 @@ namespace Final_Assignment
             spriteBatch.Begin();
 
             spriteBatch.Draw(_bg, Vector2.Zero, color: Color.White);
-            spriteBatch.DrawString(_font, "TALES WAR", new Vector2(300, 200) - _font.MeasureString("TALE WARS") / 2, Color.White);
+            spriteBatch.Draw(_strip, new Vector2(100,0), color: Color.White);
+            spriteBatch.DrawString(_font, "TALES WAR", new Vector2(300, 200) - _font.MeasureString("TALE WARS") / 2 , Color.White);
 
 
             spriteBatch.DrawString(_font, "PLAY", menu_button_poslist[0], menu_button_colorlist[0], 0, _font.MeasureString("PLAY") / 2, menu_button_scalelist[0], SpriteEffects.None, 0);

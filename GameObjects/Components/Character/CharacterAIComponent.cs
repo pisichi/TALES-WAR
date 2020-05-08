@@ -46,7 +46,7 @@ namespace Final_Assignment
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
 
-            _rotation = rnd.Next(1, 4);
+            _rotation = rnd.Next(2, 4);
 
             _force = rnd.Next(200, 300)/100;
             parent.Rotation = _rotation;
