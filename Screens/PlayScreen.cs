@@ -136,7 +136,6 @@ namespace Final_Assignment
                 Position = new Vector2(600, 800),
                 InTurn = true,
                 Viewport = new Rectangle(0, 0, 150, 230),
-                _hit = _hit,
                 Name = Singleton.Instance.CurrentHero,
                 Weapon = _weapon,
                 HP = 8,
@@ -186,10 +185,9 @@ namespace Final_Assignment
                                        }),
                                    new GuanSkillComponent())
             {
-                Position = new Vector2(3700, 200),
+                Position = new Vector2(3730, 200),
                 InTurn = false,
                 Viewport = new Rectangle(0, 0, 150, 230),
-                //_hit = _hit,
                 Name = "guan",
                 Weapon = "lance",
                 HP = 7,
@@ -212,10 +210,9 @@ namespace Final_Assignment
                           }),
                       new MobSkillComponent())
             {
-                Position = new Vector2(2400, 540),
+                Position = new Vector2(2400, 560),
                 InTurn = false,
                 Viewport = new Rectangle(0, 0, 150, 230),
-                //_hit = _hit,
                 Name = "mob",
                 Weapon = "rock",
                 HP = 3,
@@ -239,10 +236,9 @@ namespace Final_Assignment
                          }),
                      new MobSkillComponent())
             {
-                Position = new Vector2(3200, 430),
+                Position = new Vector2(3200, 450),
                 InTurn = false,
                 Viewport = new Rectangle(0, 0, 150, 230),
-                //_hit = _hit,
                 Name = "mob",
                 Weapon = "rock",
                 HP = 3,
@@ -258,7 +254,6 @@ namespace Final_Assignment
                 Position = new Vector2(400, 950),
                 Viewport = new Rectangle(0, 0, 900, 50),
                 Name = "floor",
-                _hit = _hit
             }
             );
 
@@ -267,7 +262,6 @@ namespace Final_Assignment
                 Position = new Vector2(1300, 900),
                 Viewport = new Rectangle(0, 0, 800, 50),
                 Name = "floor",
-                //_hit = _hit
             }
            );
 
@@ -276,7 +270,6 @@ namespace Final_Assignment
                 Position = new Vector2(3800, 400),
                 Viewport = new Rectangle(0, 0, 200, 150),
                 Name = "floor",
-                //_hit = _hit
             }
            );
 
@@ -285,7 +278,6 @@ namespace Final_Assignment
                 Position = new Vector2(3200, 650),
                 Viewport = new Rectangle(0, 0, 200, 150),
                 Name = "floor",
-                //_hit = _hit
             }
             );
 
@@ -294,7 +286,6 @@ namespace Final_Assignment
                 Position = new Vector2(2420, 750),
                 Viewport = new Rectangle(0, 0, 350, 150),
                 Name = "floor",
-                //_hit = _hit
             });
 
 
@@ -306,6 +297,62 @@ namespace Final_Assignment
         {
 
             #region character
+
+
+            enemy = new GameObject(new CharacterAIComponent(content),
+                     new CharacterPhysicComponent(),
+                     new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                         {
+                                            { "Idle", new Animation(_mob, new Rectangle(0,0,400,250),2) },
+                                            { "Throw", new Animation(_mob, new Rectangle(0,250,400,250),2) },
+                                            { "Skill", new Animation(_mob, new Rectangle(0,0,400,250),2) },
+                                            { "Hit", new Animation(_mob, new Rectangle(0,500,200,250),1) },
+                                            { "Stunt", new Animation(_mob, new Rectangle(0,750,400,250),2) },
+                                             { "Die", new Animation(_mob, new Rectangle(200,1000,200,250),1) }
+                         }),
+                     new MobSkillComponent())
+            {
+                Position = new Vector2(2700, 700),
+                InTurn = false,
+                Viewport = new Rectangle(0, 0, 150, 230),
+              
+                Name = "mob",
+                Weapon = "rock",
+                HP = 3,
+                attack = 1
+            };
+            _gameObjects.Add(enemy);
+            enemyList.Add(enemy);
+
+
+
+            enemy = new GameObject(new CharacterAIComponent(content),
+                     new CharacterPhysicComponent(),
+                     new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
+                         {
+                                            { "Idle", new Animation(_mob, new Rectangle(0,0,400,250),2) },
+                                            { "Throw", new Animation(_mob, new Rectangle(0,250,400,250),2) },
+                                            { "Skill", new Animation(_mob, new Rectangle(0,0,400,250),2) },
+                                            { "Hit", new Animation(_mob, new Rectangle(0,500,200,250),1) },
+                                            { "Stunt", new Animation(_mob, new Rectangle(0,750,400,250),2) },
+                                             { "Die", new Animation(_mob, new Rectangle(200,1000,200,250),1) }
+                         }),
+                     new MobSkillComponent())
+            {
+                Position = new Vector2(2100, 700),
+                InTurn = false,
+                Viewport = new Rectangle(0, 0, 150, 230),
+                
+                Name = "mob",
+                Weapon = "rock",
+                HP = 3,
+                attack = 1
+            };
+            _gameObjects.Add(enemy);
+            enemyList.Add(enemy);
+
+
+
             boss = new GameObject(new CharacterAIComponent(content),
                                   new CharacterPhysicComponent(),
                                   new CharacterGraphicComponent(content, new Dictionary<string, Animation>()
@@ -322,7 +369,7 @@ namespace Final_Assignment
                 Position = new Vector2(3250, 550),
                 InTurn = false,
                 Viewport = new Rectangle(0, 0, 150, 230),
-                _hit = _hit,
+               
                 Name = "sung",
                 Weapon = "bar",
                 HP = 6,
@@ -346,7 +393,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(1300, 900),
                 Viewport = new Rectangle(0, 0, 800, 50),
-                _hit = _hit,
+               
                 Name = "floor",
              
             }
@@ -356,7 +403,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(3250, 750),
                 Viewport = new Rectangle(0, 0, 400, 200),
-                _hit = _hit,
+              
                 Name = "floor",
                
             }
@@ -366,7 +413,7 @@ namespace Final_Assignment
             {
                 Position = new Vector2(2100, 900),
                 Viewport = new Rectangle(0, 0, 150, 150),
-                _hit = _hit,
+               
                 Name = "floor",
              
             }
@@ -593,10 +640,10 @@ namespace Final_Assignment
                         Singleton.Instance.follow = enemyList[enemyIndex];
 
                     waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
-                    if (waitTime > 2)
+                    if (waitTime > 2.3f)
                     {
                         enemyList[enemyIndex].action = true;
-                       // enemyList[enemyIndex].InTurn = false;
+                        //enemyList[enemyIndex].InTurn = false;
                         waitTime = 0;
                     }
                 }
@@ -608,7 +655,9 @@ namespace Final_Assignment
                     if (enemyIndex < enemyList.Count)
                     {
                         enemyList[enemyIndex].InTurn = true;
-                        
+                        waitTime = 0;
+
+
                     }
                 }
 

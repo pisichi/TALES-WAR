@@ -102,7 +102,7 @@ namespace Final_Assignment
 
                         if (s.IsActive && parent.IsActive && IsTouching(parent, s))
                         {
-                            parent.Viewport = new Rectangle(0,0,150, 150);
+                            parent.Viewport = new Rectangle(0,0,100, 100);
                             parent.IsHit = true;
                             _hit.Play();
                             touch = true;
@@ -142,7 +142,7 @@ namespace Final_Assignment
                 
                 if (waitTime > 0.3)
                 {
-                    Console.WriteLine("hitting  " + target.Name);
+                    
                     parent.IsActive = false;
                     hitting = false;
                     touch = false;

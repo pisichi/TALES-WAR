@@ -34,11 +34,11 @@ namespace Final_Assignment
 
         Rectangle Rectangle;
 
-        private bool isKeyboardCursorActive;
+        //private bool isKeyboardCursorActive;
         private int keyboardCursorPosCounter;
         private Keycursorstate keycursorstate;
         private int cursorselectionPlayedcount;
-        private bool isMouseActive;
+        //private bool isMouseActive;
         private bool iscursorselectionPlayed;
         private enum Keycursorstate
         {
@@ -144,7 +144,7 @@ namespace Final_Assignment
                                     nav_button_poslist[0],
                                     nav_button_colorlist[0], 0, _font.MeasureString("Back") / 2, nav_button_scalelist[0], 0, 0);
 
-            if (isKeyboardCursorActive)
+            if (Singleton.Instance.isKeyboardCursorActive)
             {
                 //spriteBatch.Draw(_KeyboardCursor, KeyboardCursorPos, null, new Rectangle(0, 0, 100, 100), new Vector2(50, 50), 0, new Vector2(2.5f, 3.5f), Color.Red, 0);
                 switch (keyboardCursorPosCounter)
@@ -183,8 +183,17 @@ namespace Final_Assignment
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Right) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
-                isKeyboardCursorActive = true;
-                keyboardCursorPosCounter++;
+                bool isFirstActive;
+                if (!Singleton.Instance.isKeyboardCursorActive)
+                {
+                    isFirstActive = true;
+                    Singleton.Instance.isKeyboardCursorActive = true;
+                }
+                else
+                {
+                    isFirstActive = false;
+                    keyboardCursorPosCounter++;
+                }
                 switch (keycursorstate)
                 {
                     case Keycursorstate.Charater:
@@ -214,9 +223,17 @@ namespace Final_Assignment
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Left) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
-                isKeyboardCursorActive = true;
-
-                keyboardCursorPosCounter--;
+                bool isFirstActive;
+                if (!Singleton.Instance.isKeyboardCursorActive)
+                {
+                    isFirstActive = true;
+                    Singleton.Instance.isKeyboardCursorActive = true;
+                }
+                else
+                {
+                    isFirstActive = false;
+                    keyboardCursorPosCounter--;
+                }
 
                 switch (keycursorstate)
                 {
@@ -249,61 +266,141 @@ namespace Final_Assignment
 
             }
 
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down) && Singleton.Instance._currentkey != Singleton.Instance._previouskey
-                && keycursorstate == Keycursorstate.Charater)
+            /*            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down) && Singleton.Instance._currentkey != Singleton.Instance._previouskey
+                            && keycursorstate == Keycursorstate.Charater)
 
+                        {
+                                    Singleton.Instance.isKeyboardCursorActive = true;
+                            keyboardCursorPosCounter = _gameObjects.Count;
+                            KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - _gameObjects.Count];
+                            keycursorstate = Keycursorstate.Navigation;
+                            //to do play selection cursor sound
+                            _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                            _cursorselection.Play();
+                            //End to do play selection cursor sound
+                        }
+                        else if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down) && Singleton.Instance._currentkey != Singleton.Instance._previouskey
+                            && keycursorstate == Keycursorstate.Navigation
+                            )
+                        {
+                                    Singleton.Instance.isKeyboardCursorActive = true;
+                            keyboardCursorPosCounter = 0;
+                            KeyboardCursorPos = _gameObjects[keyboardCursorPosCounter].Position;
+                            keycursorstate = Keycursorstate.Charater;
+                            //to do play selection cursor sound
+                            _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                            _cursorselection.Play();
+                            //End to do play selection cursor sound
+                        }*/
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
-                isKeyboardCursorActive = true;
-                keyboardCursorPosCounter = _gameObjects.Count;
-                KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - _gameObjects.Count];
-                keycursorstate = Keycursorstate.Navigation;
-                //to do play selection cursor sound
-                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
-                _cursorselection.Play();
-                //End to do play selection cursor sound
-            }
-            else if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down) && Singleton.Instance._currentkey != Singleton.Instance._previouskey
-                && keycursorstate == Keycursorstate.Navigation
-                )
-            {
-                isKeyboardCursorActive = true;
-                keyboardCursorPosCounter = 0;
-                KeyboardCursorPos = _gameObjects[keyboardCursorPosCounter].Position;
-                keycursorstate = Keycursorstate.Charater;
-                //to do play selection cursor sound
-                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
-                _cursorselection.Play();
-                //End to do play selection cursor sound
+                bool isFirstActive;
+                if (!Singleton.Instance.isKeyboardCursorActive)
+                {
+                    isFirstActive = true;
+                    Singleton.Instance.isKeyboardCursorActive = true;
+                }
+                else
+                {
+                    isFirstActive = false;
+                }
+                switch (keycursorstate)
+                {
+                    case Keycursorstate.Charater:
+                        if (!isFirstActive)
+                        {
+                            keyboardCursorPosCounter = _gameObjects.Count;
+                            KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - _gameObjects.Count];
+                            keycursorstate = Keycursorstate.Navigation;
+                        }
+                        //to do play selection cursor sound
+                        _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                        _cursorselection.Play();
+                        //End to do play selection cursor sound
+                        break;
+                    case Keycursorstate.Navigation:
+                        if (!isFirstActive)
+                        {
+                            keyboardCursorPosCounter = 0;
+                            KeyboardCursorPos = _gameObjects[keyboardCursorPosCounter].Position;
+                            keycursorstate = Keycursorstate.Charater;
+                        }
+                        //to do play selection cursor sound
+                        _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                        _cursorselection.Play();
+                        //End to do play selection cursor sound
+                        break;
+                }
             }
 
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up) && Singleton.Instance._currentkey != Singleton.Instance._previouskey
-                && keycursorstate == Keycursorstate.Charater
-                )
+            /*            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up) && Singleton.Instance._currentkey != Singleton.Instance._previouskey
+                            && keycursorstate == Keycursorstate.Charater
+                            )
+                        {
+                                    Singleton.Instance.isKeyboardCursorActive = true;
+                            keyboardCursorPosCounter = _gameObjects.Count;
+                            KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - _gameObjects.Count];
+                            keycursorstate = Keycursorstate.Navigation;
+                            //to do play selection cursor sound
+                            _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                            _cursorselection.Play();
+                            //End to do play selection cursor sound
+                        }
+                        else if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up) && Singleton.Instance._currentkey != Singleton.Instance._previouskey
+                            && keycursorstate == Keycursorstate.Navigation
+                            )
+                        {
+                                    Singleton.Instance.isKeyboardCursorActive = true;
+                            keyboardCursorPosCounter = 0;
+                            KeyboardCursorPos = _gameObjects[keyboardCursorPosCounter].Position;
+                            keycursorstate = Keycursorstate.Charater;
+                            //to do play selection cursor sound
+                            _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                            _cursorselection.Play();
+                            //End to do play selection cursor sound
+                        }*/
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
-                isKeyboardCursorActive = true;
-                keyboardCursorPosCounter = _gameObjects.Count;
-                KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - _gameObjects.Count];
-                keycursorstate = Keycursorstate.Navigation;
-                //to do play selection cursor sound
-                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
-                _cursorselection.Play();
-                //End to do play selection cursor sound
-            }
-            else if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up) && Singleton.Instance._currentkey != Singleton.Instance._previouskey
-                && keycursorstate == Keycursorstate.Navigation
-                )
-            {
-                isKeyboardCursorActive = true;
-                keyboardCursorPosCounter = 0;
-                KeyboardCursorPos = _gameObjects[keyboardCursorPosCounter].Position;
-                keycursorstate = Keycursorstate.Charater;
-                //to do play selection cursor sound
-                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
-                _cursorselection.Play();
-                //End to do play selection cursor sound
+                bool isFirstActive;
+                if (!Singleton.Instance.isKeyboardCursorActive)
+                {
+                    isFirstActive = true;
+                    Singleton.Instance.isKeyboardCursorActive = true;
+                }
+                else
+                {
+                    isFirstActive = false;
+                }
+                switch (keycursorstate)
+                {
+                    case Keycursorstate.Charater:
+                        if (!isFirstActive)
+                        {
+                            keyboardCursorPosCounter = _gameObjects.Count;
+                            KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - _gameObjects.Count];
+                            keycursorstate = Keycursorstate.Navigation;
+                        }
+                        //to do play selection cursor sound
+                        _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                        _cursorselection.Play();
+                        //End to do play selection cursor sound
+                        break;
+                    case Keycursorstate.Navigation:
+                        if (!isFirstActive)
+                        {
+                            keyboardCursorPosCounter = 0;
+                            KeyboardCursorPos = _gameObjects[keyboardCursorPosCounter].Position;
+                            keycursorstate = Keycursorstate.Charater;
+                        }
+                        //to do play selection cursor sound
+                        _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+                        _cursorselection.Play();
+                        //End to do play selection cursor sound
+                        break;
+                }
             }
 
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && isKeyboardCursorActive)
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.isKeyboardCursorActive)
             {
 
                 switch (keyboardCursorPosCounter)
@@ -364,16 +461,16 @@ namespace Final_Assignment
             // _animationManager.Update(gameTime);
 
             //Mouse and Keyboard Detect
-            if (Singleton.Instance._currentmouse.Position != Singleton.Instance._previousmouse.Position || Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed || !isKeyboardCursorActive)
+            if (Singleton.Instance._currentmouse.Position != Singleton.Instance._previousmouse.Position || Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed || !Singleton.Instance.isKeyboardCursorActive)
             {
-                isMouseActive = true;
-                isKeyboardCursorActive = false;
+                Singleton.Instance.isMouseActive = true;
+                Singleton.Instance.isKeyboardCursorActive = false;
             }
-            else isMouseActive = false;
+            else Singleton.Instance.isMouseActive = false;
             //End Mouse and Keyboard Detect
 
             if (Singleton.Instance._currentmouse.Position.X > 350 && Singleton.Instance._currentmouse.Position.X < 520 &&
-                Singleton.Instance._currentmouse.Position.Y > 280 && Singleton.Instance._currentmouse.Position.Y < 520 && isMouseActive)
+                Singleton.Instance._currentmouse.Position.Y > 280 && Singleton.Instance._currentmouse.Position.Y < 520 && Singleton.Instance.isMouseActive)
             {
                 zeus.Scale = new Vector2(1.2f, 1.2f);
                 KeyboardCursorPos = _charPosition[0];
@@ -417,7 +514,7 @@ namespace Final_Assignment
             }
 
             if (Singleton.Instance._currentmouse.Position.X > 680 && Singleton.Instance._currentmouse.Position.X < 840 &&
-                Singleton.Instance._currentmouse.Position.Y > 280 && Singleton.Instance._currentmouse.Position.Y < 520 && isMouseActive)
+                Singleton.Instance._currentmouse.Position.Y > 280 && Singleton.Instance._currentmouse.Position.Y < 520 && Singleton.Instance.isMouseActive)
             {
                 thor.Scale = new Vector2(1.2f, 1.2f);
                 KeyboardCursorPos = _charPosition[1];
@@ -463,7 +560,7 @@ namespace Final_Assignment
             if (Singleton.Instance._currentmouse.Position.X > nav_button_poslist[0].X - _font.MeasureString("Back").X
                     && Singleton.Instance._currentmouse.Position.X < nav_button_poslist[0].X + _font.MeasureString("Back").X
                     && Singleton.Instance._currentmouse.Position.Y > nav_button_poslist[0].Y - _font.MeasureString("Back").Y
-                    && Singleton.Instance._currentmouse.Position.Y < nav_button_poslist[0].Y + _font.MeasureString("Back").Y && isMouseActive)
+                    && Singleton.Instance._currentmouse.Position.Y < nav_button_poslist[0].Y + _font.MeasureString("Back").Y && Singleton.Instance.isMouseActive)
             //Back button
             {
                 KeyboardCursorPos = nav_button_poslist[0];

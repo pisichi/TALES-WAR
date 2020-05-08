@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 
@@ -13,16 +12,15 @@ namespace Final_Assignment
     {
         private readonly IGameScreenManager m_screenManager;
         private bool m_exitGame;
-        private bool isKeyboardCursorActive;
+        //private bool isKeyboardCursorActive;
         private int keyboardCursorPosCounter;
         private int cursorselectionPlayedcount;
-        private bool isMouseActive;
+        //private bool isMouseActive;
         private bool iscursorselectionPlayed;
 
         Random rnd = new Random();
 
         public bool IsPaused { get; private set; }
-
 
         Texture2D _bg;
         Texture2D _strip;
@@ -76,9 +74,12 @@ namespace Final_Assignment
             menu_button_colorlist.Add(Color.White);
 
             KeyboardCursorPos = menu_button_poslist[0];
-            isKeyboardCursorActive = false;
 
-            isMouseActive = false;
+            Singleton.Instance.isKeyboardCursorActive = false;
+            Singleton.Instance.isMouseActive = false;
+
+            _selected.Volume = Singleton.Instance.MasterSFXVolume;
+            _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
 
         }
 
@@ -103,22 +104,18 @@ namespace Final_Assignment
 
 
             //Mouse and Keyboard Detect
-            if (Singleton.Instance._currentmouse.Position != Singleton.Instance._previousmouse.Position || Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed || !isKeyboardCursorActive)
+            if (Singleton.Instance._currentmouse.Position != Singleton.Instance._previousmouse.Position || Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed || !Singleton.Instance.isKeyboardCursorActive)
             {
-                isMouseActive = true;
-                isKeyboardCursorActive = false;
+                Singleton.Instance.isMouseActive = true;
+                Singleton.Instance.isKeyboardCursorActive = false;
             }
-            else isMouseActive = false;
+            else Singleton.Instance.isMouseActive = false;
             //End Mouse and Keyboard Detect
             cursorselectionPlayedcount = menu_button_colorlist.Count;//Initial check cursor selection
             Button(0);
             Button(1);
             Button(2);
             Button(3);
-
-            //MediaPlayer.IsRepeating = true;
-            //MediaPlayer.Volume = Singleton.Instance.MasterBGMVolume;
-            //MediaPlayer.Play(_bgm);
 
         }
 
@@ -129,7 +126,7 @@ namespace Final_Assignment
                  && Singleton.Instance._currentmouse.Position.X < menu_button_poslist[i].X + _font.MeasureString("CONTROL").X / 2
                  && Singleton.Instance._currentmouse.Position.Y > menu_button_poslist[i].Y - _font.MeasureString("CONTROL").Y / 2
                  && Singleton.Instance._currentmouse.Position.Y < menu_button_poslist[i].Y + _font.MeasureString("CONTROL").Y / 2
-                && isMouseActive)
+                && Singleton.Instance.isMouseActive)
 
             {
                 menu_button_scalelist[i] = new Vector2(1.2f, 1.2f);
@@ -188,7 +185,7 @@ namespace Final_Assignment
 
                 }
             }
-            else if (!isKeyboardCursorActive)
+            else if (!Singleton.Instance.isKeyboardCursorActive)
             {
                 menu_button_scalelist[i] = Vector2.One;
                 menu_button_colorlist[i] = Color.White;
@@ -206,8 +203,17 @@ namespace Final_Assignment
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
                 menu_button_scalelist[keyboardCursorPosCounter] = new Vector2(1, 1);
-                isKeyboardCursorActive = true;
-                keyboardCursorPosCounter++;
+                bool isFirstActive;
+                if (!Singleton.Instance.isKeyboardCursorActive)
+                {
+                    isFirstActive = true;
+                    Singleton.Instance.isKeyboardCursorActive = true;
+                }
+                else
+                {
+                    isFirstActive = false;
+                    keyboardCursorPosCounter++;
+                }
                 if (keyboardCursorPosCounter > menu_button_poslist.Count - 1)
                     keyboardCursorPosCounter = 0;
                 KeyboardCursorPos = menu_button_poslist[keyboardCursorPosCounter];
@@ -221,8 +227,17 @@ namespace Final_Assignment
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
                 menu_button_scalelist[keyboardCursorPosCounter] = new Vector2(1, 1);
-                isKeyboardCursorActive = true;
-                keyboardCursorPosCounter--;
+                bool isFirstActive;
+                if (!Singleton.Instance.isKeyboardCursorActive)
+                {
+                    isFirstActive = true;
+                    Singleton.Instance.isKeyboardCursorActive = true;
+                }
+                else
+                {
+                    isFirstActive = false;
+                    keyboardCursorPosCounter--;
+                }
                 if (keyboardCursorPosCounter < 0)
                     keyboardCursorPosCounter = menu_button_poslist.Count - 1;
                 KeyboardCursorPos = menu_button_poslist[keyboardCursorPosCounter];
@@ -234,7 +249,7 @@ namespace Final_Assignment
             }
 
 
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.isKeyboardCursorActive)
             {
 
                 switch (keyboardCursorPosCounter)
@@ -259,6 +274,7 @@ namespace Final_Assignment
                         _selected.Volume = Singleton.Instance.MasterSFXVolume;
                         _selected.Play();
                         //End to do play selected button sound
+                        m_screenManager.ChangeScreen(new AboutScreen(m_screenManager));
                         break;
 
                     case 3:
@@ -281,7 +297,7 @@ namespace Final_Assignment
 
             spriteBatch.Draw(_bg, Vector2.Zero, color: Color.White);
             spriteBatch.Draw(_strip, new Vector2(100,0), color: Color.White);
-            spriteBatch.DrawString(_font, "TALES WAR", new Vector2(300, 200) - _font.MeasureString("TALE WARS") / 2 , Color.White);
+            //spriteBatch.DrawString(_font, "TALES WAR", new Vector2(300, 200) - _font.MeasureString("TALE WARS") / 2, Color.White);
 
 
             spriteBatch.DrawString(_font, "PLAY", menu_button_poslist[0], menu_button_colorlist[0], 0, _font.MeasureString("PLAY") / 2, menu_button_scalelist[0], SpriteEffects.None, 0);
@@ -289,7 +305,7 @@ namespace Final_Assignment
             spriteBatch.DrawString(_font, "ABOUT", menu_button_poslist[2], menu_button_colorlist[2], 0, _font.MeasureString("ABOUT") / 2, menu_button_scalelist[2], SpriteEffects.None, 0);
             spriteBatch.DrawString(_font, "EXIT", menu_button_poslist[3], menu_button_colorlist[3], 0, _font.MeasureString("EXIT") / 2, menu_button_scalelist[3], SpriteEffects.None, 0);
 
-            if (isKeyboardCursorActive)
+            if (Singleton.Instance.isKeyboardCursorActive)
             {
                 switch (keyboardCursorPosCounter)
                 {
