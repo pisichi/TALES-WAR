@@ -20,7 +20,7 @@ namespace Final_Assignment
 
         Random rnd = new Random();
 
-        public bool IsPaused { get; private set; }
+        public bool IsPaused { get;  set; }
 
         Texture2D _bg;
         Texture2D _strip;
@@ -33,7 +33,6 @@ namespace Final_Assignment
         SoundEffectInstance _cursorselection;
 
         Texture2D _KeyboardCursor;
-        Texture2D _selectedChar;
 
         private Vector2 KeyboardCursorPos;
 
@@ -75,11 +74,13 @@ namespace Final_Assignment
 
             KeyboardCursorPos = menu_button_poslist[0];
 
-            Singleton.Instance.isKeyboardCursorActive = false;
+            Singleton.Instance.isKeyboardCursorActive = true;
             Singleton.Instance.isMouseActive = false;
 
             _selected.Volume = Singleton.Instance.MasterSFXVolume;
             _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
+
+       
 
         }
 
@@ -122,10 +123,10 @@ namespace Final_Assignment
         private void Button(int i)
         {
 
-            if (Singleton.Instance._currentmouse.Position.X > menu_button_poslist[i].X - _font.MeasureString("CONTROL").X / 2
-                 && Singleton.Instance._currentmouse.Position.X < menu_button_poslist[i].X + _font.MeasureString("CONTROL").X / 2
-                 && Singleton.Instance._currentmouse.Position.Y > menu_button_poslist[i].Y - _font.MeasureString("CONTROL").Y / 2
-                 && Singleton.Instance._currentmouse.Position.Y < menu_button_poslist[i].Y + _font.MeasureString("CONTROL").Y / 2
+            if (Singleton.Instance._currentmouse.Position.X > menu_button_poslist[i].X - _font.MeasureString("HOW TO PLAY").X / 2
+                 && Singleton.Instance._currentmouse.Position.X < menu_button_poslist[i].X + _font.MeasureString("HOW TO PLAY").X / 2
+                 && Singleton.Instance._currentmouse.Position.Y > menu_button_poslist[i].Y - _font.MeasureString("HOW TO PLAY").Y / 2
+                 && Singleton.Instance._currentmouse.Position.Y < menu_button_poslist[i].Y + _font.MeasureString("HOW TO PLAY").Y / 2
                 && Singleton.Instance.isMouseActive)
 
             {
@@ -166,6 +167,7 @@ namespace Final_Assignment
                             _selected.Volume = Singleton.Instance.MasterSFXVolume;
                             _selected.Play();
                             //End to do play selected button sound
+                            m_screenManager.ChangeScreen(new HowToPlayScreen(m_screenManager));
                             break;
                         case 2:
                             //Start to do play selected button sound
@@ -256,7 +258,6 @@ namespace Final_Assignment
                 {
                     case 0:
                         //Start to do play selected button sound
-                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
                         _selected.Play();
                         //End to do play selected button sound
                         m_screenManager.ChangeScreen(new SelectCharScreen(m_screenManager));
@@ -264,14 +265,13 @@ namespace Final_Assignment
 
                     case 1:
                         //Start to do play selected button sound
-                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
                         _selected.Play();
                         //End to do play selected button sound
+                        m_screenManager.ChangeScreen(new HowToPlayScreen(m_screenManager));
                         break;
 
                     case 2:
                         //Start to do play selected button sound
-                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
                         _selected.Play();
                         //End to do play selected button sound
                         m_screenManager.ChangeScreen(new AboutScreen(m_screenManager));
@@ -279,7 +279,6 @@ namespace Final_Assignment
 
                     case 3:
                         //Start to do play selected button sound
-                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
                         _selected.Play();
                         //End to do play selected button sound
                         m_screenManager.Exit();
@@ -296,12 +295,12 @@ namespace Final_Assignment
             spriteBatch.Begin();
 
             spriteBatch.Draw(_bg, Vector2.Zero, color: Color.White);
-            spriteBatch.Draw(_strip, new Vector2(100,0), color: Color.White);
+            spriteBatch.Draw(_strip, new Vector2(100, 0), color: Color.White);
             //spriteBatch.DrawString(_font, "TALES WAR", new Vector2(300, 200) - _font.MeasureString("TALE WARS") / 2, Color.White);
 
 
             spriteBatch.DrawString(_font, "PLAY", menu_button_poslist[0], menu_button_colorlist[0], 0, _font.MeasureString("PLAY") / 2, menu_button_scalelist[0], SpriteEffects.None, 0);
-            spriteBatch.DrawString(_font, "CONTROL", menu_button_poslist[1], menu_button_colorlist[1], 0, _font.MeasureString("CONTROL") / 2, menu_button_scalelist[1], SpriteEffects.None, 0);
+            spriteBatch.DrawString(_font, "HOW  TO  PLAY", menu_button_poslist[1], menu_button_colorlist[1], 0, _font.MeasureString("HOW TO PLAY") / 2, menu_button_scalelist[1], SpriteEffects.None, 0);
             spriteBatch.DrawString(_font, "ABOUT", menu_button_poslist[2], menu_button_colorlist[2], 0, _font.MeasureString("ABOUT") / 2, menu_button_scalelist[2], SpriteEffects.None, 0);
             spriteBatch.DrawString(_font, "EXIT", menu_button_poslist[3], menu_button_colorlist[3], 0, _font.MeasureString("EXIT") / 2, menu_button_scalelist[3], SpriteEffects.None, 0);
 
@@ -314,7 +313,7 @@ namespace Final_Assignment
                         break;
 
                     case 1:
-                        spriteBatch.DrawString(_font, "CONTROL", menu_button_poslist[1], Color.Red, 0, _font.MeasureString("CONTROL") / 2, menu_button_scalelist[1], SpriteEffects.None, 0);
+                        spriteBatch.DrawString(_font, "HOW  TO  PLAY", menu_button_poslist[1], Color.Red, 0, _font.MeasureString("HOW TO PLAY") / 2, menu_button_scalelist[1], SpriteEffects.None, 0);
 
                         break;
                     case 2:
@@ -327,7 +326,7 @@ namespace Final_Assignment
                 }
             }
             spriteBatch.DrawString(_font,
-                 "[console log] Res: " + Singleton.SCREENWIDTH + "x" + Singleton.SCREENHEIGHT + "  MousePos: " + Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
+                 "[Console] Res: " + Singleton.SCREENWIDTH + "x" + Singleton.SCREENHEIGHT + "    Keyboard status: " + Singleton.Instance.isKeyboardCursorActive + "    Mouse status: " + Singleton.Instance.isMouseActive + "   MousePos: " + Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
                  new Vector2(1, Singleton.SCREENHEIGHT - 20),
                  Color.White, 0, new Vector2(0, 0), new Vector2(0.8f, 0.8f), 0, 0);
 

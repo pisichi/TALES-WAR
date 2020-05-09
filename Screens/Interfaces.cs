@@ -35,7 +35,7 @@ namespace Final_Assignment
 
     interface IGameScreen : IDisposable
     {
-        bool IsPaused { get; }
+        bool IsPaused { get; set; }
 
         void Pause();
 

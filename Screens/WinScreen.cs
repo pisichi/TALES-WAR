@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Collections.Generic;
 
 namespace Final_Assignment
@@ -25,10 +26,10 @@ namespace Final_Assignment
         SoundEffectInstance _selected;
         SoundEffectInstance _cursorselection;
 
-       
 
 
-        public bool IsPaused { get; private set; }
+
+        public bool IsPaused { get; set; }
 
         GameObject _character;
         List<GameObject> _gameObjects;
@@ -49,12 +50,12 @@ namespace Final_Assignment
             _bg = content.Load<Texture2D>("sprites/bg_win");
             _font = content.Load<SpriteFont>("font/File");
 
-           
+
 
             switch (Singleton.Instance.CurrentHero)
             {
                 case "zeus":
-                  
+
                     _selectedChar = content.Load<Texture2D>("sprites/sheet_zeus");
                     _character = new GameObject(null,
                                    null,
@@ -64,7 +65,7 @@ namespace Final_Assignment
                                        }),
                                    null)
                     {
-                        Position = new Vector2(Singleton.SCREENWIDTH / 2 , Singleton.SCREENHEIGHT / 2),
+                        Position = new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2),
                         HP = 1,
                         IsActive = false
                     };
@@ -72,7 +73,7 @@ namespace Final_Assignment
                     break;
 
                 case "thor":
-                   
+
                     _selectedChar = content.Load<Texture2D>("sprites/sheet_thor");
                     _character = new GameObject(null,
                                             null,
@@ -115,8 +116,10 @@ namespace Final_Assignment
 
             isMouseActive = false;
 
+            _selected.Volume = Singleton.Instance.MasterSFXVolume;
+            _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
 
-
+         
 
         }
 
@@ -173,8 +176,6 @@ namespace Final_Assignment
                 //Start to do play selection cursor sound
                 cursorselectionPlayedcount++;
                 //_cursorselection.IsLooped = false;
-                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
-
                 if (!iscursorselectionPlayed && cursorselectionPlayedcount > 0)
                 {
                     _cursorselection.Play();
@@ -193,22 +194,21 @@ namespace Final_Assignment
                     {
                         case 0:
                             //Start to do play selected button sound
-                            _selected.Volume = Singleton.Instance.MasterSFXVolume;
                             _selected.Play();
+                            Singleton.Instance.CurrentStage = 0;
+                            Singleton.Instance.CurrentHero = "";
                             //End to do play selected button sound
                             m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
                             break;
                         case 1:
                             //Start to do play selected button sound
-                            _selected.Volume = Singleton.Instance.MasterSFXVolume;
                             _selected.Play();
                             //End to do play selected button sound
                             if (Singleton.Instance.CurrentStage >= 2)
                                 m_exitGame = true;
                             else
-                            m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
+                                m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
                             break;
-
                     }
 
                 }
@@ -238,7 +238,6 @@ namespace Final_Assignment
                 KeyboardCursorPos = menu_button_poslist[keyboardCursorPosCounter];
                 menu_button_scalelist[keyboardCursorPosCounter] = new Vector2(1.2f, 1.2f);
                 //to do play selection cursor sound
-                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
                 _cursorselection.Play();
                 //End to do play selection cursor sound
             }
@@ -253,7 +252,6 @@ namespace Final_Assignment
                 KeyboardCursorPos = menu_button_poslist[keyboardCursorPosCounter];
                 menu_button_scalelist[keyboardCursorPosCounter] = new Vector2(1.2f, 1.2f);
                 //to do play selection cursor sound
-                _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
                 _cursorselection.Play();
                 //End to do play selection cursor sound
             }
@@ -266,15 +264,15 @@ namespace Final_Assignment
                 {
                     case 0:
                         //Start to do play selected button sound
-                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
                         _selected.Play();
                         //End to do play selected button sound
+                        Singleton.Instance.CurrentStage = 0;
+                        Singleton.Instance.CurrentHero = "";
                         m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
                         break;
 
                     case 1:
                         //Start to do play selected button sound
-                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
                         _selected.Play();
                         //End to do play selected button sound
                         if (Singleton.Instance.CurrentStage >= 2)
@@ -296,7 +294,7 @@ namespace Final_Assignment
         {
             spriteBatch.Begin();
             spriteBatch.Draw(_bg, Vector2.Zero, color: Color.White);
-           
+
 
             spriteBatch.DrawString(_font, "MENU", menu_button_poslist[0], menu_button_colorlist[0], 0, _font.MeasureString("MENU") / 2, menu_button_scalelist[0], SpriteEffects.None, 0);
 

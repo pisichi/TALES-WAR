@@ -28,7 +28,7 @@ namespace Final_Assignment
 
 
 
-        public bool IsPaused { get; private set; }
+        public bool IsPaused { get;  set; }
 
         GameObject _character;
         List<GameObject> _gameObjects;
@@ -54,7 +54,7 @@ namespace Final_Assignment
             switch (Singleton.Instance.CurrentHero)
             {
                 case "zeus":
-                    
+
                     _selectedChar = content.Load<Texture2D>("sprites/sheet_zeus");
                     _character = new GameObject(null,
                                    null,
@@ -72,7 +72,7 @@ namespace Final_Assignment
                     break;
 
                 case "thor":
-                   
+
                     _selectedChar = content.Load<Texture2D>("sprites/sheet_thor");
                     _character = new GameObject(null,
                                             null,
@@ -115,7 +115,8 @@ namespace Final_Assignment
 
             isMouseActive = false;
 
-
+            _selected.Volume = Singleton.Instance.MasterSFXVolume;
+            _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
 
 
         }
@@ -192,19 +193,19 @@ namespace Final_Assignment
                     switch (i)
                     {
                         case 0:
+                            Singleton.Instance.CurrentStage = 0;
+                            Singleton.Instance.CurrentHero = "";
                             //Start to do play selected button sound
-                            _selected.Volume = Singleton.Instance.MasterSFXVolume;
                             _selected.Play();
                             //End to do play selected button sound
                             m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
                             break;
                         case 1:
                             //Start to do play selected button sound
-                            _selected.Volume = Singleton.Instance.MasterSFXVolume;
                             _selected.Play();
                             //End to do play selected button sound
- 
-                                m_exitGame = true;
+
+                            m_exitGame = true;
 
                             break;
 
@@ -265,7 +266,8 @@ namespace Final_Assignment
                 {
                     case 0:
                         //Start to do play selected button sound
-                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
+                        Singleton.Instance.CurrentStage = 0;
+                        Singleton.Instance.CurrentHero = "";
                         _selected.Play();
                         //End to do play selected button sound
                         m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
@@ -273,10 +275,9 @@ namespace Final_Assignment
 
                     case 1:
                         //Start to do play selected button sound
-                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
                         _selected.Play();
                         //End to do play selected button sound
-                            m_exitGame = true;
+                        m_exitGame = true;
                         break;
 
                 }
@@ -289,13 +290,13 @@ namespace Final_Assignment
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(_bg,Vector2.Zero, color: Color.White);
+            spriteBatch.Draw(_bg, Vector2.Zero, color: Color.White);
 
 
             spriteBatch.DrawString(_font, "MENU", menu_button_poslist[0], menu_button_colorlist[0], 0, _font.MeasureString("MENU") / 2, menu_button_scalelist[0], SpriteEffects.None, 0);
 
-                spriteBatch.DrawString(_font, "YOU LOSE!!!", new Vector2(Singleton.SCREENWIDTH / 2, 200), Color.White, 0, _font.MeasureString("YOU LOSE!!!") / 2, 1.5f, SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "EXIT", menu_button_poslist[1], menu_button_colorlist[1], 0, _font.MeasureString("EXIT") / 2, menu_button_scalelist[1], SpriteEffects.None, 0);
+            spriteBatch.DrawString(_font, "YOU LOSE!!!", new Vector2(Singleton.SCREENWIDTH / 2, 200), Color.White, 0, _font.MeasureString("YOU LOSE!!!") / 2, 1.5f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(_font, "EXIT", menu_button_poslist[1], menu_button_colorlist[1], 0, _font.MeasureString("EXIT") / 2, menu_button_scalelist[1], SpriteEffects.None, 0);
 
 
 

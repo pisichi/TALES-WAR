@@ -12,7 +12,6 @@ namespace Final_Assignment
     {
 
         int message;
-        int count = 0;
         int _bulletSkill;
 
         int _action = 0;

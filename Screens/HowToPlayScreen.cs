@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 
 namespace Final_Assignment
 {
-    class AboutScreen : IGameScreen
+    class HowToPlayScreen : IGameScreen
     {
         private readonly IGameScreenManager m_screenManager;
-        private bool m_exitGame;
-        //private bool isKeyboardCursorActive;
+
         private int keyboardCursorPosCounter;
         private int cursorselectionPlayedcount;
         //private bool isMouseActive;
@@ -20,45 +20,34 @@ namespace Final_Assignment
         private List<Vector2> menu_button_poslist;
         private List<Vector2> menu_button_scalelist;
         private List<Color> menu_button_colorlist;
+
+        private Texture2D _howtoplaybg;
+        private SpriteFont _font;
+
         private Vector2 KeyboardCursorPos;
 
         SoundEffectInstance _selected;
         SoundEffectInstance _cursorselection;
 
 
-
-
-        public bool IsPaused { get;  set; }
-
-        GameObject _character;
-        List<GameObject> _gameObjects;
-
-        Texture2D _KeyboardCursor;
-        Texture2D _bg;
-        Texture2D _selectedChar;
-        SpriteFont _font;
-
-        public AboutScreen(IGameScreenManager screenManager)
+        public HowToPlayScreen(IGameScreenManager screenManager)
         {
             m_screenManager = screenManager;
         }
-
+        public bool IsPaused { get;  set; }
 
         public void Init(ContentManager content)
         {
-            _bg = content.Load<Texture2D>("sprites/about");
+            _howtoplaybg = content.Load<Texture2D>("sprites/bg_control");
             _font = content.Load<SpriteFont>("font/File");
-
-
-
 
             _selected = content.Load<SoundEffect>("sounds/selected_sound").CreateInstance();
             _cursorselection = content.Load<SoundEffect>("sounds/selection_sound").CreateInstance();
 
-            menu_button_scalelist = new List<Vector2>();
             menu_button_poslist = new List<Vector2>();
+            menu_button_scalelist = new List<Vector2>();
             menu_button_colorlist = new List<Color>();
-            _KeyboardCursor = content.Load<Texture2D>("sprites/hitbox");
+
 
             menu_button_scalelist.Add(Vector2.One);
 
@@ -70,16 +59,8 @@ namespace Final_Assignment
 
             _selected.Volume = Singleton.Instance.MasterSFXVolume;
             _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
-        }
 
-        public void Pause()
-        {
-            IsPaused = true;
-        }
-
-        public void Resume()
-        {
-            IsPaused = false;
+         
         }
 
         public void Update(GameTime gameTime)
@@ -89,9 +70,6 @@ namespace Final_Assignment
 
             Singleton.Instance._previousmouse = Singleton.Instance._currentmouse;
             Singleton.Instance._currentmouse = Mouse.GetState();
-
-
-
             //Mouse and Keyboard Detect
             if (Singleton.Instance._currentmouse.Position != Singleton.Instance._previousmouse.Position || Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed || !Singleton.Instance.isKeyboardCursorActive)
             {
@@ -100,27 +78,17 @@ namespace Final_Assignment
             }
             else Singleton.Instance.isMouseActive = false;
             //End Mouse and Keyboard Detect
-            cursorselectionPlayedcount = menu_button_colorlist.Count;//Initial check cursor selection
-            Button(0);
 
-
-
-        }
-
-        private void Button(int i)
-        {
-
-            if (Singleton.Instance._currentmouse.Position.X > menu_button_poslist[i].X - _font.MeasureString("CONTROL").X / 2
-                 && Singleton.Instance._currentmouse.Position.X < menu_button_poslist[i].X + _font.MeasureString("CONTROL").X / 2
-                 && Singleton.Instance._currentmouse.Position.Y > menu_button_poslist[i].Y - _font.MeasureString("CONTROL").Y / 2
-                 && Singleton.Instance._currentmouse.Position.Y < menu_button_poslist[i].Y + _font.MeasureString("CONTROL").Y / 2
-                && Singleton.Instance.isMouseActive)
-
+            if (Singleton.Instance._currentmouse.Position.X > menu_button_poslist[0].X - _font.MeasureString("OK").X
+                    && Singleton.Instance._currentmouse.Position.X < menu_button_poslist[0].X + _font.MeasureString("OK").X
+                    && Singleton.Instance._currentmouse.Position.Y > menu_button_poslist[0].Y - _font.MeasureString("OK").Y
+                    && Singleton.Instance._currentmouse.Position.Y < menu_button_poslist[0].Y + _font.MeasureString("OK").Y && Singleton.Instance.isMouseActive)
+            //Back button
             {
-                menu_button_scalelist[i] = new Vector2(1.2f, 1.2f);
-                menu_button_colorlist[i] = Color.Red;
-                KeyboardCursorPos = menu_button_poslist[i];
-                keyboardCursorPosCounter = i;
+                KeyboardCursorPos = menu_button_poslist[0];
+                menu_button_colorlist[0] = Color.Red;
+                menu_button_scalelist[0] = new Vector2(1.7f, 1.7f);
+                keyboardCursorPosCounter = menu_button_poslist.Count - 1;
                 //Start to do play selection cursor sound
                 cursorselectionPlayedcount++;
                 //_cursorselection.IsLooped = false;
@@ -135,53 +103,45 @@ namespace Final_Assignment
                 //End to do play selection cursor sound
                 if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Pressed)
                 {
-                    menu_button_scalelist[i] = new Vector2(1.1f, 1.1f);
-                    menu_button_colorlist[i] = Color.OrangeRed;
+                    menu_button_colorlist[0] = Color.OrangeRed;
+                    menu_button_scalelist[0] = new Vector2(1.6f, 1.6f);
                 }
                 else if (Singleton.Instance._currentmouse.LeftButton == ButtonState.Released && Singleton.Instance._previousmouse.LeftButton == ButtonState.Pressed)
                 {
-                    switch (i)
-                    {
-                        case 0:
-                            //Start to do play selected button sound
-                            _selected.Volume = Singleton.Instance.MasterSFXVolume;
-                            _selected.Play();
-                            //End to do play selected button sound
-                            m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
-                            break;
-                        case 1:
-                            //Start to do play selected button sound
-                            _selected.Volume = Singleton.Instance.MasterSFXVolume;
-                            _selected.Play();
-                            //End to do play selected button sound
-                            if (Singleton.Instance.CurrentStage >= 2)
-                                m_exitGame = true;
-                            else
-                                m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
-                            break;
+                    menu_button_colorlist[0] = Color.Red;
 
-                    }
-
+                    //Do when click Back button
+                    if (Singleton.Instance.CurrentStage == 1)
+                        m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
+                    else if (Singleton.Instance.CurrentStage == 0)
+                        m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
+                    //Start to do play selected button sound
+                    _selected.Volume = Singleton.Instance.MasterSFXVolume;
+                    _selected.Play();
+                    //End to do play selected button sound
                 }
             }
-            else if (!Singleton.Instance.isKeyboardCursorActive)
+            else
             {
-                menu_button_scalelist[i] = Vector2.One;
-                menu_button_colorlist[i] = Color.White;
+                menu_button_colorlist[0] = Color.White;
+                menu_button_scalelist[0] = new Vector2(1.5f, 1.5f);
                 //Check cursor sound played
                 cursorselectionPlayedcount--;
                 if (cursorselectionPlayedcount == 0)
                     iscursorselectionPlayed = false;
                 //End check cursor sound played
             }
+            cursorselectionPlayedcount = menu_button_colorlist.Count;//Initial check cursor selection
         }
 
         public void HandleInput(GameTime gameTime)
         {
-
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Escape) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
-                m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
+                if (Singleton.Instance.CurrentStage == 1)
+                    m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
+                else if (Singleton.Instance.CurrentStage == 0)
+                    m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
             }
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
@@ -214,7 +174,6 @@ namespace Final_Assignment
 
             }
 
-
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
 
@@ -222,67 +181,54 @@ namespace Final_Assignment
                 {
                     case 0:
                         //Start to do play selected button sound
-                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
                         _selected.Play();
                         //End to do play selected button sound
-                        m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
-                        break;
-
-                    case 1:
-                        //Start to do play selected button sound
-                        _selected.Volume = Singleton.Instance.MasterSFXVolume;
-                        _selected.Play();
-                        //End to do play selected button sound
-                        if (Singleton.Instance.CurrentStage >= 2)
-                            m_exitGame = true;
-                        else
-                        {
-                            m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
-                        }
+                        if (Singleton.Instance.CurrentStage == 1)
+                            m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
+                        else if (Singleton.Instance.CurrentStage == 0)
+                            m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
                         break;
                 }
 
             }
-
 
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            spriteBatch.Draw(_bg, Vector2.Zero, color: Color.White);
+            spriteBatch.Draw(_howtoplaybg, Vector2.Zero);
 
-
-            spriteBatch.DrawString(_font, "BACK", menu_button_poslist[0], menu_button_colorlist[0], 0, _font.MeasureString("BACK") / 2, menu_button_scalelist[0], SpriteEffects.None, 0);
-
-
-
-
+            spriteBatch.DrawString(_font, "OK", menu_button_poslist[0], menu_button_colorlist[0], 0, _font.MeasureString("OK") / 2, menu_button_scalelist[0], SpriteEffects.None, 0);
 
             if (Singleton.Instance.isKeyboardCursorActive)
             {
                 switch (keyboardCursorPosCounter)
                 {
                     case 0:
-                        spriteBatch.DrawString(_font, "BACK", menu_button_poslist[0], Color.Red, 0, _font.MeasureString("BACK") / 2, menu_button_scalelist[0], SpriteEffects.None, 0);
+                        spriteBatch.DrawString(_font, "OK", menu_button_poslist[0], Color.Red, 0, _font.MeasureString("OK") / 2, menu_button_scalelist[0], SpriteEffects.None, 0);
                         break;
                 }
             }
-
             spriteBatch.End();
+
+        }
+
+        public void Pause()
+        {
+        }
+
+        public void Resume()
+        {
         }
 
         public void ChangeBetweenScreen()
         {
-            if (m_exitGame)
-            {
-                m_screenManager.Exit();
-            }
         }
 
         public void Dispose()
         {
-
         }
+
     }
 }

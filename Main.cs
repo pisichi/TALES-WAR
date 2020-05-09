@@ -68,9 +68,9 @@ namespace Final_Assignment
 
             m_screenManager.ChangeBetweenScreen();
 
-            m_screenManager.Update(gameTime);
-
             m_screenManager.HandleInput(gameTime);
+
+            m_screenManager.Update(gameTime);
 
             base.Update(gameTime);
         }
