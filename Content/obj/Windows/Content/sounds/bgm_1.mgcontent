@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Game Programming/Final project copy/2020-05-09_1 master/Monogame_shooting/Content/sounds/bgm_1.mp3</SourceFile>
-  <SourceTime>2020-05-09T09:24:35.7011875+07:00</SourceTime>
-  <DestFile>D:/Game Programming/Final project copy/2020-05-09_1 master/Monogame_shooting/Content/bin/Windows/Content/sounds/bgm_1.xnb</DestFile>
-  <DestTime>2020-05-09T16:43:29.1591253+07:00</DestTime>
+  <SourceFile>D:/work/gamepro/final/code/Monogame_shooting/Content/sounds/bgm_1.mp3</SourceFile>
+  <SourceTime>2020-05-10T02:10:15.290527+07:00</SourceTime>
+  <DestFile>D:/work/gamepro/final/code/Monogame_shooting/Content/bin/Windows/Content/sounds/bgm_1.xnb</DestFile>
+  <DestTime>2020-05-10T02:10:36.284715+07:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2018-12-08T23:35:54+07:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>D:/Game Programming/Final project copy/2020-05-09_1 master/Monogame_shooting/Content/bin/Windows/Content/sounds/bgm_1.wma</string>
+    <string>D:/work/gamepro/final/code/Monogame_shooting/Content/bin/Windows/Content/sounds/bgm_1.wma</string>
   </BuildOutput>
 </PipelineBuildEvent>

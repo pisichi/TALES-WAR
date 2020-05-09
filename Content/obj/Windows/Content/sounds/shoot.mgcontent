@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>D:/Game Programming/Final project copy/2020-05-09_1 master/Monogame_shooting/Content/sounds/shoot.wav</SourceFile>
-  <SourceTime>2020-05-06T12:55:34.6646263+07:00</SourceTime>
-  <DestFile>D:/Game Programming/Final project copy/2020-05-09_1 master/Monogame_shooting/Content/bin/Windows/Content/sounds/shoot.xnb</DestFile>
-  <DestTime>2020-05-09T16:43:29.9604637+07:00</DestTime>
+  <SourceFile>D:/work/gamepro/final/code/Monogame_shooting/Content/sounds/shoot.wav</SourceFile>
+  <SourceTime>2020-05-10T02:10:15.3069916+07:00</SourceTime>
+  <DestFile>D:/work/gamepro/final/code/Monogame_shooting/Content/bin/Windows/Content/sounds/shoot.xnb</DestFile>
+  <DestTime>2020-05-10T02:10:37.6495389+07:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2018-12-08T23:35:54+07:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>
