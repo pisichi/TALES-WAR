@@ -6,7 +6,7 @@ namespace Final_Assignment
   class Camera
     {
 
-        private Vector2 CameraPosition;
+        public Vector2 CameraPosition;
 
         public bool shake;
 

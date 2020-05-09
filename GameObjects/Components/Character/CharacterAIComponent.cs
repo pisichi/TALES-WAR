@@ -12,7 +12,6 @@ namespace Final_Assignment
     {
 
         int message;
-        int count = 0;
         int _bulletSkill;
 
         int _action = 0;
@@ -135,7 +134,7 @@ namespace Final_Assignment
             bullet = BulletFactory.create(content, parent.Weapon);
            
             _shoot.Play();
-            //Console.WriteLine("rotation  " + _rotation);
+            Console.WriteLine("rotation  " + _rotation);
             _direction = new Vector2((float)Math.Cos(_rotation + (float)Math.PI / 2), (float)Math.Sin(_rotation + (float)Math.PI / 2));
             bullet.Rotation = _rotation - (float)Math.PI;
 

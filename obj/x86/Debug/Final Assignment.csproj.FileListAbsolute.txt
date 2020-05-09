@@ -70,75 +70,81 @@ C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Win
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\bg_control.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\bg_lose.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\bg_win.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bullet.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\about.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\arrow.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\ball.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bg_control.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bg_lose.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bg_win.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\fram1.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\fx_barrier.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\fx_burn.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\gauge.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\heart.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\hitbox.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\menu_1.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\menu_2.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\menu_3.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\menu_4.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\menu_strip.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\newmainskill.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\newplus.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\pin.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\select.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\sheet_guan.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\sheet_mob.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\sheet_sung.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\sheet_thor.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\sheet_zeus.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\skill_thor_1.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\skill_thor_2.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\skill_thor_3.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\skill_zeus_1.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\skill_zeus_2.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\skill_zeus_3.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\stage_bg.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\stage_platform_1.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\stage_platform_2.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\stage_sky_1.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\stage_sky_2.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\t1.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\t2.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\z1.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\z2.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\hit_char.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\hit_floor.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\hit_iron.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\selected_sound.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\selection_sound.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\shoot.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Content\font\File.xnb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Final Assignment.exe
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\Final Assignment.pdb
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\MonoGame.Framework.dll
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.dll
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.DXGI.dll
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XInput.dll
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\MonoGame.Framework.xml
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.xml
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.DXGI.xml
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XInput.xml
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\obj\x86\Debug\Final Assignment.csprojAssemblyReference.cache
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\obj\x86\Debug\Final Assignment.csproj.CoreCompileInputs.cache
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\obj\x86\Debug\Final Assignment.csproj.CopyComplete
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\obj\x86\Debug\Final Assignment.exe
-D:\Game Programming\Final project copy\2020-05-08 master\Monogame_shooting\obj\x86\Debug\Final Assignment.pdb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sounds\dead.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sounds\bgm_1.wma
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sounds\bgm_1.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bullet.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\about.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\arrow.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\ball.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bg_control.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bg_lose.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\bg_win.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\fram1.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\fx_barrier.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\fx_burn.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\gauge.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\heart.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\hitbox.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\menu_1.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\menu_2.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\menu_3.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\menu_4.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\menu_strip.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\newmainskill.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\newplus.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\pin.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\select.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\sheet_guan.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\sheet_mob.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\sheet_sung.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\sheet_thor.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\sheet_zeus.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\skill_thor_1.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\skill_thor_2.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\skill_thor_3.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\skill_zeus_1.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\skill_zeus_2.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\skill_zeus_3.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\stage_bg.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\stage_platform_1.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\stage_platform_2.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\stage_sky_1.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\stage_sky_2.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\t1.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\t2.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\z1.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sprites\z2.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\bgm_1.wma
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\bgm_1.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\dead.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\hit_char.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\hit_floor.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\hit_iron.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\selected_sound.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\selection_sound.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\sounds\shoot.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Content\font\File.xnb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Final Assignment.exe
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\Final Assignment.pdb
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\MonoGame.Framework.dll
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.dll
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XInput.dll
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\MonoGame.Framework.xml
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.xml
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\bin\Windows\x86\Debug\SharpDX.XInput.xml
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\obj\x86\Debug\Final Assignment.csprojAssemblyReference.cache
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\obj\x86\Debug\Final Assignment.csproj.CoreCompileInputs.cache
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\obj\x86\Debug\Final Assignment.csproj.CopyComplete
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\obj\x86\Debug\Final Assignment.exe
+D:\Game Programming\Final project copy\2020-05-09_1 master\Monogame_shooting\obj\x86\Debug\Final Assignment.pdb

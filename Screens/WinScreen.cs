@@ -26,10 +26,10 @@ namespace Final_Assignment
         SoundEffectInstance _selected;
         SoundEffectInstance _cursorselection;
 
-       
 
 
-        public bool IsPaused { get; private set; }
+
+        public bool IsPaused { get; set; }
 
         GameObject _character;
         List<GameObject> _gameObjects;
@@ -50,12 +50,12 @@ namespace Final_Assignment
             _bg = content.Load<Texture2D>("sprites/bg_win");
             _font = content.Load<SpriteFont>("font/File");
 
-           
+
 
             switch (Singleton.Instance.CurrentHero)
             {
                 case "zeus":
-                  
+
                     _selectedChar = content.Load<Texture2D>("sprites/sheet_zeus");
                     _character = new GameObject(null,
                                    null,
@@ -65,7 +65,7 @@ namespace Final_Assignment
                                        }),
                                    null)
                     {
-                        Position = new Vector2(Singleton.SCREENWIDTH / 2 , Singleton.SCREENHEIGHT / 2),
+                        Position = new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2),
                         HP = 1,
                         IsActive = false
                     };
@@ -73,7 +73,7 @@ namespace Final_Assignment
                     break;
 
                 case "thor":
-                   
+
                     _selectedChar = content.Load<Texture2D>("sprites/sheet_thor");
                     _character = new GameObject(null,
                                             null,
@@ -119,20 +119,7 @@ namespace Final_Assignment
             _selected.Volume = Singleton.Instance.MasterSFXVolume;
             _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
 
-            Console.WriteLine("Win Screen Stage "+ Singleton.Instance.CurrentStage);
-            Console.WriteLine("Hero value: " + Singleton.Instance.CurrentHero);
-            Console.WriteLine("Stage value: " + Singleton.Instance.CurrentStage);
-            Console.WriteLine("skill 1 value: " + Singleton.Instance.level_sk1);
-            Console.WriteLine("skill 2 value: " + Singleton.Instance.level_sk2);
-            Console.WriteLine("skill 3 value: " + Singleton.Instance.level_sk3);
-            Console.WriteLine("Previous skill 1 value: " + Singleton.Instance.previous_level_sk1);
-            Console.WriteLine("Previous skill 2 value: " + Singleton.Instance.previous_level_sk2);
-            Console.WriteLine("Previous skill 3 value: " + Singleton.Instance.previous_level_sk3);
-            Console.WriteLine("Keyboard status: " + Singleton.Instance.isKeyboardCursorActive);
-            Console.WriteLine("Mouse status: " + Singleton.Instance.isMouseActive);
-            Console.WriteLine("BGM Value: " + Singleton.Instance.MasterBGMVolume);
-            Console.WriteLine("SFX Value: " + Singleton.Instance.MasterSFXVolume);
-            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+         
 
         }
 
@@ -220,7 +207,7 @@ namespace Final_Assignment
                             if (Singleton.Instance.CurrentStage >= 2)
                                 m_exitGame = true;
                             else
-                            m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
+                                m_screenManager.ChangeScreen(new UpgradeScreen(m_screenManager));
                             break;
                     }
 
@@ -307,7 +294,7 @@ namespace Final_Assignment
         {
             spriteBatch.Begin();
             spriteBatch.Draw(_bg, Vector2.Zero, color: Color.White);
-           
+
 
             spriteBatch.DrawString(_font, "MENU", menu_button_poslist[0], menu_button_colorlist[0], 0, _font.MeasureString("MENU") / 2, menu_button_scalelist[0], SpriteEffects.None, 0);
 

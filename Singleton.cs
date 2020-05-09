@@ -24,16 +24,12 @@ namespace Final_Assignment
         public int level_sk2;
         public int level_sk3;
 
-        public int previous_level_sk1;
-        public int previous_level_sk2;
-        public int previous_level_sk3;
-
 
         public int Cooldown_1;
         public int Cooldown_2;
 
 
-        public float MasterBGMVolume = 0.5f;
+        public float MasterBGMVolume = 0.2f;
         public float MasterSFXVolume = 0.3f;
 
 

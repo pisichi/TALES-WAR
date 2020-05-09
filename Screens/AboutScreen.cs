@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -29,7 +28,7 @@ namespace Final_Assignment
 
 
 
-        public bool IsPaused { get; private set; }
+        public bool IsPaused { get;  set; }
 
         GameObject _character;
         List<GameObject> _gameObjects;

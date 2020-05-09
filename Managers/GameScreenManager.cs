@@ -3,9 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Final_Assignment
 {
@@ -115,10 +113,12 @@ namespace Final_Assignment
             {
                 var screen = GetCurrentScreen();
 
-                if (!screen.IsPaused)
-                {
-                    screen.Draw(gameTime,m_spriteBatch);
-                }
+                //if (!screen.IsPaused)
+                //{
+                //    screen.Draw(gameTime,m_spriteBatch);
+                //}
+                screen.Draw(gameTime, m_spriteBatch);
+
             }
 
         }
@@ -129,10 +129,12 @@ namespace Final_Assignment
             {
                 var screen = GetCurrentScreen();
 
-                if (!screen.IsPaused)
-                {
-                    screen.HandleInput(gameTime);
-                }
+                //if (!screen.IsPaused)
+                //{
+                //    screen.HandleInput(gameTime);
+                //}
+                screen.HandleInput(gameTime);
+
             }
         }
 

@@ -12,14 +12,16 @@ namespace Final_Assignment
     {
 
 
-        int CurrentCharState;
-        ContentManager content;
-        Texture2D _hp;
-        Texture2D _burn;
-        Texture2D _bari;
-        SoundEffectInstance _ouch;
+        private int CurrentCharState;
+        private ContentManager content;
+        private Texture2D _hp;
+        private Texture2D _burn;
+        private Texture2D _bari;
+        private SoundEffectInstance _ouch;
+        private SoundEffectInstance _dead;
 
-        float waitTime = 0;
+        private float waitTime = 0;
+        private bool justDied;
 
 
 
@@ -31,21 +33,33 @@ namespace Final_Assignment
             _burn = content.Load<Texture2D>("sprites/fx_burn");
 
             _ouch = content.Load<SoundEffect>("sounds/hit_char").CreateInstance();
+            _dead = content.Load<SoundEffect>("sounds/dead").CreateInstance();
             _ouch.Volume = Singleton.Instance.MasterSFXVolume;
+            _dead.Volume = Singleton.Instance.MasterSFXVolume;
+            justDied = false;
             this.content = content;
+
         }
 
         public override void Update(GameTime gameTime, List<GameObject> gameObjects, GameObject parent)
         {
+            if (parent.HP <=0 && !justDied)
+            {
+                _dead.Play();
+                justDied = true;
+            }
            
 
             switch (CurrentCharState)
             {
                 case 1:
-                    if(parent.status == 1)
+                    if (parent.status == 1)
                         _animationManager.Play(_animations["Stunt"]);
-                    else if(parent.HP <= 0)
-                    _animationManager.Play(_animations["Die"]);
+                    else if (parent.HP <= 0)
+                    {
+                        
+                        _animationManager.Play(_animations["Die"]);
+                    }
                     else
                         _animationManager.Play(_animations["Idle"]);
                     break;
@@ -73,16 +87,11 @@ namespace Final_Assignment
                     if (waitTime > 0.3)
                     {
                         _ouch.Play();
+                       
                         CurrentCharState = 1;
                         waitTime = 0;
                     }
                     _animationManager.Play(_animations["Hit"]);
-                    break;
-                case 5:
-                    _animationManager.Play(_animations["Stunt"]);
-                    break;
-                case 6:
-                    _animationManager.Play(_animations["Die"]);
                     break;
             }
 

@@ -34,7 +34,7 @@ namespace Final_Assignment
         {
             m_screenManager = screenManager;
         }
-        public bool IsPaused { get; private set; }
+        public bool IsPaused { get;  set; }
 
         public void Init(ContentManager content)
         {
@@ -60,20 +60,7 @@ namespace Final_Assignment
             _selected.Volume = Singleton.Instance.MasterSFXVolume;
             _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
 
-            Console.WriteLine("How to play Screen Stage " + Singleton.Instance.CurrentStage);
-            Console.WriteLine("Hero value: " + Singleton.Instance.CurrentHero);
-            Console.WriteLine("Stage value: " + Singleton.Instance.CurrentStage);
-            Console.WriteLine("skill 1 value: " + Singleton.Instance.level_sk1);
-            Console.WriteLine("skill 2 value: " + Singleton.Instance.level_sk2);
-            Console.WriteLine("skill 3 value: " + Singleton.Instance.level_sk3);
-            Console.WriteLine("Previous skill 1 value: " + Singleton.Instance.previous_level_sk1);
-            Console.WriteLine("Previous skill 2 value: " + Singleton.Instance.previous_level_sk2);
-            Console.WriteLine("Previous skill 3 value: " + Singleton.Instance.previous_level_sk3);
-            Console.WriteLine("Keyboard status: " + Singleton.Instance.isKeyboardCursorActive);
-            Console.WriteLine("Mouse status: " + Singleton.Instance.isMouseActive);
-            Console.WriteLine("BGM Value: " + Singleton.Instance.MasterBGMVolume);
-            Console.WriteLine("SFX Value: " + Singleton.Instance.MasterSFXVolume);
-            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+         
         }
 
         public void Update(GameTime gameTime)

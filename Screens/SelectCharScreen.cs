@@ -32,8 +32,6 @@ namespace Final_Assignment
         SoundEffectInstance _selected;
         SoundEffectInstance _cursorselection;
 
-        Rectangle Rectangle;
-
         //private bool isKeyboardCursorActive;
         private int keyboardCursorPosCounter;
         private Keycursorstate keycursorstate;
@@ -54,7 +52,7 @@ namespace Final_Assignment
             m_screenManager = screenManager;
         }
 
-        public bool IsPaused { get; private set; }
+        public bool IsPaused { get; set; }
         public void Init(ContentManager content)
         {
             _gameObjects = new List<GameObject>();
@@ -111,28 +109,12 @@ namespace Final_Assignment
             Singleton.Instance.level_sk2 = 1;
             Singleton.Instance.level_sk3 = 1;
 
-            Singleton.Instance.previous_level_sk1 = Singleton.Instance.level_sk1;
-            Singleton.Instance.previous_level_sk2 = Singleton.Instance.level_sk2;
-            Singleton.Instance.previous_level_sk3 = Singleton.Instance.level_sk3;
 
             Singleton.Instance.CurrentStage = 0;
 
             KeyboardCursorPos = _charPosition[0];
 
-            Console.WriteLine("Select char Screen");
-            Console.WriteLine("Hero value: " + Singleton.Instance.CurrentHero);
-            Console.WriteLine("Stage value: " + Singleton.Instance.CurrentStage);
-            Console.WriteLine("skill 1 value: " + Singleton.Instance.level_sk1);
-            Console.WriteLine("skill 2 value: " + Singleton.Instance.level_sk2);
-            Console.WriteLine("skill 3 value: " + Singleton.Instance.level_sk3);
-            Console.WriteLine("Previous skill 1 value: " + Singleton.Instance.previous_level_sk1);
-            Console.WriteLine("Previous skill 2 value: " + Singleton.Instance.previous_level_sk2);
-            Console.WriteLine("Previous skill 3 value: " + Singleton.Instance.previous_level_sk3);
-            Console.WriteLine("Keyboard status: " + Singleton.Instance.isKeyboardCursorActive);
-            Console.WriteLine("Mouse status: " + Singleton.Instance.isMouseActive);
-            Console.WriteLine("BGM Value: " + Singleton.Instance.MasterBGMVolume);
-            Console.WriteLine("SFX Value: " + Singleton.Instance.MasterSFXVolume);
-            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+        
 
         }
         public void ChangeBetweenScreen()
@@ -152,7 +134,7 @@ namespace Final_Assignment
             spriteBatch.DrawString(_font,
                 "Select character",
                  new Vector2(Singleton.SCREENWIDTH / 2, 150),
-                 Color.White, 0, _font.MeasureString("Select character") / 2, new Vector2(2f, 2f), 0, 0);
+                 Color.White, 0, _font.MeasureString("Select character") / 2, new Vector2(3f, 3f), 0, 0);
 
             spriteBatch.DrawString(_font,
                                     "Back",
@@ -264,8 +246,8 @@ namespace Final_Assignment
                         _cursorselection.Play();
                         //End to do play selection cursor sound
 
-/*                        Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);*/
+                        /*                        Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                                                Console.WriteLine("State = " + (int)keycursorstate);*/
 
                         break;
                     case Keycursorstate.Navigation:

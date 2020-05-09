@@ -25,7 +25,7 @@ namespace Final_Assignment
             Size
         }
 
-        public bool IsPaused { get; private set; }
+        public bool IsPaused { get; set; }
 
         private GameObject selectedChar;
         private List<GameObject> _gameObjects;
@@ -44,8 +44,14 @@ namespace Final_Assignment
 
         private int skillPoint;
 
+        private int previous_level_sk1;
+        private int previous_level_sk2;
+        private int previous_level_sk3;
+
+
         //ContentManager content;
         SoundEffectInstance _selected;
+        SoundEffectInstance _selected1;
         SoundEffectInstance _cursorselection;
 
         Texture2D _bg;
@@ -92,6 +98,7 @@ namespace Final_Assignment
             _addskill = content.Load<Texture2D>("sprites/newplus");
 
             _selected = content.Load<SoundEffect>("sounds/selected_sound").CreateInstance();
+            _selected1 = content.Load<SoundEffect>("sounds/selected_sound").CreateInstance();
             _cursorselection = content.Load<SoundEffect>("sounds/selection_sound").CreateInstance();
 
 
@@ -201,22 +208,27 @@ namespace Final_Assignment
             keycursorstate = Keycursorstate.Skill;
 
             _selected.Volume = Singleton.Instance.MasterSFXVolume;
+            _selected1.Volume = Singleton.Instance.MasterSFXVolume;
             _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
 
-            Console.WriteLine("Upgrade Screen stage "+Singleton.Instance.CurrentStage);
-            Console.WriteLine("Hero value: "+Singleton.Instance.CurrentHero);
-            Console.WriteLine("Stage value: " + Singleton.Instance.CurrentStage);
-            Console.WriteLine("skill 1 value: " + Singleton.Instance.level_sk1);
-            Console.WriteLine("skill 2 value: " + Singleton.Instance.level_sk2);
-            Console.WriteLine("skill 3 value: " + Singleton.Instance.level_sk3);
-            Console.WriteLine("Previous skill 1 value: " + Singleton.Instance.previous_level_sk1);
-            Console.WriteLine("Previous skill 2 value: " + Singleton.Instance.previous_level_sk2);
-            Console.WriteLine("Previous skill 3 value: " + Singleton.Instance.previous_level_sk3);
-            Console.WriteLine("Keyboard status: " + Singleton.Instance.isKeyboardCursorActive);
-            Console.WriteLine("Mouse status: " + Singleton.Instance.isMouseActive);
-            Console.WriteLine("BGM Value: " + Singleton.Instance.MasterBGMVolume);
-            Console.WriteLine("SFX Value: " + Singleton.Instance.MasterSFXVolume);
-            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+            //Console.WriteLine("Upgrade Screen stage " + Singleton.Instance.CurrentStage);
+            //Console.WriteLine("Hero value: " + Singleton.Instance.CurrentHero);
+            //Console.WriteLine("Stage value: " + Singleton.Instance.CurrentStage);
+            //Console.WriteLine("skill 1 value: " + Singleton.Instance.level_sk1);
+            //Console.WriteLine("skill 2 value: " + Singleton.Instance.level_sk2);
+            //Console.WriteLine("skill 3 value: " + Singleton.Instance.level_sk3);
+            //Console.WriteLine("Previous skill 1 value: " + Singleton.Instance.previous_level_sk1);
+            //Console.WriteLine("Previous skill 2 value: " + Singleton.Instance.previous_level_sk2);
+            //Console.WriteLine("Previous skill 3 value: " + Singleton.Instance.previous_level_sk3);
+            //Console.WriteLine("Keyboard status: " + Singleton.Instance.isKeyboardCursorActive);
+            //Console.WriteLine("Mouse status: " + Singleton.Instance.isMouseActive);
+            //Console.WriteLine("BGM Value: " + Singleton.Instance.MasterBGMVolume);
+            //Console.WriteLine("SFX Value: " + Singleton.Instance.MasterSFXVolume);
+            //Console.WriteLine("----------------------------------------------------------------------------------------------------");
+
+            previous_level_sk1 = Singleton.Instance.level_sk1;
+            previous_level_sk2 = Singleton.Instance.level_sk2;
+            previous_level_sk3 = Singleton.Instance.level_sk3;
         }
 
         public void Pause()
@@ -253,7 +265,7 @@ namespace Final_Assignment
                 if (Singleton.Instance._currentmouse.Position.X > skill_button_poslist[i].X - _skillwindow.Width / 2
                 && Singleton.Instance._currentmouse.Position.X < skill_button_poslist[i].X + _skillwindow.Width / 2
                 && Singleton.Instance._currentmouse.Position.Y > skill_button_poslist[i].Y - _skillwindow.Height / 2
-                && Singleton.Instance._currentmouse.Position.Y < skill_button_poslist[i].Y + _skillwindow.Height / 2 && Singleton.Instance.isMouseActive && skillPoint != 0)
+                && Singleton.Instance._currentmouse.Position.Y < skill_button_poslist[i].Y + _skillwindow.Height / 2 && Singleton.Instance.isMouseActive)
                 //skill1-3 button
                 {
                     skill_button_scalelist[i] = new Vector2(1.2f, 1.2f);
@@ -332,11 +344,6 @@ namespace Final_Assignment
                         nav_button_colorlist[i] = Color.Red;
                         //Do when click Reset skill button
                         NavCommandList(i);
-
-                        //Start to do play selected button sound
-                        _selected.Play();
-                        //End to do play selected button sound
-
                     }
                 }
                 else
@@ -384,8 +391,8 @@ namespace Final_Assignment
                             keyboardCursorPosCounter = 0;
                         }
                         KeyboardCursorPos = skill_button_poslist[keyboardCursorPosCounter];
-/*                        Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);*/
+                        /*                        Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                                                Console.WriteLine("State = " + (int)keycursorstate);*/
 
                         break;
                     case Keycursorstate.Navigation:
@@ -395,8 +402,8 @@ namespace Final_Assignment
                             keyboardCursorPosCounter = skill_button_poslist.Count;
                         }
                         KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - skill_button_poslist.Count];
-/*                        Console.WriteLine("Nav Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + (nav_button_poslist.Count + skill_button_poslist.Count));
-                        Console.WriteLine("State = " + (int)keycursorstate);*/
+                        /*                        Console.WriteLine("Nav Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + (nav_button_poslist.Count + skill_button_poslist.Count));
+                                                Console.WriteLine("State = " + (int)keycursorstate);*/
 
                         break;
                 }
@@ -424,8 +431,8 @@ namespace Final_Assignment
                             keyboardCursorPosCounter = skill_button_poslist.Count - 1;
                         }
                         KeyboardCursorPos = skill_button_poslist[keyboardCursorPosCounter];
-/*                        Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);*/
+                        /*                        Console.WriteLine("Skill Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                                                Console.WriteLine("State = " + (int)keycursorstate);*/
 
                         break;
                     case Keycursorstate.Navigation:
@@ -435,8 +442,8 @@ namespace Final_Assignment
                             keyboardCursorPosCounter = nav_button_poslist.Count + skill_button_poslist.Count - 1;
                         }
                         KeyboardCursorPos = nav_button_poslist[keyboardCursorPosCounter - skill_button_poslist.Count];
-/*                        Console.WriteLine("Nav Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + ((nav_button_poslist.Count - 1) + (skill_button_poslist.Count - 1)));
-                        Console.WriteLine("State = " + (int)keycursorstate);*/
+                        /*                        Console.WriteLine("Nav Right key Pos: " + keyboardCursorPosCounter + "Real pos: " + ((nav_button_poslist.Count - 1) + (skill_button_poslist.Count - 1)));
+                                                Console.WriteLine("State = " + (int)keycursorstate);*/
 
                         break;
                 }
@@ -466,8 +473,8 @@ namespace Final_Assignment
                             keycursorstate = Keycursorstate.Navigation;
                         }
                         _cursorselection.Play();
-/*                        Console.WriteLine("Nav Down key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);*/
+                        /*                        Console.WriteLine("Nav Down key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                                                Console.WriteLine("State = " + (int)keycursorstate);*/
                         break;
                     case Keycursorstate.Navigation:
                         if (!isFirstActive)
@@ -477,8 +484,8 @@ namespace Final_Assignment
                             keycursorstate = Keycursorstate.Skill;
                         }
                         _cursorselection.Play();
-/*                        Console.WriteLine("Skill Down key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);*/
+                        /*                        Console.WriteLine("Skill Down key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                                                Console.WriteLine("State = " + (int)keycursorstate);*/
                         break;
                 }
             }
@@ -505,8 +512,8 @@ namespace Final_Assignment
                             keycursorstate = Keycursorstate.Navigation;
                         }
                         _cursorselection.Play();
-/*                        Console.WriteLine("Nav Up key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);*/
+                        /*                        Console.WriteLine("Nav Up key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                                                Console.WriteLine("State = " + (int)keycursorstate);*/
                         break;
                     case Keycursorstate.Navigation:
                         if (!isFirstActive)
@@ -516,15 +523,15 @@ namespace Final_Assignment
                             keycursorstate = Keycursorstate.Skill;
                             _cursorselection.Play();
                         }
- /*                       Console.WriteLine("Skill Up key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
-                        Console.WriteLine("State = " + (int)keycursorstate);*/
+                        /*                       Console.WriteLine("Skill Up key Pos: " + keyboardCursorPosCounter + "Real pos: " + keyboardCursorPosCounter);
+                                               Console.WriteLine("State = " + (int)keycursorstate);*/
                         break;
                 }
             }
 
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Escape) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
-
+                _selected.Play();
                 m_screenManager.ChangeScreen(new SelectCharScreen(m_screenManager));
             }
 
@@ -540,7 +547,18 @@ namespace Final_Assignment
                             Singleton.Instance.level_sk1 += 1;
                             skillPoint -= 1;
                             //Start to do play selected button sound
-                            _selected.Play();
+                            if (_selected.State == SoundState.Playing)
+                            {
+                                _selected.Stop();
+                                _selected1.Play();
+                            }
+                            else if (_selected1.State == SoundState.Playing)
+                            {
+                                _selected1.Stop();
+                                _selected.Play();
+                            }
+                            else
+                                _selected.Play();
                             //End to do play selected button sound
                         }
                         break;
@@ -551,7 +569,18 @@ namespace Final_Assignment
                             Singleton.Instance.level_sk2 += 1;
                             skillPoint -= 1;
                             //Start to do play selected button sound
-                            _selected.Play();
+                            if (_selected.State == SoundState.Playing)
+                            {
+                                _selected.Stop();
+                                _selected1.Play();
+                            }
+                            else if (_selected1.State == SoundState.Playing)
+                            {
+                                _selected1.Stop();
+                                _selected.Play();
+                            }
+                            else
+                                _selected.Play();
                             //End to do play selected button sound
                         }
                         break;
@@ -562,7 +591,18 @@ namespace Final_Assignment
                             Singleton.Instance.level_sk3 += 1;
                             skillPoint -= 1;
                             //Start to do play selected button sound
-                            _selected.Play();
+                            if (_selected.State == SoundState.Playing)
+                            {
+                                _selected.Stop();
+                                _selected1.Play();
+                            }
+                            else if (_selected1.State == SoundState.Playing)
+                            {
+                                _selected1.Stop();
+                                _selected.Play();
+                            }
+                            else
+                                _selected.Play();
                             //End to do play selected button sound
                         }
                         break;
@@ -572,15 +612,15 @@ namespace Final_Assignment
                         //Start to do play selected button sound
                         _selected.Play();
                         //End to do play selected button sound
-                        
-                        
+
+
                         if (Singleton.Instance.CurrentStage == 0)
                             m_screenManager.ChangeScreen(new SelectCharScreen(m_screenManager));
                         else
                         {
-                            m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));     
+                            m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
                         }
-                        Singleton.Instance.CurrentStage = 0;    
+                        Singleton.Instance.CurrentStage = 0;
                         Singleton.Instance.CurrentHero = "";
                         break;
                     case 4://Start
@@ -592,18 +632,29 @@ namespace Final_Assignment
                         //End to do play selected button sound
                         if (Singleton.Instance.CurrentStage == 1)
                             m_screenManager.ChangeScreen(new HowToPlayScreen(m_screenManager));
-                        else 
+                        else
                             m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
                         break;
                     case 5://Reset skill
                            //Do when enter Reset skill button
 
                         //Start to do play selected button sound
-                        _selected.Play();
+                        if (_selected.State == SoundState.Playing)
+                        {
+                            _selected.Stop();
+                            _selected1.Play();
+                        }
+                        else if (_selected1.State == SoundState.Playing)
+                        {
+                            _selected1.Stop();
+                            _selected.Play();
+                        }
+                        else
+                            _selected.Play();
                         //End to do play selected button sound
-                        Singleton.Instance.level_sk1 = Singleton.Instance.previous_level_sk1;
-                        Singleton.Instance.level_sk2 = Singleton.Instance.previous_level_sk2;
-                        Singleton.Instance.level_sk3 = Singleton.Instance.previous_level_sk3;
+                        Singleton.Instance.level_sk1 = previous_level_sk1;
+                        Singleton.Instance.level_sk2 = previous_level_sk2;
+                        Singleton.Instance.level_sk3 = previous_level_sk3;
                         skillPoint = 2;
                         break;
 
@@ -636,12 +687,6 @@ namespace Final_Assignment
             {
                 spriteBatch.Draw(_skillwindow, skill_button_poslist[i], null, null, new Vector2(_skillwindow.Width / 2, _skillwindow.Height / 2), 0, Vector2.One, null, 0);
                 spriteBatch.Draw(skill_button_texturelist[i], new Vector2(skill_button_poslist[i].X, skill_button_poslist[i].Y - 75), null, null, new Vector2(skill_button_texturelist[i].Width / 2, skill_button_texturelist[i].Height / 2), 0, skill_button_scalelist[i], null, 0);
-                if (skillPoint == 0)
-                    spriteBatch.Draw(_addskill, new Vector2(skill_button_poslist[i].X, skill_button_poslist[i].Y + 118), null, null, new Vector2(_addskill.Width / 2, _addskill.Height / 2), 0, Vector2.One, Color.Gray, 0);
-                else
-                    spriteBatch.Draw(_addskill, new Vector2(skill_button_poslist[i].X, skill_button_poslist[i].Y + 118), null, null, new Vector2(_addskill.Width / 2, _addskill.Height / 2), 0, _addskill_button_scalelist[i], null, 0);
-
-
             }
 
             if (skillPoint == 0)
@@ -649,14 +694,48 @@ namespace Final_Assignment
                 spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk1, skill_button_poslist[0], Color.Red, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height + 150) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
                 spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk2, skill_button_poslist[1], Color.Red, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height + 150) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
                 spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk3, skill_button_poslist[2], Color.Red, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height + 150) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
-
+                spriteBatch.Draw(_addskill, new Vector2(skill_button_poslist[0].X, skill_button_poslist[0].Y + 118), null, null, new Vector2(_addskill.Width / 2, _addskill.Height / 2), 0, Vector2.One, Color.Gray, 0);
+                spriteBatch.Draw(_addskill, new Vector2(skill_button_poslist[1].X, skill_button_poslist[1].Y + 118), null, null, new Vector2(_addskill.Width / 2, _addskill.Height / 2), 0, Vector2.One, Color.Gray, 0);
+                spriteBatch.Draw(_addskill, new Vector2(skill_button_poslist[2].X, skill_button_poslist[2].Y + 118), null, null, new Vector2(_addskill.Width / 2, _addskill.Height / 2), 0, Vector2.One, Color.Gray, 0);
             }
             else
             {
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk1, skill_button_poslist[0], Color.White, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height + 150) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[0], SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk2, skill_button_poslist[1], Color.White, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height + 150) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[1], SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk3, skill_button_poslist[2], Color.White, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height + 150) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[2], SpriteEffects.None, 0);
+                if (Singleton.Instance.level_sk1 < 3)
+                {
+                    spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk1, skill_button_poslist[0], Color.White, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height + 150) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[0], SpriteEffects.None, 0);
+                    spriteBatch.Draw(_addskill, new Vector2(skill_button_poslist[0].X, skill_button_poslist[0].Y + 118), null, null, new Vector2(_addskill.Width / 2, _addskill.Height / 2), 0, _addskill_button_scalelist[0], null, 0);
 
+                }
+                else
+                {
+                    spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk1, skill_button_poslist[0], Color.Red, 0, new Vector2((skill_button_texturelist[0].Width - 100) / 2, (skill_button_texturelist[0].Height + 150) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
+                    spriteBatch.Draw(_addskill, new Vector2(skill_button_poslist[0].X, skill_button_poslist[0].Y + 118), null, null, new Vector2(_addskill.Width / 2, _addskill.Height / 2), 0, Vector2.One, Color.Gray, 0);
+
+                }
+                if (Singleton.Instance.level_sk2 < 3)
+                {
+                    spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk2, skill_button_poslist[1], Color.White, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height + 150) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[1], SpriteEffects.None, 0);
+                    spriteBatch.Draw(_addskill, new Vector2(skill_button_poslist[1].X, skill_button_poslist[1].Y + 118), null, null, new Vector2(_addskill.Width / 2, _addskill.Height / 2), 0, _addskill_button_scalelist[1], null, 0);
+
+                }
+                else
+                {
+                    spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk2, skill_button_poslist[1], Color.Red, 0, new Vector2((skill_button_texturelist[1].Width - 100) / 2, (skill_button_texturelist[1].Height + 150) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
+                    spriteBatch.Draw(_addskill, new Vector2(skill_button_poslist[1].X, skill_button_poslist[1].Y + 118), null, null, new Vector2(_addskill.Width / 2, _addskill.Height / 2), 0, Vector2.One, Color.Gray, 0);
+
+                }
+                if (Singleton.Instance.level_sk3 < 3)
+                {
+                    spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk3, skill_button_poslist[2], Color.White, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height + 150) / 2) + _font.MeasureString("level") / 2, _addskill_button_scalelist[2], SpriteEffects.None, 0);
+                    spriteBatch.Draw(_addskill, new Vector2(skill_button_poslist[2].X, skill_button_poslist[2].Y + 118), null, null, new Vector2(_addskill.Width / 2, _addskill.Height / 2), 0, _addskill_button_scalelist[2], null, 0);
+
+                }
+                else
+                {
+                    spriteBatch.DrawString(_font, "level  " + Singleton.Instance.level_sk3, skill_button_poslist[2], Color.Red, 0, new Vector2((skill_button_texturelist[2].Width - 100) / 2, (skill_button_texturelist[2].Height + 150) / 2) + _font.MeasureString("level") / 2, 1, SpriteEffects.None, 0);
+                    spriteBatch.Draw(_addskill, new Vector2(skill_button_poslist[2].X, skill_button_poslist[2].Y + 118), null, null, new Vector2(_addskill.Width / 2, _addskill.Height / 2), 0, Vector2.One, Color.Gray, 0);
+
+                }
             }
 
             for (int i = 0; i <= _skillDes.GetLength(0) - 1; i++)
@@ -784,12 +863,26 @@ namespace Final_Assignment
                         m_screenManager.ChangeScreen(new PlayScreen(m_screenManager));
                     break;
                 case 2://reset command
-                    Singleton.Instance.level_sk1 = Singleton.Instance.previous_level_sk1;
-                    Singleton.Instance.level_sk2 = Singleton.Instance.previous_level_sk2;
-                    Singleton.Instance.level_sk3 = Singleton.Instance.previous_level_sk3;
+                    Singleton.Instance.level_sk1 = previous_level_sk1;
+                    Singleton.Instance.level_sk2 = previous_level_sk2;
+                    Singleton.Instance.level_sk3 = previous_level_sk3;
                     skillPoint = 2;
                     break;
             }
+            //Start to do play selected button sound
+            if (_selected.State == SoundState.Playing)
+            {
+                _selected.Stop();
+                _selected1.Play();
+            }
+            else if (_selected1.State == SoundState.Playing)
+            {
+                _selected1.Stop();
+                _selected.Play();
+            }
+            else
+                _selected.Play();
+            //End to do play selected button sound
         }
 
         public void SkillCommandList(int i)
@@ -801,6 +894,20 @@ namespace Final_Assignment
                     {
                         Singleton.Instance.level_sk1 += 1;
                         skillPoint -= 1;
+                        //Start to do play selected button sound
+                        if (_selected.State == SoundState.Playing)
+                        {
+                            _selected.Stop();
+                            _selected1.Play();
+                        }
+                        else if (_selected1.State == SoundState.Playing)
+                        {
+                            _selected1.Stop();
+                            _selected.Play();
+                        }
+                        else
+                            _selected.Play();
+                        //End to do play selected button sound
                     }
                     break;
                 case 1://skill2 command
@@ -808,6 +915,20 @@ namespace Final_Assignment
                     {
                         Singleton.Instance.level_sk2 += 1;
                         skillPoint -= 1;
+                        //Start to do play selected button sound
+                        if (_selected.State == SoundState.Playing)
+                        {
+                            _selected.Stop();
+                            _selected1.Play();
+                        }
+                        else if (_selected1.State == SoundState.Playing)
+                        {
+                            _selected1.Stop();
+                            _selected.Play();
+                        }
+                        else
+                            _selected.Play();
+                        //End to do play selected button sound
                     }
                     break;
                 case 2://skill3 command
@@ -815,12 +936,23 @@ namespace Final_Assignment
                     {
                         Singleton.Instance.level_sk3 += 1;
                         skillPoint -= 1;
+                        //Start to do play selected button sound
+                        if (_selected.State == SoundState.Playing)
+                        {
+                            _selected.Stop();
+                            _selected1.Play();
+                        }
+                        else if (_selected1.State == SoundState.Playing)
+                        {
+                            _selected1.Stop();
+                            _selected.Play();
+                        }
+                        else
+                            _selected.Play();
+                        //End to do play selected button sound
                     }
                     break;
             }
-            //Start to do play selected button sound
-            _selected.Play();
-            //End to do play selected button sound
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Final_Assignment
 
         Random rnd = new Random();
 
-        public bool IsPaused { get; private set; }
+        public bool IsPaused { get;  set; }
 
         Texture2D _bg;
         Texture2D _strip;
@@ -33,7 +33,6 @@ namespace Final_Assignment
         SoundEffectInstance _cursorselection;
 
         Texture2D _KeyboardCursor;
-        Texture2D _selectedChar;
 
         private Vector2 KeyboardCursorPos;
 
@@ -81,20 +80,7 @@ namespace Final_Assignment
             _selected.Volume = Singleton.Instance.MasterSFXVolume;
             _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
 
-            Console.WriteLine("Menu Screen");
-            Console.WriteLine("Hero value: " + Singleton.Instance.CurrentHero);
-            Console.WriteLine("Stage value: " + Singleton.Instance.CurrentStage);
-            Console.WriteLine("skill 1 value: " + Singleton.Instance.level_sk1);
-            Console.WriteLine("skill 2 value: " + Singleton.Instance.level_sk2);
-            Console.WriteLine("skill 3 value: " + Singleton.Instance.level_sk3);
-            Console.WriteLine("Previous skill 1 value: " + Singleton.Instance.previous_level_sk1);
-            Console.WriteLine("Previous skill 2 value: " + Singleton.Instance.previous_level_sk2);
-            Console.WriteLine("Previous skill 3 value: " + Singleton.Instance.previous_level_sk3);
-            Console.WriteLine("Keyboard status: " + Singleton.Instance.isKeyboardCursorActive);
-            Console.WriteLine("Mouse status: " + Singleton.Instance.isMouseActive);
-            Console.WriteLine("BGM Value: " + Singleton.Instance.MasterBGMVolume);
-            Console.WriteLine("SFX Value: " + Singleton.Instance.MasterSFXVolume);
-            Console.WriteLine("----------------------------------------------------------------------------------------------------");
+       
 
         }
 
@@ -309,7 +295,7 @@ namespace Final_Assignment
             spriteBatch.Begin();
 
             spriteBatch.Draw(_bg, Vector2.Zero, color: Color.White);
-            spriteBatch.Draw(_strip, new Vector2(100,0), color: Color.White);
+            spriteBatch.Draw(_strip, new Vector2(100, 0), color: Color.White);
             //spriteBatch.DrawString(_font, "TALES WAR", new Vector2(300, 200) - _font.MeasureString("TALE WARS") / 2, Color.White);
 
 
@@ -340,7 +326,7 @@ namespace Final_Assignment
                 }
             }
             spriteBatch.DrawString(_font,
-                 "[Console] Res: " + Singleton.SCREENWIDTH + "x" + Singleton.SCREENHEIGHT +"    Keyboard status: "+Singleton.Instance.isKeyboardCursorActive + "    Mouse status: " + Singleton.Instance.isMouseActive+ "   MousePos: " + Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
+                 "[Console] Res: " + Singleton.SCREENWIDTH + "x" + Singleton.SCREENHEIGHT + "    Keyboard status: " + Singleton.Instance.isKeyboardCursorActive + "    Mouse status: " + Singleton.Instance.isMouseActive + "   MousePos: " + Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
                  new Vector2(1, Singleton.SCREENHEIGHT - 20),
                  Color.White, 0, new Vector2(0, 0), new Vector2(0.8f, 0.8f), 0, 0);
 

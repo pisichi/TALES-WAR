@@ -21,12 +21,14 @@ namespace Final_Assignment
         private bool select = false;
         private bool freecam = false;
 
-        public bool IsPaused { get; private set; }
+        public bool IsPaused { get;  set; }
 
         List<GameObject> _gameObjects;
 
         float waitTime = 0;
-        
+
+        private Vector2 _pausePosition;
+
 
         private GameObject player;
         private GameObject boss;
@@ -44,6 +46,7 @@ namespace Final_Assignment
         Texture2D _arrow;
         Texture2D _gauge;
         Texture2D _pin;
+        Texture2D _strip;
 
         Texture2D _skill1;
         Texture2D _skill2;
@@ -60,13 +63,6 @@ namespace Final_Assignment
 
 
         private ContentManager content;
-
-        private enum Screenstate
-        {
-            Play,
-            Pause
-        }
-        private Screenstate screenstate;
 
         public PlayScreen(IGameScreenManager screenManager)
         {
@@ -86,6 +82,7 @@ namespace Final_Assignment
             Singleton.Instance.Cooldown_2 = 0;
 
             _bg = content.Load<Texture2D>("sprites/stage_bg");
+            _strip = content.Load<Texture2D>("sprites/menu_strip");
             _pin = content.Load<Texture2D>("sprites/pin");
             _gauge = content.Load<Texture2D>("sprites/gauge");
             _arrow = content.Load<Texture2D>("sprites/arrow");
@@ -155,6 +152,7 @@ namespace Final_Assignment
             enemyIndex = 0;
 
             select = false;
+            IsPaused = false;
 
             Singleton.Instance.CurrentTurnState = Singleton.TurnState.skill;
 
@@ -171,22 +169,6 @@ namespace Final_Assignment
                 SetStage2();
             }
 
-            screenstate = Screenstate.Play;
-
-            Console.WriteLine("Play Screen");
-            Console.WriteLine("Hero value: " + Singleton.Instance.CurrentHero);
-            Console.WriteLine("Stage value: " + Singleton.Instance.CurrentStage);
-            Console.WriteLine("skill 1 value: " + Singleton.Instance.level_sk1);
-            Console.WriteLine("skill 2 value: " + Singleton.Instance.level_sk2);
-            Console.WriteLine("skill 3 value: " + Singleton.Instance.level_sk3);
-            Console.WriteLine("Previous skill 1 value: " + Singleton.Instance.previous_level_sk1);
-            Console.WriteLine("Previous skill 2 value: " + Singleton.Instance.previous_level_sk2);
-            Console.WriteLine("Previous skill 3 value: " + Singleton.Instance.previous_level_sk3);
-            Console.WriteLine("Keyboard status: " + Singleton.Instance.isKeyboardCursorActive);
-            Console.WriteLine("Mouse status: " + Singleton.Instance.isMouseActive);
-            Console.WriteLine("BGM Value: " + Singleton.Instance.MasterBGMVolume);
-            Console.WriteLine("SFX Value: " + Singleton.Instance.MasterSFXVolume);
-            Console.WriteLine("----------------------------------------------------------------------------------------------------");
         }
 
         private void SetStage1()
@@ -466,58 +448,50 @@ namespace Final_Assignment
 
         public void Update(GameTime gameTime)
         {
-            Singleton.Instance._previouskey = Singleton.Instance._currentkey;
-            Singleton.Instance._currentkey = Keyboard.GetState();
+          
 
-            switch (screenstate)
+            if (player.HP <= 0)
             {
-                case Screenstate.Pause:
-                    break;
-                case Screenstate.Play:
-                    if (player.HP <= 0)
-                    {
-                        m_screenManager.ChangeScreen(new LoseScreen(m_screenManager));
-                    }
+                m_screenManager.ChangeScreen(new LoseScreen(m_screenManager));
+            }
 
-                    if (boss.HP <= 0)
-                    {
-                        m_screenManager.ChangeScreen(new WinScreen(m_screenManager));
-                    }
+            if (boss.HP <= 0)
+            {
+                m_screenManager.ChangeScreen(new WinScreen(m_screenManager));
+            }
 
-                    if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
-                    {
-                        freecam = !freecam;
-                    }
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.M) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+            {
+                freecam = !freecam;
+            }
 
 
-                    if (freecam)
-                        testcam();
-                    else
-                        Singleton.Instance._camera.Follow(Singleton.Instance.follow);
+            if (freecam)
+                testcam();
+            else
+                Singleton.Instance._camera.Follow(Singleton.Instance.follow);
 
 
-                    if (player.InTurn)
-                    {
-                        if (!select)
-                        {
-                            select = true;
-                        }
-                        PlayerModule();
-                    }
-                    else
-                    {
-                        select = false;
-                        EnemyModule(gameTime);
-                    }
+            if (player.InTurn)
+            {
+                if (!select)
+                {
+                    select = true;
+                }
+                PlayerModule();
+            }
+            else
+            {
+                select = false;
+                EnemyModule(gameTime);
+            }
 
 
-                    for (int i = 0; i < _gameObjects.Count; i++)
-                    {
-                        if (_gameObjects[i].IsActive)
-                            _gameObjects[i].Update(gameTime, _gameObjects);
-                        else _gameObjects.Remove(_gameObjects[i]);
-                    }
-                    break;
+            for (int i = 0; i < _gameObjects.Count; i++)
+            {
+                if (_gameObjects[i].IsActive)
+                    _gameObjects[i].Update(gameTime, _gameObjects);
+                else _gameObjects.Remove(_gameObjects[i]);
             }
         }
 
@@ -562,6 +536,7 @@ namespace Final_Assignment
 
                     if (Singleton.Instance._currentkey.IsKeyDown(Keys.Z) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.Cooldown_1 <= 0)
                     {
+                        player.Rotation = 0f;
                         player.skill = 1;
                         _selected.Play();
                         Singleton.Instance.Cooldown_1 = 4;
@@ -570,6 +545,7 @@ namespace Final_Assignment
 
                     if (Singleton.Instance._currentkey.IsKeyDown(Keys.X) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.Cooldown_2 <= 0)
                     {
+                        player.Rotation = 0f;
                         player.skill = 2;
                         _selected.Play();
                         Singleton.Instance.Cooldown_2 = 5;
@@ -589,11 +565,11 @@ namespace Final_Assignment
 
                         if (swap)
                         {
-                            player.Rotation += 0.1f;
+                            player.Rotation += 0.08f;
                         }
                         else
                         {
-                            player.Rotation -= 0.1f;
+                            player.Rotation -= 0.08f;
                         }
 
                         if (player.Rotation < -3.25)
@@ -672,9 +648,8 @@ namespace Final_Assignment
                     waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
                     if (waitTime > 2.3f)
                     {
-                        enemyList[enemyIndex].action = true;
-                        //enemyList[enemyIndex].InTurn = false;
                         waitTime = 0;
+                        enemyList[enemyIndex].action = true;
                     }
                 }
 
@@ -697,25 +672,33 @@ namespace Final_Assignment
         public void HandleInput(GameTime gameTime)
         {
 
+            Singleton.Instance._previouskey = Singleton.Instance._currentkey;
+            Singleton.Instance._currentkey = Keyboard.GetState();
+
             if ((Singleton.Instance._currentkey.IsKeyDown(Keys.L) && Singleton.Instance._currentkey != Singleton.Instance._previouskey))
             {
                 m_screenManager.ChangeScreen(new WinScreen(m_screenManager));
             }
 
-
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+            if (!IsPaused)
             {
-                //m_screenManager.Exit();
-                switch (screenstate)
+                if (Singleton.Instance._currentkey.IsKeyDown(Keys.Escape) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+                    Pause();
+            }
+            else if (IsPaused)
+            {
+                if (Singleton.Instance._currentkey.IsKeyDown(Keys.Escape) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                 {
-                    case Screenstate.Pause:
-                        screenstate = Screenstate.Play;
-                        break;
-                    case Screenstate.Play:
-                        screenstate = Screenstate.Pause;
-                        break;
+                    Resume();
+                }
+                else if (Singleton.Instance._currentkey.IsKeyDown(Keys.Q) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+                { 
+                    Singleton.Instance.CurrentStage = 0;
+                    Singleton.Instance.CurrentHero = "";
+                    m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
                 }
             }
+            
 
         }
 
@@ -752,12 +735,12 @@ namespace Final_Assignment
                     }
                     break;
                 case Singleton.TurnState.angle:
-                    spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, player.Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(_arrow, player.Position + new Vector2(130, -100), null, Color.White, player.Rotation, new Vector2(_arrow.Width / 2, 0), 1f, SpriteEffects.FlipVertically, 0);
                     break;
                 case Singleton.TurnState.force:
-                    spriteBatch.Draw(_arrow, player.Position + new Vector2(120, -100), null, Color.White, player.Rotation, Vector2.Zero, 1f, SpriteEffects.None, 0);
+                    spriteBatch.Draw(_arrow, player.Position + new Vector2(130, -100), null, Color.White, player.Rotation, new Vector2(_arrow.Width/2,0), 1f, SpriteEffects.FlipVertically, 0);
                     spriteBatch.Draw(_gauge, player.Position + new Vector2(130, -100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
-                    spriteBatch.Draw(_pin, player.Position + new Vector2(120 + (player.force - 1) * 50, -100), null, Color.White, 0f, Vector2.Zero, new Vector2(2, 0.5f), SpriteEffects.None, 0);
+                    spriteBatch.Draw(_pin, player.Position + new Vector2(120 + (player.force - 1) * 50, -100), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0);
                     break;
                 case Singleton.TurnState.shoot:
                     break;
@@ -768,6 +751,24 @@ namespace Final_Assignment
             {
                 if (_gameObjects[i].IsActive)
                     _gameObjects[i].Draw(spriteBatch);
+            }
+            if (IsPaused)
+            {
+                spriteBatch.Draw(_strip, destinationRectangle: new Rectangle(-100, -500, 4200, 2000));
+
+                if (freecam)
+                {
+                    _pausePosition = cam.Position - new Vector2(100, 100);
+                }
+
+
+                else
+                {
+                    _pausePosition = Singleton.Instance._camera.CameraPosition;
+                }
+                spriteBatch.DrawString(_font, "GAME PAUSED", _pausePosition + new Vector2(270, 0), Color.White, 0, _font.MeasureString("GAME PAUSED"), 2, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "Press ESC to Continue", _pausePosition + new Vector2(220, 200), Color.White, 0, _font.MeasureString("Press ESC to Continue"), 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "Press Q to Main Menu", _pausePosition + new Vector2(220, 300), Color.White, 0, _font.MeasureString("Press Q to Main Menu"), 1, SpriteEffects.None, 0);
             }
 
             spriteBatch.End();
