@@ -125,17 +125,17 @@ namespace Final_Assignment
                     skill_button_texturelist.Add(content.Load<Texture2D>("sprites/skill_zeus_2"));
                     skill_button_texturelist.Add(content.Load<Texture2D>("sprites/skill_zeus_3"));
 
-                    _skillDes[0, 0] = "lv.1  +2 damage";
-                    _skillDes[0, 1] = "lv.2  +3 damage";
-                    _skillDes[0, 2] = "lv.3  +4 damage";
+                    _skillDes[0, 0] = "lv.1  +2 stun damage";
+                    _skillDes[0, 1] = "lv.2  +3 stun damage";
+                    _skillDes[0, 2] = "lv.3  +4 stun damage";
 
-                    _skillDes[1, 0] = "lv.1  +2 damage";
-                    _skillDes[1, 1] = "lv.2  +4 damage";
-                    _skillDes[1, 2] = "lv.3  +6 damage";
+                    _skillDes[1, 0] = "lv.1  +2 skill damage";
+                    _skillDes[1, 1] = "lv.2  +4 skill damage";
+                    _skillDes[1, 2] = "lv.3  +6 skill damage";
 
-                    _skillDes[2, 0] = "lv.1  30% chance";
-                    _skillDes[2, 1] = "lv.2  40% chance";
-                    _skillDes[2, 2] = "lv.3  50% chance";
+                    _skillDes[2, 0] = "lv.1 30% recover chance";
+                    _skillDes[2, 1] = "lv.2 40% recover chance";
+                    _skillDes[2, 2] = "lv.3 50% recover chance";
                     break;
 
                 case "thor":
@@ -163,13 +163,13 @@ namespace Final_Assignment
                     _skillDes[0, 1] = "lv.2  +2 armor";
                     _skillDes[0, 2] = "lv.3  +3 armor";
 
-                    _skillDes[1, 0] = "lv.1  +25% size";
-                    _skillDes[1, 1] = "lv.2  +50% size";
-                    _skillDes[1, 2] = "lv.3  +100% size";
+                    _skillDes[1, 0] = "lv.1  +25% weapon size";
+                    _skillDes[1, 1] = "lv.2  +50% weapon size";
+                    _skillDes[1, 2] = "lv.3  +100% weapon size";
 
-                    _skillDes[2, 0] = "lv.1  10% chance";
-                    _skillDes[2, 1] = "lv.2  20% chance";
-                    _skillDes[2, 2] = "lv.3  30% chance";
+                    _skillDes[2, 0] = "lv.1  +10% DMG chance";
+                    _skillDes[2, 1] = "lv.2  +20% DMG chance";
+                    _skillDes[2, 2] = "lv.3  +30% DMG chance";
                     break;
             }
 
