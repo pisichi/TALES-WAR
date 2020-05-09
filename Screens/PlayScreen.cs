@@ -747,7 +747,7 @@ namespace Final_Assignment
 
                 if (freecam)
                 {
-                    _pausePosition = Singleton.Instance._camera.CameraPosition + new Vector2(Singleton.SCREENWIDTH / 2, Singleton.SCREENHEIGHT / 2);
+                    _pausePosition = cam.Position - new Vector2(100, 100);
                 }
 
 
@@ -755,12 +755,11 @@ namespace Final_Assignment
                 {
                     _pausePosition = Singleton.Instance._camera.CameraPosition;
                 }
-                spriteBatch.DrawString(_font, "GAME PAUSED", _pausePosition + new Vector2(300, 0), Color.White, 0, _font.MeasureString("GAME PAUSED"), 2, SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "Press ESC to Resume", _pausePosition + new Vector2(250, 200), Color.White, 0, _font.MeasureString("Press ESC to Resume"), 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "GAME PAUSED", _pausePosition + new Vector2(270, 0), Color.White, 0, _font.MeasureString("GAME PAUSED"), 2, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "Press ESC to Resume", _pausePosition + new Vector2(220, 200), Color.White, 0, _font.MeasureString("Press ESC to Resume"), 1, SpriteEffects.None, 0);
 
 
-                spriteBatch.DrawString(_font, "GAME PAUSED", cam.Position, Color.White, 0, _font.MeasureString("GAME PAUSED"), 2, SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "Press ESC to Resume",cam.Position, Color.White, 0, _font.MeasureString("Press ESC to Resume"), 1, SpriteEffects.None, 0);
+              
 
             }
 
