@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,7 +12,7 @@ namespace Final_Assignment
     {
         private readonly IGameScreenManager m_screenManager;
         private bool m_exitGame;
-      
+
         private int enemyIndex;
 
         private bool swap;
@@ -21,7 +20,7 @@ namespace Final_Assignment
         private bool select = false;
         private bool freecam = false;
 
-        public bool IsPaused { get;  set; }
+        public bool IsPaused { get; set; }
 
         List<GameObject> _gameObjects;
 
@@ -97,7 +96,7 @@ namespace Final_Assignment
             _selected = content.Load<SoundEffect>("sounds/selection_sound").CreateInstance();
 
             _selected.Volume = Singleton.Instance.MasterSFXVolume;
-            
+
 
             cam = new GameObject(null, null, null, null)
             {
@@ -173,7 +172,7 @@ namespace Final_Assignment
 
         private void SetStage1()
         {
-           
+
             #region character
 
 
@@ -195,9 +194,9 @@ namespace Final_Assignment
                 Viewport = new Rectangle(0, 0, 150, 230),
                 Name = "guan",
                 Weapon = "lance",
-                HP = 7,
+                HP = 6,
                 attack = 1
-                
+
             };
             _gameObjects.Add(boss);
             enemyList.Add(boss);
@@ -320,7 +319,7 @@ namespace Final_Assignment
                 Position = new Vector2(2700, 700),
                 InTurn = false,
                 Viewport = new Rectangle(0, 0, 150, 230),
-              
+
                 Name = "mob",
                 Weapon = "rock",
                 HP = 3,
@@ -347,7 +346,7 @@ namespace Final_Assignment
                 Position = new Vector2(2100, 700),
                 InTurn = false,
                 Viewport = new Rectangle(0, 0, 150, 230),
-                
+
                 Name = "mob",
                 Weapon = "rock",
                 HP = 3,
@@ -374,7 +373,7 @@ namespace Final_Assignment
                 Position = new Vector2(3250, 550),
                 InTurn = false,
                 Viewport = new Rectangle(0, 0, 150, 230),
-               
+
                 Name = "sung",
                 Weapon = "bar",
                 HP = 6,
@@ -390,7 +389,7 @@ namespace Final_Assignment
                 Viewport = new Rectangle(0, 0, 900, 50),
 
                 Name = "floor",
-              
+
             }
             );
 
@@ -398,9 +397,9 @@ namespace Final_Assignment
             {
                 Position = new Vector2(1300, 900),
                 Viewport = new Rectangle(0, 0, 800, 50),
-               
+
                 Name = "floor",
-             
+
             }
            );
 
@@ -408,9 +407,9 @@ namespace Final_Assignment
             {
                 Position = new Vector2(3250, 750),
                 Viewport = new Rectangle(0, 0, 400, 200),
-              
+
                 Name = "floor",
-               
+
             }
            );
 
@@ -418,9 +417,9 @@ namespace Final_Assignment
             {
                 Position = new Vector2(2100, 900),
                 Viewport = new Rectangle(0, 0, 150, 150),
-               
+
                 Name = "floor",
-             
+
             }
             );
 
@@ -430,7 +429,7 @@ namespace Final_Assignment
                 Viewport = new Rectangle(0, 0, 150, 150),
                 _hit = _hit,
                 Name = "floor",
-              
+
             });
 
             Singleton.Instance.follow = player;
@@ -448,7 +447,7 @@ namespace Final_Assignment
 
         public void Update(GameTime gameTime)
         {
-          
+
 
             if (player.HP <= 0)
             {
@@ -460,7 +459,7 @@ namespace Final_Assignment
                 m_screenManager.ChangeScreen(new WinScreen(m_screenManager));
             }
 
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Enter) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.K) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
                 freecam = !freecam;
             }
@@ -502,22 +501,22 @@ namespace Final_Assignment
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Right))
             {
                 if (cam.Position.X < 4000 - Singleton.SCREENWIDTH / 2)
-                    cam.Position.X += 10;
+                    cam.Position.X += 20;
             }
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Left))
             {
                 if (cam.Position.X > Singleton.SCREENWIDTH / 2)
-                    cam.Position.X -= 10;
+                    cam.Position.X -= 20;
             }
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up))
             {
                 if (cam.Position.Y > Singleton.SCREENHEIGHT / 2)
-                    cam.Position.Y -= 10;
+                    cam.Position.Y -= 20;
             }
             if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down))
             {
                 if (cam.Position.Y < 1000 - Singleton.SCREENHEIGHT / 2)
-                    cam.Position.Y += 10;
+                    cam.Position.Y += 20;
             }
         }
 
@@ -534,7 +533,7 @@ namespace Final_Assignment
                     if (player.status == 1)
                     { Singleton.Instance.CurrentTurnState = Singleton.TurnState.shoot; }
 
-                    if (Singleton.Instance._currentkey.IsKeyDown(Keys.NumPad1) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.Cooldown_1 <= 0)
+                    if (Singleton.Instance._currentkey.IsKeyDown(Keys.Z) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.Cooldown_1 <= 0)
                     {
                         player.Rotation = 0f;
                         player.skill = 1;
@@ -543,7 +542,7 @@ namespace Final_Assignment
                         Singleton.Instance.CurrentTurnState = Singleton.TurnState.angle;
                     }
 
-                    if (Singleton.Instance._currentkey.IsKeyDown(Keys.NumPad2) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.Cooldown_2 <= 0)
+                    if (Singleton.Instance._currentkey.IsKeyDown(Keys.X) && Singleton.Instance._currentkey != Singleton.Instance._previouskey && Singleton.Instance.Cooldown_2 <= 0)
                     {
                         player.Rotation = 0f;
                         player.skill = 2;
@@ -638,11 +637,11 @@ namespace Final_Assignment
             }
             else
             {
-                
+
 
                 if (enemyList[enemyIndex].InTurn)
                 {
-                    if(!enemyList[enemyIndex].shooting)
+                    if (!enemyList[enemyIndex].shooting)
                         Singleton.Instance.follow = enemyList[enemyIndex];
 
                     waitTime += gameTime.ElapsedGameTime.Ticks / (float)TimeSpan.TicksPerSecond;
@@ -680,14 +679,25 @@ namespace Final_Assignment
                 m_screenManager.ChangeScreen(new WinScreen(m_screenManager));
             }
 
-
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Escape) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+            if (!IsPaused)
             {
-                if(!IsPaused)
+                if (Singleton.Instance._currentkey.IsKeyDown(Keys.Escape) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
                     Pause();
-                else
-                    Resume();
             }
+            else if (IsPaused)
+            {
+                if (Singleton.Instance._currentkey.IsKeyDown(Keys.Escape) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+                {
+                    Resume();
+                }
+                else if (Singleton.Instance._currentkey.IsKeyDown(Keys.Q) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+                {
+                    Singleton.Instance.CurrentStage = 0;
+                    Singleton.Instance.CurrentHero = "";
+                    m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
+                }
+            }
+
 
         }
 
@@ -708,8 +718,8 @@ namespace Final_Assignment
                     }
                     else
                     {
-                        spriteBatch.DrawString(_font, "cool down: "+ Singleton.Instance.Cooldown_1, player.Position + new Vector2(-80, -220), Color.White, 0, _font.MeasureString("cool down: " + Singleton.Instance.Cooldown_1) / 2, 1, SpriteEffects.None, 0);
-                        spriteBatch.Draw(_skill1, player.Position + new Vector2(-80, -150), null, Color.Gray,0, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 1f, SpriteEffects.None, 0);
+                        spriteBatch.DrawString(_font, "cool down: " + Singleton.Instance.Cooldown_1, player.Position + new Vector2(-80, -220), Color.White, 0, _font.MeasureString("cool down: " + Singleton.Instance.Cooldown_1) / 2, 1, SpriteEffects.None, 0);
+                        spriteBatch.Draw(_skill1, player.Position + new Vector2(-80, -150), null, Color.Gray, 0, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 1f, SpriteEffects.None, 0);
                     }
 
                     if (Singleton.Instance.Cooldown_2 <= 0)
@@ -727,7 +737,7 @@ namespace Final_Assignment
                     spriteBatch.Draw(_arrow, player.Position + new Vector2(130, -100), null, Color.White, player.Rotation, new Vector2(_arrow.Width / 2, 0), 1f, SpriteEffects.FlipVertically, 0);
                     break;
                 case Singleton.TurnState.force:
-                    spriteBatch.Draw(_arrow, player.Position + new Vector2(130, -100), null, Color.White, player.Rotation, new Vector2(_arrow.Width/2,0), 1f, SpriteEffects.FlipVertically, 0);
+                    spriteBatch.Draw(_arrow, player.Position + new Vector2(130, -100), null, Color.White, player.Rotation, new Vector2(_arrow.Width / 2, 0), 1f, SpriteEffects.FlipVertically, 0);
                     spriteBatch.Draw(_gauge, player.Position + new Vector2(130, -100), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0);
                     spriteBatch.Draw(_pin, player.Position + new Vector2(120 + (player.force - 1) * 50, -100), null, Color.White, 0f, Vector2.Zero, 1, SpriteEffects.None, 0);
                     break;
@@ -756,11 +766,8 @@ namespace Final_Assignment
                     _pausePosition = Singleton.Instance._camera.CameraPosition;
                 }
                 spriteBatch.DrawString(_font, "GAME PAUSED", _pausePosition + new Vector2(270, 0), Color.White, 0, _font.MeasureString("GAME PAUSED"), 2, SpriteEffects.None, 0);
-                spriteBatch.DrawString(_font, "Press ESC to Resume", _pausePosition + new Vector2(220, 200), Color.White, 0, _font.MeasureString("Press ESC to Resume"), 1, SpriteEffects.None, 0);
-
-
-              
-
+                spriteBatch.DrawString(_font, "Press ESC to Continue", _pausePosition + new Vector2(220, 200), Color.White, 0, _font.MeasureString("Press ESC to Continue"), 1, SpriteEffects.None, 0);
+                spriteBatch.DrawString(_font, "Press Q to Main Menu", _pausePosition + new Vector2(220, 300), Color.White, 0, _font.MeasureString("Press Q to Main Menu"), 1, SpriteEffects.None, 0);
             }
 
             spriteBatch.End();
@@ -786,6 +793,3 @@ namespace Final_Assignment
         }
     }
 }
-
-
-

@@ -28,7 +28,7 @@ namespace Final_Assignment
 
 
 
-        public bool IsPaused { get;  set; }
+        public bool IsPaused { get; set; }
 
         GameObject _character;
         List<GameObject> _gameObjects;

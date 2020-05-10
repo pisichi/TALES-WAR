@@ -114,7 +114,7 @@ namespace Final_Assignment
 
             KeyboardCursorPos = _charPosition[0];
 
-        
+
 
         }
         public void ChangeBetweenScreen()
@@ -134,7 +134,7 @@ namespace Final_Assignment
             spriteBatch.DrawString(_font,
                 "Select character",
                  new Vector2(Singleton.SCREENWIDTH / 2, 150),
-                 Color.White, 0, _font.MeasureString("Select character") / 2, new Vector2(2f, 2f), 0, 0);
+                 Color.White, 0, _font.MeasureString("Select character") / 2, new Vector2(3f, 3f), 0, 0);
 
             spriteBatch.DrawString(_font,
                                     "Back",

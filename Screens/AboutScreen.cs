@@ -11,10 +11,10 @@ namespace Final_Assignment
     {
         private readonly IGameScreenManager m_screenManager;
         private bool m_exitGame;
-        //private bool isKeyboardCursorActive;
+  
         private int keyboardCursorPosCounter;
         private int cursorselectionPlayedcount;
-        //private bool isMouseActive;
+
         private bool iscursorselectionPlayed;
 
         private List<Vector2> menu_button_poslist;
@@ -28,7 +28,7 @@ namespace Final_Assignment
 
 
 
-        public bool IsPaused { get;  set; }
+        public bool IsPaused { get; set; }
 
         GameObject _character;
         List<GameObject> _gameObjects;

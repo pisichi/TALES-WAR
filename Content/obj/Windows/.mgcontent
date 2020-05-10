@@ -19,6 +19,8 @@
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bg_control.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bg_lose.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/bg_win.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/char_bg_1.png</File>
+    <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/char_bg_2.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/fram1.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/fx_barrier.png</File>
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/fx_burn.png</File>
@@ -56,6 +58,8 @@
     <File>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/z2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

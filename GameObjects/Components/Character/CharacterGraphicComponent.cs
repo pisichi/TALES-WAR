@@ -53,12 +53,11 @@ namespace Final_Assignment
             switch (CurrentCharState)
             {
                 case 1:
-                    if (parent.status == 1)
-                        _animationManager.Play(_animations["Stunt"]);
-                    else if (parent.HP <= 0)
-                    {
-                        
+                    if (parent.HP <= 0)
                         _animationManager.Play(_animations["Die"]);
+                    else if (parent.status == 1)
+                    {
+                        _animationManager.Play(_animations["Stunt"]);
                     }
                     else
                         _animationManager.Play(_animations["Idle"]);

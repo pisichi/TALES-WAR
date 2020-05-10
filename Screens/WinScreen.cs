@@ -119,7 +119,7 @@ namespace Final_Assignment
             _selected.Volume = Singleton.Instance.MasterSFXVolume;
             _cursorselection.Volume = Singleton.Instance.MasterSFXVolume;
 
-         
+
 
         }
 

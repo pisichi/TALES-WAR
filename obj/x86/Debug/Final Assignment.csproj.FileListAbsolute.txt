@@ -73,3 +73,5 @@ C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Win
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sounds\dead.xnb
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sounds\bgm_1.wma
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sounds\bgm_1.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\char_bg_1.xnb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\bin\Windows\x86\Debug\Content\sprites\char_bg_2.xnb

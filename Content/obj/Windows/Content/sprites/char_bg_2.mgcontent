@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/sheet_zeus.png</SourceFile>
-  <SourceTime>2020-05-10T06:04:00.6641152+07:00</SourceTime>
-  <DestFile>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/bin/Windows/sprites/sheet_zeus.xnb</DestFile>
-  <DestTime>2020-05-10T06:04:21.7992692+07:00</DestTime>
+  <SourceFile>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/sprites/char_bg_2.png</SourceFile>
+  <SourceTime>2020-05-10T06:35:48.6137084+07:00</SourceTime>
+  <DestFile>C:/Users/User/Desktop/Final Assignment/Final Assignment/Final Assignment/Content/bin/Windows/Content/sprites/char_bg_2.xnb</DestFile>
+  <DestTime>2020-05-10T06:37:10.8348991+07:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2018-12-08T23:35:54+07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
