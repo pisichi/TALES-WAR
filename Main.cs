@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 namespace Final_Assignment
@@ -40,6 +39,7 @@ namespace Final_Assignment
             song = Content.Load<Song>("sounds/bgm_1");
             MediaPlayer.Volume = Singleton.Instance.MasterBGMVolume;
             MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
 
             m_spriteBatch = new SpriteBatch(GraphicsDevice);
 

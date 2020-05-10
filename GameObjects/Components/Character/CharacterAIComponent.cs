@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace Final_Assignment
 {
@@ -134,7 +133,6 @@ namespace Final_Assignment
             bullet = BulletFactory.create(content, parent.Weapon);
            
             _shoot.Play();
-            Console.WriteLine("rotation  " + _rotation);
             _direction = new Vector2((float)Math.Cos(_rotation + (float)Math.PI / 2), (float)Math.Sin(_rotation + (float)Math.PI / 2));
             bullet.Rotation = _rotation - (float)Math.PI;
 

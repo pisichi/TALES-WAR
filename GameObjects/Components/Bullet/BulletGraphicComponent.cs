@@ -8,11 +8,10 @@ namespace Final_Assignment
     class BulletGraphicComponent : GraphicComponent
     {
         ContentManager content;
-        //Texture2D _hit;
+
 
         public BulletGraphicComponent(ContentManager content, Dictionary<string, Animation> animations) : base(animations)
         {
-            //_hit = content.Load<Texture2D>("sprites/hitbox");
             this.content = content;
         }
 

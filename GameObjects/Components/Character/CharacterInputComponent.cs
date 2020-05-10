@@ -47,7 +47,6 @@ namespace Final_Assignment
                     parent.shooting = false;
                     parent.InTurn = false;
                     count += 1;
-                    Console.WriteLine(count);
                     Singleton.Instance.CurrentTurnState = Singleton.TurnState.enemy;
                     if (count >= 1)
                     {
@@ -100,7 +99,6 @@ namespace Final_Assignment
 
             _shoot.Play();
 
-            Console.WriteLine("add bullet");
             bullet = BulletFactory.create(content,parent.Weapon);
 
             bullet.Direction = parent.Direction;

@@ -33,7 +33,6 @@ namespace Final_Assignment
             {
                 parent.Viewport = new Rectangle(0, 0, 0, 0);
             }
-            //parent.Position.X += 10;
 
             base.Update(gameTime, gameObjects, parent);
         }
