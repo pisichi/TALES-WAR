@@ -347,10 +347,10 @@ namespace Final_Assignment
                         break;
                 }
             }
-            spriteBatch.DrawString(_font,
-                 "[Console] Res: " + Singleton.SCREENWIDTH + "x" + Singleton.SCREENHEIGHT + "    Keyboard status: " + Singleton.Instance.isKeyboardCursorActive + "    Mouse status: " + Singleton.Instance.isMouseActive + "   MousePos: " + Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
-                 new Vector2(1, Singleton.SCREENHEIGHT - 20),
-                 Color.White, 0, new Vector2(0, 0), new Vector2(0.8f, 0.8f), 0, 0);
+            //spriteBatch.DrawString(_font,
+            //     "[Console] Res: " + Singleton.SCREENWIDTH + "x" + Singleton.SCREENHEIGHT + "    Keyboard status: " + Singleton.Instance.isKeyboardCursorActive + "    Mouse status: " + Singleton.Instance.isMouseActive + "   MousePos: " + Singleton.Instance._currentmouse.Position.X + ", " + Singleton.Instance._currentmouse.Position.Y,
+            //     new Vector2(1, Singleton.SCREENHEIGHT - 20),
+            //     Color.White, 0, new Vector2(0, 0), new Vector2(0.8f, 0.8f), 0, 0);
             spriteBatch.End();
 
         }

@@ -184,7 +184,7 @@ namespace Final_Assignment
                     m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
             }
 
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Left) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
                 //to do play selection cursor sound
                 if (!Singleton.Instance.isKeyboardCursorActive) _cursorselection.Play();
@@ -199,7 +199,7 @@ namespace Final_Assignment
 
             }
 
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Right) && Singleton.Instance._currentkey != Singleton.Instance._previouskey)
             {
                 //to do play selection cursor sound
                 if (!Singleton.Instance.isKeyboardCursorActive) _cursorselection.Play();
@@ -223,7 +223,23 @@ namespace Final_Assignment
                         //Start to do play selected button sound
                         _selected.Play();
                         //End to do play selected button sound
-                            m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
+                        m_screenManager.ChangeScreen(new MenuScreen(m_screenManager));
+                        break;
+                    case 1:
+                        //Start to do play selected button sound
+                        _selected.Play();
+                        //End to do play selected button sound
+                        if (pageIndex > 0)
+                            pageIndex -= 1;
+
+                        break;
+
+                    case 2:
+                        //Start to do play selected button sound
+                        _selected.Play();
+                        //End to do play selected button sound
+                        if (pageIndex < 1)
+                            pageIndex += 1;
                         break;
                 }
 
@@ -259,10 +275,10 @@ namespace Final_Assignment
                         spriteBatch.DrawString(_font, "BACK", menu_button_poslist[0], Color.Red, 0, _font.MeasureString("BACK") / 2, menu_button_scalelist[0], SpriteEffects.None, 0);
                         break;
                     case 1:
-                        spriteBatch.DrawString(_font, "<", menu_button_poslist[1], menu_button_colorlist[1], 0, _font.MeasureString("<") / 2, menu_button_scalelist[1], SpriteEffects.None, 0);
+                        spriteBatch.DrawString(_font, "<", menu_button_poslist[1], Color.Red, 0, _font.MeasureString("<") / 2, menu_button_scalelist[1], SpriteEffects.None, 0);
                         break;
                     case 2:
-                        spriteBatch.DrawString(_font, ">", menu_button_poslist[2], menu_button_colorlist[2], 0, _font.MeasureString(">") / 2, menu_button_scalelist[2], SpriteEffects.None, 0);
+                        spriteBatch.DrawString(_font, ">", menu_button_poslist[2], Color.Red, 0, _font.MeasureString(">") / 2, menu_button_scalelist[2], SpriteEffects.None, 0);
                         break;
                 }
             }
