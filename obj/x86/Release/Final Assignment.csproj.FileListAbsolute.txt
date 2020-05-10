@@ -74,3 +74,4 @@ C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86\Release\Final Assignment.csproj.CopyComplete
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86\Release\Final Assignment.exe
 C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86\Release\Final Assignment.pdb
+C:\Users\User\Desktop\Final Assignment\Final Assignment\Final Assignment\obj\x86\Release\Final Assignment.csprojResolveAssemblyReference.cache
