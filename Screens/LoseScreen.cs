@@ -49,7 +49,7 @@ namespace Final_Assignment
             _bg = content.Load<Texture2D>("sprites/bg_lose");
             _font = content.Load<SpriteFont>("font/File");
 
-            Singleton.Instance.CurrentHero = "zeus";
+            
 
             switch (Singleton.Instance.CurrentHero)
             {

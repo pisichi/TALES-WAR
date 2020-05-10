@@ -498,22 +498,22 @@ namespace Final_Assignment
         {
             Singleton.Instance._camera.Follow(cam);
 
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Right))
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Right) || Singleton.Instance._currentkey.IsKeyDown(Keys.D))
             {
                 if (cam.Position.X < 4000 - Singleton.SCREENWIDTH / 2)
                     cam.Position.X += 20;
             }
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Left))
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Left) || Singleton.Instance._currentkey.IsKeyDown(Keys.A))
             {
                 if (cam.Position.X > Singleton.SCREENWIDTH / 2)
                     cam.Position.X -= 20;
             }
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up))
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Up) || Singleton.Instance._currentkey.IsKeyDown(Keys.W))
             {
                 if (cam.Position.Y > Singleton.SCREENHEIGHT / 2)
                     cam.Position.Y -= 20;
             }
-            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down))
+            if (Singleton.Instance._currentkey.IsKeyDown(Keys.Down) || Singleton.Instance._currentkey.IsKeyDown(Keys.S))
             {
                 if (cam.Position.Y < 1000 - Singleton.SCREENHEIGHT / 2)
                     cam.Position.Y += 20;
@@ -714,6 +714,7 @@ namespace Final_Assignment
                 case Singleton.TurnState.skill:
                     if (Singleton.Instance.Cooldown_1 <= 0)
                     {
+                        spriteBatch.DrawString(_font, "Z", player.Position + new Vector2(-80, -230), Color.White, 0, _font.MeasureString("Z") / 2, 1.5f, SpriteEffects.None, 0);
                         spriteBatch.Draw(_skill1, player.Position + new Vector2(-80, -150), null, Color.White, 0, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 1f, SpriteEffects.None, 0);
                     }
                     else
@@ -724,7 +725,7 @@ namespace Final_Assignment
 
                     if (Singleton.Instance.Cooldown_2 <= 0)
                     {
-
+                        spriteBatch.DrawString(_font, "X", player.Position + new Vector2(80, -223), Color.White, 0, _font.MeasureString("X") / 2, 1.5f, SpriteEffects.None, 0);
                         spriteBatch.Draw(_skill2, player.Position + new Vector2(80, -150), null, Color.White, 0f, new Vector2(_skill1.Width / 2, _skill1.Height / 2), 1f, SpriteEffects.None, 0);
                     }
                     else

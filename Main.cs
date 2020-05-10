@@ -22,7 +22,7 @@ namespace Final_Assignment
                 PreferredBackBufferWidth = Singleton.SCREENWIDTH,
                 PreferredBackBufferHeight = Singleton.SCREENHEIGHT
             };
-
+            Window.Title = "TALES WAR";
             IsMouseVisible = true;
             
             graphics.GraphicsProfile = GraphicsProfile.HiDef;
